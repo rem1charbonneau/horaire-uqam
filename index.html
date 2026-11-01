@@ -98,10 +98,6 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent)}
 .tag.bad{background:var(--bad-bg);color:var(--bad);border-color:transparent}
 .tag.warn{background:var(--warn-bg);color:var(--warn);border-color:transparent}
 .mode{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:500;border:1px solid var(--line);border-radius:999px;padding:0 8px 0 6px}
-.mode::before{content:"";width:9px;height:9px;border:1.5px solid currentColor;border-radius:2px}
-.mode-pres::before{background:currentColor}
-.mode-hyb::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
-.mode-dist::before{border-style:dashed}
 .seats{font:500 12px var(--font-mono);padding:2px 7px;border-radius:5px;white-space:nowrap}
 .seats.ok{background:var(--ok-bg);color:var(--ok)}
 .seats.low{background:var(--warn-bg);color:var(--warn)}
@@ -128,8 +124,6 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent)}
 .blk{position:absolute;border-radius:6px;border:1px solid var(--cc);border-left:4px solid var(--cc);background:var(--ct);padding:3px 5px;font-size:11px;line-height:1.28;overflow:hidden;z-index:2}
 .blk b{font:500 11.5px var(--font-mono)}
 .blk .t{font:400 11px var(--font-mono)}
-.blk.dist{border-style:dashed;border-left-style:solid}
-.blk.hyb{background-image:repeating-linear-gradient(135deg,rgba(128,128,128,.16) 0 5px,transparent 5px 10px)}
 .blk.bad{outline:2px solid var(--bad);z-index:4}
 .work{position:absolute;left:2px;right:2px;border:1px solid var(--work);border-radius:6px;background-image:repeating-linear-gradient(45deg,var(--work-bg) 0 6px,transparent 6px 12px);color:var(--muted);font-size:11px;padding:3px 5px;z-index:1}
 .buf{position:absolute;left:2px;right:2px;background:var(--work-bg);opacity:.45;border-radius:4px;z-index:0}
@@ -241,6 +235,21 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 .foot a{color:var(--accent);text-underline-offset:3px}
 .left::-webkit-scrollbar,.wkwrap::-webkit-scrollbar{width:8px;height:8px}
 .left::-webkit-scrollbar-thumb,.wkwrap::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+
+/* Modalités : même apparence dans la légende et dans l'horaire.
+   Présentiel = plein · Hybride = moitié pleine · À distance = contour pointillé, fond vide */
+.sw{display:inline-block;width:14px;height:14px;border-radius:4px;border:1.5px solid var(--accent);background:color-mix(in srgb,var(--accent) 35%,var(--surface));flex-shrink:0}
+.mode-hyb .sw{background:linear-gradient(to bottom,color-mix(in srgb,var(--accent) 35%,var(--surface)) 50%,var(--surface) 50%)}
+.mode-dist .sw{border-style:dashed;background:var(--surface)}
+.mode-work::before{content:"";width:14px;height:14px;border-radius:4px;border:1.5px solid var(--work);background:repeating-linear-gradient(45deg,var(--work-bg) 0 4px,transparent 4px 8px)}
+.mode{white-space:nowrap;gap:6px;padding:2px 10px 2px 7px;font-size:12px}
+.blk.hyb{background:linear-gradient(to bottom,var(--ct) 50%,var(--surface) 50%)}
+.blk.dist{border-style:dashed;background:var(--surface)}
+.legend{gap:8px 10px}
+.sec-t{margin:0;display:flex;align-items:center;gap:8px;padding:14px 16px 4px;font:600 15px var(--font-head)}
+.sec-t small{margin-left:auto;font:400 12px var(--font-body);color:var(--muted)}
+.sec>.sec-b{padding-top:8px}
+.crs details>summary{color:var(--accent);font-weight:500}
 @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
@@ -252,7 +261,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
   <header class="top">
     <div>
       <h1>Horaire UQAM, hiver 2027</h1>
-      <p>BAA, concentration finance (7111). Choisis tes cours dans le tableau, règle tes limites à gauche, puis feuillette les horaires sans conflit à droite.</p>
+      <p>BAA, concentration finance (7111)</p>
     </div>
     <div class="meta" id="meta"></div>
   </header>
@@ -262,9 +271,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
     <aside class="left" id="left"></aside>
     <main class="right" id="right"></main>
   </div>
-  <footer class="foot">
-    Horaires, modalités, campus et places lus sur la <a href="https://etudier.uqam.ca/cours-horaires" target="_blank" rel="noopener">Recherche de cours de l'UQAM</a> (onglet Horaire - Hiver 2027, places réservées au programme 7111). Les places sont relues automatiquement toutes les 4 heures et baissent au fil des inscriptions : revérifie avant de décider. Les salles précises ne sont pas publiques, et les groupes hybrides annoncent leur salle et leur horaire plus tard. Cet outil ne t'inscrit à rien et ne garantit pas qu'un groupe sera offert ou qu'il restera de la place.
-  </footer>
+  <footer class="foot">Source : <a href="https://etudier.uqam.ca/cours-horaires" target="_blank" rel="noopener">Recherche de cours de l'UQAM</a>. Places relues toutes les 4 heures.</footer>
 </div>
 
 <script>
@@ -454,7 +461,7 @@ function lanes(items){
   if(cluster.length)flush();
   return items;
 }
-function modeBadge(m){return '<span class="mode mode-'+m+'">'+MODES[m]+'</span>';}
+function modeBadge(m){return '<span class="mode mode-'+m+'"><i class="sw"></i>'+MODES[m]+'</span>';}
 function seatsPill(n){if(n===null)return '<span class="seats low">n.d.</span>';var cls=n===0?'zero':(n<10?'low':'ok');return '<span class="seats '+cls+'">'+(n===0?'Complet':n+' pl.')+'</span>';}
 function placeText(g){
   if(g.mode==='dist')return 'En ligne';
@@ -472,7 +479,7 @@ function metaHTML(){
   var stale=age!==null&&age>24;
   var h='<span'+(stale?' class="stale"':'')+'>Places et horaires lus le <b>'+(o?fmtStamp(o):'?')+'</b>'+(stale?' (il y a '+Math.floor(age/24)+' j)':'')+'</span>'
     +'<span>'+cs.length+' cours · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' déjà faits':'')+'</span>'
-    +'<span>Places relues automatiquement toutes les 4 heures</span>';
+;
   return h;
 }
 function refreshText(){
@@ -529,8 +536,8 @@ function sessionHTML(){
         var sat=groupSatisfied(x);
         h+='<div class="gc grp-par"><div class="hint" style="margin-bottom:6px">1 cours parmi :</div>'+x.map(function(c){return cellHTML(c,sat&&!isDone(c));}).join('')+'</div>';
       }else if(/^[A-Z]{3}\d{4}$/.test(x))h+=cellHTML(x,false);
-      else if(x==='Cours libre')h+='<div class="gc ph"><b>Cours libre</b><span class="hint">Cours hors programme (6 crédits au choix), à choisir avec ton programme.</span></div>';
-      else h+='<div class="gc ph"><b>Cours de concentration</b><span class="hint">Un des cours au choix de la concentration finance.</span><button type="button" class="btn sm" data-act="catview" data-v="all">Voir la liste</button></div>';
+      else if(x==='Cours libre')h+='<div class="gc ph"><b>Cours libre</b></div>';
+      else h+='<div class="gc ph"><b>Cours de concentration</b><button type="button" class="btn sm" data-act="catview" data-v="all">Voir la liste</button></div>';
     });
     h+='</div></div>';
   });
@@ -557,14 +564,13 @@ function catalogHTML(){
   var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0);
   var h='<details class="sec cat cat-wrap" data-k="catalog"'+(S.open.catalog?' open':'')+'><summary>Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></summary><div class="sec-b">'
     +'<div class="chips"><button type="button" class="chip" data-act="catview" data-v="sess" aria-pressed="'+(S.view!=='all')+'">Par trimestre (grille type)</button><button type="button" class="chip" data-act="catview" data-v="all" aria-pressed="'+(S.view==='all')+'">Tous les cours</button></div>'
-    +'<p class="hint">Coche «Choisir» pour ajouter un cours à tes horaires, et «Fait» pour un cours déjà réussi ou exempté : il ne pourra plus être choisi et ses préalables compteront comme satisfaits. Grille de cheminement type du BAA, concentration finance (7111), d’après la page du programme de l’UQAM consultée le 31 oct. 2026. MAT2082 doit être réussi dans les 45 premiers crédits du programme. Les 6 crédits au choix et les cours à choisir de la concentration sont à valider avec ton programme.</p>'
-    +(S.view==='all'?allHTML():sessionHTML())+'</div></details>';
+        +(S.view==='all'?allHTML():sessionHTML())+'</div></details>';
   return h;
 }
 
 //--- panneau de réglages
 function sec(k,title,sub,body){
-  return '<details class="sec" data-k="'+k+'"'+(S.open[k]?' open':'')+'><summary>'+title+'<small>'+sub+'</small></summary><div class="sec-b">'+body+'</div></details>';
+  return '<section class="sec"><h2 class="sec-t">'+title+'<small>'+sub+'</small></h2><div class="sec-b">'+body+'</div></section>';
 }
 function groupRow(c,g){
   var r=reason(c,g),excl=(S.excl[c.code]||[]).indexOf(g.id)>=0,pinned=S.pin[c.code]===g.id;
@@ -585,8 +591,8 @@ function controlsHTML(){
       +(un?'<div class="pw"><span class="tag warn" title="'+esc(c.pre)+'">Préalable non satisfait : '+esc(c.preSig.join(c.preAny?' ou ':' et '))+'</span></div>':'')
       +(offered(c)?'<details data-k="g'+c.code+'"'+(S.open['g'+c.code]?' open':'')+'><summary>Choisir les groupes</summary>'+c.groups.map(function(g){return groupRow(c,g);}).join('')+'</details>':'')+'</div>';
   });
-  if(!cs.length)coursesB+='<p class="hint">Aucun cours choisi. Ouvre «Choisir mes cours» en haut de la page.</p>';
-  coursesB+='<div><button type="button" class="btn sm" data-act="opencat">Ajouter ou retirer des cours</button></div><p class="hint">Décoche un groupe pour l\u2019écarter, ou clique « Fixer » pour l\u2019imposer. Les groupes grisés sont déjà écartés par tes autres réglages (raison indiquée).</p>';
+  if(!cs.length)coursesB+='<p class="hint">Aucun cours choisi.</p>';
+  coursesB+='<div><button type="button" class="btn sm" data-act="opencat">Ajouter ou retirer des cours</button></div>';
 
   var hrs=['','08:00','09:00','10:00','11:00','12:00','13:00'],hrsA=['','15:00','16:00','17:00','18:00','19:00','20:00','21:00'];
   function opt(list,v){return list.map(function(h){return '<option value="'+h+'"'+(h===v?' selected':'')+'>'+(h?h.replace(':00','h'):'Aucune limite')+'</option>';}).join('');}
@@ -598,7 +604,7 @@ function controlsHTML(){
     timeB+='<label class="dn"><input type="checkbox" data-act="dayon" data-d="'+d+'"'+(l.on?' checked':'')+'>'+d+'</label>'
       +'<input type="time" data-act="dayt" data-d="'+d+'" data-f="s" value="'+l.s+'" aria-label="'+d+' début">'
       +'<span>à</span><input type="time" data-act="dayt" data-d="'+d+'" data-f="e" value="'+l.e+'" aria-label="'+d+' fin">';});
-  timeB+='</div><p class="hint">Décoche un jour pour ne plus avoir de cours ce jour-là. Les heures s\u2019appliquent aussi aux séances d\u2019exercices.</p>';
+  timeB+='</div>';
   var tsub=(S.before||S.after)?((S.before?'dès '+S.before.replace(':00','h'):'')+(S.before&&S.after?' · ':'')+(S.after?'avant '+S.after.replace(':00','h'):'')):'aucune limite';
   var offd=DAYS.slice(0,6).filter(function(d){return !S.dayLim[d].on;});
   if(offd.length)tsub+=' · sans '+offd.join(', ').toLowerCase();
@@ -619,11 +625,10 @@ function controlsHTML(){
     +'<div><button type="button" class="btn sm" data-act="addshift">Ajouter un quart</button></div>'
     +'<div class="row"><label><input type="checkbox" id="fWork"'+(S.workOn?' checked':'')+'>Éviter mes quarts</label></div>'
     +'<div class="row"><label>Marge de trajet, présentiel <input type="number" id="bufP" min="0" max="300" step="15" value="'+S.bufP+'"> min</label>'
-    +'<label>À distance <input type="number" id="bufD" min="0" max="300" step="15" value="'+S.bufD+'"> min</label></div>'
-    +'<p class="hint">Un cours doit finir assez tôt avant ton quart, ou commencer assez tard après, pour couvrir la marge.</p>';
+    +'<label>À distance <input type="number" id="bufD" min="0" max="300" step="15" value="'+S.bufD+'"> min</label></div>';
   var wsub=S.workOn?S.work.map(function(w){return w.d+' '+w.s.replace(':00','h')+'–'+w.e.replace(':00','h');}).join(', ')||'aucun quart':'ignoré';
 
-  return sec('courses','1. Mes cours',cs.length+' choisis',coursesB)+sec('time','2. Heures et jours',tsub,timeB)+sec('mode','3. Modalité et lieu',msub,modeB)+sec('work','4. Mon travail',wsub,workB);
+  return sec('courses','Mes cours',cs.length+' choisis',coursesB)+sec('time','Heures et jours',tsub,timeB)+sec('mode','Modalité et lieu',msub,modeB)+sec('work','Travail',wsub,workB);
 }
 
 //--- résultats
@@ -642,7 +647,7 @@ function gridHTML(sel){
         var b1=Math.max(START,ws-bufP);if(ws>b1)inner+='<div class="buf" style="top:'+((b1-START)*PX)+'px;height:'+((ws-b1)*PX)+'px"></div>';
         var a2=Math.min(END,we+bufP);if(a2>we)inner+='<div class="buf" style="top:'+((we-START)*PX)+'px;height:'+((a2-we)*PX)+'px"></div>';}
       var t0=Math.max(START,ws),t1=Math.min(END,we);
-      if(t1>t0)inner+='<div class="work" style="top:'+((t0-START)*PX)+'px;height:'+((t1-t0)*PX)+'px">Simons<br>'+w.s+'–'+w.e+'</div>';});
+      if(t1>t0)inner+='<div class="work" style="top:'+((t0-START)*PX)+'px;height:'+((t1-t0)*PX)+'px">Travail<br>'+w.s+'–'+w.e+'</div>';});
     items.forEach(function(it){
       var t0=Math.max(START,it.a),t1=Math.min(END,it.b);if(t1<=t0)return;
       var s=it.s,ex=s.t==='Exercices',bad=workIssue(s)==='overlap';
@@ -677,7 +682,7 @@ function resultsHTML(){
     +'<button type="button" class="btn'+(isFav?' primary':'')+'" data-act="fav">'+(isFav?'★ Dans mes favoris':'☆ Garder cet horaire')+'</button></div>';
   h+='<div class="stats"><span class="stat"><b>'+st.days+'</b> jours</span><span class="stat"><b>'+st.campusDays+'</b> jours sur campus</span><span class="stat"><b>'+st.campuses+'</b> lieu'+(st.campuses>1?'x':'')+' connu'+(st.campuses>1?'s':'')+'</span><span class="stat">groupe le plus serré : <b>'+(st.minp===null?'?':st.minp)+'</b> pl.</span></div>';
   h+='<div class="wkwrap">'+gridHTML(sel)+'</div>'
-    +'<div class="legend">'+modeBadge('pres')+modeBadge('hyb')+modeBadge('dist')+'<span>Gris hachuré : ton quart · bande pâle : marge de trajet</span></div></div>';
+    +'<div class="legend">'+modeBadge('pres')+modeBadge('hyb')+modeBadge('dist')+'<span class="mode mode-work">Travail</span></div></div>';
   h+='<div class="card"><h2 class="h3">Groupes de cet horaire</h2><div class="tblwrap"><table><thead><tr><th>Cours</th><th>Gr.</th><th>Horaire</th><th>Modalité</th><th>Lieu</th><th>Places</th></tr></thead><tbody>';
   sel.forEach(function(x){var g=x.g,notes=g.notes.slice();if(g.prof)notes.unshift(g.prof);
     h+='<tr class="'+x.c.cls+'"><td class="cd">'+x.c.code+'</td><td class="m">'+g.id+'</td><td class="m">'+esc(whenText(g))+'</td><td>'+modeBadge(g.mode)+'</td><td>'+esc(placeText(g))+(notes.length?'<div class="hint">'+esc(notes.join(' · '))+'</div>':'')+'</td><td>'+seatsPill(g.places)+'</td></tr>';});
@@ -686,14 +691,14 @@ function resultsHTML(){
   sel.forEach(function(x){if(x.g.places===0)h+='<div class="alert warn" style="margin-top:8px">'+x.c.code+' gr. '+x.g.id+' est complet. Surveille les annulations.</div>';});
   h+='</div>';
   var ex=examRows(sel);
-  h+='<details class="card plain" data-k="exams"'+(S.open.exams?' open':'')+'><summary>Examens</summary>';
-  if(!ex.length)h+='<p class="hint">Aucune date d\u2019examen affichée par l\u2019UQAM pour ces groupes.</p>';
+  h+='<div class="card"><h2 class="h3">Examens</h2>';
+  if(!ex.length)h+='<p class="hint">Aucune date d\u2019examen publiée.</p>';
   else{h+='<div class="tblwrap"><table><thead><tr><th>Cours</th><th>Date</th><th>Heure</th><th>À vérifier</th></tr></thead><tbody>';
     ex.forEach(function(r){h+='<tr class="'+r.cls+'"><td class="cd">'+r.code+'</td><td>'+fmtDate(r.date)+'</td><td class="m">'+r.s+'–'+r.e+'</td><td>'+(r.flags.length?r.flags.map(function(f){return '<span class="tag '+f.k+'">'+esc(f.t)+'</span>';}).join(' '):'<span class="tag">Rien à signaler</span>')+'</td></tr>';});
     h+='</tbody></table></div>';}
   var miss=sel.filter(function(x){return !(x.g.exams||[]).length;}).map(function(x){return x.c.code;});
   if(miss.length&&ex.length)h+='<p class="hint" style="margin-top:8px">'+miss.join(', ')+' : dates d\u2019examen non affichées par l\u2019UQAM.</p>';
-  h+='</details>';
+  h+='</div>';
   if(S.favs.length){
     h+='<div class="card"><h2 class="h3">Mes favoris</h2><div class="favs">';
     S.favs.forEach(function(f,i){
