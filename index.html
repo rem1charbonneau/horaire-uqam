@@ -255,6 +255,23 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 @keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
 @media (max-width:640px){.top .meta{align-items:flex-start;text-align:left}.top{padding:18px 18px}.top h1{font-size:24px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Modalités : trois niveaux de remplissage faciles à distinguer, identiques dans la légende et l'horaire
+   ● Présentiel = plein · ◐ Hybride = teinte + contour plein · ○ À distance = fond blanc + contour pointillé */
+:root{--on:#FFFFFF}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--on:#08121E}}
+:root[data-theme="dark"]{--on:#08121E}
+.blk{color:var(--ink)}
+.blk.pres{border:2px solid var(--cc);background:var(--cc);color:var(--on)}
+.blk.hyb{border:2px solid var(--cc);background:var(--ct);color:var(--ink)}
+.blk.dist{border:2px dashed var(--cc);background:var(--surface);color:var(--ink)}
+.blk .ml{font-weight:600}
+.blk .gl{font-size:12px}
+.sw{width:16px;height:16px;border-radius:4px;border:2px solid var(--accent);background:var(--accent)}
+.mode-hyb .sw{border-style:solid;background:var(--accent-soft)}
+.mode-dist .sw{border-style:dashed;background:var(--surface)}
+.mode{font-weight:600;padding:3px 11px 3px 6px}
+.mode-pres::after,.mode-hyb::after,.mode-dist::after{content:none}
 </style>
 
 <div class="app">
@@ -652,8 +669,8 @@ function gridHTML(sel){
       var t0=Math.max(START,it.a),t1=Math.min(END,it.b);if(t1<=t0)return;
       var s=it.s,ex=s.t==='Exercices',bad=workIssue(s)==='overlap';
       var l3=ex?'Exercices · '+(s.m==='dist'?'à distance':'en présentiel'):(it.g.mode==='dist'?'À distance':it.g.mode==='hyb'?('Hybride'+(it.g.campus?' · '+it.g.campus:'')):('Présentiel · '+(it.g.campus||'lieu non affiché')));
-      inner+='<div class="blk '+it.c.cls+' '+(s.m==='dist'?'dist':s.m==='hyb'?'hyb':'')+(bad?' bad':'')+'" title="'+esc(it.c.code+' gr. '+it.g.id+' · '+l3)+'" style="top:'+((t0-START)*PX)+'px;height:'+((t1-t0)*PX)+'px;left:calc('+(it.lane/it.n*100)+'% + 2px);width:calc('+(100/it.n)+'% - 4px)">'
-        +'<b>'+it.c.code+'</b> gr.'+it.g.id+'<div class="t">'+s.s+'–'+s.e+'</div><div>'+esc(l3)+'</div></div>';});
+      inner+='<div class="blk '+it.c.cls+' '+(s.m==='dist'?'dist':s.m==='hyb'?'hyb':'pres')+(bad?' bad':'')+'" title="'+esc(it.c.code+' gr. '+it.g.id+' · '+l3)+'" style="top:'+((t0-START)*PX)+'px;height:'+((t1-t0)*PX)+'px;left:calc('+(it.lane/it.n*100)+'% + 2px);width:calc('+(100/it.n)+'% - 4px)">'
+        +'<b>'+it.c.code+'</b> gr.'+it.g.id+'<div class="t">'+s.s+'–'+s.e+'</div><div class="ml">'+esc(l3)+'</div></div>';});
     h+='<div class="wk-col" style="height:'+H+'px">'+inner+'</div>';
   });
   return h+'</div>';
