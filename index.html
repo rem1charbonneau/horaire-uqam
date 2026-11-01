@@ -369,6 +369,11 @@ body{padding-top:0}
 @media (max-width:1050px){.stamp{display:none}}
 .tabs{flex:0 1 auto}
 .tabs a{flex-shrink:0}
+.pre-line{font-size:.75rem;color:var(--muted);line-height:1.35;overflow-wrap:anywhere}
+.pre-line b{font-weight:600;color:var(--ink)}
+.pre-line.warn{color:var(--warn);background:var(--warn-bg);border-radius:8px;padding:5px 9px}
+.pre-line.warn b{color:inherit}
+.cat td.pre{font-size:.78rem;min-width:150px;white-space:normal}
 </style>
 </head><body>
 
@@ -623,7 +628,7 @@ function cellHTML(code,blocked){
     +'</div>'
     +'<div class="gt">'+esc(c.title)+'</div>'
     +'<div class="gm"><span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span>'+(dn?'<span class="tag ok">Déjà fait</span>':(blocked?'<span class="tag">Bloc déjà complété</span>':offerText(c)))
-    +(un?'<div class="tag warn" title="'+esc(c.pre)+'">Préalable : '+esc(preText(c))+'</div>':'')+'</div></div>';
+    +'<div class="pre-line'+(un?' warn':'')+'" title="'+esc(c.pre)+'"><b>Préalable'+(c.preSig.length>1?'s':'')+' :</b> '+esc(preText(c)||'aucun')+'</div></div></div>';
 }
 function sessionHTML(){
   var h='';
