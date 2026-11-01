@@ -353,6 +353,16 @@ body{padding-top:0}
 .toast[hidden]{display:none}
 @media (min-width:1000px){.left{top:calc(env(safe-area-inset-top,0px) + 70px);max-height:calc(100vh - 86px)}}
 @media (max-width:640px){.nav{flex-wrap:nowrap;gap:6px}.nav-r .btn .t{display:none}.nav-r .btn{padding:6px 12px}.tabs a{font-size:.85rem}.stamp{display:none}.nav .brand{display:none}.tabs{flex:1}.tabs a{padding:7px 10px}.hero{padding:22px 20px}.hero h1{font-size:1.5rem}}
+
+/* Cadre complet de l'horaire */
+.wkwrap{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow-x:auto;overflow-y:hidden}
+.wk-head{border-bottom:1px solid var(--line);background:var(--surface-2);padding:9px 0}
+.wk-time{border-bottom:0}
+.wk-time span:first-child{transform:translateY(4px)}
+.wk-col:last-child{border-right:0}
+.gold{background:linear-gradient(135deg,#F8D866,#E8B21E);color:#4A3500;font-weight:600;font-size:.76rem;line-height:1;border-radius:999px;padding:5px 11px;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(120,80,0,.18)}
+.hrow .gold{justify-self:end}
+.tabs{overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
 </style>
 </head><body>
 
@@ -360,6 +370,7 @@ body{padding-top:0}
   <a class="brand" href="#accueil">Horaire UQAM</a>
   <div class="tabs" role="tablist">
     <a href="#accueil" data-tab="accueil">Accueil</a>
+    <a href="#cours" data-tab="cours">Choisir mes cours</a>
     <a href="#generateur" data-tab="generateur">Générateur</a>
     <a href="#parametres" data-tab="parametres">Paramètres</a>
   </div>
@@ -367,8 +378,8 @@ body{padding-top:0}
 </nav>
 <div class="app">
   <section class="view" id="v-accueil"></section>
+  <section class="view" id="v-cours" hidden><div id="catalog"></div></section>
   <section class="view" id="v-generateur" hidden>
-    <div id="catalog"></div>
     <div class="cols">
       <aside class="left" id="left"></aside>
       <main class="right" id="right"></main>
@@ -646,9 +657,9 @@ function allHTML(){
 }
 function catalogHTML(){
   var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0);
-  var h='<details class="sec cat cat-wrap" data-k="catalog"'+(S.open.catalog?' open':'')+'><summary>Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></summary><div class="sec-b">'
+  var h='<section class="sec cat cat-wrap"><h2 class="sec-t">Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></h2><div class="sec-b">'
     +'<div class="chips"><button type="button" class="chip" data-act="catview" data-v="sess" aria-pressed="'+(S.view!=='all')+'">Par trimestre (grille type)</button><button type="button" class="chip" data-act="catview" data-v="all" aria-pressed="'+(S.view==='all')+'">Tous les cours</button></div>'
-        +(S.view==='all'?allHTML():sessionHTML())+'</div></details>';
+        +(S.view==='all'?allHTML():sessionHTML())+'</div></section>';
   return h;
 }
 
@@ -718,7 +729,7 @@ function controlsHTML(){
 //--- résultats
 function gridHTML(sel){
   var PX=0.8,START=480,END=1320,H=(END-START)*PX,bufP=Number(S.bufP)||0;
-  var h='<div class="wk"><div></div>'+DAYS.slice(0,6).map(function(d){return '<div class="wk-head">'+d+'</div>';}).join('');
+  var h='<div class="wk"><div class="wk-head"></div>'+DAYS.slice(0,6).map(function(d){return '<div class="wk-head">'+d+'</div>';}).join('');
   var tm='';for(var hr=8;hr<22;hr++)tm+='<span style="top:'+((hr-8)*60*PX)+'px">'+hr+'h</span>';
   h+='<div class="wk-time" style="height:'+H+'px">'+tm+'</div>';
   DAYS.slice(0,6).forEach(function(d){
@@ -763,7 +774,7 @@ function resultsHTML(){
   var picks=curPicks(sel),isFav=S.favs.some(function(f){return sameFav(f.picks,picks);});
   h+='<div class="toolbar"><label class="row" style="gap:6px">Trier par <select id="sort">'
     +[['campus','Moins de lieux sur campus'],['campusDays','Moins de jours sur campus'],['jours','Moins de jours en tout'],['places','Plus de places']].map(function(o){return '<option value="'+o[0]+'"'+(S.sort===o[0]?' selected':'')+'>'+o[1]+'</option>';}).join('')+'</select></label>'
-    +'<button type="button" class="btn'+(isFav?' primary':'')+'" data-act="fav">'+(isFav?'★ Dans mes favoris':'☆ Garder cet horaire')+'</button></div>';
+    +'<button type="button" class="btn'+(isFav?' primary':'')+'" data-act="fav">'+(isFav?'★ Dans mes favoris':'☆ Garder cet horaire')+'</button><button type="button" class="btn" data-act="snap">Enregistrer l\u2019image</button></div>';
   h+='<div class="stats"><span class="stat"><b>'+st.days+'</b> jours</span><span class="stat"><b>'+st.campusDays+'</b> jours sur campus</span><span class="stat"><b>'+st.campuses+'</b> lieu'+(st.campuses>1?'x':'')+' connu'+(st.campuses>1?'s':'')+'</span><span class="stat">groupe le plus serré : <b>'+(st.minp===null?'?':st.minp)+'</b> pl.</span></div>';
   h+='<div class="wkwrap">'+gridHTML(sel)+'</div>'
     +'<div class="legend">'+modeBadge('pres')+modeBadge('hyb')+modeBadge('dist')+'<span class="mode mode-work">Travail</span></div></div>';
@@ -855,8 +866,9 @@ document.addEventListener('click',function(e){
     if(k>=0){S.favs.splice(k,1);viewFav=null;}else if(S.favs.length<12)S.favs.push({picks:p});save();renderResults();return;}
   if(a==='rmfav'){S.favs.splice(+d.i,1);viewFav=null;save();renderResults();return;}
   if(a==='catview'){S.view=d.v==='all'?'all':'sess';save();render();return;}
-  if(a==='opencat'){S.open.catalog=true;save();goTab('generateur');render();window.scrollTo(0,0);return;}
+  if(a==='opencat'){S.open.catalog=true;save();goTab('cours');render();window.scrollTo(0,0);return;}
   if(a==='upd'){doUpdate();return;}
+  if(a==='snap'){snapSchedule();return;}
   if(a==='gen'){goTab('generateur');return;}
   if(a==='homefav'){viewFav=+d.i;goTab('generateur');renderResults();return;}
   if(a==='theme'){P.theme=d.v;savePrefs();applyPrefs();renderPages();return;}
@@ -924,7 +936,7 @@ function getTok(){try{return localStorage.getItem(TKEY)||'';}catch(e){return '';
 function setTok(v){try{if(v)localStorage.setItem(TKEY,v);else localStorage.removeItem(TKEY);}catch(e){}}
 
 //--- navigation par onglets (#accueil, #generateur, #parametres)
-var TABS=['accueil','generateur','parametres'];
+var TABS=['accueil','cours','generateur','parametres'];
 function curTab(){var h=(location.hash||'').slice(1);return TABS.indexOf(h)>=0?h:'accueil';}
 function goTab(t){if(location.hash!=='#'+t)location.hash='#'+t;else showTab();}
 function showTab(){
@@ -1002,7 +1014,7 @@ function homeHTML(){
     +'<div class="tile"><b>'+open+'</b><span>groupes avec places</span></div></div>';
   h+='<div class="home-cols"><div class="card"><div class="card-h"><h2 class="h3">Mes cours</h2><button type="button" class="btn sm" data-act="opencat">Modifier</button></div>';
   if(!cs.length)h+='<p class="hint">Aucun cours choisi.</p>';
-  cs.forEach(function(c){h+='<div class="hrow '+c.cls+'"><code>'+c.code+'</code><span class="ti">'+esc(c.title)+'</span><span class="cr">'+c.credits+' cr.</span><span class="of">'+offerText(c)+'</span></div>';});
+  cs.forEach(function(c){h+='<div class="hrow '+c.cls+'"><code>'+c.code+'</code><span class="ti">'+esc(c.title)+'</span><span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span><span class="of">'+offerText(c)+'</span></div>';});
   h+='</div><div class="stack"><div class="card"><div class="card-h"><h2 class="h3">Données</h2><button type="button" class="btn sm primary" data-act="upd"'+(upd.busy?' disabled':'')+'>↻ Actualiser</button></div>'
     +'<p class="big-line'+(stale?' warn':'')+'">'+(o?'Lues le <b>'+fmtStamp(o)+'</b>'+(stale?' (il y a '+Math.floor(age/24)+' j)':''):'Aucune donnée')+'</p>'
     +(upd.msg?'<p class="hint">'+esc(upd.msg)+'</p>':'<p class="hint">Relues automatiquement toutes les 4 heures.</p>')+'</div>'
@@ -1036,6 +1048,72 @@ function renderPages(){
   var el=document.getElementById('stamp'),b=document.getElementById('updbtn');
   if(el)el.textContent=upd.msg||(oldest()?'Lu le '+fmtStamp(oldest()):'');
   if(b){b.disabled=upd.busy;b.innerHTML=upd.busy?'↻ <span class="t">Actualisation…</span>':'↻ <span class="t">Actualiser</span>';}
+}
+
+
+//--- image de l'horaire (dessinée directement, sans bibliothèque)
+function snapSchedule(){
+  var sel=currentGroups();if(!sel.length){toast('Aucun horaire à enregistrer.');return;}
+  var cs=getComputedStyle(document.documentElement);function V(n){return cs.getPropertyValue(n).trim();}
+  var FB=getComputedStyle(document.body).fontFamily,FM=V('--font-mono')||'monospace';
+  var Z=2,G=46,CW=150,HH=36,PXM=0.9,START=480,END=1320,PAD=14,H=(END-START)*PXM,W=G+6*CW,bufP=Number(S.bufP)||0;
+  var cv=document.createElement('canvas');cv.width=(W+2*PAD)*Z;cv.height=(HH+H+2*PAD)*Z;
+  var x=cv.getContext('2d');x.scale(Z,Z);x.translate(PAD,PAD);
+  function rr(px,py,w,h,r){x.beginPath();x.moveTo(px+r,py);x.arcTo(px+w,py,px+w,py+h,r);x.arcTo(px+w,py+h,px,py+h,r);x.arcTo(px,py+h,px,py,r);x.arcTo(px,py,px+w,py,r);x.closePath();}
+  x.fillStyle=V('--surface');x.fillRect(-PAD,-PAD,W+2*PAD,HH+H+2*PAD);
+  // cadre complet et en-tête
+  rr(0,0,W,HH+H,12);x.save();x.clip();
+  x.fillStyle=V('--surface-2');x.fillRect(0,0,W,HH);
+  x.strokeStyle=V('--line');x.lineWidth=1;
+  x.beginPath();x.moveTo(0,HH+.5);x.lineTo(W,HH+.5);x.stroke();
+  for(var hr=8;hr<22;hr++){var y=HH+(hr-8)*60*PXM+.5;x.beginPath();x.moveTo(G,y);x.lineTo(W,y);x.stroke();}
+  for(var i=0;i<6;i++){var cx=G+i*CW+.5;x.beginPath();x.moveTo(cx,0);x.lineTo(cx,HH+H);x.stroke();}
+  x.restore();
+  x.strokeStyle=V('--line');x.lineWidth=1.5;rr(0,0,W,HH+H,12);x.stroke();
+  x.fillStyle=V('--muted');x.textAlign='center';x.textBaseline='middle';x.font='600 12px '+FB;
+  DAYS.slice(0,6).forEach(function(d,i){x.fillText(d.toUpperCase(),G+i*CW+CW/2,HH/2);});
+  x.textAlign='right';x.font='400 10.5px '+FM;
+  for(hr=8;hr<22;hr++){x.fillText(hr+'h',G-8,HH+(hr-8)*60*PXM+(hr===8?8:0));}
+  // motif hachuré du travail
+  var pc=document.createElement('canvas');pc.width=pc.height=12;var pg=pc.getContext('2d');
+  pg.strokeStyle=V('--work-bg');pg.lineWidth=5;pg.beginPath();pg.moveTo(-2,14);pg.lineTo(14,-2);pg.stroke();
+  var pat=x.createPattern(pc,'repeat');
+  function wrap(t,w){var words=t.split(' '),lines=[],cur='';words.forEach(function(wd){var tt=cur?cur+' '+wd:wd;if(x.measureText(tt).width>w&&cur){lines.push(cur);cur=wd;}else cur=tt;});if(cur)lines.push(cur);return lines;}
+  DAYS.slice(0,6).forEach(function(d,di){
+    var cx=G+di*CW,items=[];
+    sel.forEach(function(o){o.g.slots.forEach(function(sl){if(sl.d===d)items.push({a:T(sl.s),b:T(sl.e),c:o.c,g:o.g,s:sl});});});
+    lanes(items);
+    S.work.forEach(function(w){if(w.d!==d)return;var ws=T(w.s),we=T(w.e);
+      if(bufP>0){x.globalAlpha=.45;x.fillStyle=V('--work-bg');
+        var b1=Math.max(START,ws-bufP);if(ws>b1)x.fillRect(cx+2,HH+(b1-START)*PXM,CW-4,(ws-b1)*PXM);
+        var a2=Math.min(END,we+bufP);if(a2>we)x.fillRect(cx+2,HH+(we-START)*PXM,CW-4,(a2-we)*PXM);x.globalAlpha=1;}
+      var t0=Math.max(START,ws),t1=Math.min(END,we);if(t1<=t0)return;
+      var py=HH+(t0-START)*PXM,ph=(t1-t0)*PXM;
+      rr(cx+2,py,CW-4,ph,6);x.fillStyle=V('--surface');x.fill();x.fillStyle=pat;x.fill();x.strokeStyle=V('--work');x.lineWidth=1;x.stroke();
+      x.fillStyle=V('--muted');x.textAlign='left';x.textBaseline='top';x.font='500 11px '+FB;x.fillText('Travail',cx+8,py+5);x.fillText(w.s+'–'+w.e,cx+8,py+19);});
+    items.forEach(function(it){
+      var t0=Math.max(START,it.a),t1=Math.min(END,it.b);if(t1<=t0)return;
+      var sl=it.s,ex=sl.t==='Exercices',n=(it.c.cls.match(/\d+/)||[1])[0],cc=V('--c'+n),ct=V('--c'+n+'t');
+      var l3=ex?'Exercices · '+(sl.m==='dist'?'à distance':'en présentiel'):(it.g.mode==='dist'?'À distance':it.g.mode==='hyb'?('Hybride'+(it.g.campus?' · '+it.g.campus:'')):('Présentiel · '+(it.g.campus||'lieu non affiché')));
+      var bw=CW/it.n,bx=cx+it.lane*bw+2,by=HH+(t0-START)*PXM,bh=(t1-t0)*PXM,w2=bw-4;
+      rr(bx,by,w2,bh,7);
+      var pres=sl.m!=='dist'&&sl.m!=='hyb';
+      x.fillStyle=pres?cc:(sl.m==='hyb'?ct:V('--surface'));x.fill();
+      x.strokeStyle=cc;x.lineWidth=2;x.setLineDash(sl.m==='dist'?[5,3]:[]);x.stroke();x.setLineDash([]);
+      x.save();rr(bx+1,by+1,w2-2,bh-2,6);x.clip();
+      x.fillStyle=pres?V('--on'):V('--ink');x.textAlign='left';x.textBaseline='top';
+      var ty=by+6,tx=bx+7,tw=w2-14;
+      x.font='600 11.5px '+FM;x.fillText(it.c.code+' gr.'+it.g.id,tx,ty);ty+=15;
+      x.font='400 11px '+FM;x.fillText(sl.s+'–'+sl.e,tx,ty);ty+=15;
+      x.font='600 11px '+FB;wrap(l3,tw).forEach(function(L){x.fillText(L,tx,ty);ty+=14;});
+      x.restore();});
+  });
+  cv.toBlob(function(bl){
+    if(!bl){toast('Impossible de créer l’image.');return;}
+    var a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download='horaire-uqam-hiver-2027.png';
+    document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href);},4000);
+    toast('Image enregistrée.');
+  },'image/png');
 }
 
 //--- champ d'heure : saisie au clavier + liste déroulante
