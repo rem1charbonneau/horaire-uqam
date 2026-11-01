@@ -1,15 +1,15 @@
 <title>Horaire UQAM Hiver 2027</title>
 <meta charset="utf-8">
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Disposition : colonne de réglages à gauche (4 sections repliables), résultats à droite avec navigation d'un horaire à l'autre. */
 :root{
-  --font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --font-head:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
-  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --bg:#EEF1F5; --surface:#FFFFFF; --surface-2:#F5F7FA; --ink:#131A24; --muted:#586478; --line:#D5DBE4;
-  --accent:#1F4FD8; --accent-ink:#FFFFFF;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-head:"Inter",system-ui,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --bg:#EAF3FB; --surface:#FFFFFF; --surface-2:#F3F8FD; --ink:#0F2236; --muted:#52687D; --line:#D3E2F0;
+  --accent:#0A6CC2; --accent-2:#3AA0E8; --accent-soft:#DCEEFC; --accent-ink:#FFFFFF; --shadow:0 1px 2px rgba(10,60,110,.06),0 6px 18px rgba(10,60,110,.07);
   --ok:#17794A; --ok-bg:#DDF2E6; --warn:#955700; --warn-bg:#FCEBC8; --bad:#B3261E; --bad-bg:#FADDDA;
   --work:#6B7587; --work-bg:#DDE2EA;
   --c1:#2B64D9; --c1t:#E2EBFC; --c2:#0F8577; --c2t:#D9F1ED; --c3:#A8660A; --c3t:#FBEBD0; --c4:#7A4BC9; --c4t:#EBE2FA; --c5:#C03A5B; --c5t:#FADFE6;
@@ -17,8 +17,8 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0D121A; --surface:#141B26; --surface-2:#19212E; --ink:#E7ECF3; --muted:#9AA6B8; --line:#2A3441;
-    --accent:#6E96FF; --accent-ink:#0D121A;
+    --bg:#0A1522; --surface:#10202F; --surface-2:#142637; --ink:#E6F0FA; --muted:#93A9BE; --line:#223A50;
+    --accent:#4DB0F5; --accent-2:#2E8FD8; --accent-soft:#12324B; --accent-ink:#06192A; --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
     --ok:#5FD395; --ok-bg:#123525; --warn:#F0B14F; --warn-bg:#3A2A0C; --bad:#FF8A80; --bad-bg:#3E1713;
     --work:#8D98AB; --work-bg:#252E3B;
     --c1:#7BA3FF; --c1t:#17284A; --c2:#4FD1BF; --c2t:#0F3330; --c3:#F2B35A; --c3t:#392A10; --c4:#B79BFF; --c4t:#2A1F4A; --c5:#FF8FA9; --c5t:#451C28;
@@ -27,8 +27,8 @@
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0D121A; --surface:#141B26; --surface-2:#19212E; --ink:#E7ECF3; --muted:#9AA6B8; --line:#2A3441;
-  --accent:#6E96FF; --accent-ink:#0D121A;
+  --bg:#0A1522; --surface:#10202F; --surface-2:#142637; --ink:#E6F0FA; --muted:#93A9BE; --line:#223A50;
+  --accent:#4DB0F5; --accent-2:#2E8FD8; --accent-soft:#12324B; --accent-ink:#06192A; --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);
   --ok:#5FD395; --ok-bg:#123525; --warn:#F0B14F; --warn-bg:#3A2A0C; --bad:#FF8A80; --bad-bg:#3E1713;
   --work:#8D98AB; --work-bg:#252E3B;
   --c1:#7BA3FF; --c1t:#17284A; --c2:#4FD1BF; --c2t:#0F3330; --c3:#F2B35A; --c3t:#392A10; --c4:#B79BFF; --c4t:#2A1F4A; --c5:#FF8FA9; --c5t:#451C28;
@@ -192,6 +192,60 @@ details.plain[open]>summary{margin-bottom:10px}
 .tag.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}
 .cr{font:400 11.5px var(--font-mono);color:var(--muted)}
 .cat .tblwrap table{min-width:720px}
+
+/* ===== Habillage UQAM : bleu clair, cartes douces, animations discrètes ===== */
+body{background:var(--bg);background-image:radial-gradient(1200px 380px at 50% -120px,var(--accent-soft),transparent 70%);background-repeat:no-repeat}
+.app{padding-top:14px}
+.top{position:relative;overflow:hidden;margin:6px 0 18px;padding:22px 26px;border-radius:18px;color:#fff;
+  background:linear-gradient(120deg,#0A5CA8 0%,#0A6CC2 45%,#3AA0E8 100%);box-shadow:var(--shadow);animation:rise .5s ease both}
+.top::after{content:"";position:absolute;right:-60px;top:-80px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.12)}
+.top::before{content:"";position:absolute;right:120px;bottom:-110px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.08)}
+.top>*{position:relative;z-index:1}
+.top h1{font:700 30px/1.1 var(--font-head);letter-spacing:-.02em}
+.top p,.top .meta{color:rgba(255,255,255,.88)}
+.top .meta.stale b{color:#FFE3A3}
+.sec,.card,.tri,.crs{border-radius:14px;box-shadow:var(--shadow);transition:box-shadow .2s ease,border-color .2s ease}
+.sec>summary,.h3,details.plain>summary{letter-spacing:.02em;text-transform:none;font:600 15px var(--font-head)}
+.sec>summary{padding:13px 16px;transition:background .15s}
+.sec>summary:hover{background:var(--surface-2);border-radius:14px}
+.sec[open]>summary::before{border-color:var(--accent)}
+.sec-b{animation:fade .25s ease both}
+.btn{border-radius:10px;padding:7px 14px;font-weight:500;transition:transform .12s ease,box-shadow .15s ease,border-color .15s ease,background .15s ease}
+.btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 12px rgba(10,108,194,.18)}
+.btn:active:not(:disabled){transform:translateY(0)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));border-color:transparent}
+.chip{padding:4px 12px;transition:background .15s,color .15s,border-color .15s,transform .12s}
+.chip:hover{border-color:var(--accent);transform:translateY(-1px)}
+.chip[aria-pressed="true"]{background:linear-gradient(135deg,var(--accent),var(--accent-2));border-color:transparent}
+input[type=number],input[type=time],select{border-radius:8px;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.crs{border-left-width:5px;overflow:hidden;animation:rise .35s ease both}
+.crs:hover{box-shadow:0 2px 4px rgba(10,60,110,.08),0 10px 24px rgba(10,60,110,.1)}
+.grp{transition:background .15s}
+.grp:hover{background:var(--surface-2)}
+.gc{border-radius:12px;transition:transform .15s ease,box-shadow .15s ease,background .2s ease,border-color .2s;animation:rise .35s ease both}
+.gc:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.tri-h{background:linear-gradient(90deg,var(--accent-soft),transparent)}
+.cat tr{transition:background .15s}
+.cat tr:not(.blk-h):hover td{background:var(--accent-soft)}
+.count{font:700 30px/1 var(--font-head);color:var(--accent);letter-spacing:-.02em}
+.stat{background:var(--accent-soft);border-color:transparent;color:var(--ink)}
+.wk-col{background-color:var(--surface)}
+.blk{border-radius:8px;box-shadow:0 1px 3px rgba(10,60,110,.15);animation:pop .3s cubic-bezier(.2,.8,.3,1.2) both;transition:transform .15s ease,box-shadow .15s ease}
+.blk:hover{transform:scale(1.03);z-index:5;box-shadow:0 6px 16px rgba(10,60,110,.25)}
+.wkwrap{animation:fade .3s ease both}
+.seats{border-radius:999px}
+.tag{border-radius:999px}
+.alert{border-radius:12px;animation:fade .25s ease both}
+.nav .pos{color:var(--accent)}
+.foot a{color:var(--accent);text-underline-offset:3px}
+.left::-webkit-scrollbar,.wkwrap::-webkit-scrollbar{width:8px;height:8px}
+.left::-webkit-scrollbar-thumb,.wkwrap::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@media (max-width:640px){.top .meta{align-items:flex-start;text-align:left}.top{padding:18px 18px}.top h1{font-size:24px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
 <div class="app">
