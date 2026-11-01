@@ -1,0 +1,6 @@
+{
+  "name": "horaire-uqam",
+  "private": true,
+  "description": "Générateur d'horaires UQAM (BAA finance) avec places lues automatiquement",
+  "dependencies": { "playwright": "^1.50.0" }
+}

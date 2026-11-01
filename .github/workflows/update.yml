@@ -1,0 +1,48 @@
+name: Mettre à jour les horaires et publier le site
+
+on:
+  schedule:
+    - cron: '17 */4 * * *'   # toutes les 4 heures
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Installer Playwright
+        run: |
+          npm install
+          npx playwright install --with-deps chromium
+      - name: Reprendre les dernières données publiées (repli si une lecture échoue)
+        run: |
+          mkdir -p site
+          curl -fsS "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/data.json" -o site/data.json || cp data.json site/data.json
+      - name: Lire le site de l'UQAM (une page à la fois, avec pause)
+        run: node scrape.js site/data.json 7111 $(cat courses.txt | tr '\n' ' ')
+      - name: Assembler le site
+        run: cp index.html site/index.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4
