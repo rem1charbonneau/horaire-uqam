@@ -1,12 +1,12 @@
 # Horaire UQAM, hiver 2027
 
-Générateur d'horaires pour le BAA, concentration finance (7111), à l'UQAM. Les horaires, modalités, campus et places viennent de la Recherche de cours de l'UQAM et sont relus automatiquement toutes les 4 heures, sans intervention.
+Générateur d'horaires pour le BAA, concentration finance (7111), à l'UQAM. Les horaires, modalités, campus et places viennent de la Recherche de cours de l'UQAM et sont relus automatiquement toutes les heures, sans intervention.
 
 ## Comment ça marche
 
 - `index.html` : le site (aucun serveur, tout se calcule dans le navigateur). Tes choix (cours, filtres, quarts de travail, favoris) sont gardés dans ton navigateur seulement.
 - `scrape.js` : ouvre la fiche de chaque cours de `courses.txt` dans un navigateur automatisé, entre le code de programme 7111 et lit les places restantes. Une page à la fois, avec une pause, pour ne pas surcharger le site de l'UQAM.
-- `.github/workflows/update.yml` : toutes les 4 heures, lance `scrape.js` puis publie le site sur GitHub Pages. Si une lecture échoue, les dernières données publiées sont conservées.
+- `.github/workflows/update.yml` : toutes les heures, lance `scrape.js` puis publie le site sur GitHub Pages. Si une lecture échoue, les dernières données publiées sont conservées.
 
 ## Mise en place (une seule fois)
 
@@ -22,3 +22,6 @@ Générateur d'horaires pour le BAA, concentration finance (7111), à l'UQAM. Le
 - Autre trimestre : adapter `Hiver 2027` et l'année `2027` dans `scrape.js`.
 
 Les places baissent au fil des inscriptions et ne sont pas garanties. Vérifie toujours sur le site de l'UQAM avant de t'inscrire.
+
+## Relais « Actualiser maintenant » (sans jeton dans le site)
+`relay/worker.js` est un Cloudflare Worker qui garde le jeton GitHub de son côté. Une fois déployé, mettre son URL dans `RELAY` au début du script de `index.html` : le bouton Actualiser fonctionne alors sur tous les appareils, sans jeton. Le relais refuse un nouveau lancement si une lecture est en cours ou date de moins de 15 minutes.

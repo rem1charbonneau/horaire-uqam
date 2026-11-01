@@ -2,7 +2,7 @@ name: Mettre à jour les horaires et publier le site
 
 on:
   schedule:
-    - cron: '17 */4 * * *'   # toutes les 4 heures
+    - cron: '17 * * * *'   # toutes les heures
   workflow_dispatch:
   push:
     branches: [main]

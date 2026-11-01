@@ -409,7 +409,7 @@ var CAMPUS=['Laval','Longueuil','Terrebonne','Montérégie-Ouest','Montréal','N
 var CAMPUS_LABEL={'N/A':'Lieu non affiché'};
 var MONTHS=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
 var PAL=['c1','c2','c3','c4','c5','c6','c7','c8'];
-var PROG='7111',REPO='rem1charbonneau/horaire-uqam';
+var PROG='7111',REPO='rem1charbonneau/horaire-uqam',RELAY='';
 var BLOCKS=[
  {t:'Tronc commun (16 cours obligatoires)',c:['AOT3221','AOT4200','AOT5100','AOT5121','DSR5100','ECO1301','ECO2401','FIN3500','JUR1031','MAT2082','MGT2150','MKG3300','ORH1163','ORH1700','SCO1045','SCO2003']},
  {t:'Un cours parmi (responsabilité, éthique, développement durable)',c:['DSR2012','DSR6200','EUT1172','ORH2110']},
@@ -977,6 +977,16 @@ function reloadData(){
   return fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){DATA=d;CACHE={};render();});
 }
 function stopPoll(){clearInterval(upd.timer);upd.timer=null;upd.busy=false;upd.msg='';paintStamp();}
+function waitFresh(before){
+  var t0=Date.now();upd.msg='Lecture de l’UQAM en cours (environ 6 min)…';paintStamp();
+  upd.timer=setInterval(function(){
+    if(Date.now()-t0>14*60*1000){stopPoll();toast('La lecture prend plus de temps que prévu. Réessaie dans quelques minutes.');return;}
+    fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+      var f=null;Object.keys(d).forEach(function(k){if(d[k].fetched&&(!f||d[k].fetched>f))f=d[k].fetched;});
+      if(f&&(!before||f>before)){DATA=d;CACHE={};stopPoll();render();toast('Données mises à jour.');}
+    }).catch(function(){});
+  },20000);
+}
 function doUpdate(){
   if(upd.busy)return;
   upd.busy=true;upd.msg='Actualisation…';paintStamp();
@@ -987,6 +997,14 @@ function doUpdate(){
     reloadData().then(function(){var changed=newest()!==before;stopPoll();toast((changed?'Nouvelles données chargées. ':'Déjà à jour. ')+(note||''));})
       .catch(function(){stopPoll();toast('Impossible de recharger les données.');});
   }
+  if(RELAY){
+    fetch(RELAY,{method:'POST'}).then(function(r){return r.json().then(function(j){return {s:r.status,j:j};});}).then(function(x){
+      if(x.s!==200&&x.s!==202){stopPoll();toast('Échec du lancement ('+x.s+').');return;}
+      if(x.j.status==='busy')toast('Une lecture est déjà en cours ou très récente.');
+      waitFresh(before);
+    }).catch(function(){stopPoll();toast('Impossible de joindre le relais.');});
+    return;
+  }
   if(!tok){plain('Pour relire le site de l’UQAM maintenant, ajoute un jeton dans Paramètres.');return;}
   if(recent){plain('Une lecture a été lancée il y a moins de 15 min.');return;}
   fetch('https://api.github.com/repos/'+REPO+'/actions/workflows/update.yml/dispatches',{method:'POST',
@@ -994,14 +1012,7 @@ function doUpdate(){
   .then(function(r){
     if(r.status!==204){stopPoll();toast(r.status===401||r.status===403||r.status===404?'Jeton refusé : il lui faut la permission « Actions » en écriture sur ce dépôt.':'Échec du lancement ('+r.status+').');return;}
     try{localStorage.setItem(LKEY,String(Date.now()));}catch(e){}
-    var t0=Date.now();upd.msg='Lecture de l’UQAM en cours (environ 6 min)…';paintStamp();
-    upd.timer=setInterval(function(){
-      if(Date.now()-t0>14*60*1000){stopPoll();toast('La lecture prend plus de temps que prévu. Réessaie dans quelques minutes.');return;}
-      fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
-        var f=null;Object.keys(d).forEach(function(k){if(d[k].fetched&&(!f||d[k].fetched>f))f=d[k].fetched;});
-        if(f&&(!before||f>before)){DATA=d;CACHE={};stopPoll();render();toast('Données mises à jour.');}
-      }).catch(function(){});
-    },20000);
+    waitFresh(before);
   }).catch(function(){stopPoll();toast('Impossible de joindre GitHub.');});
 }
 
@@ -1026,7 +1037,7 @@ function homeHTML(){
   cs.forEach(function(c){h+='<div class="hrow '+c.cls+'"><code>'+c.code+'</code><span class="ti">'+esc(c.title)+'</span><span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span><span class="of">'+offerText(c)+'</span></div>';});
   h+='</div><div class="stack"><div class="card"><div class="card-h"><h2 class="h3">Données</h2><button type="button" class="btn sm primary" data-act="upd"'+(upd.busy?' disabled':'')+'>↻ Actualiser</button></div>'
     +'<p class="big-line'+(stale?' warn':'')+'">'+(o?'Lues le <b>'+fmtStamp(o)+'</b>'+(stale?' (il y a '+Math.floor(age/24)+' j)':''):'Aucune donnée')+'</p>'
-    +(upd.msg?'<p class="hint">'+esc(upd.msg)+'</p>':'<p class="hint">Relues automatiquement toutes les 4 heures.</p>')+'</div>'
+    +(upd.msg?'<p class="hint">'+esc(upd.msg)+'</p>':'<p class="hint">Relues automatiquement toutes les heures.</p>')+'</div>'
     +'<div class="card"><h2 class="h3">Mes favoris</h2>';
   if(!S.favs.length)h+='<p class="hint">Aucun favori.</p>';
   else{h+='<div class="favs">';S.favs.forEach(function(f,i){h+='<button type="button" class="btn sm" data-act="homefav" data-i="'+i+'">'+esc(favLabel(f,i))+'</button>';});h+='</div>';}
