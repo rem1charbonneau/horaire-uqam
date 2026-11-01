@@ -620,10 +620,10 @@ function cellHTML(code,blocked){
   var can=offered(c)&&!dn&&!blocked&&!un;
   return '<div class="gc '+(on?'sel '+selCls(code):'')+(dn?' done':'')+(blocked&&!dn?' off':'')+'">'
     +'<div class="gh"><label class="chk"><input type="checkbox" data-act="togglec" data-c="'+code+'"'+(on?' checked':'')+(can||on?'':' disabled')+' aria-label="Choisir '+code+'"><b class="cd">'+code+'</b></label>'
-    +'<label class="chk fait"><input type="checkbox" data-act="donec" data-c="'+code+'"'+(dn?' checked':'')+((!dn&&un)?' disabled':'')+' aria-label="'+code+' déjà fait">Fait</label></div>'
+    +'</div>'
     +'<div class="gt">'+esc(c.title)+'</div>'
     +'<div class="gm"><span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span>'+(dn?'<span class="tag ok">Déjà fait</span>':(blocked?'<span class="tag">Bloc déjà complété</span>':offerText(c)))
-    +(un?'<div class="tag warn" title="'+esc(c.pre)+'">Coche d\u2019abord «Fait» pour : '+esc(preText(c))+'</div>':'')+'</div></div>';
+    +(un?'<div class="tag warn" title="'+esc(c.pre)+'">Préalable : '+esc(preText(c))+'</div>':'')+'</div></div>';
 }
 function sessionHTML(){
   var h='';
@@ -644,7 +644,7 @@ function sessionHTML(){
   return h;
 }
 function allHTML(){
-  var h='<div class="tblwrap"><table><thead><tr><th></th><th>Fait</th><th>Sigle</th><th>Cours</th><th>Préalables</th><th>Hiver 2027</th></tr></thead><tbody>';
+  var h='<div class="tblwrap"><table><thead><tr><th></th><th>Sigle</th><th>Cours</th><th>Préalables</th><th>Hiver 2027</th></tr></thead><tbody>';
   var parmi=[BLOCKS[1].c,BLOCKS[2].c];
   BLOCKS.forEach(function(b,bi){
     var grp=(bi===1||bi===2)?b.c:null,sat=grp?groupSatisfied(grp):false;
@@ -654,7 +654,6 @@ function allHTML(){
       if(!c){h+='<tr class="off"><td></td><td></td><td class="cd">'+code+'</td><td colspan="3">Données non chargées</td></tr>';return;}
       var on=S.sel.indexOf(code)>=0,dn=isDone(code),blocked=sat&&!dn;
       h+='<tr class="'+selCls(code)+(on?' sel':'')+((offered(c)&&!blocked&&!preUnmet(c))||dn?'':' off')+'"><td><input type="checkbox" data-act="togglec" data-c="'+code+'"'+(on?' checked':'')+((offered(c)&&!dn&&!blocked&&!preUnmet(c))||on?'':' disabled')+' aria-label="Choisir '+code+'"></td>'
-        +'<td><input type="checkbox" data-act="donec" data-c="'+code+'"'+(dn?' checked':'')+((!dn&&preUnmet(c))?' disabled':'')+' aria-label="'+code+' déjà fait"></td>'
         +'<td class="cd">'+code+'</td><td>'+esc(c.title)+' <span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span></td>'+preCell(c)+'<td>'+(dn?'<span class="tag ok">Déjà fait</span>':offerText(c))+'</td></tr>';
     });
   });
@@ -767,12 +766,12 @@ function resultsHTML(){
   else h+='<div class="nav"><button type="button" class="btn" data-act="prev" aria-label="Précédent"'+(total<2?' disabled':'')+'>‹</button><span class="pos">'+(total?(idx+1).toLocaleString('fr-CA')+' / '+tot:'–')+'</span><button type="button" class="btn" data-act="next" aria-label="Suivant"'+(total<2?' disabled':'')+'>›</button>'
     +'<button type="button" class="btn" data-act="rand"'+(total<2?' disabled':'')+'>Au hasard</button></div>';
   h+='</div>';
-  if(lastPrunedDone.length)h+='<div class="alert warn" style="margin-top:10px">Décoché «Fait», préalable manquant : '+lastPrunedDone.join(', ')+'.</div>';
-  if(lastPruned.length)h+='<div class="alert warn" style="margin-top:10px">Retiré de ta sélection, préalable non satisfait : '+lastPruned.join(', ')+'. Coche d\u2019abord «Fait» pour le cours préalable.</div>';
+  
+  if(lastPruned.length)h+='<div class="alert warn" style="margin-top:10px">Retiré de ta sélection, préalable non satisfait : '+lastPruned.join(', ')+'.</div>';
   var notOff=selCourses().filter(function(c){return !offered(c);});
   if(notOff.length)h+='<div class="alert warn" style="margin-top:10px">'+notOff.map(function(c){return c.code;}).join(', ')+' n\u2019a aucun groupe à l\u2019hiver 2027 : ignoré dans les horaires.</div>';
   var unm=selCourses().filter(preUnmet);
-  if(unm.length)h+='<div class="alert warn" style="margin-top:10px">Préalable non satisfait : '+unm.map(function(c){return c.code+' ('+esc(c.preSig.join(c.preAny?' ou ':' et '))+')';}).join(' ; ')+'. Valide avec ton programme, ou indique tes cours réussis dans «Choisir mes cours».</div>';
+  if(unm.length)h+='<div class="alert warn" style="margin-top:10px">Préalable non satisfait : '+unm.map(function(c){return c.code+' ('+esc(c.preSig.join(c.preAny?' ou ':' et '))+')';}).join(' ; ')+'. Valide avec ton programme.</div>';
   if(!sel.length){
     return h+'<div class="alert warn" style="margin-top:12px">'+esc(diag||'Aucun horaire à afficher.')+'</div></div>';
   }
