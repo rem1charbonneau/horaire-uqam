@@ -592,9 +592,8 @@ function oldest(){var o=null;selCourses().forEach(function(c){if(c.fetched&&(!o|
 //--- catalogue : vue par trimestre (grille type) et vue tous les cours
 function offerText(c){
   if(!offered(c))return '<span class="tag">Non offert</span>';
-  var withP=c.groups.filter(function(g){return g.places>0;}).length;
-  var mx=Math.max.apply(null,c.groups.map(function(g){return g.places||0;}));
-  return c.groups.length+' groupes · '+withP+' avec places'+(withP?' (max '+mx+')':'');
+  var n=c.groups.filter(function(g){return g.places>0;}).length,t=c.groups.length;
+  return (n?n+' classe'+(n>1?'s':'')+' disponible'+(n>1?'s':''):'Aucune classe disponible')+' ('+t+' au total)';
 }
 function preText(c){return c.preSig.length?c.preSig.join(c.preAny?' ou ':' et '):'';}
 function preCell(c){
@@ -616,7 +615,7 @@ function cellHTML(code,blocked){
   return '<div class="gc '+(on?'sel '+selCls(code):'')+(dn?' done':'')+(blocked&&!dn?' off':'')+'">'
     +'<div class="gh"><label class="chk"><input type="checkbox" data-act="togglec" data-c="'+code+'"'+(on?' checked':'')+(can||on?'':' disabled')+' aria-label="Choisir '+code+'"><b class="cd">'+code+'</b></label>'
     +'<label class="chk fait"><input type="checkbox" data-act="donec" data-c="'+code+'"'+(dn?' checked':'')+((!dn&&un)?' disabled':'')+' aria-label="'+code+' déjà fait">Fait</label></div>'
-    +'<div class="gt">'+esc(c.title)+' <span class="cr">'+c.credits+' cr.</span></div>'
+    +'<div class="gt">'+esc(c.title)+' <span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span></div>'
     +'<div class="gm">'+(dn?'<span class="tag ok">Déjà fait</span>':(blocked?'<span class="tag">Bloc déjà complété</span>':offerText(c)))
     +(un?'<div class="tag warn" title="'+esc(c.pre)+'">Coche d\u2019abord «Fait» pour : '+esc(preText(c))+'</div>':'')+'</div></div>';
 }
@@ -650,7 +649,7 @@ function allHTML(){
       var on=S.sel.indexOf(code)>=0,dn=isDone(code),blocked=sat&&!dn;
       h+='<tr class="'+selCls(code)+(on?' sel':'')+((offered(c)&&!blocked&&!preUnmet(c))||dn?'':' off')+'"><td><input type="checkbox" data-act="togglec" data-c="'+code+'"'+(on?' checked':'')+((offered(c)&&!dn&&!blocked&&!preUnmet(c))||on?'':' disabled')+' aria-label="Choisir '+code+'"></td>'
         +'<td><input type="checkbox" data-act="donec" data-c="'+code+'"'+(dn?' checked':'')+((!dn&&preUnmet(c))?' disabled':'')+' aria-label="'+code+' déjà fait"></td>'
-        +'<td class="cd">'+code+'</td><td>'+esc(c.title)+' <span class="cr">'+c.credits+' cr.</span></td>'+preCell(c)+'<td>'+(dn?'<span class="tag ok">Déjà fait</span>':offerText(c))+'</td></tr>';
+        +'<td class="cd">'+code+'</td><td>'+esc(c.title)+' <span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span></td>'+preCell(c)+'<td>'+(dn?'<span class="tag ok">Déjà fait</span>':offerText(c))+'</td></tr>';
     });
   });
   return h+'</tbody></table></div>';
