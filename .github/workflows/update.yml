@@ -28,15 +28,29 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      # Sur un simple push (changement de design), on ne relit pas l'UQAM : on réutilise les dernières données.
+      - name: Garder le navigateur en cache
+        if: github.event_name != 'push'
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package.json') }}
       - name: Installer Playwright
+        if: github.event_name != 'push'
         run: |
           npm install
-          npx playwright install --with-deps chromium
+          if [ "${{ steps.pw-cache.outputs.cache-hit }}" = "true" ]; then
+            npx playwright install-deps chromium
+          else
+            npx playwright install --with-deps chromium
+          fi
       - name: Reprendre les dernières données publiées (repli si une lecture échoue)
         run: |
           mkdir -p site
           curl -fsS "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/data.json" -o site/data.json || cp data.json site/data.json
       - name: Lire le site de l'UQAM (une page à la fois, avec pause)
+        if: github.event_name != 'push'
         run: node scrape.js site/data.json 7111 $(cat courses.txt | tr '\n' ' ')
       - name: Assembler le site
         run: cp index.html site/index.html
