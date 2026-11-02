@@ -499,7 +499,7 @@ function reason(c,g){
   var ck=g.mode==='dist'?null:(g.campus||'N/A');
   if(ck&&S.noCampus.indexOf(ck)>=0)return 'Lieu masqué ('+(CAMPUS_LABEL[ck]||ck)+')';
   var tr=timeReason(g);if(tr)return tr;
-  if(S.workOn){var w=groupWorkIssue(g);if(w==='overlap')return 'Pendant ton quart';if(w)return 'Trop près de ton quart';}
+  if(S.workOn){var w=groupWorkIssue(g);if(w==='overlap')return 'Pendant une indisponibilité';if(w)return 'Trop près d’une indisponibilité';}
   return null;
 }
 function candidates(c){
@@ -570,8 +570,8 @@ function examRows(sel){
   sel.forEach(function(x){(x.g.exams||[]).forEach(function(e){r.push({code:x.c.code,cls:x.c.cls,date:e.date,s:e.s,e:e.e,wd:wdIndex(e.date),flags:[]});});});
   r.forEach(function(a){
     S.work.forEach(function(w){if(w.d===DAYS[a.wd]){
-      if(T(a.s)<T(w.e)&&T(w.s)<T(a.e))a.flags.push({k:'bad',t:'Chevauche ton quart ('+w.s+' à '+w.e+')'});
-      else a.flags.push({k:'warn',t:'Jour de quart'});}});
+      if(T(a.s)<T(w.e)&&T(w.s)<T(a.e))a.flags.push({k:'bad',t:'Chevauche une indisponibilité ('+w.s+' à '+w.e+')'});
+      else a.flags.push({k:'warn',t:'Jour d’indisponibilité'});}});
     r.forEach(function(o){if(o!==a&&o.date===a.date){
       if(T(a.s)<T(o.e)&&T(o.s)<T(a.e))a.flags.push({k:'bad',t:'Chevauche '+o.code});
       else a.flags.push({k:'warn',t:'Même journée que '+o.code});}});
@@ -691,6 +691,7 @@ function controlsHTML(){
   cs.forEach(function(c){
     var cand=candidates(c).length,un=preUnmet(c);
     coursesB+='<div class="crs '+c.cls+'"><div class="crs-h"><code>'+c.code+'</code>'+(TRIM[c.code]?'<span class="cr" title="Trimestre de la grille type">T'+TRIM[c.code]+'</span>':'')+'<span class="ti" style="flex:1">'+esc(c.title)+'</span>'
+      +'<span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span>'
       +'<span class="n">'+(offered(c)?cand+'/'+c.groups.length:'non offert')+'</span><button type="button" class="btn sm" data-act="removec" data-c="'+c.code+'" aria-label="Retirer '+c.code+'">Retirer</button></div>'
       +(un?'<div class="pw"><span class="tag warn" title="'+esc(c.pre)+'">Préalable non satisfait : '+esc(c.preSig.join(c.preAny?' ou ':' et '))+'</span></div>':'')
       +(offered(c)?'<details data-k="g'+c.code+'"'+(S.open['g'+c.code]?' open':'')+'><summary>Choisir les groupes</summary>'+c.groups.map(function(g){return groupRow(c,g);}).join('')+'</details>':'')+'</div>';
@@ -726,13 +727,13 @@ function controlsHTML(){
     return '<div class="shift"><select data-act="shift" data-i="'+i+'" data-f="d" aria-label="Jour">'+DAYS.map(function(d){return '<option'+(d===w.d?' selected':'')+'>'+d+'</option>';}).join('')+'</select>'
       +tf('data-act="shift" data-i="'+i+'" data-f="s" aria-label="Début"',w.s)+'<span>à</span>'+tf('data-act="shift" data-i="'+i+'" data-f="e" aria-label="Fin"',w.e)
       +'<button type="button" class="x" data-act="rmshift" data-i="'+i+'" aria-label="Retirer">×</button></div>';}).join('')
-    +'<div><button type="button" class="btn sm" data-act="addshift">Ajouter un quart</button></div>'
-    +'<div class="row"><label><input type="checkbox" id="fWork"'+(S.workOn?' checked':'')+'>Éviter mes quarts</label></div>'
+    +'<div><button type="button" class="btn sm" data-act="addshift">Ajouter une indisponibilité</button></div>'
+    +'<div class="row"><label><input type="checkbox" id="fWork"'+(S.workOn?' checked':'')+'>Éviter mes indisponibilités</label></div>'
     +'<div class="row"><label>Marge de trajet, présentiel <input type="number" id="bufP" min="0" max="300" step="15" value="'+S.bufP+'"> min</label>'
     +'<label>À distance <input type="number" id="bufD" min="0" max="300" step="15" value="'+S.bufD+'"> min</label></div>';
-  var wsub=S.workOn?S.work.map(function(w){return w.d+' '+w.s.replace(':00','h')+'–'+w.e.replace(':00','h');}).join(', ')||'aucun quart':'ignoré';
+  var wsub=S.workOn?S.work.map(function(w){return w.d+' '+w.s.replace(':00','h')+'–'+w.e.replace(':00','h');}).join(', ')||'aucune':'ignoré';
 
-  return sec('courses','Mes cours',cs.length+' choisis',coursesB)+sec('time','Heures et jours',tsub,timeB)+sec('mode','Modalité et lieu',msub,modeB)+sec('work','Travail',wsub,workB);
+  return sec('courses','Mes cours',cs.length+' choisis · '+cs.reduce(function(a,c){return a+c.credits;},0)+' crédits',coursesB)+sec('time','Heures et jours',tsub,timeB)+sec('mode','Modalité et lieu',msub,modeB)+sec('work','Indisponibilités',wsub,workB);
 }
 
 //--- résultats
@@ -751,7 +752,7 @@ function gridHTML(sel){
         var b1=Math.max(START,ws-bufP);if(ws>b1)inner+='<div class="buf" style="top:'+((b1-START)*PX)+'px;height:'+((ws-b1)*PX)+'px"></div>';
         var a2=Math.min(END,we+bufP);if(a2>we)inner+='<div class="buf" style="top:'+((we-START)*PX)+'px;height:'+((a2-we)*PX)+'px"></div>';}
       var t0=Math.max(START,ws),t1=Math.min(END,we);
-      if(t1>t0)inner+='<div class="work" style="top:'+((t0-START)*PX)+'px;height:'+((t1-t0)*PX)+'px">Travail<br>'+w.s+'–'+w.e+'</div>';});
+      if(t1>t0)inner+='<div class="work" style="top:'+((t0-START)*PX)+'px;height:'+((t1-t0)*PX)+'px">Indisponible<br>'+w.s+'–'+w.e+'</div>';});
     items.forEach(function(it){
       var t0=Math.max(START,it.a),t1=Math.min(END,it.b);if(t1<=t0)return;
       var s=it.s,ex=s.t==='Exercices',bad=workIssue(s)==='overlap';
@@ -786,12 +787,12 @@ function resultsHTML(){
     +'<button type="button" class="btn'+(isFav?' primary':'')+'" data-act="fav">'+(isFav?'★ Dans mes favoris':'☆ Garder cet horaire')+'</button><button type="button" class="btn" data-act="snap">Enregistrer l\u2019image</button></div>';
   h+='<div class="stats"><span class="stat"><b>'+st.days+'</b> jours</span><span class="stat"><b>'+st.campusDays+'</b> jours sur campus</span><span class="stat"><b>'+st.campuses+'</b> lieu'+(st.campuses>1?'x':'')+' connu'+(st.campuses>1?'s':'')+'</span><span class="stat">groupe le plus serré : <b>'+(st.minp===null?'?':st.minp)+'</b> pl.</span></div>';
   h+='<div class="wkwrap">'+gridHTML(sel)+'</div>'
-    +'<div class="legend">'+modeBadge('pres')+modeBadge('hyb')+modeBadge('dist')+'<span class="mode mode-work">Travail</span></div></div>';
+    +'<div class="legend">'+modeBadge('pres')+modeBadge('hyb')+modeBadge('dist')+'<span class="mode mode-work">Indisponible</span></div></div>';
   h+='<div class="card"><h2 class="h3">Groupes de cet horaire</h2><div class="tblwrap"><table><thead><tr><th>Cours</th><th>Gr.</th><th>Horaire</th><th>Modalité</th><th>Lieu</th><th>Places</th></tr></thead><tbody>';
   sel.forEach(function(x){var g=x.g,notes=g.notes.slice();if(g.prof)notes.unshift(g.prof);
     h+='<tr class="'+x.c.cls+'"><td class="cd">'+x.c.code+'</td><td class="m">'+g.id+'</td><td class="m">'+esc(whenText(g))+'</td><td>'+modeBadge(g.mode)+'</td><td>'+esc(placeText(g))+(notes.length?'<div class="hint">'+esc(notes.join(' · '))+'</div>':'')+'</td><td>'+seatsPill(g.places)+'</td></tr>';});
   h+='</tbody></table></div>';
-  sel.forEach(function(x){if(groupWorkIssue(x.g)==='overlap')h+='<div class="alert bad" style="margin-top:8px">'+x.c.code+' gr. '+x.g.id+' tombe pendant un de tes quarts.</div>';});
+  sel.forEach(function(x){if(groupWorkIssue(x.g)==='overlap')h+='<div class="alert bad" style="margin-top:8px">'+x.c.code+' gr. '+x.g.id+' tombe pendant une de tes indisponibilités.</div>';});
   sel.forEach(function(x){if(x.g.places===0)h+='<div class="alert warn" style="margin-top:8px">'+x.c.code+' gr. '+x.g.id+' est complet. Surveille les annulations.</div>';});
   h+='</div>';
   var ex=examRows(sel);
@@ -977,16 +978,59 @@ function reloadData(){
   return fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){DATA=d;CACHE={};render();});
 }
 function stopPoll(){clearInterval(upd.timer);upd.timer=null;upd.busy=false;upd.msg='';paintStamp();}
-function waitFresh(before){
-  var t0=Date.now();upd.msg='Lecture de l’UQAM en cours (environ 6 min)…';paintStamp();
-  upd.timer=setInterval(function(){
-    if(Date.now()-t0>14*60*1000){stopPoll();toast('La lecture prend plus de temps que prévu. Réessaie dans quelques minutes.');return;}
-    fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
-      var f=null;Object.keys(d).forEach(function(k){if(d[k].fetched&&(!f||d[k].fetched>f))f=d[k].fetched;});
-      if(f&&(!before||f>before)){DATA=d;CACHE={};stopPoll();render();toast('Données mises à jour.');}
-    }).catch(function(){});
-  },20000);
+var RKEY='uqam-h27-run';
+function hm(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,'0')+'h'+String(d.getMinutes()).padStart(2,'0');}
+function newestOf(d){var f=null;Object.keys(d).forEach(function(k){if(d[k]&&d[k].fetched&&(!f||d[k].fetched>f))f=d[k].fetched;});return f;}
+function runInfo(){
+  return fetch('https://api.github.com/repos/'+REPO+'/actions/workflows/update.yml/runs?per_page=1',{headers:{Accept:'application/vnd.github+json'}})
+    .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(j){return (j.workflow_runs||[])[0]||null;});
 }
+function waitFresh(before,since){
+  clearInterval(upd.timer);
+  var t0=since||Date.now(),est=t0+7*60*1000;
+  try{localStorage.setItem(RKEY,JSON.stringify({t0:t0,before:before}));}catch(e){}
+  upd.busy=true;
+  function say(st){upd.msg=(st==='queued'?'Lecture en attente':'Lecture de l’UQAM en cours')+' · fin prévue vers '+hm(Math.max(est,Date.now()+30000));paintStamp();}
+  say('in_progress');
+  var n=0;
+  function tick(){
+    if(Date.now()-t0>16*60*1000){forget();stopPoll();toast('La lecture prend plus de temps que prévu. Réessaie dans quelques minutes.');return;}
+    n++;
+    fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+      var f=newestOf(d);
+      if(f&&(!before||f>before)){forget();DATA=d;CACHE={};stopPoll();render();toast('Données mises à jour.');}
+      else if(n%2===1)runInfo().then(function(r){
+        if(r&&r.status==='completed'&&r.conclusion&&r.conclusion!=='success'&&Date.now()-t0>60000){forget();stopPoll();toast('La lecture a échoué. Les anciennes données sont conservées.');}
+        else if(r)say(r.status);
+      }).catch(function(){});
+    }).catch(function(){});
+  }
+  upd.timer=setInterval(tick,20000);
+}
+function forget(){try{localStorage.removeItem(RKEY);}catch(e){}}
+// Reprendre le décompte après un rechargement de la page
+function resumeRun(){
+  var o=null;try{o=JSON.parse(localStorage.getItem(RKEY)||'null');}catch(e){}
+  if(o&&Date.now()-o.t0<16*60*1000){if(!upd.timer)waitFresh(o.before,o.t0);return;}
+  forget();
+  runInfo().then(function(r){
+    if(r&&r.status!=='completed'&&!upd.timer){var t=new Date(r.run_started_at||r.created_at).getTime();if(Date.now()-t<16*60*1000)waitFresh(newest(),t);}
+  }).catch(function(){});
+}
+// Mise à jour automatique : vérifie en arrière-plan, remplace les données sans recharger la page
+function quietBusy(){var a=document.activeElement;return (a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))||!!document.querySelector('.tf-pop');}
+function autoCheck(){
+  if(document.hidden||upd.timer)return;
+  fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
+    if(!d)return;var f=newestOf(d),cur=newest();
+    if(f&&cur&&f>cur){
+      if(quietBusy()){setTimeout(autoCheck,15000);return;}
+      DATA=d;CACHE={};render();paintStamp();toast('Nouvelles données chargées.');
+    }
+  }).catch(function(){});
+}
+setInterval(autoCheck,5*60*1000);
+document.addEventListener('visibilitychange',function(){if(!document.hidden){autoCheck();resumeRun();}});
 function doUpdate(){
   if(upd.busy)return;
   upd.busy=true;upd.msg='Actualisation…';paintStamp();
@@ -1000,7 +1044,13 @@ function doUpdate(){
   if(RELAY){
     fetch(RELAY,{method:'POST'}).then(function(r){return r.json().then(function(j){return {s:r.status,j:j};});}).then(function(x){
       if(x.s!==200&&x.s!==202){stopPoll();toast('Échec du lancement ('+x.s+').');return;}
-      if(x.j.status==='busy')toast('Une lecture est déjà en cours ou très récente.');
+      if(x.j.status==='busy'){
+        runInfo().then(function(r){
+          if(r&&r.status!=='completed')waitFresh(before,new Date(r.run_started_at||r.created_at).getTime());
+          else plain('Une lecture a eu lieu il y a moins de 15 min.');
+        }).catch(function(){plain('Une lecture est déjà en cours ou très récente.');});
+        return;
+      }
       waitFresh(before);
     }).catch(function(){stopPoll();toast('Impossible de joindre le relais.');});
     return;
@@ -1051,7 +1101,7 @@ function settingsHTML(){
    +'<div class="lab">Taille du texte</div>'+chipsHTML('tsize',P.ts,[[0.9,'Petit'],[1,'Normal'],[1.12,'Grand'],[1.25,'Très grand']])
    +'<div class="lab">Animations</div><div class="chips"><button type="button" class="chip" data-act="anim" aria-pressed="'+P.anim+'">'+(P.anim?'Activées':'Désactivées')+'</button></div></div>'
    +'<div class="card"><h2 class="h3">Actualisation</h2><p class="hint">Le bouton « Actualiser » relance la lecture du site de l’UQAM (environ 6 min), sur tous tes appareils. Sinon, les données sont relues automatiquement toutes les heures.</p>'
-   +'</div><div class="card"><h2 class="h3">Mes données</h2><p class="hint">Cours choisis, cours faits, limites d’heures, quarts et favoris sont gardés dans ce navigateur.</p>'
+   +'</div><div class="card"><h2 class="h3">Mes données</h2><p class="hint">Cours choisis, cours faits, limites d’heures, indisponibilités et favoris sont gardés dans ce navigateur.</p>'
    +(wipeAsk?'<div class="row"><span>Tout réinitialiser ?</span><button type="button" class="btn danger" data-act="wipe">Oui, réinitialiser</button><button type="button" class="btn" data-act="wipeNo">Annuler</button></div>'
             :'<div class="row"><button type="button" class="btn" data-act="wipe">Réinitialiser mes choix</button></div>')
    +'</div></div>';
@@ -1106,7 +1156,7 @@ function snapSchedule(){
       var t0=Math.max(START,ws),t1=Math.min(END,we);if(t1<=t0)return;
       var py=HH+(t0-START)*PXM,ph=(t1-t0)*PXM;
       rr(cx+2,py,CW-4,ph,6);x.fillStyle=V('--surface');x.fill();x.fillStyle=pat;x.fill();x.strokeStyle=V('--work');x.lineWidth=1;x.stroke();
-      x.fillStyle=V('--muted');x.textAlign='left';x.textBaseline='top';x.font='500 11px '+FB;x.fillText('Travail',cx+8,py+5);x.fillText(w.s+'–'+w.e,cx+8,py+19);});
+      x.fillStyle=V('--muted');x.textAlign='left';x.textBaseline='top';x.font='500 11px '+FB;x.fillText('Indisponible',cx+8,py+5);x.fillText(w.s+'–'+w.e,cx+8,py+19);});
     items.forEach(function(it){
       var t0=Math.max(START,it.a),t1=Math.min(END,it.b);if(t1<=t0)return;
       var sl=it.s,ex=sl.t==='Exercices',n=(it.c.cls.match(/\d+/)||[1])[0],cc=V('--c'+n),ct=V('--c'+n+'t');
@@ -1184,7 +1234,7 @@ document.addEventListener('keydown',function(e){
 });
 window.addEventListener('resize',closePop);
 window.addEventListener('scroll',function(e){if(tfPop&&!(e.target&&e.target.classList&&e.target.classList.contains('tf-pop')))closePop();},true);
-function start(){load();render();showTab();}
+function start(){load();render();showTab();resumeRun();}
 fetch('data.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){DATA=d;start();})
  .catch(function(err){document.getElementById('right').innerHTML='<div class="alert bad">Impossible de charger les données des cours ('+esc(String(err&&err.message||err))+'). Recharge la page.</div>';});
 </script>
