@@ -59,9 +59,19 @@ jobs:
         env:
           ONLY: ${{ github.event.inputs.courses }}
         run: |
-          # Actualisation rapide : seulement les cours demandés (sigles valides), sinon toute la liste.
+          # Cours demandés à la main (actualisation rapide) : on les lit et on note la date de la demande.
           LIST=$(printf '%s' "$ONLY" | tr -c 'A-Z0-9' ' ' | tr -s ' ' | grep -oE '[A-Z]{3}[0-9]{3}[0-9A-Z]' | head -12 | tr '\n' ' ')
-          if [ -z "$LIST" ]; then LIST=$(cat courses.txt | tr '\n' ' '); fi
+          if [ -n "$LIST" ]; then
+            export ASKED=1
+          else
+            # Lecture automatique (toutes les heures) : seulement les cours demandés dans les 7 derniers jours.
+            # Une lecture complète de la liste a lieu une fois par semaine (dimanche, 5 h UTC) ou si le fichier est vide.
+            LIST=$(node -e "const d=require('./site/data.json');const t=Date.now()-7*864e5;console.log(Object.keys(d).filter(k=>d[k].asked>t).slice(0,40).join(' '))")
+            if [ "$(date -u +%u%H)" = "705" ] || [ "$(node -e "console.log(Object.keys(require('./site/data.json')).length)")" -lt 5 ]; then
+              LIST=$(cat courses.txt | tr '\n' ' ')
+            fi
+          fi
+          if [ -z "$LIST" ]; then echo "Aucun cours demandé récemment : pas de lecture."; exit 0; fi
           echo "Cours lus : $LIST"
           node scrape.js site/data.json 7111 $LIST
       - name: Assembler le site
