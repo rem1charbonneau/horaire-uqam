@@ -1,7 +1,7 @@
 // Relais Cloudflare Worker : lance la mise à jour du site sans exposer de jeton GitHub.
 // Variables à définir dans Cloudflare : GH_TOKEN (secret), REPO (ex. rem1charbonneau/horaire-uqam)
 const ORIGIN = 'https://rem1charbonneau.github.io';
-const COOLDOWN_MIN = 15;
+const COOLDOWN_MIN = 3;
 
 const cors = {
   'Access-Control-Allow-Origin': ORIGIN,
@@ -16,6 +16,14 @@ export default {
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
     if (req.method !== 'POST') return reply(405, { status: 'method' });
     if (req.headers.get('Origin') !== ORIGIN) return reply(403, { status: 'origin' });
+
+    // Cours à relire (optionnel) : on ne garde que des sigles valides.
+    let courses = [];
+    try {
+      const body = await req.json();
+      courses = (Array.isArray(body.courses) ? body.courses : [])
+        .filter(c => typeof c === 'string' && /^[A-Z]{3}\d{3}[0-9A-Z]$/.test(c)).slice(0, 12);
+    } catch (e) {}
 
     const gh = (path, init = {}) => fetch('https://api.github.com/repos/' + env.REPO + path, {
       ...init,
@@ -39,7 +47,7 @@ export default {
     }
     const r = await gh('/actions/workflows/update.yml/dispatches', {
       method: 'POST',
-      body: JSON.stringify({ ref: 'main' })
+      body: JSON.stringify(courses.length ? { ref: 'main', inputs: { courses: courses.join(' ') } } : { ref: 'main' })
     });
     return r.status === 204 ? reply(200, { status: 'started' }) : reply(502, { status: 'github', code: r.status });
   }
