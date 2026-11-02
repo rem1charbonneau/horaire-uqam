@@ -409,7 +409,7 @@ var CAMPUS=['Laval','Longueuil','Terrebonne','Montérégie-Ouest','Montréal','N
 var CAMPUS_LABEL={'N/A':'Lieu non affiché'};
 var MONTHS=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
 var PAL=['c1','c2','c3','c4','c5','c6','c7','c8'];
-var PROG='7111',REPO='rem1charbonneau/horaire-uqam',RELAY='';
+var PROG='7111',REPO='rem1charbonneau/horaire-uqam',RELAY='https://horaire-uqam-relay.remi-charbonneau.workers.dev/';
 var BLOCKS=[
  {t:'Tronc commun (16 cours obligatoires)',c:['AOT3221','AOT4200','AOT5100','AOT5121','DSR5100','ECO1301','ECO2401','FIN3500','JUR1031','MAT2082','MGT2150','MKG3300','ORH1163','ORH1700','SCO1045','SCO2003']},
  {t:'Un cours parmi (responsabilité, éthique, développement durable)',c:['DSR2012','DSR6200','EUT1172','ORH2110']},
@@ -1046,15 +1046,11 @@ function homeHTML(){
 }
 function chipsHTML(act,cur,list){return '<div class="chips">'+list.map(function(x){return '<button type="button" class="chip" data-act="'+act+'" data-v="'+x[0]+'" aria-pressed="'+(String(cur)===String(x[0]))+'">'+x[1]+'</button>';}).join('')+'</div>';}
 function settingsHTML(){
-  var tok=getTok();
   var h='<h1 class="page-t">Paramètres</h1><div class="set-cols"><div class="card"><h2 class="h3">Apparence</h2>'
    +'<div class="lab">Thème</div>'+chipsHTML('theme',P.theme,[['auto','Automatique'],['light','Clair'],['dark','Sombre']])
    +'<div class="lab">Taille du texte</div>'+chipsHTML('tsize',P.ts,[[0.9,'Petit'],[1,'Normal'],[1.12,'Grand'],[1.25,'Très grand']])
    +'<div class="lab">Animations</div><div class="chips"><button type="button" class="chip" data-act="anim" aria-pressed="'+P.anim+'">'+(P.anim?'Activées':'Désactivées')+'</button></div></div>'
-   +'<div class="card"><h2 class="h3">Actualisation</h2><p class="hint">Avec un jeton GitHub, le bouton « Actualiser » relance la lecture du site de l’UQAM d’un seul clic. Sans jeton, il recharge seulement les dernières données publiées.</p>'
-   +(tok?'<p class="big-line">Jeton enregistré sur cet appareil.</p><div class="row"><button type="button" class="btn" data-act="tokDel">Retirer le jeton</button></div>'
-        :'<div class="row"><input type="password" id="tokIn" class="txt" placeholder="Jeton GitHub (optionnel)" autocomplete="off" spellcheck="false"><button type="button" class="btn primary" data-act="tokSave">Enregistrer</button></div>'
-        +'<p class="hint"><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Créer un jeton</a> limité au dépôt ' + REPO + ', permission « Actions : lecture et écriture ». Il reste dans ce navigateur.</p>')
+   +'<div class="card"><h2 class="h3">Actualisation</h2><p class="hint">Le bouton « Actualiser » relance la lecture du site de l’UQAM (environ 6 min), sur tous tes appareils. Sinon, les données sont relues automatiquement toutes les heures.</p>'
    +'</div><div class="card"><h2 class="h3">Mes données</h2><p class="hint">Cours choisis, cours faits, limites d’heures, quarts et favoris sont gardés dans ce navigateur.</p>'
    +(wipeAsk?'<div class="row"><span>Tout réinitialiser ?</span><button type="button" class="btn danger" data-act="wipe">Oui, réinitialiser</button><button type="button" class="btn" data-act="wipeNo">Annuler</button></div>'
             :'<div class="row"><button type="button" class="btn" data-act="wipe">Réinitialiser mes choix</button></div>')
