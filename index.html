@@ -423,8 +423,9 @@ body.sending::before{content:"";position:fixed;inset:0;z-index:110;background:rg
 var DAYS=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
 var DAYS_LONG=['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
 var MODES={pres:'Présentiel',hyb:'Hybride',dist:'À distance'};
-var CAMPUS=['Laval','Longueuil','Terrebonne','Montérégie-Ouest','Montréal','N/A'];
-var CAMPUS_LABEL={'N/A':'Lieu non affiché'};
+var CAMPUS=['Laval','Longueuil','Terrebonne','Montérégie-Ouest','Montréal'];
+var CAMPUS_LABEL={'Montréal':'Montréal (ou lieu non précisé)'};
+function campusLbl(g){return g.campus||'Montréal (probable)';}
 var MONTHS=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
 var PAL=['c1','c2','c3','c4','c5','c6','c7','c8'];
 var PROG='7111',REPO='rem1charbonneau/horaire-uqam',RELAY='https://horaire-uqam-relay.remi-charbonneau.workers.dev/';
@@ -517,7 +518,7 @@ function reason(c,g){
   if(g.en&&!S.en)return 'Groupe en anglais';
   if(S.hideFull&&g.places===0)return 'Complet';
   if(g.places!==null&&g.places<S.minPl)return 'Moins de '+S.minPl+' places';
-  var ck=g.mode==='dist'?null:(g.campus||'N/A');
+  var ck=g.mode==='dist'?null:(g.campus||'Montréal');
   if(ck&&S.noCampus.indexOf(ck)>=0)return 'Lieu masqué ('+(CAMPUS_LABEL[ck]||ck)+')';
   var tr=timeReason(g);if(tr)return tr;
   if(S.workOn){var w=groupWorkIssue(g);if(w==='overlap')return 'Pendant une indisponibilité';if(w)return 'Trop près d’une indisponibilité';}
@@ -627,7 +628,7 @@ function seatsPill(n){if(n===null)return '<span class="seats low">n.d.</span>';v
 function placeText(g){
   if(g.mode==='dist')return 'En ligne';
   if(g.mode==='hyb')return g.campus||'Lieu à venir';
-  return g.campus||'Lieu non affiché';
+  return g.campus||'Montréal (probable)';
 }
 function whenText(g){return g.slots.length?g.slots.map(function(s){return s.d+' '+s.s+'–'+s.e+(s.t==='Exercices'?' (ex.)':'');}).join(' + '):'Horaire à venir';}
 function fmtStamp(iso){var d=new Date(iso);if(isNaN(d))return '?';return d.getDate()+' '+MONTHS[d.getMonth()]+' '+d.getFullYear()+', '+String(d.getHours()).padStart(2,'0')+'h'+String(d.getMinutes()).padStart(2,'0');}
@@ -763,7 +764,7 @@ function controlsHTML(){
     +Object.keys(MODES).map(function(m){return '<button type="button" class="chip" data-act="mode" data-v="'+m+'" aria-pressed="'+(S.modes.indexOf(m)>=0)+'">'+MODES[m]+'</button>';}).join('')
     +'</div><div class="lab">Lieu des cours en présentiel</div><div class="chips">'
     +CAMPUS.map(function(c){return '<button type="button" class="chip" data-act="campus" data-v="'+c+'" aria-pressed="'+(S.noCampus.indexOf(c)<0)+'">'+esc(CAMPUS_LABEL[c]||c)+'</button>';}).join('')
-    +'</div><div class="row"><label><input type="checkbox" id="fHide"'+(S.hideFull?' checked':'')+'>Masquer les groupes complets</label>'
+    +'</div><p class="hint" style="margin:6px 0 0">Quand l’UQAM n’indique aucun lieu, on suppose Montréal. À confirmer auprès du Registrariat.</p><div class="row"><label><input type="checkbox" id="fHide"'+(S.hideFull?' checked':'')+'>Masquer les groupes complets</label>'
     +'<label><input type="checkbox" id="fEn"'+(S.en?' checked':'')+'>Inclure le groupe anglais</label></div>';
   var msub=S.modes.length===3&&!S.noCampus.length?'tout':S.modes.map(function(m){return MODES[m];}).join(', ');
 
@@ -800,7 +801,7 @@ function gridHTML(sel){
     items.forEach(function(it){
       var t0=Math.max(START,it.a),t1=Math.min(END,it.b);if(t1<=t0)return;
       var s=it.s,ex=s.t==='Exercices',bad=workIssue(s)==='overlap';
-      var l3=ex?'Exercices · '+(s.m==='dist'?'à distance':'en présentiel'):(it.g.mode==='dist'?'À distance':it.g.mode==='hyb'?('Hybride'+(it.g.campus?' · '+it.g.campus:'')):('Présentiel · '+(it.g.campus||'lieu non affiché')));
+      var l3=ex?'Exercices · '+(s.m==='dist'?'à distance':'en présentiel'):(it.g.mode==='dist'?'À distance':it.g.mode==='hyb'?('Hybride'+(it.g.campus?' · '+it.g.campus:'')):('Présentiel · '+campusLbl(it.g)));
       inner+='<div class="blk '+it.c.cls+' '+(s.m==='dist'?'dist':s.m==='hyb'?'hyb':'pres')+(bad?' bad':'')+'" title="'+esc(it.c.code+' gr. '+it.g.id+' · '+l3)+'" style="top:'+((t0-START)*PX)+'px;height:'+((t1-t0)*PX)+'px;left:calc('+(it.lane/it.n*100)+'% + 2px);width:calc('+(100/it.n)+'% - 4px)">'
         +'<b>'+it.c.code+'</b> gr.'+it.g.id+'<div class="t">'+s.s+'–'+s.e+'</div><div class="ml">'+esc(l3)+'</div></div>';});
     h+='<div class="wk-col" style="height:'+H+'px">'+inner+'</div>';
@@ -898,7 +899,7 @@ function load(){
     if(d.excl&&typeof d.excl==='object')Object.keys(d.excl).forEach(function(c){if(Array.isArray(d.excl[c]))b.excl[c]=d.excl[c];});
     if(d.pin&&typeof d.pin==='object')Object.keys(d.pin).forEach(function(c){if(typeof d.pin[c]==='string')b.pin[c]=d.pin[c];});
     if(Array.isArray(d.modes))b.modes=d.modes.filter(function(m){return MODES[m];});
-    if(Array.isArray(d.noCampus))b.noCampus=d.noCampus.filter(function(c){return CAMPUS.indexOf(c)>=0;});
+    if(Array.isArray(d.noCampus)){b.noCampus=d.noCampus.map(function(c){return c==='N/A'?'Montréal':c;}).filter(function(c,i,a){return CAMPUS.indexOf(c)>=0&&a.indexOf(c)===i;});}
     b.sent=typeof d.sent==='string'?d.sent:'';b.hideFull=d.hideFull!==false;b.en=!!d.en;b.workOn=d.workOn!==false;b.minPl=0;
     if(Array.isArray(d.work)&&d.work.every(function(w){return DAYS.indexOf(w.d)>=0&&/^\d\d:\d\d$/.test(w.s)&&/^\d\d:\d\d$/.test(w.e);}))b.work=d.work;
     b.bufP=Math.max(0,Number(d.bufP)||0);b.bufD=Math.max(0,Number(d.bufD)||0);
@@ -1309,7 +1310,7 @@ function snapSchedule(){
     items.forEach(function(it){
       var t0=Math.max(START,it.a),t1=Math.min(END,it.b);if(t1<=t0)return;
       var sl=it.s,ex=sl.t==='Exercices',n=(it.c.cls.match(/\d+/)||[1])[0],cc=V('--c'+n),ct=V('--c'+n+'t');
-      var l3=ex?'Exercices · '+(sl.m==='dist'?'à distance':'en présentiel'):(it.g.mode==='dist'?'À distance':it.g.mode==='hyb'?('Hybride'+(it.g.campus?' · '+it.g.campus:'')):('Présentiel · '+(it.g.campus||'lieu non affiché')));
+      var l3=ex?'Exercices · '+(sl.m==='dist'?'à distance':'en présentiel'):(it.g.mode==='dist'?'À distance':it.g.mode==='hyb'?('Hybride'+(it.g.campus?' · '+it.g.campus:'')):('Présentiel · '+campusLbl(it.g)));
       var bw=CW/it.n,bx=cx+it.lane*bw+2,by=HH+(t0-START)*PXM,bh=(t1-t0)*PXM,w2=bw-4;
       rr(bx,by,w2,bh,7);
       var pres=sl.m!=='dist'&&sl.m!=='hyb';
