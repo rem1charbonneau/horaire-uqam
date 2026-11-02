@@ -452,6 +452,64 @@ body.sending::before{content:"";position:fixed;inset:0;z-index:110;background:rg
 .sh-t{margin:0;font:800 1.35rem var(--font-head);letter-spacing:-.01em}
 .sh .hint{margin-top:2px}
 @media (max-width:760px){.hero2{grid-template-columns:minmax(0,1fr)}.hero2-art{order:-1}.hero2-art svg{width:min(70%,240px)}.nav{flex-wrap:wrap;row-gap:6px}.nav .brand{order:1}.nav-r{order:2;margin-left:auto}.nav .stamp{display:none}.tabs{order:3;flex:1 0 100%;overflow-x:auto;justify-content:flex-start}.tabs{gap:2px}.tabs a{padding:6px 7px;gap:5px;white-space:nowrap;font-size:.8125rem}.tabs a i{width:20px;height:20px}}
+/* ---- accueil plein écran, animé ---- */
+.app{max-width:none}
+body.home{padding-left:0;padding-right:0;padding-bottom:0}
+body.home .nav{margin:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body.home .app{padding:0}body.home .foot{display:none}
+.view:not(#v-accueil){max-width:1760px;margin-inline:auto}
+.about{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:999px;color:var(--muted);font-weight:500;text-decoration:none}
+.about:hover,.about.on{background:var(--accent-soft);color:var(--accent)}
+.about.on{background:var(--accent);color:var(--accent-ink)}
+.nav-r{display:flex;align-items:center;gap:6px}
+.hh{position:relative;overflow:hidden;isolation:isolate;min-height:calc(100svh - 54px);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:center;gap:24px;padding:clamp(28px,5vw,72px) max(clamp(20px,5vw,84px),env(safe-area-inset-left,0px));color:#fff;background:#06162B;--px:0;--py:0}
+.hh-bg{position:absolute;inset:-35%;z-index:-3;transform:translate3d(calc(var(--px)*-28px),calc(var(--py)*-28px),0) rotate(-22deg);transition:transform .35s ease-out;filter:blur(2.5px)}
+.hh-grid{position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.09) 0 1px,transparent 1px 110px),repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 2px,transparent 2px 28px);animation:hhGrid 14s linear infinite}
+.hh-b{position:absolute;border-radius:14px;animation:hhDrift var(--t,9s) ease-in-out infinite alternate,hhPulse calc(var(--t,9s)*.8) ease-in-out infinite;animation-delay:var(--d,0s)}
+.hh-shade{position:absolute;inset:0;z-index:-2;background:radial-gradient(120% 90% at 85% 40%,rgba(16,70,127,.15),transparent 60%),linear-gradient(90deg,rgba(5,18,36,.88) 0%,rgba(5,18,36,.6) 36%,rgba(5,18,36,.05) 72%,rgba(5,18,36,.2) 100%)}
+.hh-in{position:relative;z-index:1}
+.hh-eye{margin:0 0 6px;font:600 clamp(1.3rem,3vw,2.2rem) var(--font-head);color:#9CC9F5;animation:hhRise .8s .05s both cubic-bezier(.2,.8,.2,1)}
+.hh h1{margin:0;font:italic 800 clamp(4rem,12vw,10rem)/.92 'Kanit',var(--font-head);letter-spacing:0}
+.hh h1 .ln{display:block;white-space:nowrap}
+.hh h1 .ln+.ln{color:#F2B35A}
+.hh h1 .lt{display:inline-block;animation:hhLetter .7s both cubic-bezier(.2,.9,.25,1.2);animation-delay:calc(.15s + var(--i)*.06s)}
+.hh-lead{margin:20px 0 0;max-width:36em;font-size:clamp(1.05rem,2vw,1.4rem);line-height:1.45;color:#C9DDF3;animation:hhRise .9s .75s both cubic-bezier(.2,.8,.2,1)}
+.hh-cta{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:14px;margin-top:30px;padding:clamp(18px,2.4vw,28px) clamp(34px,5vw,64px);border:0;border-radius:14px;background:#F2B35A;color:#0B1E36;font:italic 800 clamp(1.4rem,2.8vw,2.1rem) 'Kanit',var(--font-head);text-transform:uppercase;cursor:pointer;animation:hhRise .9s .95s both cubic-bezier(.2,.8,.2,1),hhGlow 2.6s 2s ease-in-out infinite;transition:transform .2s}
+.hh-cta:hover{transform:translateY(-3px) scale(1.03)}
+.hh-cta:active{transform:scale(.98)}
+.hh-cta::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg);animation:hhShine 3.4s 2.2s ease-in-out infinite}
+.hh-cta .ar{display:inline-block;animation:hhNudge 1.4s ease-in-out infinite}
+.hh-steps{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0;padding:0;list-style:none;animation:hhRise .9s 1.15s both cubic-bezier(.2,.8,.2,1)}
+.hh-steps li{display:flex;align-items:center;gap:9px;padding:8px 16px 8px 8px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.08);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#E2EEFB;font-weight:500}
+.hh-steps b{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#F2B35A;color:#0B1E36;font:800 .85rem var(--font-head)}
+.hh-art{position:relative;display:flex;justify-content:center;align-items:center;transform:translate3d(calc(var(--px)*16px),calc(var(--py)*16px),0);transition:transform .35s ease-out}
+.hh-circ{width:min(100%,clamp(260px,34vw,500px));aspect-ratio:1;animation:hhPop 1s .35s both cubic-bezier(.2,1.2,.3,1),hhFloat 7s 1.4s ease-in-out infinite}
+.hh-circ svg{width:100%;height:100%;filter:drop-shadow(0 26px 40px rgba(0,0,0,.5))}
+.hh-chip{position:absolute;display:flex;align-items:center;justify-content:center;width:clamp(54px,6vw,84px);aspect-ratio:1;border-radius:20px;background:#fff;box-shadow:0 14px 30px rgba(0,0,0,.4);animation:hhPop .8s both cubic-bezier(.2,1.2,.3,1),hhFloat 6s ease-in-out infinite}
+.hh-chip svg{width:62%;height:62%}
+.hh-chip.c1{top:6%;left:4%;animation-delay:1.2s,1.2s}
+.hh-chip.c2{top:2%;right:6%;animation-delay:1.4s,2.3s}
+.hh-chip.c3{bottom:6%;right:2%;animation-delay:1.6s,.6s}
+@keyframes hhRise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes hhLetter{from{opacity:0;transform:translateY(-.6em) skewX(-14deg) scale(.7)}to{opacity:1;transform:none}}
+@keyframes hhPop{from{opacity:0;transform:scale(.4) rotate(-10deg)}to{opacity:1;transform:none}}
+@keyframes hhFloat{0%,100%{translate:0 0}50%{translate:0 -16px}}
+@keyframes hhDrift{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,var(--dy,60px),0)}}
+@keyframes hhPulse{0%,100%{opacity:var(--o1,.25)}50%{opacity:var(--o2,.55)}}
+@keyframes hhGrid{to{background-position:110px 0,0 56px}}
+@keyframes hhShine{0%{left:-60%}55%,100%{left:140%}}
+@keyframes hhNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+@keyframes hhGlow{0%,100%{box-shadow:0 10px 28px rgba(242,179,90,.3)}50%{box-shadow:0 14px 46px rgba(242,179,90,.7)}}
+@media (prefers-reduced-motion:reduce){.hh *,.hh{animation:none!important;transition:none!important}.hh-bg{transform:rotate(-22deg)}}
+@media (max-width:860px){.hh{grid-template-columns:minmax(0,1fr);padding-top:20px;align-content:center}.hh-art{order:-1}.hh-circ{width:min(62vw,280px)}.hh-chip{display:none}.hh h1{font-size:clamp(3.6rem,19vw,6rem)}}
+.ab{max-width:900px;margin:0 auto;display:grid;gap:14px;padding-bottom:20px}
+.ab h2{margin:0 0 8px;font:700 1.15rem var(--font-head)}
+.ab p,.ab li{line-height:1.55;color:var(--ink)}
+.ab ul{margin:6px 0 0;padding-left:1.2em;display:grid;gap:6px}
+.ab .warn{border-color:var(--accent);background:var(--accent-soft)}
+.ab table{width:100%;border-collapse:collapse;margin-top:6px}
+.ab td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:top}
+.ab td:first-child{font-weight:600;white-space:nowrap;padding-left:0}
 </style>
 </head><body>
 
@@ -462,7 +520,7 @@ body.sending::before{content:"";position:fixed;inset:0;z-index:110;background:rg
     <a href="#cours" data-tab="cours" data-n="2"><i>2</i>Choisir mes cours</a>
     <a href="#generateur" data-tab="generateur" data-n="3"><i>3</i>Générateur</a>
   </div>
-  <div class="nav-r"><span class="stamp" id="stamp"></span><a class="gear" href="#parametres" data-tab="parametres" aria-label="Paramètres" title="Paramètres"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></a></div>
+  <div class="nav-r"><span class="stamp" id="stamp"></span><a class="about" href="#apropos" data-tab="apropos"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg><span>À propos</span></a><a class="gear" href="#parametres" data-tab="parametres" aria-label="Paramètres" title="Paramètres"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></a></div>
 </nav>
 <div class="app">
   <section class="view" id="v-accueil"></section>
@@ -476,6 +534,7 @@ body.sending::before{content:"";position:fixed;inset:0;z-index:110;background:rg
     </div>
   </section>
   <section class="view" id="v-parametres" hidden></section>
+  <section class="view" id="v-apropos" hidden></section>
   <footer class="foot">Source : <a href="https://etudier.uqam.ca/cours-horaires" target="_blank" rel="noopener">Recherche de cours de l'UQAM</a></footer>
 </div>
 <div class="toast" id="toast" role="status" hidden></div>
@@ -1286,7 +1345,7 @@ function getTok(){try{return localStorage.getItem(TKEY)||'';}catch(e){return '';
 function setTok(v){try{if(v)localStorage.setItem(TKEY,v);else localStorage.removeItem(TKEY);}catch(e){}}
 
 //--- navigation par onglets (#accueil, #generateur, #parametres)
-var TABS=['accueil','programmes','cours','generateur','parametres'];
+var TABS=['accueil','programmes','cours','generateur','parametres','apropos'];
 function curTab(){var h=(location.hash||'').slice(1);return TABS.indexOf(h)>=0?h:'accueil';}
 function goTab(t){if(location.hash!=='#'+t)location.hash='#'+t;else showTab();}
 function paintNav(){
@@ -1303,10 +1362,14 @@ function genHead(){
 function showTab(){
   var t=curTab();
   TABS.forEach(function(k){document.getElementById('v-'+k).hidden=(k!==t);});
-  document.querySelectorAll('.tabs a,.gear').forEach(function(a){var on=a.getAttribute('data-tab')===t;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  document.body.classList.toggle('home',t==='accueil');
+  document.querySelectorAll('.tabs a,.gear,.about').forEach(function(a){var on=a.getAttribute('data-tab')===t;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   closePop();renderPages();window.scrollTo(0,0);
 }
 window.addEventListener('hashchange',showTab);
+(function(){var raf=0,mq=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)');
+  document.addEventListener('mousemove',function(e){var h=document.getElementById('hh');if(!h||h.offsetParent===null||(mq&&mq.matches))return;
+    cancelAnimationFrame(raf);raf=requestAnimationFrame(function(){h.style.setProperty('--px',(e.clientX/innerWidth*2-1).toFixed(3));h.style.setProperty('--py',(e.clientY/innerHeight*2-1).toFixed(3));});});})();
 
 //--- messages brefs
 var toastT=null;
@@ -1506,22 +1569,36 @@ function nextStep(){
   if(!cs.length||valKey()!==S.sent)return 'cours';
   return 'generateur';
 }
-function homeHTML(){
-  var fresh=!S.picked&&!S.sel.length;
-  var blk=[['6%','14%','74px','34px','#4FD1BF'],['14%','52%','86px','40px','#7BA3FF'],['30%','20%','70px','36px','#F2B35A'],['52%','8%','96px','38px','#B79BFF'],['62%','62%','78px','40px','#FF8FA9'],['10%','82%','70px','34px','#4FD1BF'],['44%','88%','84px','38px','#F2B35A'],['72%','36%','90px','36px','#7BA3FF']];
-  var h='<section class="hero2"><div class="hero2-bg" aria-hidden="true"><svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" aria-hidden="true"><g fill="none" stroke="#fff" stroke-opacity=".07"><path d="M0 60H1000M0 120H1000M0 180H1000M0 240H1000M0 300H1000M0 360H1000M0 420H1000"/><path d="M200 0V500M400 0V500M600 0V500M800 0V500"/></g><g opacity=".2"><rect x="14" y="64" width="172" height="112" rx="10" fill="#4FD1BF"/><rect x="14" y="244" width="172" height="52" rx="10" fill="#7BA3FF"/><rect x="214" y="124" width="172" height="52" rx="10" fill="#F2B35A"/><rect x="214" y="304" width="172" height="112" rx="10" fill="#B79BFF"/><rect x="414" y="64" width="172" height="52" rx="10" fill="#7BA3FF"/><rect x="414" y="184" width="172" height="112" rx="10" fill="#4FD1BF"/><rect x="614" y="124" width="172" height="112" rx="10" fill="#FF8FA9"/><rect x="614" y="364" width="172" height="52" rx="10" fill="#F2B35A"/><rect x="814" y="64" width="172" height="52" rx="10" fill="#B79BFF"/><rect x="814" y="244" width="172" height="112" rx="10" fill="#7BA3FF"/></g></svg></div>'+SVG_SKY
-    +'<div class="hero2-txt"><p class="eyebrow">Bienvenue sur</p><h1>Horaire<br><span>UQAM</span></h1>'
-    +'<p class="lead">Le générateur d’horaires pour les étudiantes et étudiants de l’ESG UQAM. Choisis ton programme et tes cours de l’hiver 2027 : le site trouve les horaires sans conflit et te montre les places qui restent.</p>'
-    +'<div class="ctas"><button type="button" class="cta" data-act="cta">'+'Commencer'+' <span aria-hidden="true">→</span></button></div></div>'
-    +'<div class="hero2-art">'+SVG_HERO+'<div class="art-card" aria-hidden="true"><i style="background:#0A6CC2"></i><i style="background:#F2B35A"></i><i style="background:#17794A"></i></div></div></section>'
-    +'<section class="why" id="why"><h2>À quoi sert ce site ?</h2><p>À préparer ta session sans te perdre dans les pages de l’UQAM : tu vois ton cheminement, tu choisis tes cours, et le site assemble tous les horaires possibles sans conflit, en tenant compte de tes heures de travail et de tes préférences.</p>'
-    +'<div class="why-g">'
-    +'<div class="why-c"><div class="ic">'+IC_PROG+'</div><div class="k">Étape 1</div><h3>Choisis ton programme</h3><p>Domaine, cycle, programme et concentration : tu vois les cours à suivre, leurs crédits, leurs préalables et la grille de cheminement de l’UQAM.</p></div>'
-    +'<div class="why-c"><div class="ic">'+IC_COURS+'</div><div class="k">Étape 2</div><h3>Choisis tes cours</h3><p>Coche les cours de l’hiver 2027. Les préalables manquants sont signalés, puis tu valides et le site lit les groupes et les places.</p></div>'
-    +'<div class="why-c"><div class="ic">'+IC_GEN+'</div><div class="k">Étape 3</div><h3>Génère ton horaire</h3><p>Des horaires sans conflit, triés selon tes goûts : moins de jours sur le campus, moins de trous, plus de places libres.</p></div>'
-    +'</div><p class="fine">Outil non officiel : les données viennent des pages publiques de l’UQAM et peuvent changer. L’inscription se fait toujours dans Mon Portail, et le choix de cours se confirme avec le responsable de programme.</p></section>';
-  if(!fresh)h+='<p class="hint" style="text-align:center;margin-top:8px">Envie de repartir de zéro ? <button type="button" class="btn sm" data-act="wipeGo">Tout réinitialiser</button></p>';
+function seedR(n){var x=n*9301+49297;return function(){x=(x*9301+49297)%233280;return x/233280;};}
+function hhBlocks(){
+  var r=seedR(7),cols=['#4FD1BF','#7BA3FF','#F2B35A','#B79BFF','#FF8FA9','#6FD08C','#5CC3EA'],h='';
+  for(var c=0;c<26;c++){var y=-r()*160,n=6+Math.floor(r()*3);
+    for(var k=0;k<n;k++){var ht=40+r()*130,col=cols[Math.floor(r()*cols.length)];
+      h+='<i class="hh-b" style="left:'+(c*110+8)+'px;top:'+Math.round(y)+'px;width:94px;height:'+Math.round(ht)+'px;background:'+col+';--t:'+(7+r()*8).toFixed(1)+'s;--d:-'+(r()*9).toFixed(1)+'s;--dy:'+Math.round(30+r()*90)+'px;--o1:'+(.3+r()*.15).toFixed(2)+';--o2:'+(.6+r()*.3).toFixed(2)+'"></i>';
+      y+=ht+14+r()*90;}}
   return h;
+}
+function lettres(t,off){return t.split('').map(function(ch,i){return '<span class="lt" style="--i:'+(i+off)+'">'+ch+'</span>';}).join('');}
+function homeHTML(){
+  return '<section class="hh" id="hh"><div class="hh-bg" aria-hidden="true"><div class="hh-grid"></div>'+hhBlocks()+'</div><div class="hh-shade" aria-hidden="true"></div>'
+    +'<div class="hh-in"><p class="hh-eye">Bienvenue sur</p><h1 aria-label="Horaire UQAM"><span class="ln" aria-hidden="true">'+lettres('Horaire',0)+'</span><span class="ln" aria-hidden="true">'+lettres('UQAM',7)+'</span></h1>'
+    +'<p class="hh-lead">Le générateur d’horaires pour les étudiantes et étudiants de l’ESG UQAM. Choisis ton programme et tes cours : le site trouve les horaires sans conflit.</p>'
+    +'<button type="button" class="hh-cta" data-act="cta">Commencer <span class="ar" aria-hidden="true">→</span></button>'
+    +'<ol class="hh-steps"><li><b>1</b>Programme</li><li><b>2</b>Choisir mes cours</li><li><b>3</b>Générateur</li></ol></div>'
+    +'<div class="hh-art" aria-hidden="true"><div class="hh-chip c1">'+IC_PROG+'</div><div class="hh-chip c2">'+IC_COURS+'</div><div class="hh-chip c3">'+IC_GEN+'</div><div class="hh-circ">'+SVG_HERO+'</div></div></section>';
+}
+function aboutHTML(){
+  return '<div class="ab"><div class="sh"><div class="sh-ic">'+IC_GEN+'</div><div><div class="sh-k">Information</div><h1 class="sh-t">À propos du site</h1><p class="hint">Ce que fait le site, d’où viennent les données et ce qu’il ne peut pas faire.</p></div></div>'
+  +'<div class="card"><h2>Le but du site</h2><p>Horaire UQAM sert uniquement à <b>faciliter le choix de cours</b> à l’École des sciences de la gestion (ESG) : tu choisis ton programme et tes cours, puis le site assemble les horaires possibles sans conflit.</p></div>'
+  +'<div class="card"><h2>Créé avec l’intelligence artificielle</h2><p>Ce site a été créé à l’aide de l’intelligence artificielle (Claude, d’Anthropic), à titre personnel par un étudiant. Il n’est <b>pas un site officiel</b> et n’a aucun lien avec l’UQAM. Même vérifié, il peut contenir des erreurs.</p></div>'
+  +'<div class="card warn"><h2>À retenir</h2><ul><li>Le site <b>ne t’inscrit à rien</b> : l’inscription se fait toujours dans Mon Portail.</li><li>Il ne garantit <b>ni qu’un cours soit offert, ni qu’il reste de la place</b>.</li><li>Préalables, équivalences, exemptions et cheminement : à confirmer auprès du Registrariat ou du responsable de ton programme.</li></ul></div>'
+  +'<div class="card"><h2>D’où viennent les données et à quel rythme</h2><table><tbody>'
+  +'<tr><td>Groupes et places</td><td>Lus sur les pages publiques de l’UQAM quand tu valides tes cours, puis rafraîchis en arrière-plan environ aux 5 minutes, avec une limite par heure. L’heure de la dernière lecture s’affiche en haut de la page. Il peut y avoir du retard : vérifie toujours dans Mon Portail avant de t’inscrire.</td></tr>'
+  +'<tr><td>Liste des cours</td><td>Mise à jour une fois par semaine.</td></tr>'
+  +'<tr><td>Programmes et grilles</td><td>Mis à jour périodiquement, pas en direct. Ils peuvent différer de la fiche officielle de l’UQAM.</td></tr>'
+  +'</tbody></table></div>'
+  +'<div class="card"><h2>Limites connues</h2><ul><li>Seuls les programmes de gestion (ESG) sont couverts.</li><li>Certaines grilles de cheminement n’ont pas pu être lues : le site affiche alors les blocs de cours sans la grille.</li><li>Les locaux ne sont plus publics depuis l’été 2025 : le local est souvent absent.</li><li>Un cours dont l’horaire n’est pas encore publié est signalé « à lire » et ne peut pas être placé dans un horaire.</li><li>Tes choix restent dans ton navigateur seulement, sur cet appareil. Tu peux tout effacer dans les Paramètres.</li></ul></div>'
+  +'<div class="card"><h2>Sources officielles</h2><p><a href="https://etudier.uqam.ca/cours-horaires" target="_blank" rel="noopener">Recherche de cours de l’UQAM</a> et les fiches de programme du site de l’UQAM.</p></div></div>';
 }
 function chipsHTML(act,cur,list){return '<div class="chips">'+list.map(function(x){return '<button type="button" class="chip" data-act="'+act+'" data-v="'+x[0]+'" aria-pressed="'+(String(cur)===String(x[0]))+'">'+x[1]+'</button>';}).join('')+'</div>';}
 function settingsHTML(){
@@ -1540,6 +1617,7 @@ function renderPages(){
   var a=document.getElementById('v-accueil'),p=document.getElementById('v-parametres');
   if(a&&!a.hidden||a&&a.innerHTML==='')a.innerHTML=homeHTML();
   if(p&&!p.hidden||p&&p.innerHTML==='')p.innerHTML=settingsHTML();
+  var ab=document.getElementById('v-apropos');if(ab&&!ab.hidden&&ab.innerHTML==='')ab.innerHTML=aboutHTML();
   var pg=document.getElementById('v-programmes');if(pg&&!pg.hidden)pg.innerHTML=progHTML();
   var gh=document.getElementById('gen-head'),gv=document.getElementById('v-generateur');if(gh&&gv&&!gv.hidden)gh.innerHTML=genHead();
   paintNav();
