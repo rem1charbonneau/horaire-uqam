@@ -476,7 +476,7 @@ function defaults(){
   var dl={};DAYS.slice(0,6).forEach(function(d){dl[d]={on:true,s:'08:00',e:'22:00'};});
   return {sel:['ORH1700','SCO1045','MAT2082','ECO1301'],done:[],view:'sess',excl:{},pin:{},modes:['pres','hyb','dist'],noCampus:[],hideFull:true,minPl:0,en:false,
     workOn:true,work:JSON.parse(JSON.stringify(WORK_DEFAULT)),bufP:120,bufD:60,before:'',after:'',dayLim:dl,
-    sort:'campus',sent:'',favs:[],open:{catalog:false,courses:true,time:true,mode:false,work:false},reqAll:false};
+    sort:'equilibre',sent:'',favs:[],open:{catalog:false,courses:true,time:true,mode:false,work:false},reqAll:false};
 }
 var ferr={time:'',work:''},ferT=null;
 function showErr(k,m){ferr[k]=m;render();clearTimeout(ferT);ferT=setTimeout(function(){ferr.time=ferr.work='';var l=document.querySelectorAll('.ferr');for(var i=0;i<l.length;i++)l[i].remove();},9000);}
@@ -528,12 +528,22 @@ function candidates(c){
   if(p){var g=getGroup(c,p);return g?[g]:[];}
   return c.groups.filter(function(g){return !reason(c,g);});
 }
+function fmtH(m){if(!m)return '0 h';var h=Math.floor(m/60),r=m%60;return h+' h'+(r?String(r).padStart(2,'0'):'');}
+function fmtT(m){return Math.floor(m/60)+'h'+String(m%60).padStart(2,'0');}
 function stats(gs){
   var days={},cd={},camp={},minp=1e9,nd=0,ncd=0,nc=0;
   gs.forEach(function(g){if(g.places!==null)minp=Math.min(minp,g.places);
     g.slots.forEach(function(s){if(!days[s.d]){days[s.d]=1;nd++;}
       if(s.m!=='dist'){if(!cd[s.d]){cd[s.d]=1;ncd++;} if(s.l&&!camp[s.l]){camp[s.l]=1;nc++;}}});});
-  return {days:nd,campusDays:ncd,campuses:nc,minp:minp===1e9?null:minp};
+  var by={};gs.forEach(function(g){g.slots.forEach(function(s){(by[s.d]=by[s.d]||[]).push([T(s.s),T(s.e)]);});});
+  var gap=0,span=0,first=1e9,last=0;
+  Object.keys(by).forEach(function(d){var a=by[d].sort(function(x,y){return x[0]-y[0];}),end=a[0][1];
+    for(var i=1;i<a.length;i++){if(a[i][0]>end)gap+=a[i][0]-end;end=Math.max(end,a[i][1]);}
+    span+=end-a[0][0];first=Math.min(first,a[0][0]);last=Math.max(last,end);});
+  var mp=minp===1e9?null:minp;
+  var tight=mp===null?0:mp<5?40:mp<10?20:mp<20?8:0;
+  var score=nd*100+ncd*20+gap/60*25+tight+(first<540?10:0)+(last>1200?10:0);
+  return {days:nd,campusDays:ncd,campuses:nc,minp:mp,gap:gap,span:span,first:first===1e9?0:first,last:last,score:score};
 }
 var CAP=150000;
 function compute(){
@@ -561,12 +571,15 @@ function compute(){
   if(notOff.length&&!diag)diag='';
   var R=out.map(function(p){return {p:p,st:stats(p)};});
   var mp=function(r){return r.st.minp===null?999:r.st.minp;};
-  var cmp={
-    campus:function(a,b){return a.st.campuses-b.st.campuses||a.st.campusDays-b.st.campusDays||mp(b)-mp(a);},
-    campusDays:function(a,b){return a.st.campusDays-b.st.campusDays||a.st.campuses-b.st.campuses||mp(b)-mp(a);},
-    jours:function(a,b){return a.st.days-b.st.days||a.st.campusDays-b.st.campusDays||mp(b)-mp(a);},
-    places:function(a,b){return mp(b)-mp(a)||a.st.campusDays-b.st.campusDays||a.st.campuses-b.st.campuses;}
-  }[S.sort]||function(){return 0;};
+  var bal=function(a,b){return a.st.score-b.st.score;};
+  var cmp0={
+    equilibre:bal,
+    jours:function(a,b){return a.st.days-b.st.days||a.st.campusDays-b.st.campusDays||bal(a,b);},
+    trous:function(a,b){return a.st.gap-b.st.gap||bal(a,b);},
+    places:function(a,b){return mp(b)-mp(a)||bal(a,b);},
+    courtes:function(a,b){return a.st.span-b.st.span||b.st.first-a.st.first||bal(a,b);}
+  }[S.sort];
+  var cmp=cmp0||function(){return 0;};
   R.sort(cmp);
   rows=R;total=R.length;
   window.__cs=cs;
@@ -814,10 +827,10 @@ function resultsHTML(){
   }
   var picks=curPicks(sel),isFav=S.favs.some(function(f){return sameFav(f.picks,picks);});
   h+='<div class="toolbar"><span class="lab" style="margin:0">Trier par</span><div class="chips">'
-    +[['campus','Moins de lieux sur campus'],['campusDays','Moins de jours sur campus'],['jours','Moins de jours en tout'],['places','Plus de places'],['none','Sans tri']].map(function(o){return '<button type="button" class="chip" data-act="sort" data-v="'+o[0]+'" aria-pressed="'+(S.sort===o[0])+'">'+o[1]+'</button>';}).join('')+'</div></div>'
+    +[['equilibre','Mieux équilibré'],['jours','Moins de jours'],['trous','Moins de trous'],['places','Plus de places'],['courtes','Journées courtes'],['none','Sans tri']].map(function(o){return '<button type="button" class="chip" data-act="sort" data-v="'+o[0]+'" aria-pressed="'+(S.sort===o[0])+'">'+o[1]+'</button>';}).join('')+'</div></div>'
     +'<div class="toolbar">'
     +'<button type="button" class="btn'+(isFav?' primary':'')+'" data-act="fav">'+(isFav?'★ Dans mes favoris':'☆ Garder cet horaire')+'</button><button type="button" class="btn" data-act="snap">Enregistrer l\u2019image</button></div>';
-  h+='<div class="stats"><span class="stat"><b>'+st.days+'</b> jours</span><span class="stat"><b>'+st.campusDays+'</b> jours sur campus</span><span class="stat"><b>'+st.campuses+'</b> lieu'+(st.campuses>1?'x':'')+' connu'+(st.campuses>1?'s':'')+'</span><span class="stat">groupe le plus serré : <b>'+(st.minp===null?'?':st.minp)+'</b> pl.</span></div>';
+  h+='<div class="stats"><span class="stat"><b>'+st.days+'</b> jour'+(st.days>1?'s':'')+'</span><span class="stat"><b>'+st.campusDays+'</b> jour'+(st.campusDays>1?'s':'')+' sur campus</span><span class="stat"><b>'+st.campuses+'</b> lieu'+(st.campuses>1?'x':'')+' connu'+(st.campuses>1?'s':'')+'</span><span class="stat">groupe le plus serré : <b>'+(st.minp===null?'?':st.minp)+'</b> pl.</span><span class="stat"><b>'+fmtH(st.gap)+'</b> de trous</span><span class="stat">début <b>'+fmtT(st.first)+'</b> · fin <b>'+fmtT(st.last)+'</b></span></div>';
   h+='<div class="wkwrap">'+gridHTML(sel)+'</div>'
     +'<div class="legend">'+modeBadge('pres')+modeBadge('hyb')+modeBadge('dist')+'</div></div>';
   h+='<div class="card"><h2 class="h3">Groupes de cet horaire</h2><div class="tblwrap"><table><thead><tr><th>Cours</th><th>Gr.</th><th>Horaire</th><th>Modalité</th><th>Lieu</th><th>Places</th></tr></thead><tbody>';
@@ -891,7 +904,7 @@ function load(){
     b.bufP=Math.max(0,Number(d.bufP)||0);b.bufD=Math.max(0,Number(d.bufD)||0);
     if(/^\d\d:\d\d$/.test(d.before||''))b.before=d.before;if(/^\d\d:\d\d$/.test(d.after||''))b.after=d.after;
     if(d.dayLim)DAYS.slice(0,6).forEach(function(x){var l=d.dayLim[x];if(l&&/^\d\d:\d\d$/.test(l.s)&&/^\d\d:\d\d$/.test(l.e))b.dayLim[x]={on:l.on!==false,s:l.s,e:l.e};});
-    if(['campus','campusDays','jours','places','none'].indexOf(d.sort)>=0)b.sort=d.sort;
+    if(['equilibre','jours','trous','places','courtes','none'].indexOf(d.sort)>=0)b.sort=d.sort;else if(d.sort==='campus'||d.sort==='campusDays')b.sort='equilibre';
     if(Array.isArray(d.favs))b.favs=d.favs.filter(function(f){return f&&f.picks;}).slice(0,12);
     if(d.open&&typeof d.open==='object')b.open=d.open;
     b.work.forEach(function(w){if(T(w.e)<=T(w.s)){var ne=Math.min(T(w.s)+60,1439);w.e=String(Math.floor(ne/60)).padStart(2,'0')+':'+String(ne%60).padStart(2,'0');}});
