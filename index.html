@@ -386,6 +386,7 @@ body{padding-top:0}
 .shiftbox{display:flex;flex-direction:column;gap:6px;padding:8px 0;border-bottom:1px solid var(--line)}
 .daychips{gap:4px}
 .daychips .chip{padding:3px 9px;min-width:2.9em;text-align:center}
+.toast-b{margin-left:8px;border:0;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:4px 12px;font:inherit;font-weight:600;cursor:pointer}
 </style>
 </head><body>
 
@@ -734,8 +735,7 @@ function controlsHTML(){
     +'</div><div class="lab">Lieu des cours en présentiel</div><div class="chips">'
     +CAMPUS.map(function(c){return '<button type="button" class="chip" data-act="campus" data-v="'+c+'" aria-pressed="'+(S.noCampus.indexOf(c)<0)+'">'+esc(CAMPUS_LABEL[c]||c)+'</button>';}).join('')
     +'</div><div class="row"><label><input type="checkbox" id="fHide"'+(S.hideFull?' checked':'')+'>Masquer les groupes complets</label>'
-    +'<label><input type="checkbox" id="fEn"'+(S.en?' checked':'')+'>Inclure le groupe anglais</label>'
-    +'<label>Places min. <input type="number" id="fMin" min="0" max="200" value="'+S.minPl+'"></label></div>';
+    +'<label><input type="checkbox" id="fEn"'+(S.en?' checked':'')+'>Inclure le groupe anglais</label></div>';
   var msub=S.modes.length===3&&!S.noCampus.length?'tout':S.modes.map(function(m){return MODES[m];}).join(', ');
 
   var workB=(ferr.work?'<div class="ferr" role="alert">'+esc(ferr.work)+'</div>':'')+S.work.map(function(w,i){
@@ -748,7 +748,7 @@ function controlsHTML(){
     +'<label>À distance <input type="number" id="bufD" min="0" max="300" step="15" value="'+S.bufD+'"> min</label></div>';
   var wsub=S.workOn?S.work.map(function(w){return w.d+' '+w.s.replace(':00','h')+'–'+w.e.replace(':00','h');}).join(', ')||'aucune':'ignoré';
 
-  return sec('courses','Mes cours',cs.length+' choisis · '+cs.reduce(function(a,c){return a+c.credits;},0)+' crédits',coursesB)+sec('time','Heures et jours',tsub,timeB)+sec('mode','Modalité et lieu',msub,modeB)+sec('work','Indisponibilités',wsub,workB);
+  return sec('courses','Mes cours',cs.length+' choisis · '+cs.reduce(function(a,c){return a+c.credits;},0)+' crédits',coursesB)+sec('time','Disponibilités',tsub,timeB)+sec('mode','Modalité et lieu',msub,modeB);
 }
 
 //--- résultats
@@ -802,7 +802,7 @@ function resultsHTML(){
     +'<button type="button" class="btn'+(isFav?' primary':'')+'" data-act="fav">'+(isFav?'★ Dans mes favoris':'☆ Garder cet horaire')+'</button><button type="button" class="btn" data-act="snap">Enregistrer l\u2019image</button></div>';
   h+='<div class="stats"><span class="stat"><b>'+st.days+'</b> jours</span><span class="stat"><b>'+st.campusDays+'</b> jours sur campus</span><span class="stat"><b>'+st.campuses+'</b> lieu'+(st.campuses>1?'x':'')+' connu'+(st.campuses>1?'s':'')+'</span><span class="stat">groupe le plus serré : <b>'+(st.minp===null?'?':st.minp)+'</b> pl.</span></div>';
   h+='<div class="wkwrap">'+gridHTML(sel)+'</div>'
-    +'<div class="legend">'+modeBadge('pres')+modeBadge('hyb')+modeBadge('dist')+'<span class="mode mode-work">Indisponible</span>'+(S.work.length&&S.bufP>0?'<span class="mode mode-buf" title="Temps de trajet avant et après une indisponibilité">Marge de trajet</span>':'')+'</div></div>';
+    +'<div class="legend">'+modeBadge('pres')+modeBadge('hyb')+modeBadge('dist')+'</div></div>';
   h+='<div class="card"><h2 class="h3">Groupes de cet horaire</h2><div class="tblwrap"><table><thead><tr><th>Cours</th><th>Gr.</th><th>Horaire</th><th>Modalité</th><th>Lieu</th><th>Places</th></tr></thead><tbody>';
   sel.forEach(function(x){var g=x.g,notes=g.notes.slice();if(g.prof)notes.unshift(g.prof);
     h+='<tr class="'+x.c.cls+'"><td class="cd">'+x.c.code+'</td><td class="m">'+g.id+'</td><td class="m">'+esc(whenText(g))+'</td><td>'+modeBadge(g.mode)+'</td><td>'+esc(placeText(g))+(notes.length?'<div class="hint">'+esc(notes.join(' · '))+'</div>':'')+'</td><td>'+seatsPill(g.places)+'</td></tr>';});
@@ -869,7 +869,7 @@ function load(){
     if(d.pin&&typeof d.pin==='object')Object.keys(d.pin).forEach(function(c){if(typeof d.pin[c]==='string')b.pin[c]=d.pin[c];});
     if(Array.isArray(d.modes))b.modes=d.modes.filter(function(m){return MODES[m];});
     if(Array.isArray(d.noCampus))b.noCampus=d.noCampus.filter(function(c){return CAMPUS.indexOf(c)>=0;});
-    b.hideFull=d.hideFull!==false;b.en=!!d.en;b.workOn=d.workOn!==false;b.minPl=Math.max(0,Number(d.minPl)||0);
+    b.hideFull=d.hideFull!==false;b.en=!!d.en;b.workOn=d.workOn!==false;b.minPl=0;
     if(Array.isArray(d.work)&&d.work.every(function(w){return DAYS.indexOf(w.d)>=0&&/^\d\d:\d\d$/.test(w.s)&&/^\d\d:\d\d$/.test(w.e);}))b.work=d.work;
     b.bufP=Math.max(0,Number(d.bufP)||0);b.bufD=Math.max(0,Number(d.bufD)||0);
     if(/^\d\d:\d\d$/.test(d.before||''))b.before=d.before;if(/^\d\d:\d\d$/.test(d.after||''))b.after=d.after;
@@ -879,6 +879,15 @@ function load(){
     if(d.open&&typeof d.open==='object')b.open=d.open;
     b.work.forEach(function(w){if(T(w.e)<=T(w.s)){var ne=Math.min(T(w.s)+60,1439);w.e=String(Math.floor(ne/60)).padStart(2,'0')+':'+String(ne%60).padStart(2,'0');}});
     DAYS.slice(0,6).forEach(function(x){var l=b.dayLim[x];if(l.s<'08:00')l.s='08:00';if(l.e>'22:00'||l.e<='08:00')l.e='22:00';if(l.s>='22:00'||T(l.e)<=T(l.s)){l.s='08:00';l.e='22:00';}});
+    (function(){
+      function hh(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');}
+      b.work.forEach(function(w){var l=b.dayLim[w.d];if(!l)return;
+        var a=T(l.s),z=T(l.e),ws=T(w.s),we=T(w.e);
+        var left=[a,Math.min(ws,z)],right=[Math.max(we,a),z];
+        var best=(left[1]-left[0]>=right[1]-right[0])?left:right;
+        if(best[1]-best[0]<60){l.on=false;}else{l.s=hh(best[0]);l.e=hh(best[1]);}});
+      b.work=[];b.workOn=false;
+    })();
     if(b.before&&(b.before<'08:00'||b.before>='22:00'))b.before='';if(b.after&&(b.after>'22:00'||b.after<='08:00'))b.after='';
     if(b.before&&b.after&&b.before>=b.after){b.before='';b.after='';}
     S=b;
@@ -999,7 +1008,13 @@ window.addEventListener('hashchange',showTab);
 
 //--- messages brefs
 var toastT=null;
-function toast(m){var el=document.getElementById('toast');el.textContent=m;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){el.hidden=true;},4500);}
+var toastFn=null;
+function toast(m,label,fn){
+  var el=document.getElementById('toast');el.textContent=m;toastFn=null;
+  if(label&&fn){toastFn=fn;var b=document.createElement('button');b.type='button';b.className='toast-b';b.textContent=label;b.setAttribute('data-toast','1');el.appendChild(document.createTextNode(' '));el.appendChild(b);}
+  el.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){el.hidden=true;},label?9000:4500);
+}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-toast]');if(b&&toastFn){var f=toastFn;toastFn=null;document.getElementById('toast').hidden=true;f();}});
 
 //--- actualisation des données
 function newest(){var o=null;Object.keys(DATA).forEach(function(k){var f=DATA[k]&&DATA[k].fetched;if(f&&(!o||f>o))o=f;});return o;}
@@ -1053,7 +1068,8 @@ function applyData(d,why){
   var mine=items.filter(function(i){return S.sel.indexOf(i.code)>=0;});
   try{localStorage.setItem(CKEY,JSON.stringify({t:Date.now(),mine:mine.slice(0,60),others:items.length-mine.length}));}catch(e){}
   render();paintStamp();
-  toast(why+(mine.length?' '+mine.length+' changement'+(mine.length>1?'s':'')+' dans tes cours (voir l’accueil).':' Aucun changement dans tes cours.'));
+  var msg='Cours relus à '+hm(Date.now())+' : '+(mine.length?mine.length+' changement'+(mine.length>1?'s':'')+' dans tes cours.':'aucun changement dans tes cours.');
+  if(mine.length&&curTab()!=='accueil')toast(msg,'Voir la liste',function(){goTab('accueil');});else toast(msg);
 }
 var RKEY='uqam-h27-run';
 function hm(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,'0')+'h'+String(d.getMinutes()).padStart(2,'0');}
@@ -1150,7 +1166,7 @@ function favLabel(f,i){
 }
 function changesHTML(){
   var c=loadChanges();if(!c)return '';
-  var h='<div class="chg"><div class="lab">Dernière mise à jour des places · '+hm(c.t)+'</div>';
+  var h='<div class="chg"><div class="lab">Cours relus à '+hm(c.t)+'</div>';
   if(!c.mine.length)h+='<p class="hint">Aucun changement dans tes cours.</p>';
   else{h+='<ul class="chg-l">';c.mine.slice(0,14).forEach(function(i){h+='<li><code>'+esc(i.code)+'</code> <span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span></li>';});
     if(c.mine.length>14)h+='<li class="hint">+ '+(c.mine.length-14)+' autres</li>';h+='</ul>';}
@@ -1187,7 +1203,7 @@ function settingsHTML(){
    +'<div class="lab">Taille du texte</div>'+chipsHTML('tsize',P.ts,[[0.9,'Petit'],[1,'Normal'],[1.12,'Grand'],[1.25,'Très grand']])
    +'<div class="lab">Animations</div><div class="chips"><button type="button" class="chip" data-act="anim" aria-pressed="'+P.anim+'">'+(P.anim?'Activées':'Désactivées')+'</button></div></div>'
    +'<div class="card"><h2 class="h3">Actualisation</h2><p class="hint">Le bouton « Actualiser » relit seulement les places de tes cours choisis (environ 1 min), sur tous tes appareils. Tous les cours de la liste sont relus automatiquement toutes les heures.</p>'
-   +'</div><div class="card"><h2 class="h3">Mes données</h2><p class="hint">Cours choisis, cours faits, limites d’heures, indisponibilités et favoris sont gardés dans ce navigateur.</p>'
+   +'</div><div class="card"><h2 class="h3">Mes données</h2><p class="hint">Cours choisis, cours faits, limites d’heures et favoris sont gardés dans ce navigateur.</p>'
    +(wipeAsk?'<div class="row"><span>Tout réinitialiser ?</span><button type="button" class="btn danger" data-act="wipe">Oui, réinitialiser</button><button type="button" class="btn" data-act="wipeNo">Annuler</button></div>'
             :'<div class="row"><button type="button" class="btn" data-act="wipe">Réinitialiser mes choix</button></div>')
    +'</div></div>';
