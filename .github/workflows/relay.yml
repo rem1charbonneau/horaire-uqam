@@ -1,0 +1,47 @@
+name: Déployer le relais Cloudflare
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'relay/**'
+      - '.github/workflows/relay.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: relay
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vérifier les secrets
+        id: chk
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "Secrets CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID absents : déploiement ignoré."
+            echo "go=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "go=yes" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v4
+        if: steps.chk.outputs.go == 'yes'
+        with:
+          node-version: 22
+      - name: Déployer le relais (le secret GH_TOKEN reste en place dans Cloudflare)
+        if: steps.chk.outputs.go == 'yes'
+        working-directory: relay
+        run: |
+          ID=$(npx --yes wrangler@4 kv namespace list | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{const a=JSON.parse(s);const k=a.find(x=>x.title==='horaire-queue');if(!k){console.error('Espace KV horaire-queue introuvable');process.exit(1)}console.log(k.id)})")
+          printf '\n[[kv_namespaces]]\nbinding = "Q"\nid = "%s"\n' "$ID" >> wrangler.toml
+          sed -i 's/^# \[\[kv_namespaces\]\]//' wrangler.toml
+          npx --yes wrangler@4 deploy
