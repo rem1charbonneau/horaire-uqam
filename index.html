@@ -486,7 +486,7 @@ function defaults(){
   var dl={};DAYS.slice(0,6).forEach(function(d){dl[d]={on:true,s:'08:00',e:'22:00'};});
   return {sel:['ORH1700','SCO1045','MAT2082','ECO1301'],done:[],view:'sess',excl:{},pin:{},modes:['pres','hyb','dist'],noCampus:[],hideFull:true,minPl:0,en:false,
     workOn:true,work:JSON.parse(JSON.stringify(WORK_DEFAULT)),bufP:120,bufD:60,before:'',after:'',dayLim:dl,
-    sort:'equilibre',sent:'',pick:{c:'1',t:'Baccalauréat',p:'7111',k:'7111'},favs:[],open:{catalog:false,courses:true,time:true,mode:false,work:false},reqAll:false};
+    sort:'equilibre',sent:'',pOf:{},pick:{c:'1',t:'Baccalauréat',p:'7111',k:'7111'},favs:[],open:{catalog:false,courses:true,time:true,mode:false,work:false},reqAll:false};
 }
 var ferr={time:'',work:''},ferT=null;
 function showErr(k,m){ferr[k]=m;render();clearTimeout(ferT);ferT=setTimeout(function(){ferr.time=ferr.work='';var l=document.querySelectorAll('.ferr');for(var i=0;i<l.length;i++)l[i].remove();},9000);}
@@ -711,6 +711,13 @@ function allHTML(){
 var CYC={'1':'1er cycle','2':'2e cycle','3':'3e cycle'};
 function concOf(p){return (p.sections||[]).filter(function(x){return /\((\w{4})\)\s*$/.test(x.heading)&&x.courses.length;}).map(function(x){var m=/\((\w{4})\)\s*$/.exec(x.heading),n=x.heading.replace(/\s*\(\w{4}\)\s*$/,'').toLowerCase();return {code:m[1],name:n.charAt(0).toUpperCase()+n.slice(1),s:x};});}
 function chip(act,v,label,on){return '<button type="button" class="chip" data-act="'+act+'" data-v="'+esc(v)+'" aria-pressed="'+on+'">'+esc(label)+'</button>';}
+function progFor(sig){
+  if(!STRUCT)return S.pick.p||'7111';
+  function has(p){return (p.sections||[]).some(function(x){return x.courses.some(function(c){return c.sigle===sig;});});}
+  var cur=STRUCT.programmes[S.pick.p];if(cur&&has(cur))return cur.code;
+  if(STRUCT.programmes['7111']&&has(STRUCT.programmes['7111']))return '7111';
+  var k=Object.keys(STRUCT.programmes).filter(function(k){return has(STRUCT.programmes[k]);})[0];return k||'7111';
+}
 function progRow(c){
   var k=CAT[c.sigle]||{},cc=course(c.sigle),inSel=S.sel.indexOf(c.sigle)>=0,off=c.offered&&c.offered.H27;
   var un=cc&&preUnmet(cc);
@@ -962,7 +969,7 @@ function load(){
     if(d.pin&&typeof d.pin==='object')Object.keys(d.pin).forEach(function(c){if(typeof d.pin[c]==='string')b.pin[c]=d.pin[c];});
     if(Array.isArray(d.modes))b.modes=d.modes.filter(function(m){return MODES[m];});
     if(Array.isArray(d.noCampus)){b.noCampus=d.noCampus.map(function(c){return c==='N/A'?'Montréal':c;}).filter(function(c,i,a){return CAMPUS.indexOf(c)>=0&&a.indexOf(c)===i;});}
-    b.sent=typeof d.sent==='string'?d.sent:'';if(d.pick&&typeof d.pick==='object'){['c','t','p','k'].forEach(function(k){if(typeof d.pick[k]==='string')b.pick[k]=d.pick[k];});}b.hideFull=d.hideFull!==false;b.en=!!d.en;b.workOn=d.workOn!==false;b.minPl=0;
+    b.sent=typeof d.sent==='string'?d.sent:'';if(d.pOf&&typeof d.pOf==='object')Object.keys(d.pOf).forEach(function(k){if(/^\d{4}$/.test(d.pOf[k]))b.pOf[k]=d.pOf[k];});if(d.pick&&typeof d.pick==='object'){['c','t','p','k'].forEach(function(k){if(typeof d.pick[k]==='string')b.pick[k]=d.pick[k];});}b.hideFull=d.hideFull!==false;b.en=!!d.en;b.workOn=d.workOn!==false;b.minPl=0;
     if(Array.isArray(d.work)&&d.work.every(function(w){return DAYS.indexOf(w.d)>=0&&/^\d\d:\d\d$/.test(w.s)&&/^\d\d:\d\d$/.test(w.e);}))b.work=d.work;
     b.bufP=Math.max(0,Number(d.bufP)||0);b.bufD=Math.max(0,Number(d.bufD)||0);
     if(/^\d\d:\d\d$/.test(d.before||''))b.before=d.before;if(/^\d\d:\d\d$/.test(d.after||''))b.after=d.after;
@@ -1011,6 +1018,7 @@ document.addEventListener('click',function(e){
   if(a==='pickk'){S.pick.k=d.v;save();renderPages();return;}
   if(a==='ptog'){var pc=course(d.c);if(!pc)return;
     if(S.sel.indexOf(d.c)<0&&preUnmet(pc)){toast('Préalable à faire d’abord : '+pc.preSig.join(pc.preAny?' ou ':' et ')+'.');return;}
+    if(S.sel.indexOf(d.c)<0)S.pOf[d.c]=progFor(d.c);
     toggle(S.sel,d.c);save();render();return;}
   if(a==='snap'){snapSchedule();return;}
   if(a==='gen'){goTab('generateur');return;}
@@ -1230,7 +1238,7 @@ function validate(){
   var codes=valKey().split(' ').filter(Boolean).slice(0,20);if(!codes.length)return;
   valState.sending=true;valState.err='';document.body.classList.add('sending');render();
   function fail(m){valState.sending=false;valState.err=m;document.body.classList.remove('sending');render();}
-  fetch(RELAY+'request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({courses:codes})})
+  fetch(RELAY+'request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({courses:codes,programs:S.pOf})})
     .then(function(r){return r.json().then(function(j){return {s:r.status,j:j};});})
     .then(function(x){
       if(x.s!==200||x.j.status!=='queued'){fail('L’envoi a échoué ('+x.s+'). Tes choix sont gardés, réessaie.');return;}

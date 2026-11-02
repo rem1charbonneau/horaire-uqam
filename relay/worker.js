@@ -67,6 +67,8 @@ async function tick(env, why) {
   // Cours demandés (sans doublon) et leur fraîcheur.
   const ks = await env.Q.list({ prefix: 'w:' });
   const wanted = ks.keys.map(k => k.name.slice(2)).filter(s => SIGLE.test(s));
+  const progOf = {};
+  await Promise.all(wanted.map(async s => { try { const v = JSON.parse(await env.Q.get('w:' + s)); if (v && v.p) progOf[s] = v.p; } catch (e) {} }));
   if (!wanted.length) return { status: 'empty' };
   let data = {};
   try {
@@ -94,8 +96,9 @@ async function tick(env, why) {
   if (!due.length) return { status: 'fresh', wanted: wanted.length };
   due.sort((a, b) => b[1] - a[1]);
   const batch = due.slice(0, Math.min(MAX_BATCH, left)).map(x => x[0]);
+  const tokens = batch.map(s => progOf[s] ? s + ':' + progOf[s] : s);
   const r = await gh(env, '/actions/workflows/update.yml/dispatches', {
-    method: 'POST', body: JSON.stringify({ ref: 'main', inputs: { courses: batch.join(' ') } })
+    method: 'POST', body: JSON.stringify({ ref: 'main', inputs: { courses: tokens.join(' ') } })
   });
   if (r.status !== 204) return { status: 'github', code: r.status };
   await env.Q.put(hk, String(used + batch.length), { expirationTtl: 2 * 3600 });
@@ -116,17 +119,20 @@ export default {
     if (req.method !== 'POST') return reply(405, { status: 'method' });
     if (req.headers.get('Origin') !== ORIGIN) return reply(403, { status: 'origin' });
 
-    let courses = [];
+    let courses = [], programs = {};
     try {
       const body = await req.json();
       courses = (Array.isArray(body.courses) ? body.courses : [])
         .filter(c => typeof c === 'string' && SIGLE.test(c)).slice(0, 20);
+      if (body.programs && typeof body.programs === 'object') {
+        courses.forEach(c => { const p = body.programs[c]; if (typeof p === 'string' && /^\d{4}$/.test(p)) programs[c] = p; });
+      }
     } catch (e) {}
 
     // Nouveau mode : dépôt dans la file, l'ordonnanceur décide du reste.
     if (path === '/request') {
       if (!courses.length) return reply(400, { status: 'empty' });
-      await Promise.all(courses.map(c => env.Q.put('w:' + c, String(Date.now()), { expirationTtl: TTL })));
+      await Promise.all(courses.map(c => env.Q.put('w:' + c, JSON.stringify({ t: Date.now(), p: programs[c] || null }), { expirationTtl: TTL })));
       ctx.waitUntil(tick(env, 'request').catch(() => {}));
       const brake = +(await env.Q.get('brake')) || 0;
       return reply(200, { status: 'queued', courses: courses.length, brake: brake > Date.now() ? brake : 0 });

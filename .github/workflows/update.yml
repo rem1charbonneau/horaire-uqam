@@ -61,7 +61,7 @@ jobs:
           ONLY: ${{ github.event.inputs.courses }}
         run: |
           # Cours demandés à la main (actualisation rapide) : on les lit et on note la date de la demande.
-          LIST=$(printf '%s' "$ONLY" | tr -c 'A-Z0-9' ' ' | tr -s ' ' | grep -oE '[A-Z]{3}[0-9]{3}[0-9A-Z]' | head -12 | tr '\n' ' ')
+          LIST=$(printf '%s' "$ONLY" | tr -c 'A-Z0-9:' ' ' | tr -s ' ' | grep -oE '[A-Z]{3}[0-9]{3}[0-9A-Z](:[0-9]{4})?' | head -12 | tr '\n' ' ')
           if [ -n "$LIST" ]; then
             export ASKED=1
           else

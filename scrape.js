@@ -1,8 +1,9 @@
 // Lit la fiche UQAM de chaque cours (onglet Horaire - Hiver 2027, avec le code de programme pour les places).
-// Usage : node scrape.js <sortie.json> <code_programme> <SIGLE> [SIGLE...]
+// Usage : node scrape.js <sortie.json> <code_programme_par_défaut> <SIGLE[:PROGRAMME]> ...
 // Les cours demandés sont fusionnés dans la sortie existante. Une seule page à la fois, avec pause.
 const {chromium}=require('playwright');const fs=require('fs');
-const out=process.argv[2],prog=process.argv[3],sigles=process.argv.slice(4);
+const out=process.argv[2],defProg=process.argv[3],tokens=process.argv.slice(4);
+const progOf={};const sigles=tokens.map(t=>{const [s,p]=t.split(':');progOf[s]=/^\d{4}$/.test(p||'')?p:defProg;return s;});
 let data={};try{data=JSON.parse(fs.readFileSync(out,'utf8'));}catch(e){}
 const MOIS={'janv':1,'févr':2,'mars':3,'avr':4,'mai':5,'juin':6,'juil':7,'août':8,'sept':9,'oct':10,'nov':11,'déc':12};
 const JOURS={Lundi:'Lun',Mardi:'Mar',Mercredi:'Mer',Jeudi:'Jeu',Vendredi:'Ven',Samedi:'Sam',Dimanche:'Dim'};
@@ -32,7 +33,7 @@ let errors=0;
       if(info.tab){
         await p.click('a[href="'+info.tab+'"]').catch(()=>{});
         const hasForm=await p.$(info.tab+' input[name=pc_code_prog]');
-        if(hasForm){await p.fill(info.tab+' input[name=pc_code_prog]',prog);await p.click(info.tab+' input[type=submit]');await p.waitForTimeout(4500);}
+        if(hasForm){await p.fill(info.tab+' input[name=pc_code_prog]',progOf[sig]);await p.click(info.tab+' input[type=submit]');await p.waitForTimeout(4500);}
         const groups=await p.evaluate((tab)=>{
           const root=document.querySelector(tab);if(!root)return [];
           return [...root.querySelectorAll('.groupe')].map(g=>{
