@@ -396,6 +396,14 @@ body.sending::before{content:"";position:fixed;inset:0;z-index:110;background:rg
 .ph{margin:16px 0 4px;font:600 .875rem var(--font-head)}
 .prow{display:flex;gap:10px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;background:var(--surface-2)}
 .prow.on{border-color:var(--accent)}.prow .pt{min-width:0}.prow .pm{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.steps{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:16px 0}
+.step{display:flex;gap:12px;border:1px solid var(--line);border-radius:16px;padding:14px;background:var(--surface)}
+.step.now{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)}
+.step .sn{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--surface-2);border:1px solid var(--line)}
+.step.ok .sn{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.step .sb{min-width:0;display:flex;flex-direction:column;gap:6px;align-items:flex-start}.step .h3{margin:0}
+.pbanner{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:12px;background:var(--surface)}
+.pb-t{font-size:.9375rem;margin-top:2px}
 .age{font-size:.75rem;color:var(--muted);padding:2px 2px 6px}.age.old{color:var(--warn,#d6a100)}
 </style>
 </head><body>
@@ -404,8 +412,8 @@ body.sending::before{content:"";position:fixed;inset:0;z-index:110;background:rg
   <a class="brand" href="#accueil">Horaire UQAM</a>
   <div class="tabs" role="tablist">
     <a href="#accueil" data-tab="accueil">Accueil</a>
-    <a href="#cours" data-tab="cours">Choisir mes cours</a>
     <a href="#programmes" data-tab="programmes">Programmes</a>
+    <a href="#cours" data-tab="cours">Choisir mes cours</a>
     <a href="#generateur" data-tab="generateur">Générateur</a>
     <a href="#parametres" data-tab="parametres">Paramètres</a>
   </div>
@@ -486,7 +494,7 @@ function defaults(){
   var dl={};DAYS.slice(0,6).forEach(function(d){dl[d]={on:true,s:'08:00',e:'22:00'};});
   return {sel:['ORH1700','SCO1045','MAT2082','ECO1301'],done:[],view:'sess',excl:{},pin:{},modes:['pres','hyb','dist'],noCampus:[],hideFull:true,minPl:0,en:false,
     workOn:true,work:JSON.parse(JSON.stringify(WORK_DEFAULT)),bufP:120,bufD:60,before:'',after:'',dayLim:dl,
-    sort:'equilibre',sent:'',pOf:{},pick:{c:'1',t:'Baccalauréat',p:'7111',k:'7111'},favs:[],open:{catalog:false,courses:true,time:true,mode:false,work:false},reqAll:false};
+    sort:'equilibre',sent:'',picked:false,pOf:{},pick:{c:'1',t:'Baccalauréat',p:'7111',k:'7111'},favs:[],open:{catalog:false,courses:true,time:true,mode:false,work:false},reqAll:false};
 }
 var ferr={time:'',work:''},ferT=null;
 function showErr(k,m){ferr[k]=m;render();clearTimeout(ferT);ferT=setTimeout(function(){ferr.time=ferr.work='';var l=document.querySelectorAll('.ferr');for(var i=0;i<l.length;i++)l[i].remove();},9000);}
@@ -776,9 +784,17 @@ function valBarHTML(cs){
     +(valState.err?'<span class="vb-m bad">'+esc(valState.err)+'</span>':valState.sending?'<span class="vb-m">Envoi de tes cours…</span>':same&&n?'<span class="vb-m">Cours validés, suivis automatiquement.</span>':'<span class="vb-m">Rien n’est envoyé avant que tu valides.</span>')
     +'<button type="button" class="btn primary" data-act="validate"'+(valState.sending||!n||(same&&!valState.err)?' disabled':'')+'>'+(valState.err?'Réessayer':'Valider ('+n+' cours)')+'</button></div></div>';
 }
+function progBanner(){
+  var cur=STRUCT&&STRUCT.programmes[S.pick.p];
+  var name=cur?cur.title+' ('+cur.type+')':'Programme '+S.pick.p;
+  var k=cur?concOf(cur).filter(function(x){return x.code===S.pick.k;})[0]:null;
+  return '<div class="pbanner"><div><span class="lab" style="margin:0">Mon programme</span><div class="pb-t"><b>'+esc(name)+'</b>'+(k?' · Concentration : <b>'+esc(k.name)+'</b>':'')+'</div>'
+    +(S.picked?'':'<div class="hint">Programme par défaut : confirme-le ou change-le.</div>')+'</div>'
+    +'<button type="button" class="btn sm" data-act="goprog">Changer</button></div>';
+}
 function catalogHTML(){
   var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0);
-  var h='<section class="sec cat cat-wrap"><h2 class="sec-t">Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></h2><div class="sec-b">'
+  var h=progBanner()+'<section class="sec cat cat-wrap"><h2 class="sec-t">Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></h2><div class="sec-b">'
     +'<div class="chips"><button type="button" class="chip" data-act="catview" data-v="sess" aria-pressed="'+(S.view!=='all')+'">Par trimestre (grille type)</button><button type="button" class="chip" data-act="catview" data-v="all" aria-pressed="'+(S.view==='all')+'">Tous les cours</button></div>'
         +(S.view==='all'?allHTML():sessionHTML())+'</div></section>'+valBarHTML(cs);
   return h;
@@ -969,7 +985,7 @@ function load(){
     if(d.pin&&typeof d.pin==='object')Object.keys(d.pin).forEach(function(c){if(typeof d.pin[c]==='string')b.pin[c]=d.pin[c];});
     if(Array.isArray(d.modes))b.modes=d.modes.filter(function(m){return MODES[m];});
     if(Array.isArray(d.noCampus)){b.noCampus=d.noCampus.map(function(c){return c==='N/A'?'Montréal':c;}).filter(function(c,i,a){return CAMPUS.indexOf(c)>=0&&a.indexOf(c)===i;});}
-    b.sent=typeof d.sent==='string'?d.sent:'';if(d.pOf&&typeof d.pOf==='object')Object.keys(d.pOf).forEach(function(k){if(/^\d{4}$/.test(d.pOf[k]))b.pOf[k]=d.pOf[k];});if(d.pick&&typeof d.pick==='object'){['c','t','p','k'].forEach(function(k){if(typeof d.pick[k]==='string')b.pick[k]=d.pick[k];});}b.hideFull=d.hideFull!==false;b.en=!!d.en;b.workOn=d.workOn!==false;b.minPl=0;
+    b.sent=typeof d.sent==='string'?d.sent:'';b.picked=!!d.picked;if(d.pOf&&typeof d.pOf==='object')Object.keys(d.pOf).forEach(function(k){if(/^\d{4}$/.test(d.pOf[k]))b.pOf[k]=d.pOf[k];});if(d.pick&&typeof d.pick==='object'){['c','t','p','k'].forEach(function(k){if(typeof d.pick[k]==='string')b.pick[k]=d.pick[k];});}b.hideFull=d.hideFull!==false;b.en=!!d.en;b.workOn=d.workOn!==false;b.minPl=0;
     if(Array.isArray(d.work)&&d.work.every(function(w){return DAYS.indexOf(w.d)>=0&&/^\d\d:\d\d$/.test(w.s)&&/^\d\d:\d\d$/.test(w.e);}))b.work=d.work;
     b.bufP=Math.max(0,Number(d.bufP)||0);b.bufD=Math.max(0,Number(d.bufD)||0);
     if(/^\d\d:\d\d$/.test(d.before||''))b.before=d.before;if(/^\d\d:\d\d$/.test(d.after||''))b.after=d.after;
@@ -1012,10 +1028,12 @@ document.addEventListener('click',function(e){
   if(a==='catview'){S.view=d.v==='all'?'all':'sess';save();render();return;}
   if(a==='opencat'){S.open.catalog=true;save();goTab('cours');render();window.scrollTo(0,0);return;}
   if(a==='validate'){validate();return;}
+  if(a==='goprog'){goTab('programmes');return;}
+  if(a==='gocours'){goTab('cours');return;}
   if(a==='pickc'){S.pick={c:d.v,t:'',p:'',k:''};save();renderPages();return;}
   if(a==='pickt'){S.pick={c:S.pick.c,t:d.v,p:'',k:''};save();renderPages();return;}
-  if(a==='pickp'){var pp=STRUCT&&STRUCT.programmes[d.p];if(pp){var cc=concOf(pp);S.pick={c:pp.cycle,t:pp.type,p:pp.code,k:(cc.filter(function(x){return x.code===pp.code;})[0]||cc[0]||{code:''}).code};save();renderPages();window.scrollTo(0,0);}return;}
-  if(a==='pickk'){S.pick.k=d.v;save();renderPages();return;}
+  if(a==='pickp'){var pp=STRUCT&&STRUCT.programmes[d.p];if(pp){var cc=concOf(pp);S.pick={c:pp.cycle,t:pp.type,p:pp.code,k:(cc.filter(function(x){return x.code===pp.code;})[0]||cc[0]||{code:''}).code};S.picked=true;save();renderPages();window.scrollTo(0,0);}return;}
+  if(a==='pickk'){S.pick.k=d.v;S.picked=true;save();renderPages();return;}
   if(a==='ptog'){var pc=course(d.c);if(!pc)return;
     if(S.sel.indexOf(d.c)<0&&preUnmet(pc)){toast('Préalable à faire d’abord : '+pc.preSig.join(pc.preAny?' ou ':' et ')+'.');return;}
     if(S.sel.indexOf(d.c)<0)S.pOf[d.c]=progFor(d.c);
@@ -1104,7 +1122,7 @@ function getTok(){try{return localStorage.getItem(TKEY)||'';}catch(e){return '';
 function setTok(v){try{if(v)localStorage.setItem(TKEY,v);else localStorage.removeItem(TKEY);}catch(e){}}
 
 //--- navigation par onglets (#accueil, #generateur, #parametres)
-var TABS=['accueil','cours','programmes','generateur','parametres'];
+var TABS=['accueil','programmes','cours','generateur','parametres'];
 function curTab(){var h=(location.hash||'').slice(1);return TABS.indexOf(h)>=0?h:'accueil';}
 function goTab(t){if(location.hash!=='#'+t)location.hash='#'+t;else showTab();}
 function showTab(){
@@ -1300,23 +1318,28 @@ function changesHTML(){
 }
 function homeHTML(){
   var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0);
-  var open=0;cs.forEach(function(c){open+=c.groups.filter(function(g){return g.places>0;}).length;});
-  var o=oldest(),age=o?(Date.now()-new Date(o).getTime())/36e5:null,stale=age!==null&&age>24;
-  var h='<div class="hero"><div><h1>Horaire UQAM, hiver 2027</h1><p>BAA, concentration finance (7111)</p></div>'
-    +'<button type="button" class="btn big" data-act="gen">Ouvrir le générateur →</button></div>';
-  h+='<div class="tiles">'
-    +'<div class="tile"><b>'+cs.length+'</b><span>cours choisis</span></div>'
-    +'<div class="tile"><b>'+cr+'</b><span>crédits</span></div>'
-    +'<div class="tile"><b>'+(typeof total==='number'?total.toLocaleString('fr-CA')+(capped?'+':''):'–')+'</b><span>horaires possibles</span></div>'
-    +'<div class="tile"><b>'+open+'</b><span>groupes avec places</span></div></div>';
-  h+='<div class="home-cols"><div class="card"><div class="card-h"><h2 class="h3">Mes cours</h2><button type="button" class="btn sm" data-act="opencat">Modifier</button></div>';
-  if(!cs.length)h+='<p class="hint">Aucun cours choisi.</p>';
-  cs.forEach(function(c){h+='<div class="hrow '+c.cls+'"><code>'+c.code+'</code><span class="ti">'+esc(c.title)+'</span><span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span><span class="of">'+offerText(c)+'</span></div>';});
-  h+='</div><div class="stack"><div class="card"><div class="card-h"><h2 class="h3">Données</h2></div>'
-    +'<p class="big-line'+(stale?' warn':'')+'">'+(o?'Lues le <b>'+fmtStamp(o)+'</b>'+(stale?' (il y a '+Math.floor(age/24)+' j)':''):'Aucune donnée')+'</p>'
-    +(upd.msg?'<p class="hint">'+esc(upd.msg)+'</p>':'<p class="hint">Les places de tes cours sont relues automatiquement, selon les places qui restent. Les cours que tu valides dans « Choisir mes cours » sont suivis pendant 7 jours.</p>')+changesHTML()+'</div>'
-    +'<div class="card"><h2 class="h3">Mes favoris</h2>';
-  if(!S.favs.length)h+='<p class="hint">Aucun favori.</p>';
+  var o=oldest(),age=o?(Date.now()-new Date(o).getTime())/6e4:null;
+  var sent=cs.length>0&&valKey()===S.sent;
+  var st=[
+    {n:1,t:'Choisis ton programme',d:'Domaine, cycle, type, programme et concentration : tu vois les cours du programme, leurs crédits et leurs préalables.',done:S.picked||cs.length>0,a:'goprog',b:'Choisir mon programme'},
+    {n:2,t:'Choisis tes cours',d:'Coche les cours que tu veux suivre à l’hiver 2027. Les préalables manquants sont signalés.',done:cs.length>0,a:'gocours',b:'Choisir mes cours'},
+    {n:3,t:'Valide',d:'Un clic sur « Valider » envoie tes cours : le site lit alors les groupes et les places restantes à l’UQAM.',done:sent,a:'gocours',b:'Aller valider'},
+    {n:4,t:'Génère ton horaire',d:'Le site te propose des horaires sans conflit, triés selon tes goûts (moins de jours, moins de trous, plus de places).',done:false,a:'gen',b:'Ouvrir le générateur'}
+  ];
+  var cur=0;for(var k=0;k<3;k++){if(!st[k].done){cur=k;break;}cur=3;}
+  var h='<div class="hero"><div><h1>Construis ton horaire UQAM</h1><p>Hiver 2027 · Faculté de gestion (ESG). Choisis tes cours, le site trouve les horaires sans conflit et te montre les places qui restent.</p></div></div>'
+    +'<div class="steps">'+st.map(function(x,i){
+      var on=i===cur,dn=x.done;
+      return '<div class="step'+(on?' now':'')+(dn?' ok':'')+'"><div class="sn">'+(dn?'✓':x.n)+'</div><div class="sb"><h2 class="h3">'+x.t+'</h2><p class="hint">'+x.d+'</p>'
+        +'<button type="button" class="btn'+(on?' primary':'')+' sm" data-act="'+x.a+'"'+(i===3&&!cs.length?' disabled':'')+'>'+x.b+(on?' →':'')+'</button></div></div>';}).join('')+'</div>';
+  if(cs.length){
+    h+='<div class="home-cols"><div class="card"><div class="card-h"><h2 class="h3">Mes cours</h2><span class="hint">'+cs.length+' cours · '+cr+' crédits</span></div>';
+    cs.forEach(function(c){h+='<div class="hrow '+c.cls+'"><code>'+c.code+'</code><span class="ti">'+esc(c.title)+'</span><span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span><span class="of">'+offerText(c)+'</span></div>';});
+    h+='<p class="hint" style="margin-top:8px">'+(o?'Places lues '+(age<1?'à l’instant':age<60?'il y a '+Math.round(age)+' min':age<1440?'il y a '+Math.round(age/60)+' h':'le '+fmtStamp(o))+' (la plus ancienne de tes cours). Elles se mettent à jour toutes seules.':'Les places seront lues quand tu auras validé.')+'</p></div>'
+      +'<div class="stack">'+changesHTML();
+  }else h+='<div class="home-cols"><div class="card"><p class="hint">Aucun cours choisi pour l’instant. Commence par l’étape 1.</p></div><div class="stack">';
+  h+='<div class="card"><h2 class="h3">Mes favoris</h2>';
+  if(!S.favs.length)h+='<p class="hint">Aucun horaire gardé. Dans le générateur, « Garder cet horaire » le range ici.</p>';
   else{h+='<div class="favs">';S.favs.forEach(function(f,i){h+='<button type="button" class="btn sm" data-act="homefav" data-i="'+i+'">'+esc(favLabel(f,i))+'</button>';});h+='</div>';}
   h+='</div></div></div>';
   return h;
@@ -1327,7 +1350,7 @@ function settingsHTML(){
    +'<div class="lab">Thème</div>'+chipsHTML('theme',P.theme,[['auto','Automatique'],['light','Clair'],['dark','Sombre']])
    +'<div class="lab">Taille du texte</div>'+chipsHTML('tsize',P.ts,[[0.9,'Petit'],[1,'Normal'],[1.12,'Grand'],[1.25,'Très grand']])
    +'<div class="lab">Animations</div><div class="chips"><button type="button" class="chip" data-act="anim" aria-pressed="'+P.anim+'">'+(P.anim?'Activées':'Désactivées')+'</button></div></div>'
-   +'<div class="card"><h2 class="h3">Actualisation</h2><p class="hint">Le bouton « Actualiser » relit seulement les places de tes cours choisis (environ 1 min), sur tous tes appareils. Tous les cours de la liste sont relus automatiquement toutes les heures.</p>'
+   +'<div class="card"><h2 class="h3">Actualisation</h2><p class="hint">Il n’y a plus de bouton à presser : quand tu valides tes cours, ils sont suivis pendant 7 jours. Le site relit leurs places automatiquement, plus souvent quand il en reste peu, et jamais plus que ce que l’UQAM peut supporter.</p>'
    +'</div><div class="card"><h2 class="h3">Mes données</h2><p class="hint">Cours choisis, cours faits, limites d’heures et favoris sont gardés dans ce navigateur.</p>'
    +(wipeAsk?'<div class="row"><span>Tout réinitialiser ?</span><button type="button" class="btn danger" data-act="wipe">Oui, réinitialiser</button><button type="button" class="btn" data-act="wipeNo">Annuler</button></div>'
             :'<div class="row"><button type="button" class="btn" data-act="wipe">Réinitialiser mes choix</button></div>')
@@ -1471,9 +1494,9 @@ document.addEventListener('keydown',function(e){
 window.addEventListener('resize',closePop);
 window.addEventListener('scroll',function(e){if(tfPop&&!(e.target&&e.target.classList&&e.target.classList.contains('tf-pop')))closePop();},true);
 function start(){load();render();showTab();}
-fetch('structure.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(d){STRUCT=d;renderPages();}}).catch(function(){});
+fetch('structure.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(d){STRUCT=d;render();}}).catch(function(){});
 fetch('catalogue.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(d){CAT=d;CACHE={};render();}}).catch(function(){});
-fetch('data.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){DATA=d;start();})
+fetch('data.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){DATA=d;CACHE={};start();})
  .catch(function(err){document.getElementById('right').innerHTML='<div class="alert bad">Impossible de charger les données des cours ('+esc(String(err&&err.message||err))+'). Recharge la page.</div>';});
 </script>
 </body></html>
