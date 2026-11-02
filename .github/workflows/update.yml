@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '17 * * * *'   # toutes les heures
   workflow_dispatch:
+    inputs:
+      courses:
+        description: 'Sigles à relire (séparés par des espaces). Vide = tous les cours de la liste.'
+        required: false
+        default: ''
   push:
     branches: [main]
 
@@ -51,7 +56,14 @@ jobs:
           curl -fsS -H "Cache-Control: no-cache" "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/data.json?t=$(date +%s)" -o site/data.json || cp data.json site/data.json
       - name: Lire le site de l'UQAM (une page à la fois, avec pause)
         if: github.event_name != 'push'
-        run: node scrape.js site/data.json 7111 $(cat courses.txt | tr '\n' ' ')
+        env:
+          ONLY: ${{ github.event.inputs.courses }}
+        run: |
+          # Actualisation rapide : seulement les cours demandés (sigles valides), sinon toute la liste.
+          LIST=$(printf '%s' "$ONLY" | tr -c 'A-Z0-9' ' ' | tr -s ' ' | grep -oE '[A-Z]{3}[0-9]{3}[0-9A-Z]' | head -12 | tr '\n' ' ')
+          if [ -z "$LIST" ]; then LIST=$(cat courses.txt | tr '\n' ' '); fi
+          echo "Cours lus : $LIST"
+          node scrape.js site/data.json 7111 $LIST
       - name: Assembler le site
         run: cp index.html site/index.html
       - uses: actions/configure-pages@v5

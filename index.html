@@ -282,6 +282,8 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 .tf-in{width:5.2em;border:0;background:transparent;padding:6px 4px 6px 10px;font:500 0.8125rem var(--font-mono);color:var(--ink);outline:none;min-width:0}
 .tf-in::placeholder{font:400 0.7812rem var(--font-body);color:var(--muted)}
 .tf-in[data-empty]{width:8.2em}
+.tf-day .tf-in{width:3.4em;cursor:pointer}
+.tf-day{cursor:pointer}
 .tf-btn{border:0;background:transparent;width:30px;position:relative;cursor:pointer;color:var(--muted)}
 .tf-btn::after{content:"";position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-6px 0 0 -4px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg)}
 .tf-btn:hover{background:var(--accent-soft);color:var(--accent)}
@@ -374,6 +376,9 @@ body{padding-top:0}
 .pre-line.warn{color:var(--warn);background:var(--warn-bg);border-radius:8px;padding:5px 9px}
 .pre-line.warn b{color:inherit}
 .cat td.pre{font-size:.78rem;min-width:150px;white-space:normal}
+.chg{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
+.chg-l{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.chg-l code{font-family:var(--font-mono);font-size:.78rem;margin-right:4px}
 </style>
 </head><body>
 
@@ -724,7 +729,7 @@ function controlsHTML(){
   var msub=S.modes.length===3&&!S.noCampus.length?'tout':S.modes.map(function(m){return MODES[m];}).join(', ');
 
   var workB=S.work.map(function(w,i){
-    return '<div class="shift"><select data-act="shift" data-i="'+i+'" data-f="d" aria-label="Jour">'+DAYS.map(function(d){return '<option'+(d===w.d?' selected':'')+'>'+d+'</option>';}).join('')+'</select>'
+    return '<div class="shift">'+dayDD('data-act="shift" data-i="'+i+'" data-f="d" aria-label="Jour"',w.d)
       +tf('data-act="shift" data-i="'+i+'" data-f="s" aria-label="Début"',w.s)+'<span>à</span>'+tf('data-act="shift" data-i="'+i+'" data-f="e" aria-label="Fin"',w.e)
       +'<button type="button" class="x" data-act="rmshift" data-i="'+i+'" aria-label="Retirer">×</button></div>';}).join('')
     +'<div><button type="button" class="btn sm" data-act="addshift">Ajouter une indisponibilité</button></div>'
@@ -795,12 +800,18 @@ function resultsHTML(){
   sel.forEach(function(x){if(groupWorkIssue(x.g)==='overlap')h+='<div class="alert bad" style="margin-top:8px">'+x.c.code+' gr. '+x.g.id+' tombe pendant une de tes indisponibilités.</div>';});
   sel.forEach(function(x){if(x.g.places===0)h+='<div class="alert warn" style="margin-top:8px">'+x.c.code+' gr. '+x.g.id+' est complet. Surveille les annulations.</div>';});
   h+='</div>';
-  var ex=examRows(sel);
+  var ex=examRows(sel),byc={},order=[];
+  ex.forEach(function(r){if(!byc[r.code]){byc[r.code]={code:r.code,cls:r.cls,list:[]};order.push(r.code);}byc[r.code].list.push(r);});
+  sel.forEach(function(x){var c=byc[x.c.code];if(!c)return;var l=c.list;
+    l.forEach(function(r,i){r.kind=l.length===1?(r.date>='2027-04-15'?'Final':'Intra'):(i===0?'Intra':(i===l.length-1?'Final':'Examen'));});});
+  function exCell(r){return r?'<b>'+fmtDate(r.date)+'</b><br><span class="m">'+r.s+'–'+r.e+'</span>':'<span class="hint">–</span>';}
   h+='<div class="card"><h2 class="h3">Examens</h2>';
   if(!ex.length)h+='<p class="hint">Aucune date d\u2019examen publiée.</p>';
-  else{h+='<div class="tblwrap"><table><thead><tr><th>Cours</th><th>Date</th><th>Heure</th><th>À vérifier</th></tr></thead><tbody>';
-    ex.forEach(function(r){h+='<tr class="'+r.cls+'"><td class="cd">'+r.code+'</td><td>'+fmtDate(r.date)+'</td><td class="m">'+r.s+'–'+r.e+'</td><td>'+(r.flags.length?r.flags.map(function(f){return '<span class="tag '+f.k+'">'+esc(f.t)+'</span>';}).join(' '):'<span class="tag">Rien à signaler</span>')+'</td></tr>';});
-    h+='</tbody></table></div>';}
+  else{h+='<div class="tblwrap"><table><thead><tr><th>Cours</th><th>Intra</th><th>Final</th><th>À vérifier</th></tr></thead><tbody>';
+    order.forEach(function(k){var c=byc[k],intra=c.list.filter(function(r){return r.kind==='Intra';})[0],fin=c.list.filter(function(r){return r.kind==='Final';})[0],oth=c.list.filter(function(r){return r.kind==='Examen';});
+      var fl=[];c.list.forEach(function(r){r.flags.forEach(function(f){fl.push('<span class="tag '+f.k+'">'+esc((r.kind==='Examen'?'':r.kind+' : ')+f.t)+'</span>');});});
+      h+='<tr class="'+c.cls+'"><td class="cd">'+c.code+'</td><td>'+exCell(intra)+(oth.length?'<br>'+oth.map(function(r){return exCell(r);}).join('<br>'):'')+'</td><td>'+exCell(fin)+'</td><td>'+(fl.length?fl.join(' '):'<span class="tag">Rien à signaler</span>')+'</td></tr>';});
+    h+='</tbody></table></div><p class="hint" style="margin-top:8px">Intra ou final : déduit de la date (l\u2019UQAM ne l\u2019indique pas).</p>';}
   var miss=sel.filter(function(x){return !(x.g.exams||[]).length;}).map(function(x){return x.c.code;});
   if(miss.length&&ex.length)h+='<p class="hint" style="margin-top:8px">'+miss.join(', ')+' : dates d\u2019examen non affichées par l\u2019UQAM.</p>';
   h+='</div>';
@@ -975,9 +986,41 @@ function paintStamp(){
 }
 var upd={busy:false,msg:'',timer:null};
 function reloadData(){
-  return fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){DATA=d;CACHE={};render();});
+  return fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){applyData(d,'Données rechargées.');});
 }
 function stopPoll(){clearInterval(upd.timer);upd.timer=null;upd.busy=false;upd.msg='';paintStamp();}
+var CKEY='uqam-h27-changes';
+function diffData(a,b){
+  var out=[];
+  Object.keys(b).forEach(function(k){
+    var n=b[k],o=a&&a[k];if(!n||typeof n!=='object')return;
+    if(!o){out.push({code:k,t:'Cours ajouté aux données'});return;}
+    var og={},ng={};(o.groups||[]).forEach(function(g){og[g.id]=g;});(n.groups||[]).forEach(function(g){ng[g.id]=g;});
+    Object.keys(ng).forEach(function(id){
+      var x=og[id],y=ng[id];
+      if(!x){out.push({code:k,t:'Nouveau groupe '+id+' ('+y.places+' place'+(y.places>1?'s':'')+')'});return;}
+      if(x.places!==y.places){
+        if(y.places===0)out.push({code:k,t:'Groupe '+id+' maintenant complet (avant : '+x.places+')',k:'bad'});
+        else if(x.places===0)out.push({code:k,t:'Groupe '+id+' : une place s’est libérée ('+y.places+')',k:'ok'});
+        else out.push({code:k,t:'Groupe '+id+' : '+x.places+' → '+y.places+' places',k:y.places<x.places?'warn':'ok'});
+      }
+      if(JSON.stringify(x.slots)!==JSON.stringify(y.slots))out.push({code:k,t:'Groupe '+id+' : horaire ou lieu modifié',k:'warn'});
+      else if(JSON.stringify(x.exams)!==JSON.stringify(y.exams))out.push({code:k,t:'Groupe '+id+' : dates d’examen modifiées',k:'warn'});
+    });
+    Object.keys(og).forEach(function(id){if(!ng[id])out.push({code:k,t:'Groupe '+id+' retiré',k:'bad'});});
+    if((o.prereq||'')!==(n.prereq||'')&&(o.prereq||n.prereq))out.push({code:k,t:'Préalables modifiés',k:'warn'});
+  });
+  return out;
+}
+function loadChanges(){try{return JSON.parse(localStorage.getItem(CKEY)||'null');}catch(e){return null;}}
+function applyData(d,why){
+  var items=diffData(DATA,d);
+  DATA=d;CACHE={};
+  var mine=items.filter(function(i){return S.sel.indexOf(i.code)>=0;});
+  try{localStorage.setItem(CKEY,JSON.stringify({t:Date.now(),mine:mine.slice(0,60),others:items.length-mine.length}));}catch(e){}
+  render();paintStamp();
+  toast(why+(mine.length?' '+mine.length+' changement'+(mine.length>1?'s':'')+' dans tes cours (voir l’accueil).':' Aucun changement dans tes cours.'));
+}
 var RKEY='uqam-h27-run';
 function hm(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,'0')+'h'+String(d.getMinutes()).padStart(2,'0');}
 function newestOf(d){var f=null;Object.keys(d).forEach(function(k){if(d[k]&&d[k].fetched&&(!f||d[k].fetched>f))f=d[k].fetched;});return f;}
@@ -985,10 +1028,10 @@ function runInfo(){
   return fetch('https://api.github.com/repos/'+REPO+'/actions/workflows/update.yml/runs?per_page=1',{headers:{Accept:'application/vnd.github+json'}})
     .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(j){return (j.workflow_runs||[])[0]||null;});
 }
-function waitFresh(before,since){
+function waitFresh(before,since,mins){
   clearInterval(upd.timer);
-  var t0=since||Date.now(),est=t0+7*60*1000;
-  try{localStorage.setItem(RKEY,JSON.stringify({t0:t0,before:before}));}catch(e){}
+  var t0=since||Date.now(),est=t0+(mins||7)*60*1000;
+  try{localStorage.setItem(RKEY,JSON.stringify({t0:t0,before:before,mins:mins}));}catch(e){}
   upd.busy=true;
   function say(st){upd.msg=(st==='queued'?'Lecture en attente':'Lecture de l’UQAM en cours')+' · fin prévue vers '+hm(Math.max(est,Date.now()+30000));paintStamp();}
   say('in_progress');
@@ -998,7 +1041,7 @@ function waitFresh(before,since){
     n++;
     fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
       var f=newestOf(d);
-      if(f&&(!before||f>before)){forget();DATA=d;CACHE={};stopPoll();render();toast('Données mises à jour.');}
+      if(f&&(!before||f>before)){forget();stopPoll();applyData(d,'Données mises à jour.');}
       else if(n%2===1)runInfo().then(function(r){
         if(r&&r.status==='completed'&&r.conclusion&&r.conclusion!=='success'&&Date.now()-t0>60000){forget();stopPoll();toast('La lecture a échoué. Les anciennes données sont conservées.');}
         else if(r)say(r.status);
@@ -1011,7 +1054,7 @@ function forget(){try{localStorage.removeItem(RKEY);}catch(e){}}
 // Reprendre le décompte après un rechargement de la page
 function resumeRun(){
   var o=null;try{o=JSON.parse(localStorage.getItem(RKEY)||'null');}catch(e){}
-  if(o&&Date.now()-o.t0<16*60*1000){if(!upd.timer)waitFresh(o.before,o.t0);return;}
+  if(o&&Date.now()-o.t0<16*60*1000){if(!upd.timer)waitFresh(o.before,o.t0,o.mins);return;}
   forget();
   runInfo().then(function(r){
     if(r&&r.status!=='completed'&&!upd.timer){var t=new Date(r.run_started_at||r.created_at).getTime();if(Date.now()-t<16*60*1000)waitFresh(newest(),t);}
@@ -1025,7 +1068,7 @@ function autoCheck(){
     if(!d)return;var f=newestOf(d),cur=newest();
     if(f&&cur&&f>cur){
       if(quietBusy()){setTimeout(autoCheck,15000);return;}
-      DATA=d;CACHE={};render();paintStamp();toast('Nouvelles données chargées.');
+      applyData(d,'Nouvelles données chargées.');
     }
   }).catch(function(){});
 }
@@ -1042,7 +1085,7 @@ function doUpdate(){
       .catch(function(){stopPoll();toast('Impossible de recharger les données.');});
   }
   if(RELAY){
-    fetch(RELAY,{method:'POST'}).then(function(r){return r.json().then(function(j){return {s:r.status,j:j};});}).then(function(x){
+    fetch(RELAY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({courses:S.sel.slice(0,12)})}).then(function(r){return r.json().then(function(j){return {s:r.status,j:j};});}).then(function(x){
       if(x.s!==200&&x.s!==202){stopPoll();toast('Échec du lancement ('+x.s+').');return;}
       if(x.j.status==='busy'){
         runInfo().then(function(r){
@@ -1051,7 +1094,7 @@ function doUpdate(){
         }).catch(function(){plain('Une lecture est déjà en cours ou très récente.');});
         return;
       }
-      waitFresh(before);
+      waitFresh(before,undefined,S.sel.length?3:7);
     }).catch(function(){stopPoll();toast('Impossible de joindre le relais.');});
     return;
   }
@@ -1071,6 +1114,15 @@ function favLabel(f,i){
   var gs=[];Object.keys(f.picks).forEach(function(code){var c=course(code);if(c){var g=getGroup(c,f.picks[code]);if(g)gs.push(g);}});
   var st=stats(gs);return 'Favori '+(i+1)+' · '+Object.keys(f.picks).length+' cours · '+st.days+' jours';
 }
+function changesHTML(){
+  var c=loadChanges();if(!c)return '';
+  var h='<div class="chg"><div class="lab">Dernière mise à jour des places · '+hm(c.t)+'</div>';
+  if(!c.mine.length)h+='<p class="hint">Aucun changement dans tes cours.</p>';
+  else{h+='<ul class="chg-l">';c.mine.slice(0,14).forEach(function(i){h+='<li><code>'+esc(i.code)+'</code> <span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span></li>';});
+    if(c.mine.length>14)h+='<li class="hint">+ '+(c.mine.length-14)+' autres</li>';h+='</ul>';}
+  if(c.others>0)h+='<p class="hint">'+c.others+' autre'+(c.others>1?'s':'')+' changement'+(c.others>1?'s':'')+' dans les autres cours de la liste.</p>';
+  return h+'</div>';
+}
 function homeHTML(){
   var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0);
   var open=0;cs.forEach(function(c){open+=c.groups.filter(function(g){return g.places>0;}).length;});
@@ -1087,7 +1139,7 @@ function homeHTML(){
   cs.forEach(function(c){h+='<div class="hrow '+c.cls+'"><code>'+c.code+'</code><span class="ti">'+esc(c.title)+'</span><span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span><span class="of">'+offerText(c)+'</span></div>';});
   h+='</div><div class="stack"><div class="card"><div class="card-h"><h2 class="h3">Données</h2><button type="button" class="btn sm primary" data-act="upd"'+(upd.busy?' disabled':'')+'>↻ Actualiser</button></div>'
     +'<p class="big-line'+(stale?' warn':'')+'">'+(o?'Lues le <b>'+fmtStamp(o)+'</b>'+(stale?' (il y a '+Math.floor(age/24)+' j)':''):'Aucune donnée')+'</p>'
-    +(upd.msg?'<p class="hint">'+esc(upd.msg)+'</p>':'<p class="hint">Relues automatiquement toutes les heures.</p>')+'</div>'
+    +(upd.msg?'<p class="hint">'+esc(upd.msg)+'</p>':'<p class="hint">Relues automatiquement toutes les heures.</p>')+changesHTML()+'</div>'
     +'<div class="card"><h2 class="h3">Mes favoris</h2>';
   if(!S.favs.length)h+='<p class="hint">Aucun favori.</p>';
   else{h+='<div class="favs">';S.favs.forEach(function(f,i){h+='<button type="button" class="btn sm" data-act="homefav" data-i="'+i+'">'+esc(favLabel(f,i))+'</button>';});h+='</div>';}
@@ -1100,7 +1152,7 @@ function settingsHTML(){
    +'<div class="lab">Thème</div>'+chipsHTML('theme',P.theme,[['auto','Automatique'],['light','Clair'],['dark','Sombre']])
    +'<div class="lab">Taille du texte</div>'+chipsHTML('tsize',P.ts,[[0.9,'Petit'],[1,'Normal'],[1.12,'Grand'],[1.25,'Très grand']])
    +'<div class="lab">Animations</div><div class="chips"><button type="button" class="chip" data-act="anim" aria-pressed="'+P.anim+'">'+(P.anim?'Activées':'Désactivées')+'</button></div></div>'
-   +'<div class="card"><h2 class="h3">Actualisation</h2><p class="hint">Le bouton « Actualiser » relance la lecture du site de l’UQAM (environ 6 min), sur tous tes appareils. Sinon, les données sont relues automatiquement toutes les heures.</p>'
+   +'<div class="card"><h2 class="h3">Actualisation</h2><p class="hint">Le bouton « Actualiser » relit seulement les places de tes cours choisis (environ 3 min), sur tous tes appareils. Tous les cours de la liste sont relus automatiquement toutes les heures.</p>'
    +'</div><div class="card"><h2 class="h3">Mes données</h2><p class="hint">Cours choisis, cours faits, limites d’heures, indisponibilités et favoris sont gardés dans ce navigateur.</p>'
    +(wipeAsk?'<div class="row"><span>Tout réinitialiser ?</span><button type="button" class="btn danger" data-act="wipe">Oui, réinitialiser</button><button type="button" class="btn" data-act="wipeNo">Annuler</button></div>'
             :'<div class="row"><button type="button" class="btn" data-act="wipe">Réinitialiser mes choix</button></div>')
@@ -1183,6 +1235,9 @@ function snapSchedule(){
 }
 
 //--- champ d'heure : saisie au clavier + liste déroulante
+function dayDD(attrs,val){
+  return '<span class="tf tf-day"><input type="text" class="tf-in" data-list="days" readonly tabindex="-1" '+attrs+' value="'+val+'"><button type="button" class="tf-btn" data-tf aria-label="Choisir le jour" tabindex="-1"></button></span>';
+}
 function tf(attrs,val,empty){
   return '<span class="tf"><input type="text" class="tf-in" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="7" '+attrs+' value="'+(val||'')+'"'+(empty?' data-empty="1" placeholder="Aucune limite"':'')+'><button type="button" class="tf-btn" data-tf aria-label="Choisir dans la liste" tabindex="-1"></button></span>';
 }
@@ -1200,8 +1255,11 @@ function closePop(){if(tfPop){tfPop.remove();tfPop=null;}}
 function openPop(inp){
   closePop();
   var box=inp.closest('.tf'),r=box.getBoundingClientRect(),h='';
+  if(inp.dataset.list==='days'){DAYS.forEach(function(d){h+='<button type="button" class="tf-o'+(d===inp.value?' on':'')+'" data-v="'+d+'">'+(DAYS_LONG[DAYS.indexOf(d)].charAt(0).toUpperCase()+DAYS_LONG[DAYS.indexOf(d)].slice(1))+'</button>';});}
+  else{
   if(inp.dataset.empty)h+='<button type="button" class="tf-o tf-none'+(inp.value===''?' on':'')+'" data-v="">Aucune limite</button>';
   for(var m=0;m<1440;m+=15){var v=String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');h+='<button type="button" class="tf-o'+(v===inp.value?' on':'')+'" data-v="'+v+'">'+v+'</button>';}
+  }
   tfPop=document.createElement('div');tfPop.className='tf-pop';tfPop.innerHTML=h;tfPop._inp=inp;
   var w=Math.max(r.width,120);tfPop.style.width=w+'px';
   document.body.appendChild(tfPop);
@@ -1214,6 +1272,7 @@ function openPop(inp){
 function popCommit(v){var i2=tfPop._inp;closePop();i2.value=v;i2.dispatchEvent(new Event('change',{bubbles:true}));}
 document.addEventListener('change',function(e){
   var t=e.target;if(!t.classList||!t.classList.contains('tf-in'))return;
+  if(t.dataset.list==='days'){return;}
   var p=parseTime(t.value);
   if(p===null||(p===''&&!t.dataset.empty)){t.value=t.defaultValue;e.stopPropagation();return;}
   t.value=p;
