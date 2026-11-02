@@ -1175,12 +1175,13 @@ function prune(){
   if(rm.length||lastPrunedDone.length){S.sel=S.sel.filter(function(c){return rm.indexOf(c)<0;});save();}
 }
 function render(){
-  var L=document.getElementById('left'),top=L.scrollTop;
+  var L=document.getElementById('left'),top=L.scrollTop,wy=window.scrollY,wx=window.scrollX;
   prune();
   compute();
   document.getElementById('catalog').innerHTML=catalogHTML();
   L.innerHTML=controlsHTML();L.scrollTop=top;
   renderResults();renderPages();
+  if(Math.abs(window.scrollY-wy)>1)window.scrollTo(wx,wy);
 }
 function renderResults(){document.getElementById('right').innerHTML=resultsHTML();}
 
@@ -1434,7 +1435,7 @@ function applyData(d,why){
   try{localStorage.setItem(CKEY,JSON.stringify({t:Date.now(),mine:mine.slice(0,60),others:items.length-mine.length}));}catch(e){}
   render();paintStamp();
   var msg='Cours relus à '+hm(Date.now())+' : '+(mine.length?mine.length+' changement'+(mine.length>1?'s':'')+' dans tes cours.':'aucun changement dans tes cours.');
-  if(mine.length&&curTab()!=='accueil')toast(msg,'Voir la liste',function(){goTab('accueil');});else toast(msg);
+  if(why!=='Nouvelles données chargées.'||S.sent)toast(msg);
 }
 var RKEY='uqam-h27-run';
 function hm(ms){var d=new Date(ms);return String(d.getHours()).padStart(2,'0')+'h'+String(d.getMinutes()).padStart(2,'0');}
