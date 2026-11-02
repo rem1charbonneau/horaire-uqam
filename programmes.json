@@ -1,0 +1,9025 @@
+{
+ "fetched": "2026-11-02T01:18:50.108Z",
+ "programmes": [
+  {
+   "title": "Accompagnement entrepreneurial",
+   "href": "programme?code=9182",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9182",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9182"
+  },
+  {
+   "title": "Acquisition et gestion de talents",
+   "href": "/programme/microprogramme-premier-cycle-acquisition-gestion-talents",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9091",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/microprogramme-premier-cycle-acquisition-gestion-talents"
+  },
+  {
+   "title": "Action culturelle",
+   "href": "/programme/baccalaureat-action-culturelle",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Création"
+   ],
+   "code": "6525",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-action-culturelle"
+  },
+  {
+   "title": "Actuariat",
+   "href": "/programme/baccalaureat-actuariat",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "7363",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-actuariat"
+  },
+  {
+   "title": "Actuariat",
+   "href": "/programme/majeure-actuariat",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "6002",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/majeure-actuariat"
+  },
+  {
+   "title": "Administration",
+   "href": "/programme/baccalaureat-administration",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "International",
+    "Technologies de l'information"
+   ],
+   "code": "7111",
+   "campus": [
+    "Montréal",
+    "Campus de Lanaudière",
+    "Campus de Laval",
+    "Campus de Longueuil"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-administration"
+  },
+  {
+   "title": "Administration",
+   "href": "/programme/certificat-administration",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4122",
+   "campus": [
+    "Montréal",
+    "Campus de Lanaudière",
+    "Campus de Laval",
+    "Campus de Longueuil",
+    "Campus de la Montérégie-Ouest"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-administration"
+  },
+  {
+   "title": "Administration",
+   "href": "/programme/doctorat-administration",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "3451",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-administration"
+  },
+  {
+   "title": "Administration des affaires (MBA)",
+   "href": "/programme/mba",
+   "type": "MBA",
+   "cycle": "2",
+   "domaines": [
+    "Gestion",
+    "Technologies de l'information"
+   ],
+   "code": "1892",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/mba"
+  },
+  {
+   "title": "Administration des affaires - MBA pour cadres",
+   "href": "/programme/mba-cadres",
+   "type": "MBA",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "1970",
+   "campus": [
+    "Montréal",
+    "Campus de Laval"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/mba-cadres"
+  },
+  {
+   "title": "Administration des services publics",
+   "href": "programme?code=4686",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "Science politique et droit"
+   ],
+   "code": "4686",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4686"
+  },
+  {
+   "title": "Allemand",
+   "href": "/programme/certificat-allemand",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "4165",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-allemand"
+  },
+  {
+   "title": "Allemand",
+   "href": "programme?code=F006",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Langues"
+   ],
+   "code": "F006",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F006"
+  },
+  {
+   "title": "Allemand",
+   "href": "programme?code=9144",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "9144",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9144"
+  },
+  {
+   "title": "Analyse chimique",
+   "href": "/programme/certificat-analyse-chimique",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Santé",
+    "Sciences"
+   ],
+   "code": "4780",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-analyse-chimique"
+  },
+  {
+   "title": "Anglais",
+   "href": "/programme/certificat-anglais",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "4729",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-anglais"
+  },
+  {
+   "title": "Anglais",
+   "href": "programme?code=F004",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Langues"
+   ],
+   "code": "F004",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F004"
+  },
+  {
+   "title": "Anglais",
+   "href": "programme?code=9145",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "9145",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9145"
+  },
+  {
+   "title": "Anglais et culture anglophone",
+   "href": "/programme/majeure-anglais-culture-anglophone",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "6007",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/majeure-anglais-culture-anglophone"
+  },
+  {
+   "title": "Animation culturelle",
+   "href": "/programme/certificat-animation-culturelle",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Création"
+   ],
+   "code": "4098",
+   "campus": [
+    "Montréal",
+    "Campus de Laval"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-animation-culturelle"
+  },
+  {
+   "title": "Anthropologie du contemporain",
+   "href": "programme?code=6379",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "International",
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "6379",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6379"
+  },
+  {
+   "title": "Art dramatique",
+   "href": "/programme/baccalaureat-art-dramatique",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création",
+    "Éducation et intervention sociale",
+    "Enseignement"
+   ],
+   "code": "7601",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-art-dramatique"
+  },
+  {
+   "title": "Art-thérapie",
+   "href": "/programme/desa-art-therapie",
+   "type": "DESA",
+   "cycle": "3",
+   "domaines": [
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "4248",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/desa-art-therapie"
+  },
+  {
+   "title": "Arts visuels",
+   "href": "/programme/certificat-arts-visuels",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "4087",
+   "campus": [
+    "Montréal",
+    "Campus de Lanaudière",
+    "Campus de Laval"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-arts-visuels"
+  },
+  {
+   "title": "Arts visuels et médiatiques",
+   "href": "/programme/baccalaureat-arts-visuels-mediatiques",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création",
+    "Éducation et intervention sociale",
+    "Enseignement"
+   ],
+   "code": "7324",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-arts-visuels-mediatiques"
+  },
+  {
+   "title": "Arts visuels et médiatiques",
+   "href": "/programme/maitrise-arts-visuels-mediatiques",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Création",
+    "Éducation et intervention sociale"
+   ],
+   "code": "3574",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-arts-visuels-mediatiques"
+  },
+  {
+   "title": "Bio-informatique",
+   "href": "/programme/dess-bio-informatique",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Sciences"
+   ],
+   "code": "3005",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-bio-informatique"
+  },
+  {
+   "title": "Biochimie",
+   "href": "/programme/baccalaureat-biochimie",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "6542",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-biochimie"
+  },
+  {
+   "title": "Biochimie",
+   "href": "/programme/maitrise-biochimie",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "3056",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-biochimie"
+  },
+  {
+   "title": "Biochimie",
+   "href": "/programme/doctorat-biochimie",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "3814",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-biochimie"
+  },
+  {
+   "title": "Biologie",
+   "href": "/programme/maitrise-biologie",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "3440",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-biologie"
+  },
+  {
+   "title": "Biologie",
+   "href": "programme?code=1526",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "1526",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1526"
+  },
+  {
+   "title": "Biologie en apprentissage par problèmes",
+   "href": "/programme/baccalaureat-biologie-apprentissage-problemes",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "6713",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-biologie-apprentissage-problemes"
+  },
+  {
+   "title": "Changement et développement organisationnel",
+   "href": "programme?code=4721",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4721",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4721"
+  },
+  {
+   "title": "Changement et développement organisationnel",
+   "href": "programme?code=9092",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9092",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9092"
+  },
+  {
+   "title": "Chimie",
+   "href": "/programme/baccalaureat-chimie",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "6532",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-chimie"
+  },
+  {
+   "title": "Chimie",
+   "href": "/programme/maitrise-chimie",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "3411",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-chimie"
+  },
+  {
+   "title": "Chimie",
+   "href": "/programme/doctorat-chimie",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "3554",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-chimie"
+  },
+  {
+   "title": "Cinéma",
+   "href": "/programme/baccalaureat-cinema",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Création"
+   ],
+   "code": "6678",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-cinema"
+  },
+  {
+   "title": "Commerce international",
+   "href": "/programme/certificat-commerce-international",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "International"
+   ],
+   "code": "4423",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-commerce-international"
+  },
+  {
+   "title": "Communication",
+   "href": "programme?code=6628",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "6628",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6628"
+  },
+  {
+   "title": "Communication",
+   "href": "/programme/certificat-communication",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "4214",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-communication"
+  },
+  {
+   "title": "Communication",
+   "href": "programme?code=6019",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "6019",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6019"
+  },
+  {
+   "title": "Communication",
+   "href": "/programme/maitrise-communication",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Communication",
+    "Création",
+    "International",
+    "Technologies de l'information"
+   ],
+   "code": "3479",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/maitrise-communication"
+  },
+  {
+   "title": "Communication",
+   "href": "/programme/doctorat-communication",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Communication",
+    "Création"
+   ],
+   "code": "1634",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-communication"
+  },
+  {
+   "title": "Communication (journalisme)",
+   "href": "/programme/baccalaureat-communication-journalisme",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "7433",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-communication-journalisme"
+  },
+  {
+   "title": "Communication et santé",
+   "href": "programme?code=9155",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Communication",
+    "Santé"
+   ],
+   "code": "9155",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9155"
+  },
+  {
+   "title": "Communication humaine dans les organisations",
+   "href": "programme?code=F029",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "F029",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F029"
+  },
+  {
+   "title": "Communication humaine dans les organisations",
+   "href": "programme?code=9088",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "9088",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9088"
+  },
+  {
+   "title": "Communication humaine et organisationnelle",
+   "href": "/programme/baccalaureat-communication-humaine-organisationnelle",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Éducation et intervention sociale",
+    "International",
+    "Santé"
+   ],
+   "code": "6529",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-communication-humaine-organisationnelle"
+  },
+  {
+   "title": "Communication internationale",
+   "href": "programme?code=F022",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International"
+   ],
+   "code": "F022",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F022"
+  },
+  {
+   "title": "Communication internationale",
+   "href": "programme?code=9154",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International"
+   ],
+   "code": "9154",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9154"
+  },
+  {
+   "title": "Communication marketing",
+   "href": "programme?code=6623",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Gestion"
+   ],
+   "code": "6623",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6623"
+  },
+  {
+   "title": "Communication politique",
+   "href": "/programme/baccalaureat-communication-politique-societe",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Science politique et droit"
+   ],
+   "code": "7641",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-communication-politique-societe"
+  },
+  {
+   "title": "Communication scientifique",
+   "href": "programme?code=9156",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Communication",
+    "Santé"
+   ],
+   "code": "9156",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9156"
+  },
+  {
+   "title": "Communication stratégique des organisations",
+   "href": "programme?code=9152",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "9152",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9152"
+  },
+  {
+   "title": "Communication stratégique et relations publiques",
+   "href": "/programme/baccalaureat-communication-strategique-relations-publiques",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Gestion"
+   ],
+   "code": "6593",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-communication-strategique-relations-publiques"
+  },
+  {
+   "title": "Communication – médias sociaux et organisation",
+   "href": "/programme/certificat-communication-medias-sociaux-organisation",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Technologies de l'information"
+   ],
+   "code": "4672",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-communication-medias-sociaux-organisation"
+  },
+  {
+   "title": "Communication – médias sociaux et organisation",
+   "href": "programme?code=F026",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "F026",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F026"
+  },
+  {
+   "title": "Communication – médias sociaux et organisation",
+   "href": "programme?code=9153",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "9153",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9153"
+  },
+  {
+   "title": "Communication, médias numériques et société",
+   "href": "/programme/baccalaureat-communication-medias-numeriques",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Technologies de l'information"
+   ],
+   "code": "6679",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-communication-medias-numeriques"
+  },
+  {
+   "title": "Comptabilité",
+   "href": "programme?code=4517",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4517",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4517"
+  },
+  {
+   "title": "Comptabilité générale",
+   "href": "/programme/certificat-comptabilite-generale",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4627",
+   "campus": [
+    "Montréal",
+    "Campus de Lanaudière",
+    "Campus de Laval",
+    "Campus de Longueuil",
+    "Campus de la Montérégie-Ouest"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-comptabilite-generale"
+  },
+  {
+   "title": "Comptabilité pour PME",
+   "href": "programme?code=9093",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9093",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9093"
+  },
+  {
+   "title": "Comptabilité, contrôle, audit",
+   "href": "/programme/maitrise-comptabilite-controle-audit",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "3026",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-comptabilite-controle-audit"
+  },
+  {
+   "title": "Conseil en management",
+   "href": "/programme/mba-conseil-management",
+   "type": "MBA",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "3111",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/mba-conseil-management"
+  },
+  {
+   "title": "Counseling de carrière",
+   "href": "/programme/maitrise-counseling-carriere",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Éducation"
+   ],
+   "code": "1757",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-counseling-carriere"
+  },
+  {
+   "title": "Création d'expériences immersives et interactives",
+   "href": "/programme/baccalaureat-creation-experiences-immersives-interactives",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Création",
+    "Technologies de l'information"
+   ],
+   "code": "6608",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-creation-experiences-immersives-interactives"
+  },
+  {
+   "title": "Création de start-ups à l'international",
+   "href": "programme?code=9079",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9079",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9079"
+  },
+  {
+   "title": "Création littéraire",
+   "href": "/programme/certificat-creation-litteraire",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "4289",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-creation-litteraire"
+  },
+  {
+   "title": "Création télévisuelle et multiécran",
+   "href": "/programme/baccalaureat-communication-television",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Création"
+   ],
+   "code": "6755",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-communication-television"
+  },
+  {
+   "title": "Danse",
+   "href": "/programme/baccalaureat-danse",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création",
+    "Éducation et intervention sociale",
+    "Enseignement"
+   ],
+   "code": "6780",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-danse"
+  },
+  {
+   "title": "Danse",
+   "href": "/programme/maitrise-danse",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "1801",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-danse"
+  },
+  {
+   "title": "Découvrabilité dans les secteurs de la culture et de la production médiatique",
+   "href": "/programme/microprogramme-2-cycle-decouvrabilite",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "9237",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/microprogramme-2-cycle-decouvrabilite"
+  },
+  {
+   "title": "Design d'événements",
+   "href": "/programme/dess-design-evenements",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "3997",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-design-evenements"
+  },
+  {
+   "title": "Design d'expériences interactives",
+   "href": "/programme/dess-design-experiences-interactives",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "4778",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/dess-design-experiences-interactives"
+  },
+  {
+   "title": "Design de l'environnement",
+   "href": "/programme/baccalaureat-design-environnement",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création",
+    "Environnement"
+   ],
+   "code": "7322",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-design-environnement"
+  },
+  {
+   "title": "Design de l'environnement",
+   "href": "/programme/maitrise-design-environnement",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Création",
+    "Environnement"
+   ],
+   "code": "1604",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-design-environnement"
+  },
+  {
+   "title": "Design graphique et expériences visuelles",
+   "href": "programme?code=6659",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "6659",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6659"
+  },
+  {
+   "title": "Développement de carrière",
+   "href": "/programme/baccalaureat-developpement-carriere",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Éducation"
+   ],
+   "code": "7548",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-developpement-carriere"
+  },
+  {
+   "title": "Développement de carrière",
+   "href": "/programme/majeure-developpement-carriere",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "6348",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/majeure-developpement-carriere"
+  },
+  {
+   "title": "Développement de logiciels, avancé",
+   "href": "/programme/certificat-avance-developpement-logiciels",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "4626",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-avance-developpement-logiciels"
+  },
+  {
+   "title": "Développement du tourisme",
+   "href": "/programme/dess-developpement-tourisme",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Indéfini",
+    "Gestion"
+   ],
+   "code": "1940",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-developpement-tourisme"
+  },
+  {
+   "title": "Développement du tourisme",
+   "href": "programme?code=2174",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "2174",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=2174"
+  },
+  {
+   "title": "Développement du tourisme",
+   "href": "/programme/developpement-tourisme",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "0635",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/developpement-tourisme"
+  },
+  {
+   "title": "Développement et mobilisation des employés",
+   "href": "programme?code=9106",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9106",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9106"
+  },
+  {
+   "title": "Didactique cognitive des difficultés d'apprentissage en lecture-écriture",
+   "href": "programme?code=9141",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Éducation"
+   ],
+   "code": "9141",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9141"
+  },
+  {
+   "title": "Didactique des langues",
+   "href": "/programme/dess-didactique-langues",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Langues",
+    "Éducation"
+   ],
+   "code": "3556",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-didactique-langues"
+  },
+  {
+   "title": "Didactique des langues",
+   "href": "/programme/maitrise-didactique-langues",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "3123",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-didactique-langues"
+  },
+  {
+   "title": "Didactique des langues",
+   "href": "programme?code=9142",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "9142",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9142"
+  },
+  {
+   "title": "Diversité culturelle et religieuse au Québec",
+   "href": "programme?code=9072",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "9072",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9072"
+  },
+  {
+   "title": "Droit",
+   "href": "/programme/baccalaureat-droit",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Science politique et droit"
+   ],
+   "code": "8308",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-droit"
+  },
+  {
+   "title": "Droit",
+   "href": "/programme/maitrise-droit",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Science politique et droit"
+   ],
+   "code": "1617",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-droit"
+  },
+  {
+   "title": "Droit",
+   "href": "/programme/doctorat-droit",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "International",
+    "Justice et innovation sociale",
+    "Science politique et droit"
+   ],
+   "code": "3033",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-droit"
+  },
+  {
+   "title": "Droit du travail et de la protection sociale",
+   "href": "/programme/dess-droit-travail-protection-sociale",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Science politique et droit"
+   ],
+   "code": "1573",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-droit-travail-protection-sociale"
+  },
+  {
+   "title": "Droit du travail et de la protection sociale",
+   "href": "/programme/droit-travail-protection-sociale",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Science politique et droit"
+   ],
+   "code": "0790",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/droit-travail-protection-sociale"
+  },
+  {
+   "title": "Droit social et du travail",
+   "href": "/programme/certificat-droit-social-travail",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Science politique et droit"
+   ],
+   "code": "4590",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-droit-social-travail"
+  },
+  {
+   "title": "Droits humains",
+   "href": "/programme/dess-droits-humains",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "International",
+    "Justice et innovation sociale",
+    "Science politique et droit"
+   ],
+   "code": "1556",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-droits-humains"
+  },
+  {
+   "title": "Droits humains",
+   "href": "/programme/droits-humains",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "International",
+    "Justice et innovation sociale",
+    "Science politique et droit"
+   ],
+   "code": "0783",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/droits-humains"
+  },
+  {
+   "title": "Écologie",
+   "href": "/programme/certificat-ecologie",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "4201",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-ecologie"
+  },
+  {
+   "title": "Économie, philosophie et politique",
+   "href": "programme?code=9094",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "Sciences humaines",
+    "Science politique et droit"
+   ],
+   "code": "9094",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9094"
+  },
+  {
+   "title": "Économique",
+   "href": "/programme/baccalaureat-economique",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "6571",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-economique"
+  },
+  {
+   "title": "Économique",
+   "href": "/programme/certificat-economique",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "International"
+   ],
+   "code": "4614",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-economique"
+  },
+  {
+   "title": "Économique",
+   "href": "/programme/maitrise-economique",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "3424",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-economique"
+  },
+  {
+   "title": "Économique",
+   "href": "/programme/doctorat-economique",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "3747",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-economique"
+  },
+  {
+   "title": "Éducation",
+   "href": "/programme/maitrise-education",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "1871",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-education"
+  },
+  {
+   "title": "Éducation",
+   "href": "/programme/doctorat-education",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "2179",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-education"
+  },
+  {
+   "title": "Éducation à la petite enfance (formation initiale)",
+   "href": "/programme/certificat-education-petite-enfance",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "4634",
+   "campus": [
+    "Montréal",
+    "Campus de Laval",
+    "Campus de Longueuil",
+    "Campus de la Montérégie-Ouest"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-education-petite-enfance"
+  },
+  {
+   "title": "Éducation à la petite enfance : diversité, inclusion et qualité",
+   "href": "programme?code=4615",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Éducation"
+   ],
+   "code": "4615",
+   "campus": [
+    "Montréal",
+    "Campus de Laval",
+    "Campus de Longueuil"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4615"
+  },
+  {
+   "title": "Éducation à la sexualité en milieu scolaire",
+   "href": "/programme/education-sexualite-milieu-scolaire",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "0931",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/education-sexualite-milieu-scolaire"
+  },
+  {
+   "title": "Éducation et formation des adultes",
+   "href": "/programme/dess-education-formation-adultes",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "1703",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-education-formation-adultes"
+  },
+  {
+   "title": "Éducation et formation des adultes",
+   "href": "/programme/education-formation-adultes",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "9017",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/education-formation-adultes"
+  },
+  {
+   "title": "Éducation préscolaire",
+   "href": "programme?code=9163",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "9163",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9163"
+  },
+  {
+   "title": "Éducation préscolaire et en enseignement primaire, cheminement intégré Diplôme d'études collégiales/Baccalauréat",
+   "href": "/programme/dec-bac-education-prescolaire-enseignement-primaire",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "6778",
+   "campus": [
+    "Montréal",
+    "Campus de Longueuil"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/dec-bac-education-prescolaire-enseignement-primaire"
+  },
+  {
+   "title": "Éducation préscolaire et enseignement primaire",
+   "href": "programme?code=2008",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "2008",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=2008"
+  },
+  {
+   "title": "Éducation préscolaire et enseignement primaire (cheminement à temps complet)",
+   "href": "/programme/baccalaureat-education-prescolaire-enseignement-primaire",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "6776",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-education-prescolaire-enseignement-primaire"
+  },
+  {
+   "title": "Éducation préscolaire et enseignement primaire, (cheminement à temps partiel)",
+   "href": "programme?code=6777",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "6777",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=6777"
+  },
+  {
+   "title": "Éducation relative à l'environnement",
+   "href": "programme?code=F030",
+   "type": "Concentration",
+   "cycle": "2",
+   "domaines": [
+    "Éducation"
+   ],
+   "code": "F030",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=F030"
+  },
+  {
+   "title": "Éducation relative à l'environnement",
+   "href": "/programme/education-relative-environnement",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Éducation et intervention sociale",
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Éducation"
+   ],
+   "code": "0192",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/education-relative-environnement"
+  },
+  {
+   "title": "Éducation somatique",
+   "href": "/programme/dess-education-somatique",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Éducation et intervention sociale",
+    "Santé"
+   ],
+   "code": "3273",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-education-somatique"
+  },
+  {
+   "title": "Enjeux managériaux de la PME",
+   "href": "programme?code=9095",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9095",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9095"
+  },
+  {
+   "title": "Enseignement",
+   "href": "/programme/maitrise-enseignement",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "1711",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-enseignement"
+  },
+  {
+   "title": "Enseignement à la formation générale des adultes",
+   "href": "programme?code=4441",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "4441",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=4441"
+  },
+  {
+   "title": "Enseignement à la formation générale des adultes",
+   "href": "/programme/maitrise-enseignement-formation-generale-adultes",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Éducation"
+   ],
+   "code": "2111",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/maitrise-enseignement-formation-generale-adultes"
+  },
+  {
+   "title": "Enseignement de l'anglais langue seconde",
+   "href": "/programme/baccalaureat-enseignement-anglais-langue-seconde",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Langues",
+    "Éducation"
+   ],
+   "code": "7176",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-enseignement-anglais-langue-seconde"
+  },
+  {
+   "title": "Enseignement de l'anglais langue seconde",
+   "href": "/programme/certificat-enseignement-anglais-langue-seconde",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Langues",
+    "Éducation"
+   ],
+   "code": "4851",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-enseignement-anglais-langue-seconde"
+  },
+  {
+   "title": "Enseignement des arts",
+   "href": "/programme/dess-enseignement-arts",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Éducation et intervention sociale",
+    "Enseignement"
+   ],
+   "code": "2126",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-enseignement-arts"
+  },
+  {
+   "title": "Enseignement des arts",
+   "href": "/programme/maitrise-enseignement-arts",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Éducation et intervention sociale",
+    "Enseignement"
+   ],
+   "code": "2122",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-enseignement-arts"
+  },
+  {
+   "title": "Enseignement des arts",
+   "href": "/programme/microprogramme-enseignement-arts",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Éducation et intervention sociale",
+    "Enseignement"
+   ],
+   "code": "9179",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/microprogramme-enseignement-arts"
+  },
+  {
+   "title": "Enseignement des arts",
+   "href": "/programme/enseignement-arts",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Éducation et intervention sociale",
+    "Enseignement"
+   ],
+   "code": "9180",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/enseignement-arts"
+  },
+  {
+   "title": "Enseignement du français langue seconde",
+   "href": "/programme/baccalaureat-enseignement-francais-langue-seconde",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Langues",
+    "Éducation"
+   ],
+   "code": "7177",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-enseignement-francais-langue-seconde"
+  },
+  {
+   "title": "Enseignement du français langue seconde",
+   "href": "/programme/certificat-enseignement-francais-langue-seconde",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Langues",
+    "Éducation"
+   ],
+   "code": "4857",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/certificat-enseignement-francais-langue-seconde"
+  },
+  {
+   "title": "Enseignement en adaptation scolaire et sociale",
+   "href": "/programme/baccalaureat-enseignement-adaptation-scolaire-sociale",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Éducation"
+   ],
+   "code": "6754",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-enseignement-adaptation-scolaire-sociale"
+  },
+  {
+   "title": "Enseignement en formation professionnelle et technique, concentration formation professionnelle au secondaire",
+   "href": "/programme/baccalaureat-enseignement-formation-professionnelle-technique",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "7414",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-enseignement-formation-professionnelle-technique"
+  },
+  {
+   "title": "Enseignement en formation professionnelle et technique, concentration formation technique au collégial",
+   "href": "programme?code=7415",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "7415",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=7415"
+  },
+  {
+   "title": "Enseignement secondaire",
+   "href": "/programme/maitrise-enseignement-secondaire",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "2165",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/maitrise-enseignement-secondaire"
+  },
+  {
+   "title": "Enseignement secondaire, concentration culture et citoyenneté québécoise",
+   "href": "/programme/baccalaureat-enseignement-secondaire-culture-citoyennete-quebecoise",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "6669",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-enseignement-secondaire-culture-citoyennete-quebecoise"
+  },
+  {
+   "title": "Enseignement secondaire, concentration français langue d'enseignement",
+   "href": "/programme/baccalaureat-enseignement-secondaire-francais-langue-enseignement",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "7651",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-enseignement-secondaire-francais-langue-enseignement"
+  },
+  {
+   "title": "Enseignement secondaire, concentration mathématiques",
+   "href": "/programme/baccalaureat-enseignement-secondaire-mathematiques",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "7654",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-enseignement-secondaire-mathematiques"
+  },
+  {
+   "title": "Enseignement secondaire, concentration science et technologie",
+   "href": "/programme/baccalaureat-enseignement-secondaire-science-technologie",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "6701",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-enseignement-secondaire-science-technologie"
+  },
+  {
+   "title": "Enseignement secondaire, concentration univers social",
+   "href": "/programme/baccalaureat-enseignement-secondaire-univers-social",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Éducation"
+   ],
+   "code": "7665",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-enseignement-secondaire-univers-social"
+  },
+  {
+   "title": "Enseignement spécialisé pour personnel scolaire hautement qualifié",
+   "href": "programme?code=9230",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Éducation"
+   ],
+   "code": "9230",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=9230"
+  },
+  {
+   "title": "Entreprendre et gérer autrement",
+   "href": "programme?code=9096",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9096",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9096"
+  },
+  {
+   "title": "Entrepreneuriat",
+   "href": "/programme/certificat-entrepreneuriat",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4934",
+   "campus": [
+    "Montréal",
+    "Campus de Lanaudière",
+    "Campus de Laval"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/certificat-entrepreneuriat"
+  },
+  {
+   "title": "Environnement d'affaires du tourisme au Québec",
+   "href": "programme?code=9116",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9116",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9116"
+  },
+  {
+   "title": "Environnement d'affaires du tourisme au Québec",
+   "href": "programme?code=9116",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9116",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9116"
+  },
+  {
+   "title": "Environnements nourriciers",
+   "href": "/programme/programme-court-2e-cycle-environnements-nourriciers",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Sciences"
+   ],
+   "code": "9215",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/programme-court-2e-cycle-environnements-nourriciers"
+  },
+  {
+   "title": "Espagnol",
+   "href": "/programme/certificat-espagnol",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "4727",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-espagnol"
+  },
+  {
+   "title": "Espagnol",
+   "href": "programme?code=F005",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Langues"
+   ],
+   "code": "F005",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F005"
+  },
+  {
+   "title": "Espagnol",
+   "href": "programme?code=9146",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "9146",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9146"
+  },
+  {
+   "title": "Études américaines",
+   "href": "/programme/concentration-etudes-americaines",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "F013",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/concentration-etudes-americaines"
+  },
+  {
+   "title": "Études anciennes",
+   "href": "/programme/concentration-etudes-anciennes",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "F010",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/concentration-etudes-anciennes"
+  },
+  {
+   "title": "Études autochtones",
+   "href": "/programme/concentration-etudes-autochtones",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Santé",
+    "Sciences humaines",
+    "Science politique et droit"
+   ],
+   "code": "F019",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/concentration-etudes-autochtones"
+  },
+  {
+   "title": "Études autochtones",
+   "href": "/programme/etudes-autochtones",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "0791",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/etudes-autochtones"
+  },
+  {
+   "title": "Études classiques",
+   "href": "/programme/mineure-etudes-classiques",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "8866",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/mineure-etudes-classiques"
+  },
+  {
+   "title": "Études critiques des sexualités",
+   "href": "/programme/certificat-etudes-critiques-sexualites",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "4524",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-etudes-critiques-sexualites"
+  },
+  {
+   "title": "Études culturelles",
+   "href": "/programme/maitrise-etudes-culturelles",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "2109",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/maitrise-etudes-culturelles"
+  },
+  {
+   "title": "Études des communautés en ligne",
+   "href": "/programme/certificat-etudes-communautes-en-ligne",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication"
+   ],
+   "code": "4774",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/certificat-etudes-communautes-en-ligne"
+  },
+  {
+   "title": "Études et pratiques des arts",
+   "href": "/programme/doctorat-etudes-pratiques-arts",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "3761",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-etudes-pratiques-arts"
+  },
+  {
+   "title": "Études ethniques",
+   "href": "/programme/concentration-etudes-ethniques",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "F009",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/concentration-etudes-ethniques"
+  },
+  {
+   "title": "Études féministes",
+   "href": "programme?code=4685",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "4685",
+   "campus": [
+    "Montréal",
+    "Campus de Longueuil"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4685"
+  },
+  {
+   "title": "Études féministes",
+   "href": "/programme/concentration-etudes-feministes-1er-cycle",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "F002",
+   "campus": [
+    "Montréal",
+    "Campus de Longueuil"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/concentration-etudes-feministes-1er-cycle"
+  },
+  {
+   "title": "Études féministes",
+   "href": "/programme/concentration-etudes-feministes-2e-cycle",
+   "type": "Concentration",
+   "cycle": "2",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "F003",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/concentration-etudes-feministes-2e-cycle"
+  },
+  {
+   "title": "Études féministes",
+   "href": "/programme/concentration-etudes-feministes-3e-cycle",
+   "type": "Concentration",
+   "cycle": "3",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "F016",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/concentration-etudes-feministes-3e-cycle"
+  },
+  {
+   "title": "Études littéraires",
+   "href": "/programme/baccalaureat-etudes-litteraires",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "6862",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-etudes-litteraires"
+  },
+  {
+   "title": "Études littéraires",
+   "href": "/programme/mineure-etudes-litteraires",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "8557",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/mineure-etudes-litteraires"
+  },
+  {
+   "title": "Études littéraires",
+   "href": "/programme/maitrise-etudes-litteraires",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "2158",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/maitrise-etudes-litteraires"
+  },
+  {
+   "title": "Études littéraires",
+   "href": "/programme/doctorat-etudes-litteraires",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "2137",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/doctorat-etudes-litteraires"
+  },
+  {
+   "title": "Études médiévales",
+   "href": "/programme/concentration-etudes-medievales",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "F011",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/concentration-etudes-medievales"
+  },
+  {
+   "title": "Études médiévales",
+   "href": "/programme/mineure-etudes-medievales",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "8855",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/mineure-etudes-medievales"
+  },
+  {
+   "title": "Études mondiales",
+   "href": "programme?code=F028",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Science politique et droit"
+   ],
+   "code": "F028",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F028"
+  },
+  {
+   "title": "Études mondiales",
+   "href": "programme?code=9249",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Science politique et droit"
+   ],
+   "code": "9249",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9249"
+  },
+  {
+   "title": "Études québécoises",
+   "href": "/programme/concentration-etudes-quebecoises",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "F007",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/concentration-etudes-quebecoises"
+  },
+  {
+   "title": "Études sémiotiques",
+   "href": "/programme/doctorat-interdisciplinaire-etudes-semiotiques",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "2250",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-interdisciplinaire-etudes-semiotiques"
+  },
+  {
+   "title": "Études sur l'alimentation : enjeux contemporains",
+   "href": "programme?code=1918",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Gestion",
+    "Santé"
+   ],
+   "code": "1918",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1918"
+  },
+  {
+   "title": "Études sur l'alimentation : enjeux contemporains",
+   "href": "programme?code=9118",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9118",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9118"
+  },
+  {
+   "title": "Études théâtrales",
+   "href": "/programme/majeure-etudes-theatrales",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "6003",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/majeure-etudes-theatrales"
+  },
+  {
+   "title": "Études théâtrales",
+   "href": "/programme/mineure-etudes-theatrales",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "8547",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/mineure-etudes-theatrales"
+  },
+  {
+   "title": "Études urbaines",
+   "href": "/programme/majeure-etudes-urbaines",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "6990",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/majeure-etudes-urbaines"
+  },
+  {
+   "title": "Études urbaines",
+   "href": "/programme/mineure-etudes-urbaines",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "8856",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/mineure-etudes-urbaines"
+  },
+  {
+   "title": "Études urbaines",
+   "href": "/programme/maitrise-etudes-urbaines",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion",
+    "Innovation sociale"
+   ],
+   "code": "3854",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-etudes-urbaines"
+  },
+  {
+   "title": "Études urbaines",
+   "href": "/programme/doctorat-etudes-urbaines",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Gestion",
+    "Innovation sociale"
+   ],
+   "code": "3895",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-etudes-urbaines"
+  },
+  {
+   "title": "Évaluation, intervention et soutien psychologiques auprès des personnes avec une déficience intellectuelle",
+   "href": "/programme/dess-evaluation-intervention-soutien-psychologiques-deficience-intellectuelle",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "3003",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-evaluation-intervention-soutien-psychologiques-deficience-intellectuelle"
+  },
+  {
+   "title": "Finance",
+   "href": "/programme/certificat-finance",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4607",
+   "campus": [
+    "Montréal",
+    "Campus de Laval"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-finance"
+  },
+  {
+   "title": "Finance",
+   "href": "/programme/dess-finance",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "3842",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-finance"
+  },
+  {
+   "title": "Finance appliquée",
+   "href": "/programme/maitrise-finance-appliquee",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "3580",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-finance-appliquee"
+  },
+  {
+   "title": "Finance de marché",
+   "href": "programme?code=9097",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9097",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9097"
+  },
+  {
+   "title": "Finance personnelle",
+   "href": "programme?code=9098",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9098",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9098"
+  },
+  {
+   "title": "Fintech",
+   "href": "programme?code=9120",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9120",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9120"
+  },
+  {
+   "title": "Fiscalité",
+   "href": "programme?code=9099",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9099",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9099"
+  },
+  {
+   "title": "Fiscalité",
+   "href": "/programme/dess-fiscalite",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "1894",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-fiscalite"
+  },
+  {
+   "title": "Fiscalité",
+   "href": "/programme/maitrise-fiscalite",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "2089",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/maitrise-fiscalite"
+  },
+  {
+   "title": "Formateurs en milieu de travail",
+   "href": "/programme/certificat-formateurs-milieu-travail",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "4550",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-formateurs-milieu-travail"
+  },
+  {
+   "title": "Formateurs en milieu de travail",
+   "href": "/programme/formateurs-milieu-travail",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "0630",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/formateurs-milieu-travail"
+  },
+  {
+   "title": "Français et anglais : l'expérience montréalaise",
+   "href": "/programme/certificat-francais-anglais-experience-montrealaise",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "4569",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-francais-anglais-experience-montrealaise"
+  },
+  {
+   "title": "Français langue seconde",
+   "href": "programme?code=4655",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "4655",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4655"
+  },
+  {
+   "title": "Français langue seconde",
+   "href": "programme?code=9148",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "9148",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9148"
+  },
+  {
+   "title": "Français universitaire et professionnel",
+   "href": "programme?code=9059",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Langues",
+    "Sciences humaines"
+   ],
+   "code": "9059",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9059"
+  },
+  {
+   "title": "Génie logiciel",
+   "href": "/programme/dess-genie-logiciel",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "1622",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-genie-logiciel"
+  },
+  {
+   "title": "Génie logiciel",
+   "href": "/programme/maitrise-genie-logiciel",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "1822",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-genie-logiciel"
+  },
+  {
+   "title": "Génie logiciel",
+   "href": "programme?code=9138",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "9138",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9138"
+  },
+  {
+   "title": "Géographie",
+   "href": "/programme/baccalaureat-geographie",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "International",
+    "Sciences humaines"
+   ],
+   "code": "7756",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-geographie"
+  },
+  {
+   "title": "Géographie",
+   "href": "/programme/majeure-geographie",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "6155",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/majeure-geographie"
+  },
+  {
+   "title": "Géographie",
+   "href": "/programme/maitrise-geographie",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "International",
+    "Sciences humaines"
+   ],
+   "code": "3268",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-geographie"
+  },
+  {
+   "title": "Géographie",
+   "href": "programme?code=1748",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Environnement",
+    "International",
+    "Sciences humaines"
+   ],
+   "code": "1748",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1748"
+  },
+  {
+   "title": "Géographie internationale",
+   "href": "/programme/certificat-geographie-internationale",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "International",
+    "Sciences humaines"
+   ],
+   "code": "4033",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-geographie-internationale"
+  },
+  {
+   "title": "Géologie",
+   "href": "/programme/majeure-geologie",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Sciences"
+   ],
+   "code": "6920",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/majeure-geologie"
+  },
+  {
+   "title": "Géologie appliquée",
+   "href": "/programme/certificat-geologie-appliquee",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Sciences"
+   ],
+   "code": "4024",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-geologie-appliquee"
+  },
+  {
+   "title": "Géomatique",
+   "href": "programme?code=2087",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Sciences humaines"
+   ],
+   "code": "2087",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=2087"
+  },
+  {
+   "title": "Gérontologie sociale",
+   "href": "/programme/microprogramme-1er-cycle-gerontologie-sociale",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "9228",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/microprogramme-1er-cycle-gerontologie-sociale"
+  },
+  {
+   "title": "Gestion",
+   "href": "programme?code=4657",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4657",
+   "campus": [
+    "Montréal",
+    "Campus de Lanaudière",
+    "Campus de Laval",
+    "Campus de Longueuil",
+    "Campus de la Montérégie-Ouest"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4657"
+  },
+  {
+   "title": "Gestion",
+   "href": "/programme/dess-gestion",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "3139",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-gestion"
+  },
+  {
+   "title": "Gestion administrative de l'éducation",
+   "href": "programme?code=9083",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Éducation"
+   ],
+   "code": "9083",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9083"
+  },
+  {
+   "title": "Gestion critique de projets internationaux",
+   "href": "programme?code=9181",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "International",
+    "Gestion"
+   ],
+   "code": "9181",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9181"
+  },
+  {
+   "title": "Gestion de l'éducation",
+   "href": "/programme/dess-gestion-education",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Gestion",
+    "Éducation"
+   ],
+   "code": "3264",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-gestion-education"
+  },
+  {
+   "title": "Gestion de l'information et des archives",
+   "href": "/programme/certificat-gestion-information-archives",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "Sciences humaines"
+   ],
+   "code": "4594",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-gestion-information-archives"
+  },
+  {
+   "title": "Gestion de la mode",
+   "href": "programme?code=9110",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9110",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9110"
+  },
+  {
+   "title": "Gestion de la prévention en santé et sécurité du travail",
+   "href": "programme?code=9100",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Santé",
+    "Gestion"
+   ],
+   "code": "9100",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9100"
+  },
+  {
+   "title": "Gestion de projet",
+   "href": "programme?code=9080",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9080",
+   "campus": [
+    "Montréal",
+    "Campus de Laval"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9080"
+  },
+  {
+   "title": "Gestion de projet agile",
+   "href": "programme?code=9123",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9123",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9123"
+  },
+  {
+   "title": "Gestion de projet, cheminement coopératif",
+   "href": "programme?code=2073",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "2073",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=2073"
+  },
+  {
+   "title": "Gestion de projet, profil avec mémoire",
+   "href": "programme?code=2074",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "2074",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=2074"
+  },
+  {
+   "title": "Gestion de projet, profil professionnel, cheminement général ou travail dirigé",
+   "href": "programme?code=2072",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "2072",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=2072"
+  },
+  {
+   "title": "Gestion des entreprises sociales et collectives",
+   "href": "/programme/gestion-entreprises-sociales-collectives",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Gestion",
+    "Innovation sociale",
+    "Justice et innovation sociale"
+   ],
+   "code": "0623",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/gestion-entreprises-sociales-collectives"
+  },
+  {
+   "title": "Gestion des opérations",
+   "href": "/programme/certificat-gestion-operations",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4525",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-gestion-operations"
+  },
+  {
+   "title": "Gestion des opérations à l'ère du numérique",
+   "href": "programme?code=9124",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9124",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9124"
+  },
+  {
+   "title": "Gestion des organisations de la santé et des services sociaux",
+   "href": "/programme/microprogramme-2e-cycle-gestion-organisations-sante",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Gestion"
+   ],
+   "code": "9213",
+   "campus": [
+    "Montréal",
+    "Campus de Longueuil"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/microprogramme-2e-cycle-gestion-organisations-sante"
+  },
+  {
+   "title": "Gestion des organisations du secteur public",
+   "href": "/programme/baccalaureat-gestion-organisations-secteur-public",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "6731",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-gestion-organisations-secteur-public"
+  },
+  {
+   "title": "Gestion des propriétés immobilières",
+   "href": "programme?code=4771",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4771",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=4771"
+  },
+  {
+   "title": "Gestion des relations de travail",
+   "href": "programme?code=9115",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9115",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9115"
+  },
+  {
+   "title": "Gestion des ressources humaines",
+   "href": "/programme/baccalaureat-gestion-ressources-humaines",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "7002",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-gestion-ressources-humaines"
+  },
+  {
+   "title": "Gestion des ressources humaines",
+   "href": "/programme/certificat-gestion-ressources-humaines",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4209",
+   "campus": [
+    "Montréal",
+    "Campus de Lanaudière",
+    "Campus de Laval",
+    "Campus de Longueuil",
+    "Campus de la Montérégie-Ouest"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-gestion-ressources-humaines"
+  },
+  {
+   "title": "Gestion des ressources humaines",
+   "href": "/programme/gestion-ressources-humaines",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "0803",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/gestion-ressources-humaines"
+  },
+  {
+   "title": "Gestion des services municipaux",
+   "href": "programme?code=4687",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "Science politique et droit"
+   ],
+   "code": "4687",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4687"
+  },
+  {
+   "title": "Gestion du tourisme",
+   "href": "/programme/certificat-gestion-tourisme",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4734",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-gestion-tourisme"
+  },
+  {
+   "title": "Gestion du tourisme",
+   "href": "/programme/gestion-tourisme",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "0535",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/gestion-tourisme"
+  },
+  {
+   "title": "Gestion du tourisme et de l'hôtellerie",
+   "href": "/programme/baccalaureat-gestion-tourisme-hotellerie",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "7317",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-gestion-tourisme-hotellerie"
+  },
+  {
+   "title": "Gestion du tourisme et de l'hôtellerie, concentration gestion des organisations et des destinations touristiques",
+   "href": "/programme/dec-bac-gestion-tourisme-hotellerie-organisations-destinations-touristiques",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "7588",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dec-bac-gestion-tourisme-hotellerie-organisations-destinations-touristiques"
+  },
+  {
+   "title": "Gestion du tourisme et de l'hôtellerie, concentration gestion hôtelière et de restauration",
+   "href": "/programme/dec-bac-gestion-tourisme-hotellerie-hoteliere-restauration",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "7589",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dec-bac-gestion-tourisme-hotellerie-hoteliere-restauration"
+  },
+  {
+   "title": "Gestion durable des écosystèmes forestiers",
+   "href": "/programme/maitrise-gestion-durable-ecosystemes-forestiers",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Sciences"
+   ],
+   "code": "1517",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/maitrise-gestion-durable-ecosystemes-forestiers"
+  },
+  {
+   "title": "Gestion et design de la mode",
+   "href": "/programme/baccalaureat-gestion-design-mode",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création",
+    "Gestion",
+    "Mode"
+   ],
+   "code": "6655",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-gestion-design-mode"
+  },
+  {
+   "title": "Gestion et environnement",
+   "href": "programme?code=9105",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Gestion"
+   ],
+   "code": "9105",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9105"
+  },
+  {
+   "title": "Gestion intégrée de la santé et sécurité du travail",
+   "href": "programme?code=4956",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Santé",
+    "Gestion"
+   ],
+   "code": "4956",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4956"
+  },
+  {
+   "title": "Gouvernance et contrôle des risques",
+   "href": "programme?code=9073",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9073",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9073"
+  },
+  {
+   "title": "Gouvernance, contrôle des risques et prévention de la fraude comptable",
+   "href": "programme?code=2066",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "2066",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=2066"
+  },
+  {
+   "title": "Handicap et sourditude : droits et citoyenneté",
+   "href": "programme?code=F025",
+   "type": "Concentration",
+   "cycle": "2",
+   "domaines": [
+    "Communication",
+    "Santé"
+   ],
+   "code": "F025",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F025"
+  },
+  {
+   "title": "Handicap et sourditude : droits et citoyenneté",
+   "href": "programme?code=9158",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Communication",
+    "Éducation et intervention sociale",
+    "Justice et innovation sociale",
+    "Santé"
+   ],
+   "code": "9158",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9158"
+  },
+  {
+   "title": "Histoire",
+   "href": "/programme/baccalaureat-histoire",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "6703",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-histoire"
+  },
+  {
+   "title": "Histoire",
+   "href": "/programme/certificat-histoire",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "4297",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/certificat-histoire"
+  },
+  {
+   "title": "Histoire",
+   "href": "programme?code=6020",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "6020",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=6020"
+  },
+  {
+   "title": "Histoire",
+   "href": "/programme/maitrise-histoire",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "1653",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-histoire"
+  },
+  {
+   "title": "Histoire",
+   "href": "programme?code=9103",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Création",
+    "Sciences humaines"
+   ],
+   "code": "9103",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9103"
+  },
+  {
+   "title": "Histoire",
+   "href": "/programme/doctorat-histoire",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "1730",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-histoire"
+  },
+  {
+   "title": "Histoire",
+   "href": "/programme/doctorat-histoire",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "1730",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-histoire"
+  },
+  {
+   "title": "Histoire de l'art",
+   "href": "/programme/baccalaureat-histoire-art",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "6752",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-histoire-art"
+  },
+  {
+   "title": "Histoire de l'art",
+   "href": "programme?code=4786",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "4786",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=4786"
+  },
+  {
+   "title": "Histoire de l'art",
+   "href": "programme?code=6025",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "6025",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=6025"
+  },
+  {
+   "title": "Histoire de l'art",
+   "href": "programme?code=8568",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "8568",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=8568"
+  },
+  {
+   "title": "Histoire de l'art",
+   "href": "/programme/maitrise-histoire-art",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "3163",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-histoire-art"
+  },
+  {
+   "title": "Histoire de l'art",
+   "href": "/programme/doctorat-histoire-art",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "3796",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/doctorat-histoire-art"
+  },
+  {
+   "title": "Immigration et relations interethniques",
+   "href": "programme?code=4975",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "International",
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "4975",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4975"
+  },
+  {
+   "title": "Immobilier",
+   "href": "programme?code=4844",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4844",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=4844"
+  },
+  {
+   "title": "Informatique",
+   "href": "programme?code=3281",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "3281",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3281"
+  },
+  {
+   "title": "Informatique",
+   "href": "programme?code=3121",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "3121",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3121"
+  },
+  {
+   "title": "Informatique cognitive",
+   "href": "programme?code=3560",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Santé",
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "3560",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3560"
+  },
+  {
+   "title": "Informatique des systèmes intelligents et interactifs",
+   "href": "programme?code=0433",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "0433",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=0433"
+  },
+  {
+   "title": "Informatique et développement de logiciels",
+   "href": "programme?code=4702",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "4702",
+   "campus": [
+    "Montréal",
+    "Campus de Laval"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4702"
+  },
+  {
+   "title": "Informatique et génie logiciel",
+   "href": "programme?code=7416",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "7416",
+   "campus": [
+    "Montréal",
+    "Campus de Laval"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=7416"
+  },
+  {
+   "title": "Informatique pour l'intelligence et la gestion des données",
+   "href": "programme?code=1919",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Sciences",
+    "Gestion",
+    "Technologies de l'information"
+   ],
+   "code": "1919",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1919"
+  },
+  {
+   "title": "Instruments financiers dérivés",
+   "href": "programme?code=3280",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "3280",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3280"
+  },
+  {
+   "title": "Intégration des enjeux environnementaux, sociaux et de gouvernance dans l'évaluation des investissements",
+   "href": "programme?code=9030",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9030",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9030"
+  },
+  {
+   "title": "Intégration du numérique en milieu scolaire",
+   "href": "programme?code=9518",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation",
+    "Technologies de l'information"
+   ],
+   "code": "9518",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9518"
+  },
+  {
+   "title": "Intelligence artificielle intégrée au marketing",
+   "href": "/programme/microprogramme-2e-cycle-intelligence-artificielle-integree-marketing",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9216",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/microprogramme-2e-cycle-intelligence-artificielle-integree-marketing"
+  },
+  {
+   "title": "Interprétation français-langue des signes québécoise",
+   "href": "programme?code=6013",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Langues",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "6013",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6013"
+  },
+  {
+   "title": "Interprétation français-langue des signes québécoise",
+   "href": "/programme/DESS-interpretation-francais-LSQ",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "4805",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/DESS-interpretation-francais-LSQ"
+  },
+  {
+   "title": "Intervention comportementale auprès des personnes présentant un trouble du spectre de l'autisme (TSA)",
+   "href": "programme?code=1944",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "1944",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1944"
+  },
+  {
+   "title": "Intervention éducative auprès des élèves avec un trouble du développement",
+   "href": "programme?code=3170",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Éducation"
+   ],
+   "code": "3170",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3170"
+  },
+  {
+   "title": "Intervention éducative en milieu familial et communautaire",
+   "href": "programme?code=4031",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Éducation"
+   ],
+   "code": "4031",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4031"
+  },
+  {
+   "title": "Intervention en activité physique (profil enseignement de l'éducation physique et à la santé)",
+   "href": "programme?code=7236",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Enseignement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "7236",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=7236"
+  },
+  {
+   "title": "Intervention en activité physique (profil kinésiologie)",
+   "href": "programme?code=7328",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Santé",
+    "Sciences"
+   ],
+   "code": "7328",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=7328"
+  },
+  {
+   "title": "Intervention en contexte de plein air",
+   "href": "programme?code=0804",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Sciences"
+   ],
+   "code": "0804",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=0804"
+  },
+  {
+   "title": "Intervention ergonomique",
+   "href": "programme?code=1851",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Sciences"
+   ],
+   "code": "1851",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1851"
+  },
+  {
+   "title": "Intervention psychosociale",
+   "href": "programme?code=4153",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Éducation et intervention sociale",
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Santé"
+   ],
+   "code": "4153",
+   "campus": [
+    "Montréal",
+    "Campus de Laval"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4153"
+  },
+  {
+   "title": "Japonais",
+   "href": "programme?code=F018",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Langues"
+   ],
+   "code": "F018",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F018"
+  },
+  {
+   "title": "Japonais",
+   "href": "programme?code=9147",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "9147",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9147"
+  },
+  {
+   "title": "Langue des signes québécoise",
+   "href": "programme?code=4722",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Langues",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "4722",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4722"
+  },
+  {
+   "title": "Langue et culture arabes",
+   "href": "programme?code=4720",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "4720",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4720"
+  },
+  {
+   "title": "Langue et culture arabes",
+   "href": "programme?code=F020",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Langues"
+   ],
+   "code": "F020",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F020"
+  },
+  {
+   "title": "Langue et culture arabes",
+   "href": "programme?code=F020",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Langues"
+   ],
+   "code": "F020",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F020"
+  },
+  {
+   "title": "Langue et culture arabes",
+   "href": "programme?code=9149",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "9149",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9149"
+  },
+  {
+   "title": "Langue et culture chinoises",
+   "href": "programme?code=F021",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Langues"
+   ],
+   "code": "F021",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F021"
+  },
+  {
+   "title": "Langue et culture chinoises",
+   "href": "programme?code=F021",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Langues"
+   ],
+   "code": "F021",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F021"
+  },
+  {
+   "title": "Langue et culture chinoises",
+   "href": "programme?code=9150",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "9150",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9150"
+  },
+  {
+   "title": "Langue et culture italiennes",
+   "href": "programme?code=F024",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Langues"
+   ],
+   "code": "F024",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F024"
+  },
+  {
+   "title": "Langue et culture italiennes",
+   "href": "programme?code=9151",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "9151",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9151"
+  },
+  {
+   "title": "Langues et cultures d'Asie",
+   "href": "programme?code=4621",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "4621",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4621"
+  },
+  {
+   "title": "Langues et cultures modernes",
+   "href": "programme?code=6021",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "6021",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6021"
+  },
+  {
+   "title": "Linguistique",
+   "href": "/programme/baccalaureat-linguistique",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "6705",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-linguistique"
+  },
+  {
+   "title": "Linguistique",
+   "href": "/programme/majeure-linguistique",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Sciences humaines"
+   ],
+   "code": "6023",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/majeure-linguistique"
+  },
+  {
+   "title": "Linguistique",
+   "href": "programme?code=8562",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Langues",
+    "Sciences humaines"
+   ],
+   "code": "8562",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=8562"
+  },
+  {
+   "title": "Linguistique",
+   "href": "programme?code=3431",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Langues",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "3431",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3431"
+  },
+  {
+   "title": "Linguistique",
+   "href": "programme?code=3662",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Langues",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "3662",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3662"
+  },
+  {
+   "title": "Linguistique appliquée à l'étude de la grammaire",
+   "href": "programme?code=F012",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "F012",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F012"
+  },
+  {
+   "title": "Linguistique appliquée à l'étude de la grammaire",
+   "href": "programme?code=F012",
+   "type": "Concentration",
+   "cycle": "1",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "F012",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F012"
+  },
+  {
+   "title": "Linguistique appliquée à l'étude de la grammaire",
+   "href": "programme?code=0173",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Langues",
+    "Sciences humaines"
+   ],
+   "code": "0173",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=0173"
+  },
+  {
+   "title": "Management en contexte d'innovation",
+   "href": "programme?code=9074",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9074",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9074"
+  },
+  {
+   "title": "Marketing",
+   "href": "programme?code=4206",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4206",
+   "campus": [
+    "Montréal",
+    "Campus de Laval"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=4206"
+  },
+  {
+   "title": "Marketing",
+   "href": "programme?code=1840",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "1840",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1840"
+  },
+  {
+   "title": "Marketing",
+   "href": "programme?code=0796",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "0796",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=0796"
+  },
+  {
+   "title": "Marketing dans les PME",
+   "href": "programme?code=9113",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9113",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9113"
+  },
+  {
+   "title": "Marketing numérique",
+   "href": "programme?code=4688",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4688",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4688"
+  },
+  {
+   "title": "Marketing numérique",
+   "href": "programme?code=9688",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9688",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9688"
+  },
+  {
+   "title": "Marketing numérique",
+   "href": "/programme/microprogramme-2e-cycle-marketing-numerique",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9217",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/microprogramme-2e-cycle-marketing-numerique"
+  },
+  {
+   "title": "Marketing numérique et intelligence artificielle intégrée au marketing",
+   "href": "/programme/dess-marketing-numerique-intelligence-artificielle",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4768",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/dess-marketing-numerique-intelligence-artificielle"
+  },
+  {
+   "title": "Mathématiques",
+   "href": "/programme/majeure-mathematiques",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "6486",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/majeure-mathematiques"
+  },
+  {
+   "title": "Mathématiques",
+   "href": "programme?code=3783",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "3783",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3783"
+  },
+  {
+   "title": "Mathématiques",
+   "href": "programme?code=3673",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "3673",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3673"
+  },
+  {
+   "title": "Mathématiques actuarielles et financières",
+   "href": "programme?code=8543",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "8543",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=8543"
+  },
+  {
+   "title": "Mathématiques, concentration en mathématiques",
+   "href": "/programme/baccalaureat-mathematiques",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "7721",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-mathematiques"
+  },
+  {
+   "title": "Mathématiques, concentration en statistique",
+   "href": "/programme/baccalaureat-mathematiques-statistique",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "7421",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-mathematiques-statistique"
+  },
+  {
+   "title": "Mathématiques, concentration informatique",
+   "href": "programme?code=6682",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "6682",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6682"
+  },
+  {
+   "title": "Mentorat",
+   "href": "programme?code=9157",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Communication",
+    "Éducation et intervention sociale"
+   ],
+   "code": "9157",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9157"
+  },
+  {
+   "title": "Météorologie",
+   "href": "/programme/dess-meteorologie",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Sciences"
+   ],
+   "code": "1845",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/dess-meteorologie"
+  },
+  {
+   "title": "Méthodes quantitatives",
+   "href": "programme?code=4179",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "4179",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4179"
+  },
+  {
+   "title": "Muséologie",
+   "href": "programme?code=3420",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "3420",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3420"
+  },
+  {
+   "title": "Muséologie et diffusion de l'art",
+   "href": "programme?code=4784",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "4784",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=4784"
+  },
+  {
+   "title": "Muséologie, médiation et patrimoine",
+   "href": "programme?code=3122",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "3122",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3122"
+  },
+  {
+   "title": "Musique",
+   "href": "programme?code=6760",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création",
+    "Éducation et intervention sociale",
+    "Enseignement"
+   ],
+   "code": "6760",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=6760"
+  },
+  {
+   "title": "Musique",
+   "href": "programme?code=6024",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "6024",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=6024"
+  },
+  {
+   "title": "Musique de film",
+   "href": "programme?code=3011",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Communication",
+    "Création"
+   ],
+   "code": "3011",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3011"
+  },
+  {
+   "title": "Orthodidactique des mathématiques",
+   "href": "programme?code=9584",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Éducation"
+   ],
+   "code": "9584",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9584"
+  },
+  {
+   "title": "Orthopédagogie",
+   "href": "programme?code=1891",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Éducation"
+   ],
+   "code": "1891",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1891"
+  },
+  {
+   "title": "Ostéopathie, perfectionnement",
+   "href": "programme?code=9177",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Sciences"
+   ],
+   "code": "9177",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9177"
+  },
+  {
+   "title": "Ostéopathie, sécurité clinique",
+   "href": "programme?code=9178",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Sciences"
+   ],
+   "code": "9178",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9178"
+  },
+  {
+   "title": "Patrimoine urbain",
+   "href": "programme?code=8859",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "8859",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=8859"
+  },
+  {
+   "title": "Pédagogie de l'enseignement supérieur",
+   "href": "programme?code=0680",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation",
+    "Technologies de l'information"
+   ],
+   "code": "0680",
+   "campus": [
+    "Montréal",
+    "Campus de Laval",
+    "Campus de la Montérégie-Ouest"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=0680"
+  },
+  {
+   "title": "Perfectionnement en français langue seconde",
+   "href": "/programme/certificat-perfectionnement-francais",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "International",
+    "Langues"
+   ],
+   "code": "4650",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/certificat-perfectionnement-francais"
+  },
+  {
+   "title": "Philosophie",
+   "href": "/programme/baccalaureat-philosophie",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "7796",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-philosophie"
+  },
+  {
+   "title": "Philosophie",
+   "href": "/programme/majeure-philosophie",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "6510",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/majeure-philosophie"
+  },
+  {
+   "title": "Philosophie",
+   "href": "programme?code=8384",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "8384",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=8384"
+  },
+  {
+   "title": "Philosophie",
+   "href": "programme?code=3542",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "3542",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3542"
+  },
+  {
+   "title": "Philosophie",
+   "href": "programme?code=1958",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "1958",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1958"
+  },
+  {
+   "title": "Planification et gestion stratégiques",
+   "href": "programme?code=9114",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9114",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9114"
+  },
+  {
+   "title": "Planification financière",
+   "href": "programme?code=4731",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4731",
+   "campus": [
+    "Montréal",
+    "Campus de Lanaudière",
+    "Campus de Laval",
+    "Campus de Longueuil"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4731"
+  },
+  {
+   "title": "Planification territoriale et développement local",
+   "href": "programme?code=3616",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "3616",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3616"
+  },
+  {
+   "title": "Planification territoriale et gestion des risques",
+   "href": "programme?code=4026",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "4026",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4026"
+  },
+  {
+   "title": "Pratique comptable (CPA)",
+   "href": "programme?code=1735",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "1735",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1735"
+  },
+  {
+   "title": "Présence attentive",
+   "href": "programme?code=9139",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Éducation"
+   ],
+   "code": "9139",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9139"
+  },
+  {
+   "title": "Prévention des polarisations sociales et des extrémismes violents",
+   "href": "/programme/microprogramme-prevention-polarisations-sociales-extremismes-violents",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "9214",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/microprogramme-prevention-polarisations-sociales-extremismes-violents"
+  },
+  {
+   "title": "Prévention et détection de la fraude comptable",
+   "href": "programme?code=0871",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "0871",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=0871"
+  },
+  {
+   "title": "Prévention et la détection de la fraude comptable",
+   "href": "programme?code=2019",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "2019",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=2019"
+  },
+  {
+   "title": "Production médiatique, stratégies et industries culturelles",
+   "href": "/programme/baccalaureat-production-mediatique-strategies-industries-culturelles",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Communication",
+    "Création"
+   ],
+   "code": "6677",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-production-mediatique-strategies-industries-culturelles"
+  },
+  {
+   "title": "Psychologie",
+   "href": "programme?code=6589",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "6589",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6589"
+  },
+  {
+   "title": "Psychologie",
+   "href": "programme?code=4673",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "4673",
+   "campus": [
+    "Montréal",
+    "Campus de Laval"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4673"
+  },
+  {
+   "title": "Psychologie",
+   "href": "programme?code=3091",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "3091",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3091"
+  },
+  {
+   "title": "Psychologie périnatale : conceptions humaniste et psychodynamique",
+   "href": "programme?code=9161",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "9161",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9161"
+  },
+  {
+   "title": "Recherche et développement d'innovations pédagogiques",
+   "href": "programme?code=9219",
+   "type": "Microprogramme",
+   "cycle": "3",
+   "domaines": [
+    "Éducation"
+   ],
+   "code": "9219",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=9219"
+  },
+  {
+   "title": "Relations internationales et droit international",
+   "href": "/programme/baccalaureat-relations-internationales-droit-international",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "International",
+    "Science politique et droit"
+   ],
+   "code": "6686",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-relations-internationales-droit-international"
+  },
+  {
+   "title": "Réseaux et systèmes de télécommunications",
+   "href": "programme?code=4888",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "4888",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4888"
+  },
+  {
+   "title": "Résilience, risques et catastrophes",
+   "href": "programme?code=2112",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "2112",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=2112"
+  },
+  {
+   "title": "Résilience, risques et catastrophes",
+   "href": "programme?code=9112",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "9112",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9112"
+  },
+  {
+   "title": "Responsabilité sociale des organisations",
+   "href": "programme?code=0485",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Communication",
+    "Environnement",
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Gestion"
+   ],
+   "code": "0485",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=0485"
+  },
+  {
+   "title": "Ressources énergétiques durables",
+   "href": "programme?code=4049",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Sciences"
+   ],
+   "code": "4049",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4049"
+  },
+  {
+   "title": "Santé et société",
+   "href": "programme?code=2350",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Communication",
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Sciences",
+    "Éducation",
+    "Gestion",
+    "Sciences humaines",
+    "Science politique et droit"
+   ],
+   "code": "2350",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=2350"
+  },
+  {
+   "title": "Scénarisation cinématographique",
+   "href": "programme?code=4327",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "4327",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4327"
+  },
+  {
+   "title": "Science politique",
+   "href": "/programme/baccalaureat-science-politique",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "International",
+    "Science politique et droit"
+   ],
+   "code": "6664",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-science-politique"
+  },
+  {
+   "title": "Science politique",
+   "href": "programme?code=6499",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "International",
+    "Science politique et droit"
+   ],
+   "code": "6499",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6499"
+  },
+  {
+   "title": "Science politique",
+   "href": "programme?code=8612",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "International",
+    "Science politique et droit"
+   ],
+   "code": "8612",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=8612"
+  },
+  {
+   "title": "Science politique",
+   "href": "/programme/maitrise-science-politique",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "International",
+    "Science politique et droit"
+   ],
+   "code": "2207",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/maitrise-science-politique"
+  },
+  {
+   "title": "Science politique",
+   "href": "programme?code=3555",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "International",
+    "Science politique et droit"
+   ],
+   "code": "3555",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3555"
+  },
+  {
+   "title": "Science, technologie et société",
+   "href": "programme?code=3117",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Innovation sociale",
+    "Sciences",
+    "Sciences humaines",
+    "Technologies de l'information"
+   ],
+   "code": "3117",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3117"
+  },
+  {
+   "title": "Science, technologie et société",
+   "href": "programme?code=3217",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Innovation sociale",
+    "Sciences",
+    "Sciences humaines",
+    "Technologies de l'information"
+   ],
+   "code": "3217",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3217"
+  },
+  {
+   "title": "Sciences cognitives",
+   "href": "programme?code=F017",
+   "type": "Concentration",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "F017",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F017"
+  },
+  {
+   "title": "Sciences cognitives",
+   "href": "programme?code=F015",
+   "type": "Concentration",
+   "cycle": "3",
+   "domaines": [
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "F015",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=F015"
+  },
+  {
+   "title": "Sciences comptables",
+   "href": "programme?code=6782",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "6782",
+   "campus": [
+    "Montréal",
+    "Campus de Lanaudière",
+    "Campus de Laval",
+    "Campus de Longueuil"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=6782"
+  },
+  {
+   "title": "Sciences comptables",
+   "href": "programme?code=4738",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "4738",
+   "campus": [
+    "Montréal",
+    "Campus de Laval",
+    "Campus de Longueuil"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4738"
+  },
+  {
+   "title": "Sciences de l'activité physique",
+   "href": "programme?code=1799",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Sciences"
+   ],
+   "code": "1799",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver",
+    "Été"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1799"
+  },
+  {
+   "title": "Sciences de l'activité physique, profil professionnel, concentration ergonomie et intervention",
+   "href": "programme?code=1789",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Sciences"
+   ],
+   "code": "1789",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1789"
+  },
+  {
+   "title": "Sciences de l'atmosphère",
+   "href": "programme?code=4526",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Sciences"
+   ],
+   "code": "4526",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4526"
+  },
+  {
+   "title": "Sciences de l'atmosphère",
+   "href": "programme?code=1812",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Sciences"
+   ],
+   "code": "1812",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1812"
+  },
+  {
+   "title": "Sciences de l'éducation",
+   "href": "programme?code=7690",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation"
+   ],
+   "code": "7690",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=7690"
+  },
+  {
+   "title": "Sciences de l'éducation",
+   "href": "programme?code=1596",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Éducation"
+   ],
+   "code": "1596",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1596"
+  },
+  {
+   "title": "Sciences de l'environnement",
+   "href": "programme?code=4139",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "4139",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4139"
+  },
+  {
+   "title": "Sciences de l'environnement",
+   "href": "programme?code=1852",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "1852",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1852"
+  },
+  {
+   "title": "Sciences de l'environnement",
+   "href": "programme?code=3583",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "3583",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3583"
+  },
+  {
+   "title": "Sciences de la gestion",
+   "href": "/programme/maitrise-sciences-gestion",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Gestion",
+    "International",
+    "Innovation sociale"
+   ],
+   "code": "1761",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/maitrise-sciences-gestion"
+  },
+  {
+   "title": "Sciences de la Terre",
+   "href": "programme?code=3405",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Environnement",
+    "Sciences"
+   ],
+   "code": "3405",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3405"
+  },
+  {
+   "title": "Sciences de la Terre et de l'atmosphère",
+   "href": "programme?code=3141",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Environnement",
+    "Sciences"
+   ],
+   "code": "3141",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Admission continue"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3141"
+  },
+  {
+   "title": "Sciences de la Terre et de l'atmosphère, concentration géologie",
+   "href": "/programme/baccalaureat-sciences-terre-atmosphere-geologie",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Sciences"
+   ],
+   "code": "7442",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-sciences-terre-atmosphere-geologie"
+  },
+  {
+   "title": "Sciences de la Terre et de l'atmosphère, concentration sciences de l'atmosphère : météo et climat",
+   "href": "/programme/baccalaureat-sciences-terre-atmosphere-meteo-climat",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "7459",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-sciences-terre-atmosphere-meteo-climat"
+  },
+  {
+   "title": "Sciences de la vie et biopharmaceutiques",
+   "href": "programme?code=2005",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Sciences"
+   ],
+   "code": "2005",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=2005"
+  },
+  {
+   "title": "Sciences des religions",
+   "href": "programme?code=6747",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Sciences humaines"
+   ],
+   "code": "6747",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6747"
+  },
+  {
+   "title": "Sciences des religions",
+   "href": "programme?code=4847",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Sciences humaines"
+   ],
+   "code": "4847",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4847"
+  },
+  {
+   "title": "Sciences des religions",
+   "href": "programme?code=6147",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Sciences humaines"
+   ],
+   "code": "6147",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6147"
+  },
+  {
+   "title": "Sciences des religions",
+   "href": "programme?code=1548",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "1548",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1548"
+  },
+  {
+   "title": "Sciences des religions",
+   "href": "programme?code=3678",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Sciences humaines"
+   ],
+   "code": "3678",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3678"
+  },
+  {
+   "title": "Sciences des religions : étude de terrain",
+   "href": "programme?code=9212",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "International",
+    "Sciences humaines"
+   ],
+   "code": "9212",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9212"
+  },
+  {
+   "title": "Sciences naturelles appliquées à l'environnement",
+   "href": "programme?code=6506",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Environnement",
+    "Santé",
+    "Sciences"
+   ],
+   "code": "6506",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6506"
+  },
+  {
+   "title": "Sciences psychologiques appliquées",
+   "href": "programme?code=2194",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "2194",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=2194"
+  },
+  {
+   "title": "Sciences sociales",
+   "href": "programme?code=4269",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "4269",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4269"
+  },
+  {
+   "title": "Sexologie",
+   "href": "programme?code=6514",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "6514",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6514"
+  },
+  {
+   "title": "Sexologie",
+   "href": "programme?code=1616",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "1616",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1616"
+  },
+  {
+   "title": "Sexologie",
+   "href": "programme?code=1595",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "1595",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1595"
+  },
+  {
+   "title": "Sociologie",
+   "href": "/programme/baccalaureat-sociologie",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "6961",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/baccalaureat-sociologie"
+  },
+  {
+   "title": "Sociologie",
+   "href": "/programme/majeure-sociologie",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "6161",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/majeure-sociologie"
+  },
+  {
+   "title": "Sociologie",
+   "href": "programme?code=8917",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "8917",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=8917"
+  },
+  {
+   "title": "Sociologie",
+   "href": "programme?code=1828",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "1828",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1828"
+  },
+  {
+   "title": "Sociologie",
+   "href": "programme?code=3486",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Sciences humaines"
+   ],
+   "code": "3486",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3486"
+  },
+  {
+   "title": "Solutions axées sur la nature et résilience des territoires",
+   "href": "/programme/DESS-solutions-axees-nature-resilience-territoires",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Sciences humaines"
+   ],
+   "code": "4776",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/DESS-solutions-axees-nature-resilience-territoires"
+  },
+  {
+   "title": "Soutien pédagogique dans les services de garde éducatifs",
+   "href": "programme?code=4046",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Éducation"
+   ],
+   "code": "4046",
+   "campus": [
+    "Montréal",
+    "Campus de Laval",
+    "Campus de Longueuil"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=4046"
+  },
+  {
+   "title": "Statistique",
+   "href": "/programme/majeure-statistique",
+   "type": "Majeure",
+   "cycle": "1",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "6487",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme/majeure-statistique"
+  },
+  {
+   "title": "Statistique et science des données",
+   "href": "programme?code=9069",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "9069",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9069"
+  },
+  {
+   "title": "Statistique et science des données, avancé",
+   "href": "programme?code=9070",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Sciences"
+   ],
+   "code": "9070",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9070"
+  },
+  {
+   "title": "Stratégies de développement international des PME",
+   "href": "programme?code=9075",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9075",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9075"
+  },
+  {
+   "title": "Symptômes comportementaux dans les troubles neurocognitifs majeurs chez les adultes",
+   "href": "/programme/microprogramme-symptomes-comportementaux-troubles-neurocognitifs-adultes",
+   "type": "Microprogramme",
+   "cycle": "2",
+   "domaines": [
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "9218",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme/microprogramme-symptomes-comportementaux-troubles-neurocognitifs-adultes"
+  },
+  {
+   "title": "Systèmes électroniques",
+   "href": "programme?code=9197",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "9197",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9197"
+  },
+  {
+   "title": "Systèmes informatiques et électroniques",
+   "href": "programme?code=6526",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "6526",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6526"
+  },
+  {
+   "title": "Systèmes numériques",
+   "href": "programme?code=9196",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Sciences",
+    "Technologies de l'information"
+   ],
+   "code": "9196",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9196"
+  },
+  {
+   "title": "Technologies de l'information",
+   "href": "programme?code=4802",
+   "type": "Certificat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "Technologies de l'information"
+   ],
+   "code": "4802",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": true,
+   "url": "https://etudier.uqam.ca/programme?code=4802"
+  },
+  {
+   "title": "Technologies de l'information",
+   "href": "programme?code=1575",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Gestion",
+    "Technologies de l'information"
+   ],
+   "code": "1575",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1575"
+  },
+  {
+   "title": "Technologies de l'information",
+   "href": "programme?code=1758",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion",
+    "Technologies de l'information"
+   ],
+   "code": "1758",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1758"
+  },
+  {
+   "title": "Technologies de l'information",
+   "href": "programme?code=1758",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion",
+    "Technologies de l'information"
+   ],
+   "code": "1758",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1758"
+  },
+  {
+   "title": "Technologies de l'information",
+   "href": "programme?code=2219",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Gestion",
+    "Technologies de l'information"
+   ],
+   "code": "2219",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=2219"
+  },
+  {
+   "title": "Technologies de l'information",
+   "href": "programme?code=0924",
+   "type": "Programme court",
+   "cycle": "2",
+   "domaines": [
+    "Gestion",
+    "Technologies de l'information"
+   ],
+   "code": "0924",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=0924"
+  },
+  {
+   "title": "Théâtre",
+   "href": "programme?code=3078",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "3078",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3078"
+  },
+  {
+   "title": "Théâtre de marionnettes contemporain",
+   "href": "programme?code=3010",
+   "type": "DESS",
+   "cycle": "2",
+   "domaines": [
+    "Arts",
+    "Création"
+   ],
+   "code": "3010",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=3010"
+  },
+  {
+   "title": "Travail social",
+   "href": "programme?code=6998",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "6998",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=6998"
+  },
+  {
+   "title": "Travail social",
+   "href": "programme?code=1846",
+   "type": "Maîtrise",
+   "cycle": "2",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "1846",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": true,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1846"
+  },
+  {
+   "title": "Travail social",
+   "href": "programme?code=1506",
+   "type": "Doctorat",
+   "cycle": "3",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Innovation sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "1506",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=1506"
+  },
+  {
+   "title": "Univers de la création d'entreprise",
+   "href": "programme?code=9119",
+   "type": "Microprogramme",
+   "cycle": "1",
+   "domaines": [
+    "Gestion"
+   ],
+   "code": "9119",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=9119"
+  },
+  {
+   "title": "Urbanisme",
+   "href": "programme?code=8013",
+   "type": "Baccalauréat",
+   "cycle": "1",
+   "domaines": [
+    "Gestion",
+    "International"
+   ],
+   "code": "8013",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=8013"
+  },
+  {
+   "title": "Urbanisme opérationnel",
+   "href": "programme?code=8858",
+   "type": "Mineure",
+   "cycle": "1",
+   "domaines": [
+    "Innovation sociale",
+    "Gestion"
+   ],
+   "code": "8858",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=8858"
+  },
+  {
+   "title": "Violence sexuelle et interpersonnelle",
+   "href": "programme?code=0745",
+   "type": "Programme court",
+   "cycle": "1",
+   "domaines": [
+    "Éducation et intervention sociale",
+    "Justice et innovation sociale",
+    "Santé",
+    "Sciences humaines"
+   ],
+   "code": "0745",
+   "campus": [
+    "Montréal"
+   ],
+   "trimestres": [
+    "Automne",
+    "Hiver"
+   ],
+   "contingent": false,
+   "nouveau": false,
+   "url": "https://etudier.uqam.ca/programme?code=0745"
+  }
+ ]
+}
