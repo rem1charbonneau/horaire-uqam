@@ -106,6 +106,14 @@ async function tick(env, why) {
   return { status: 'started', batch, why };
 }
 
+// Exécute l'ordonnanceur et garde la trace du dernier passage (visible dans /status) pour diagnostiquer.
+async function run(env, why) {
+  let r;
+  try { r = await tick(env, why); } catch (e) { r = { status: 'error', msg: String(e && e.message || e).slice(0, 200) }; }
+  try { await env.Q.put('last', JSON.stringify({ t: Date.now(), why, r }), { expirationTtl: 86400 }); } catch (e) {}
+  return r;
+}
+
 export default {
   async fetch(req, env, ctx) {
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
@@ -114,7 +122,8 @@ export default {
     if (path === '/status' && req.method === 'GET') {
       const ks = await env.Q.list({ prefix: 'w:' });
       const hk = 'h:' + new Date().toISOString().slice(0, 13);
-      return reply(200, { wanted: ks.keys.length, used: +(await env.Q.get(hk)) || 0, budget: BUDGET, brake: +(await env.Q.get('brake')) || 0 });
+      let last = null; try { last = JSON.parse(await env.Q.get('last')); } catch (e) {}
+      return reply(200, { wanted: ks.keys.length, used: +(await env.Q.get(hk)) || 0, budget: BUDGET, brake: +(await env.Q.get('brake')) || 0, last });
     }
     if (req.method !== 'POST') return reply(405, { status: 'method' });
     if (req.headers.get('Origin') !== ORIGIN) return reply(403, { status: 'origin' });
@@ -133,7 +142,7 @@ export default {
     if (path === '/request') {
       if (!courses.length) return reply(400, { status: 'empty' });
       await Promise.all(courses.map(c => env.Q.put('w:' + c, JSON.stringify({ t: Date.now(), p: programs[c] || null }), { expirationTtl: TTL })));
-      ctx.waitUntil(tick(env, 'request').catch(() => {}));
+      ctx.waitUntil(run(env, 'request'));
       const brake = +(await env.Q.get('brake')) || 0;
       return reply(200, { status: 'queued', courses: courses.length, brake: brake > Date.now() ? brake : 0 });
     }
@@ -156,6 +165,6 @@ export default {
   },
 
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(tick(env, 'cron').catch(() => {}));
+    ctx.waitUntil(run(env, 'cron'));
   }
 };
