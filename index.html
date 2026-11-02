@@ -824,7 +824,7 @@ var GRIDS=null;
 function normS(x){return (x||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\([^)]*\)/g,' ').replace(/[^a-z0-9]+/g,' ').trim();}
 function optKey(x){return normS(x).replace(/^(concentration|profil|cheminement)( en| de| des| du| d)? /,'');}
 function parseCell(t){
-  t=(t||'').replace(/\*+/g,'').replace(/\s+/g,' ').trim();if(!t)return null;
+  t=(t||'').replace(/[¿\uFFFD]/g,'é').replace(/\*+/g,'').replace(/\s+/g,' ').trim();if(!t)return null;
   t=t.replace(/^\d+\)\s*(et\s+\d+\)\s*)?/,'').replace(/^\d+\s+(?=[A-Z]{3}\d{4})/,'');
   var sg=t.match(/[A-Z]{3}\d{4}/g)||[];
   if(sg.length)return {alts:sg.filter(function(v,i){return sg.indexOf(v)===i;}),par:sg.length>1};
@@ -834,15 +834,17 @@ function legacyRows(){return GRID.map(function(row,i){return {label:(i===0?'1er'
 function expandCell(t){
   return (t||'').split(/;|\s+et\s+(?=[A-Z]{3}\d{4})/).map(parseCell).filter(Boolean);
 }
+function lblOk(t){t=(t||'').trim();return t.length>0&&t.length<=30&&!/[A-Z]{3}\d{4}/.test(t)&&!/^trimestre$/i.test(t)&&/^\d|trimestre\s*[\dIVX]|\b[IVX]{1,3}\b|aut|hiv|[ée]t[ée]/i.test(t);}
 function normRows(rows){
   if(!rows||!rows.length)return [];
+  var ex=[];rows.forEach(function(r){if(r.length>=4&&r.length%2===0&&lblOk(r[0].t)&&lblOk(r[2].t)){for(var i=0;i<r.length;i+=2)ex.push([r[i],r[i+1]]);}else ex.push(r);});rows=ex;
   var head=rows[0];
   if(head.length>1&&head.every(function(c){return /^trimestre/i.test(c.t);})&&rows.length>1){
     var out=[];
     head.forEach(function(c,j){var items=[];rows.slice(1).forEach(function(r){if(r[j])expandCell(r[j].t).forEach(function(x){items.push(x);});});out.push({label:c.t.replace(/\s+/g,' '),items:items});});
     return out;
   }
-  return rows.filter(function(r){var t=r[0]&&r[0].t;return t&&t.length<=30&&!/[A-Z]{3}\d{4}/.test(t)&&!/^trimestre$/i.test(t.trim())&&/^\d|trimestre\s*[\dIVX]|\b[IVX]{1,3}\b|aut|hiv|[ée]t[ée]/i.test(t);}).map(function(r){
+  return rows.filter(function(r){return r[0]&&lblOk(r[0].t);}).map(function(r){
     var items=[];r.slice(1).forEach(function(c){expandCell(c.t).forEach(function(x){items.push(x);});});
     return {label:r[0].t.replace(/\s+/g,' '),items:items};
   }).filter(function(r){return r.items.length;});
