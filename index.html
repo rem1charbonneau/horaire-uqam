@@ -173,14 +173,14 @@ details.plain[open]>summary{margin-bottom:10px}
 .tri{border:1px solid var(--line);border-radius:10px;background:var(--surface-2);overflow:hidden}
 .tri-h{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);font-size:0.7812rem;color:var(--muted)}
 .tri-h b{font:600 0.8125rem var(--font-head);letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
-.tri-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:8px}
+.tri-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:8px;align-items:start}
 .gc{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:5px;min-width:0}
 .gc.sel{border-left-color:var(--cc);background:var(--ct)}
 .gc.done{opacity:.6}
 .gc.off{opacity:.5}
 .phl{border-top:1px dashed var(--line);padding:8px 14px 12px;max-height:440px;overflow:auto}
 .ph.sub{font-weight:500;color:var(--muted);margin:12px 0 2px}
-.gc.ph{border-style:dashed;color:var(--muted);align-items:flex-start}
+.gc.ph{align-self:start;gap:4px;border-style:dashed;color:var(--muted);align-items:flex-start}
 .gc.grp-par{gap:6px}
 .gc .gc{border-left-width:3px;box-shadow:none}
 .gc .gh{display:flex;justify-content:space-between;gap:6px;align-items:center}
@@ -488,6 +488,13 @@ function course(code){
   CACHE[code]=c;return c;
 }
 function offered(c){return c&&c.groups.length>0;}
+var STRIDX=null;
+function structOff(code){
+  if(!STRUCT)return null;
+  if(!STRIDX){STRIDX={};Object.keys(STRUCT.programmes).forEach(function(k){(STRUCT.programmes[k].sections||[]).forEach(function(x){x.courses.forEach(function(c){var v=c.offered&&c.offered.H27;if(v===true)STRIDX[c.sigle]=true;else if(STRIDX[c.sigle]===undefined)STRIDX[c.sigle]=!!v;});});});}
+  return STRIDX[code]===undefined?null:STRIDX[code];
+}
+function pendingRead(c){return !!c&&!offered(c)&&structOff(c.code)===true;}
 function slotsOverlap(a,b){return a.d===b.d&&T(a.s)<T(b.e)&&T(b.s)<T(a.e);}
 function conflict(g1,g2){for(var i=0;i<g1.slots.length;i++){for(var j=0;j<g2.slots.length;j++){if(slotsOverlap(g1.slots[i],g2.slots[j]))return true;}}return false;}
 function getGroup(c,id){for(var i=0;i<c.groups.length;i++){if(c.groups[i].id===id)return c.groups[i];}return null;}
@@ -571,7 +578,7 @@ function compute(){
   var lists=cs.map(function(c){return candidates(c);});
   diag='';capped=false;
   var empty=[];lists.forEach(function(l,i){if(!l.length)empty.push(cs[i].code);});
-  var notOff=selCourses().filter(function(c){return !offered(c);}).map(function(c){return c.code;});
+  var notOff=selCourses().filter(function(c){return !offered(c)&&!pendingRead(c);}).map(function(c){return c.code;});
   if(!cs.length)diag='Choisis au moins un cours offert à l\u2019hiver 2027 dans le tableau.';
   else if(empty.length)diag='Aucun groupe disponible pour '+empty.join(', ')+' avec tes réglages. Ouvre la liste des groupes du cours pour voir pourquoi chacun est écarté.';
   var out=[];
@@ -656,7 +663,8 @@ function oldest(){var o=null;selCourses().forEach(function(c){if(c.fetched&&(!o|
 //--- en-tête et actualisation
 //--- catalogue : vue par trimestre (grille type) et vue tous les cours
 function offerText(c){
-  if(!offered(c))return '<span class="tag">Non offert</span>';
+  if(pendingRead(c))return '<span class="tag ok" title="Coche le cours puis clique sur Valider pour lire ses groupes et ses places">Offert à l’hiver 2027 · horaire à lire</span>';
+  if(!offered(c))return structOff(c.code)===false?'<span class="tag">Pas offert à l’hiver 2027</span>':'<span class="tag">Horaire non lu</span>';
   var n=c.groups.filter(function(g){return g.places>0;}).length,t=c.groups.length;
   return (n?n+' classe'+(n>1?'s':'')+' disponible'+(n>1?'s':''):'Aucune classe disponible')+' ('+t+' au total)';
 }
@@ -676,7 +684,7 @@ function cellHTML(code,blocked){
   if(!c)return '<div class="gc off"><b class="cd">'+code+'</b><span class="hint">Hors du catalogue de gestion</span></div>';
   var on=S.sel.indexOf(code)>=0,dn=isDone(code);
   var un=!dn&&preUnmet(c);
-  var can=offered(c)&&!dn&&!blocked&&!un;
+  var can=(offered(c)||pendingRead(c))&&!dn&&!blocked&&!un;
   return '<div class="gc '+(on?'sel '+selCls(code):'')+(dn?' done':'')+(blocked&&!dn?' off':'')+'">'
     +'<div class="gh"><label class="chk"><input type="checkbox" data-act="togglec" data-c="'+code+'"'+(on?' checked':'')+(can||on?'':' disabled')+' aria-label="Choisir '+code+'"><b class="cd">'+code+'</b></label>'
     +'</div>'
@@ -699,6 +707,8 @@ function sessionHTML(){
   if(g.need)return '<p class="hint note">Ce programme a une grille par profil ou concentration : choisis-en un dans « Programmes » pour voir la grille correspondante.</p>';
   if(g.src)h+='<p class="hint">Grille type officielle (<a href="'+esc(g.src.url)+'" target="_blank" rel="noopener">fiche UQAM</a>, lue le '+esc(fmtStamp(g.src.fetched))+')'+(g.title?' : '+esc(g.title):'')+'. C’est un modèle, pas une obligation : confirme ton cheminement avec le responsable de programme.</p>';
   if(g.variants)h+='<div class="lab">Version de la grille</div><div class="chips">'+g.variants.map(function(o,i){return chip('gvar',String(i),o.title.length>70?o.title.slice(0,68)+'…':o.title,o.title===g.title);}).join('')+'</div>';
+  var np=0,seenP={};g.rows.forEach(function(r){r.items.forEach(function(x){(x.alts||[]).forEach(function(c){var cc=course(c);if(cc&&pendingRead(cc)&&!seenP[c]){seenP[c]=1;np++;}});});});
+  if(np)h+='<p class="hint note">'+np+' cours de cette grille sont offerts à l’hiver 2027, mais leur horaire n’a pas encore été lu : coche ceux qui t’intéressent et clique sur Valider.</p>';
   g.rows.forEach(function(row,i){
     var codes=[];row.items.forEach(function(x){if(x.alts)x.alts.forEach(function(c){codes.push(c);});});
     var nSel=codes.filter(function(c){return S.sel.indexOf(c)>=0;}).length,nDone=codes.filter(isDone).length;
@@ -710,7 +720,8 @@ function sessionHTML(){
         h+='<div class="gc grp-par"><div class="hint" style="margin-bottom:6px">1 cours parmi :</div>'+x.alts.map(function(c){return cellHTML(c,sat&&!isDone(c));}).join('')+'</div>';
       }else if(x.alts)h+=cellHTML(x.alts[0],false);
       else{var key=i+'_'+(ci++),ch=phChoices(x.text);if(phOpen===key)openList=ch;
-        h+='<div class="gc ph"><b>'+esc(x.text)+'</b>'+(ch.length?'<button type="button" class="btn sm" data-act="phopen" data-k="'+key+'" aria-pressed="'+(phOpen===key)+'">'+(phOpen===key?'Masquer les choix':'Voir les '+ch.length+' choix')+'</button>':'')+'</div>';}
+        var cur0=STRUCT&&STRUCT.programmes[S.pick.p],kk0=cur0?concOf(cur0).filter(function(o){return o.code===S.pick.k;})[0]:null,abbr=/^[A-Z]{3}\s+[A-Z.]{1,6}\.?$/.test(x.text.trim());
+        h+='<div class="gc ph"><b>'+esc(abbr&&ch.length?'Cours au choix':x.text)+'</b>'+(abbr&&ch.length?'<span class="hint">'+esc(x.text)+(kk0?' · '+esc(kk0.name.replace(/^(concentration|profil)\s+/i,'')):'')+'</span>':'')+(ch.length?'<button type="button" class="btn sm" data-act="phopen" data-k="'+key+'" aria-pressed="'+(phOpen===key)+'">'+(phOpen===key?'Masquer les choix':'Voir les '+ch.length+' choix')+'</button>':'')+'</div>';}
     });
     h+='</div>'+(openList?'<div class="phl"><div class="hint">Choix possibles pour cette case (liste de la fiche UQAM pour ton programme ou ta concentration) :</div>'+openList.map(progRow).join('')+'</div>':'')+'</div>';
   });
@@ -920,7 +931,7 @@ function controlsHTML(){
     var cand=candidates(c).length,un=preUnmet(c);
     coursesB+='<div class="crs '+c.cls+'"><div class="crs-h"><code>'+c.code+'</code>'+(trimOf(c.code)?'<span class="cr" title="Trimestre de la grille type">T'+trimOf(c.code)+'</span>':'')+'<span class="ti" style="flex:1">'+esc(c.title)+'</span>'
       +'<span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span>'
-      +'<span class="n">'+(offered(c)?cand+'/'+c.groups.length:'non offert')+'</span><button type="button" class="btn sm" data-act="removec" data-c="'+c.code+'" aria-label="Retirer '+c.code+'">Retirer</button></div>'
+      +'<span class="n">'+(offered(c)?cand+'/'+c.groups.length:pendingRead(c)?'à lire':'non offert')+'</span><button type="button" class="btn sm" data-act="removec" data-c="'+c.code+'" aria-label="Retirer '+c.code+'">Retirer</button></div>'
       +'<div class="age'+(ageMin(c)>90?' old':'')+'">'+ageText(c)+'</div>'
       +(un?'<div class="pw"><span class="tag warn" title="'+esc(c.pre)+'">Préalable non satisfait : '+esc(c.preSig.join(c.preAny?' ou ':' et '))+'</span></div>':'')
       +(offered(c)?'<details data-k="g'+c.code+'"'+(S.open['g'+c.code]?' open':'')+'><summary>Choisir les groupes</summary>'+c.groups.map(function(g){return groupRow(c,g);}).join('')+'</details>':'')+'</div>';
@@ -1002,7 +1013,9 @@ function resultsHTML(){
   h+='</div>';
   
   if(lastPruned.length)h+='<div class="alert warn" style="margin-top:10px">Retiré de ta sélection, préalable non satisfait : '+lastPruned.join(', ')+'.</div>';
-  var notOff=selCourses().filter(function(c){return !offered(c);});
+  var pend=selCourses().filter(pendingRead);
+  if(pend.length)h+='<div class="alert warn" style="margin-top:10px">'+pend.map(function(c){return c.code;}).join(', ')+' : horaire pas encore lu. Retourne dans « Choisir mes cours » et clique sur Valider : le site lira les groupes et les places.</div>';
+  var notOff=selCourses().filter(function(c){return !offered(c)&&!pendingRead(c);});
   if(notOff.length)h+='<div class="alert warn" style="margin-top:10px">'+notOff.map(function(c){return c.code;}).join(', ')+' n\u2019a aucun groupe à l\u2019hiver 2027 : ignoré dans les horaires.</div>';
   var unm=selCourses().filter(preUnmet);
   if(unm.length)h+='<div class="alert warn" style="margin-top:10px">Préalable non satisfait : '+unm.map(function(c){return c.code+' ('+esc(c.preSig.join(c.preAny?' ou ':' et '))+')';}).join(' ; ')+'. Valide avec ton programme.</div>';
