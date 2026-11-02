@@ -744,7 +744,7 @@ function progHTML(){
   progs=all.filter(function(p){return p.cycle===P.c&&p.type===P.t;}).sort(function(a,b){return a.title<b.title?-1:1;});
   var cur=STRUCT.programmes[P.p],qv=(document.getElementById('progQ')||{}).value||'';
   var h='<section class="sec cat-wrap"><h2 class="sec-t">Programmes<small>Gestion · '+all.length+' programmes</small></h2><div class="sec-b">'
-    +'<input type="search" id="progQ" class="pq" value="'+esc(qv)+'" placeholder="Chercher un programme ou un cours (ex. finance, MBA, FIN3500)" autocomplete="off"><div id="progRes"></div>'
+    +'<input type="search" id="progQ" class="pq" value="'+esc(qv)+'" placeholder="Chercher un programme (ex. finance, MBA, marketing)" autocomplete="off"><div id="progRes"></div>'
     +'<div class="lab">Domaine</div><div class="chips"><span class="chip" aria-pressed="true">Gestion (ESG)</span></div>'
     +'<div class="lab">Cycle</div><div class="chips">'+cycles.map(function(c){return chip('pickc',c,CYC[c]||c,P.c===c);}).join('')+'</div>'
     +'<div class="lab">Type de programme</div><div class="chips">'+(types.length?types.map(function(t){return chip('pickt',t,t,P.t===t);}).join(''):'<span class="hint">Choisis un cycle.</span>')+'</div>'
@@ -753,16 +753,25 @@ function progHTML(){
   if(cur&&cc.length)h+='<div class="lab">Concentration</div><div class="chips">'+cc.map(function(x){return chip('pickk',x.code,x.name,P.k===x.code);}).join('')+'</div>';
   h+='</div></section>';
   if(cur){
+    var kk=cc.filter(function(x){return x.code===P.k;})[0];
+    h+='<section class="sec cat-wrap"><h2 class="sec-t">Mon choix<small>code '+cur.code+'</small></h2><div class="sec-b"><div class="pb-t"><b>'+esc(cur.title)+'</b> ('+esc(cur.type)+', '+(CYC[cur.cycle]||cur.cycle)+')'+(kk?'<br>Concentration : <b>'+esc(kk.name)+'</b>':(cc.length?'<br><span class="hint">Choisis une concentration ci-dessus.</span>':''))+'</div>'
+      +'<p class="hint">Source : <a href="'+esc(cur.url)+'" target="_blank" rel="noopener">fiche officielle UQAM</a>. Information non officielle : confirme ton cheminement avec le responsable de programme.</p>'
+      +'<button type="button" class="btn primary" data-act="pvalid"'+(cc.length&&!kk?' disabled':'')+'>Valider mon programme et voir le cheminement →</button></div></section>';
+  }
+  return h;
+}
+function progCoursesHTML(){
+  var P=S.pick,cur=STRUCT&&STRUCT.programmes[P.p];if(!cur)return '<p class="hint">Chargement du programme…</p>';
+  var cc=concOf(cur),h='';
+  {
     var core=(cur.sections||[]).filter(function(x){return x.courses.length&&!/\((\w{4})\)\s*$/.test(x.heading);});
     var kc=cc.filter(function(x){return x.code===P.k;})[0];
-    h+='<section class="sec cat-wrap"><h2 class="sec-t">'+esc(cur.title)+'<small>'+esc(cur.type)+' · code '+cur.code+'</small></h2><div class="sec-b">'
-      +'<p class="hint">Source : <a href="'+esc(cur.url)+'" target="_blank" rel="noopener">fiche officielle UQAM</a> (lue le '+esc(fmtStamp(cur.fetched||STRUCT.fetched))+'). Information non officielle : confirme ton cheminement avec le responsable de programme.</p>';
+    h+='<p class="hint">Cours du programme (source : <a href="'+esc(cur.url)+'" target="_blank" rel="noopener">fiche UQAM</a>, lue le '+esc(fmtStamp(cur.fetched||STRUCT.fetched))+'). Coche ceux que tu veux suivre.</p>';
     core.forEach(function(x){h+='<h3 class="ph">'+esc(x.heading.replace(/:\s*$/,''))+'</h3>'+x.courses.map(progRow).join('');});
     if(kc)h+='<h3 class="ph">Concentration : '+esc(kc.name)+'</h3>'+kc.s.courses.map(progRow).join('');
     if(!core.length&&!kc)h+='<p class="hint">'+esc(cur.note||'La page du programme ne liste pas de cours.')+'</p>';
-    h+='</div></section>';
   }
-  return h+valBarHTML(selCourses().filter(function(c){return !isDone(c.code);}));
+  return h;
 }
 function progSearch(q){
   var el=document.getElementById('progRes');if(!el||!STRUCT)return;
@@ -772,7 +781,6 @@ function progSearch(q){
   var cs=Object.keys(CAT).filter(function(k){return norm(k+' '+CAT[k].title).indexOf(nq)>=0;}).slice(0,10);
   var h='';
   if(ps.length)h+='<div class="lab">Programmes</div>'+ps.map(function(p){return '<button type="button" class="srow" data-act="pickp" data-p="'+p.code+'"><b>'+esc(p.title)+'</b> <small>'+esc(p.type)+' · '+(CYC[p.cycle]||p.cycle)+'</small></button>';}).join('');
-  if(cs.length)h+='<div class="lab">Cours</div>'+cs.map(function(k){return progRow({sigle:k,title:CAT[k].title,offered:{H27:true}});}).join('');
   el.innerHTML=h||'<p class="hint">Aucun résultat.</p>';
 }
 document.addEventListener('input',function(e){if(e.target&&e.target.id==='progQ')progSearch(e.target.value);});
@@ -786,17 +794,18 @@ function valBarHTML(cs){
 }
 function progBanner(){
   var cur=STRUCT&&STRUCT.programmes[S.pick.p];
-  var name=cur?cur.title+' ('+cur.type+')':'Programme '+S.pick.p;
+  var name=cur?(cur.title.indexOf('('+cur.type+')')>=0?cur.title:cur.title+' ('+cur.type+')'):'Programme '+S.pick.p;
   var k=cur?concOf(cur).filter(function(x){return x.code===S.pick.k;})[0]:null;
   return '<div class="pbanner"><div><span class="lab" style="margin:0">Mon programme</span><div class="pb-t"><b>'+esc(name)+'</b>'+(k?' · Concentration : <b>'+esc(k.name)+'</b>':'')+'</div>'
     +(S.picked?'':'<div class="hint">Programme par défaut : confirme-le ou change-le.</div>')+'</div>'
     +'<button type="button" class="btn sm" data-act="goprog">Changer</button></div>';
 }
+function catView(){return S.pick.p==='7111'?(S.view==='all'?'all':S.view==='prog'?'prog':'sess'):'prog';}
 function catalogHTML(){
-  var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0);
-  var h=progBanner()+'<section class="sec cat cat-wrap"><h2 class="sec-t">Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></h2><div class="sec-b">'
-    +'<div class="chips"><button type="button" class="chip" data-act="catview" data-v="sess" aria-pressed="'+(S.view!=='all')+'">Par trimestre (grille type)</button><button type="button" class="chip" data-act="catview" data-v="all" aria-pressed="'+(S.view==='all')+'">Tous les cours</button></div>'
-        +(S.view==='all'?allHTML():sessionHTML())+'</div></section>'+valBarHTML(cs);
+  var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0),v=catView();
+  var h=progBanner()+'<section class="sec cat cat-wrap"><h2 class="sec-t">Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></h2><div class="sec-b">';
+  if(S.pick.p==='7111')h+='<div class="chips"><button type="button" class="chip" data-act="catview" data-v="prog" aria-pressed="'+(v==='prog')+'">Cours du programme</button><button type="button" class="chip" data-act="catview" data-v="sess" aria-pressed="'+(v==='sess')+'">Par trimestre (grille type)</button><button type="button" class="chip" data-act="catview" data-v="all" aria-pressed="'+(v==='all')+'">Tous les cours</button></div>';
+  h+=(v==='all'?allHTML():v==='sess'?sessionHTML():progCoursesHTML())+'</div></section>'+valBarHTML(cs);
   return h;
 }
 
@@ -1025,14 +1034,15 @@ document.addEventListener('click',function(e){
   if(a==='fav'){var sel=currentGroups(),p=curPicks(sel),k=-1;S.favs.forEach(function(f,i){if(sameFav(f.picks,p))k=i;});
     if(k>=0){S.favs.splice(k,1);viewFav=null;}else if(S.favs.length<12)S.favs.push({picks:p});save();renderResults();return;}
   if(a==='rmfav'){S.favs.splice(+d.i,1);viewFav=null;save();renderResults();return;}
-  if(a==='catview'){S.view=d.v==='all'?'all':'sess';save();render();return;}
+  if(a==='catview'){S.view=d.v==='all'?'all':d.v==='prog'?'prog':'sess';save();render();return;}
+  if(a==='pvalid'){S.picked=true;S.view=S.pick.p==='7111'?S.view:'prog';save();goTab('cours');render();return;}
   if(a==='opencat'){S.open.catalog=true;save();goTab('cours');render();window.scrollTo(0,0);return;}
   if(a==='validate'){validate();return;}
   if(a==='goprog'){goTab('programmes');return;}
   if(a==='gocours'){goTab('cours');return;}
   if(a==='pickc'){S.pick={c:d.v,t:'',p:'',k:''};save();renderPages();return;}
   if(a==='pickt'){S.pick={c:S.pick.c,t:d.v,p:'',k:''};save();renderPages();return;}
-  if(a==='pickp'){var pp=STRUCT&&STRUCT.programmes[d.p];if(pp){var cc=concOf(pp);S.pick={c:pp.cycle,t:pp.type,p:pp.code,k:(cc.filter(function(x){return x.code===pp.code;})[0]||cc[0]||{code:''}).code};S.picked=true;save();renderPages();window.scrollTo(0,0);}return;}
+  if(a==='pickp'){var pp=STRUCT&&STRUCT.programmes[d.p];if(pp){var cc=concOf(pp);S.pick={c:pp.cycle,t:pp.type,p:pp.code,k:(cc.filter(function(x){return x.code===pp.code;})[0]||cc[0]||{code:''}).code};S.picked=true;if(pp.code==='7111'&&S.view==='prog')S.view='sess';save();renderPages();window.scrollTo(0,0);}return;}
   if(a==='pickk'){S.pick.k=d.v;S.picked=true;save();renderPages();return;}
   if(a==='ptog'){var pc=course(d.c);if(!pc)return;
     if(S.sel.indexOf(d.c)<0&&preUnmet(pc)){toast('Préalable à faire d’abord : '+pc.preSig.join(pc.preAny?' ou ':' et ')+'.');return;}
