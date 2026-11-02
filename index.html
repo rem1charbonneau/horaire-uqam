@@ -111,9 +111,9 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent)}
 .rhead{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
 .count{font:600 1.625rem/1 var(--font-head)}
 .count small{display:block;font:400 0.75rem var(--font-body);color:var(--muted);margin-top:3px}
-.nav{display:flex;gap:6px;align-items:center}
-.nav .pos{font:500 0.875rem var(--font-mono);min-width:96px;text-align:center}
-.nav .btn{min-width:38px;font-size:1rem;padding:4px 10px}
+.pgr{display:flex;gap:6px;align-items:center}
+.pgr .pos{font:500 0.875rem var(--font-mono);min-width:96px;text-align:center}
+.pgr .btn{min-width:38px;font-size:1rem;padding:4px 10px}
 .toolbar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:12px}
 .stats{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 6px}
 .stat{background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:0.75rem;color:var(--muted)}
@@ -234,7 +234,7 @@ input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 
 .seats{border-radius:999px}
 .tag{border-radius:999px}
 .alert{border-radius:12px;animation:fade .25s ease both}
-.nav .pos{color:var(--accent)}
+.pgr .pos{color:var(--accent)}
 .foot a{color:var(--accent);text-underline-offset:3px}
 .left::-webkit-scrollbar,.wkwrap::-webkit-scrollbar{width:8px;height:8px}
 .left::-webkit-scrollbar-thumb,.wkwrap::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
@@ -898,8 +898,8 @@ function resultsHTML(){
   var sel=currentGroups(),gs=sel.map(function(x){return x.g;}),st=stats(gs);
   var tot=total.toLocaleString('fr-CA')+(capped?'+':'');
   var h='<div class="card"><div class="rhead"><div class="count">'+tot+' horaire'+(total>1?'s':'')+' possible'+(total>1?'s':'')+'<small>sans conflit, avec tes réglages'+(capped?' (limité aux '+CAP.toLocaleString('fr-CA')+' premiers : ajoute des limites pour affiner)':'')+'</small></div>';
-  if(fav)h+='<div class="nav"><span class="pos">Favori '+(viewFav+1)+'</span><button type="button" class="btn" data-act="back">Retour aux résultats</button></div>';
-  else h+='<div class="nav"><button type="button" class="btn" data-act="prev" aria-label="Précédent"'+(total<2?' disabled':'')+'>‹</button><span class="pos">'+(total?(idx+1).toLocaleString('fr-CA')+' / '+tot:'–')+'</span><button type="button" class="btn" data-act="next" aria-label="Suivant"'+(total<2?' disabled':'')+'>›</button>'
+  if(fav)h+='<div class="pgr"><span class="pos">Favori '+(viewFav+1)+'</span><button type="button" class="btn" data-act="back">Retour aux résultats</button></div>';
+  else h+='<div class="pgr"><button type="button" class="btn" data-act="prev" aria-label="Précédent"'+(total<2?' disabled':'')+'>‹</button><span class="pos">'+(total?(idx+1).toLocaleString('fr-CA')+' / '+tot:'–')+'</span><button type="button" class="btn" data-act="next" aria-label="Suivant"'+(total<2?' disabled':'')+'>›</button>'
     +'<button type="button" class="btn" data-act="rand"'+(total<2?' disabled':'')+'>Au hasard</button></div>';
   h+='</div>';
   
