@@ -1124,7 +1124,11 @@ document.addEventListener('click',function(e){
   if(a==='anim'){P.anim=!P.anim;savePrefs();applyPrefs();renderPages();return;}
   if(a==='tokSave'){var ti=document.getElementById('tokIn');if(ti&&ti.value.trim()){setTok(ti.value.trim());toast('Jeton enregistré sur cet appareil.');}renderPages();return;}
   if(a==='tokDel'){setTok('');toast('Jeton retiré.');renderPages();return;}
-  if(a==='wipe'){if(!wipeAsk){wipeAsk=true;renderPages();return;}try{localStorage.removeItem(KEY);}catch(x){}S=defaults();wipeAsk=false;reset();save();render();toast('Choix réinitialisés.');return;}
+  if(a==='wipeGo'){wipeAsk=true;goTab('parametres');renderPages();return;}
+  if(a==='wipe'){if(!wipeAsk){wipeAsk=true;renderPages();return;}
+    try{[KEY,CKEY,LKEY,TKEY].forEach(function(k){localStorage.removeItem(k);});}catch(x){}
+    S=defaults();S.sel=[];S.sent='';S.picked=false;valState.sending=false;valState.err='';CACHE={};
+    wipeAsk=false;reset();save();goTab('accueil');render();renderPages();window.scrollTo(0,0);toast('Tout est réinitialisé : programme, cours choisis, cours faits, limites d’heures et favoris.');return;}
   if(a==='wipeNo'){wipeAsk=false;renderPages();return;}
   if(a==='sort'){S.sort=d.v;idx=0;save();compute();renderResults();return;}
   if(a==='mode')toggle(S.modes,d.v);
@@ -1420,6 +1424,7 @@ function homeHTML(){
   if(!S.favs.length)h+='<p class="hint">Aucun horaire gardé. Dans le générateur, « Garder cet horaire » le range ici.</p>';
   else{h+='<div class="favs">';S.favs.forEach(function(f,i){h+='<button type="button" class="btn sm" data-act="homefav" data-i="'+i+'">'+esc(favLabel(f,i))+'</button>';});h+='</div>';}
   h+='</div></div></div>';
+  h+='<p class="hint" style="text-align:center;margin-top:18px">Envie de repartir de zéro ? <button type="button" class="btn sm" data-act="wipeGo">Tout réinitialiser</button></p>';
   return h;
 }
 function chipsHTML(act,cur,list){return '<div class="chips">'+list.map(function(x){return '<button type="button" class="chip" data-act="'+act+'" data-v="'+x[0]+'" aria-pressed="'+(String(cur)===String(x[0]))+'">'+x[1]+'</button>';}).join('')+'</div>';}
@@ -1429,9 +1434,9 @@ function settingsHTML(){
    +'<div class="lab">Taille du texte</div>'+chipsHTML('tsize',P.ts,[[0.9,'Petit'],[1,'Normal'],[1.12,'Grand'],[1.25,'Très grand']])
    +'<div class="lab">Animations</div><div class="chips"><button type="button" class="chip" data-act="anim" aria-pressed="'+P.anim+'">'+(P.anim?'Activées':'Désactivées')+'</button></div></div>'
    +'<div class="card"><h2 class="h3">Actualisation</h2><p class="hint">Il n’y a plus de bouton à presser : quand tu valides tes cours, ils sont suivis pendant 7 jours. Le site relit leurs places automatiquement, plus souvent quand il en reste peu, et jamais plus que ce que l’UQAM peut supporter.</p>'
-   +'</div><div class="card"><h2 class="h3">Mes données</h2><p class="hint">Cours choisis, cours faits, limites d’heures et favoris sont gardés dans ce navigateur.</p>'
-   +(wipeAsk?'<div class="row"><span>Tout réinitialiser ?</span><button type="button" class="btn danger" data-act="wipe">Oui, réinitialiser</button><button type="button" class="btn" data-act="wipeNo">Annuler</button></div>'
-            :'<div class="row"><button type="button" class="btn" data-act="wipe">Réinitialiser mes choix</button></div>')
+   +'</div><div class="card"><h2 class="h3">Mes données</h2><p class="hint">Programme, cours choisis, cours faits, limites d’heures et favoris sont gardés seulement dans ce navigateur. « Tout réinitialiser » efface tout cela et te ramène à l’accueil, comme à ta première visite (le thème et la taille du texte restent). Les cours déjà validés restent suivis jusqu’à 7 jours côté serveur, sans lien avec toi.</p>'
+   +(wipeAsk?'<div class="row"><span>Effacer toutes tes informations ?</span><button type="button" class="btn danger" data-act="wipe">Oui, réinitialiser</button><button type="button" class="btn" data-act="wipeNo">Annuler</button></div>'
+            :'<div class="row"><button type="button" class="btn" data-act="wipe">Tout réinitialiser</button></div>')
    +'</div></div>';
   return h;
 }
