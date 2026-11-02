@@ -2,7 +2,7 @@ name: Mettre à jour les horaires et publier le site
 
 on:
   schedule:
-    - cron: '17 * * * *'   # toutes les heures
+    - cron: '17 5 * * 0'   # lecture complète une fois par semaine (dimanche) ; le reste est piloté par l'ordonnanceur du relais
   workflow_dispatch:
     inputs:
       courses:

@@ -387,6 +387,11 @@ body{padding-top:0}
 .daychips{gap:4px}
 .daychips .chip{padding:3px 9px;min-width:2.9em;text-align:center}
 .toast-b{margin-left:8px;border:0;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:4px 12px;font:inherit;font-weight:600;cursor:pointer}
+.valbar{position:sticky;bottom:0;z-index:120;margin-top:12px;padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--bg) 70%,transparent)}
+.vb-in{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 14px}
+.vb-m{font-size:.8125rem;color:var(--muted)}.vb-m.bad{color:var(--bad,#e5484d)}
+body.sending::before{content:"";position:fixed;inset:0;z-index:110;background:rgba(0,0,0,.6);backdrop-filter:blur(2px)}
+.age{font-size:.75rem;color:var(--muted);padding:2px 2px 6px}.age.old{color:var(--warn,#d6a100)}
 </style>
 </head><body>
 
@@ -398,7 +403,7 @@ body{padding-top:0}
     <a href="#generateur" data-tab="generateur">Générateur</a>
     <a href="#parametres" data-tab="parametres">Paramètres</a>
   </div>
-  <div class="nav-r"><span class="stamp" id="stamp"></span><button type="button" class="btn sm primary" data-act="upd" id="updbtn">↻ <span class="t">Actualiser</span></button></div>
+  <div class="nav-r"><span class="stamp" id="stamp"></span></div>
 </nav>
 <div class="app">
   <section class="view" id="v-accueil"></section>
@@ -471,7 +476,7 @@ function defaults(){
   var dl={};DAYS.slice(0,6).forEach(function(d){dl[d]={on:true,s:'08:00',e:'22:00'};});
   return {sel:['ORH1700','SCO1045','MAT2082','ECO1301'],done:[],view:'sess',excl:{},pin:{},modes:['pres','hyb','dist'],noCampus:[],hideFull:true,minPl:0,en:false,
     workOn:true,work:JSON.parse(JSON.stringify(WORK_DEFAULT)),bufP:120,bufD:60,before:'',after:'',dayLim:dl,
-    sort:'campus',favs:[],open:{catalog:false,courses:true,time:true,mode:false,work:false},reqAll:false};
+    sort:'campus',sent:'',favs:[],open:{catalog:false,courses:true,time:true,mode:false,work:false},reqAll:false};
 }
 var ferr={time:'',work:''},ferT=null;
 function showErr(k,m){ferr[k]=m;render();clearTimeout(ferT);ferT=setTimeout(function(){ferr.time=ferr.work='';var l=document.querySelectorAll('.ferr');for(var i=0;i<l.length;i++)l[i].remove();},9000);}
@@ -680,11 +685,19 @@ function allHTML(){
   });
   return h+'</tbody></table></div>';
 }
+var valState={sending:false,err:''};
+function valKey(){return selCourses().filter(function(c){return !isDone(c.code);}).map(function(c){return c.code;}).sort().join(' ');}
+function valBarHTML(cs){
+  var n=cs.length,same=valKey()===S.sent;
+  return '<div class="valbar"><div class="vb-in">'
+    +(valState.err?'<span class="vb-m bad">'+esc(valState.err)+'</span>':valState.sending?'<span class="vb-m">Envoi de tes cours…</span>':same&&n?'<span class="vb-m">Cours validés, suivis automatiquement.</span>':'<span class="vb-m">Rien n’est envoyé avant que tu valides.</span>')
+    +'<button type="button" class="btn primary" data-act="validate"'+(valState.sending||!n||(same&&!valState.err)?' disabled':'')+'>'+(valState.err?'Réessayer':'Valider ('+n+' cours)')+'</button></div></div>';
+}
 function catalogHTML(){
   var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0);
   var h='<section class="sec cat cat-wrap"><h2 class="sec-t">Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></h2><div class="sec-b">'
     +'<div class="chips"><button type="button" class="chip" data-act="catview" data-v="sess" aria-pressed="'+(S.view!=='all')+'">Par trimestre (grille type)</button><button type="button" class="chip" data-act="catview" data-v="all" aria-pressed="'+(S.view==='all')+'">Tous les cours</button></div>'
-        +(S.view==='all'?allHTML():sessionHTML())+'</div></section>';
+        +(S.view==='all'?allHTML():sessionHTML())+'</div></section>'+valBarHTML(cs);
   return h;
 }
 
@@ -702,6 +715,8 @@ function groupRow(c,g){
     +'<div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">'+seatsPill(g.places)
     +'<button type="button" class="btn sm" data-act="pin" data-c="'+c.code+'" data-g="'+g.id+'" aria-pressed="'+pinned+'">'+(pinned?'Fixé':'Fixer')+'</button></div></div>';
 }
+function ageMin(c){return c.fetched?(Date.now()-new Date(c.fetched).getTime())/60000:1e9;}
+function ageText(c){var m=ageMin(c);if(m>=1e8)return 'Places jamais lues';if(m<1)return 'Places lues à l’instant';if(m<60)return 'Places lues il y a '+Math.round(m)+' min';if(m<1440)return 'Places lues il y a '+Math.round(m/60)+' h';return 'Places lues le '+fmtStamp(c.fetched);}
 function controlsHTML(){
   var cs=selCourses(),coursesB='';
   cs.forEach(function(c){
@@ -709,6 +724,7 @@ function controlsHTML(){
     coursesB+='<div class="crs '+c.cls+'"><div class="crs-h"><code>'+c.code+'</code>'+(TRIM[c.code]?'<span class="cr" title="Trimestre de la grille type">T'+TRIM[c.code]+'</span>':'')+'<span class="ti" style="flex:1">'+esc(c.title)+'</span>'
       +'<span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span>'
       +'<span class="n">'+(offered(c)?cand+'/'+c.groups.length:'non offert')+'</span><button type="button" class="btn sm" data-act="removec" data-c="'+c.code+'" aria-label="Retirer '+c.code+'">Retirer</button></div>'
+      +'<div class="age'+(ageMin(c)>90?' old':'')+'">'+ageText(c)+'</div>'
       +(un?'<div class="pw"><span class="tag warn" title="'+esc(c.pre)+'">Préalable non satisfait : '+esc(c.preSig.join(c.preAny?' ou ':' et '))+'</span></div>':'')
       +(offered(c)?'<details data-k="g'+c.code+'"'+(S.open['g'+c.code]?' open':'')+'><summary>Choisir les groupes</summary>'+c.groups.map(function(g){return groupRow(c,g);}).join('')+'</details>':'')+'</div>';
   });
@@ -870,7 +886,7 @@ function load(){
     if(d.pin&&typeof d.pin==='object')Object.keys(d.pin).forEach(function(c){if(typeof d.pin[c]==='string')b.pin[c]=d.pin[c];});
     if(Array.isArray(d.modes))b.modes=d.modes.filter(function(m){return MODES[m];});
     if(Array.isArray(d.noCampus))b.noCampus=d.noCampus.filter(function(c){return CAMPUS.indexOf(c)>=0;});
-    b.hideFull=d.hideFull!==false;b.en=!!d.en;b.workOn=d.workOn!==false;b.minPl=0;
+    b.sent=typeof d.sent==='string'?d.sent:'';b.hideFull=d.hideFull!==false;b.en=!!d.en;b.workOn=d.workOn!==false;b.minPl=0;
     if(Array.isArray(d.work)&&d.work.every(function(w){return DAYS.indexOf(w.d)>=0&&/^\d\d:\d\d$/.test(w.s)&&/^\d\d:\d\d$/.test(w.e);}))b.work=d.work;
     b.bufP=Math.max(0,Number(d.bufP)||0);b.bufD=Math.max(0,Number(d.bufD)||0);
     if(/^\d\d:\d\d$/.test(d.before||''))b.before=d.before;if(/^\d\d:\d\d$/.test(d.after||''))b.after=d.after;
@@ -912,7 +928,7 @@ document.addEventListener('click',function(e){
   if(a==='rmfav'){S.favs.splice(+d.i,1);viewFav=null;save();renderResults();return;}
   if(a==='catview'){S.view=d.v==='all'?'all':'sess';save();render();return;}
   if(a==='opencat'){S.open.catalog=true;save();goTab('cours');render();window.scrollTo(0,0);return;}
-  if(a==='upd'){doUpdate();return;}
+  if(a==='validate'){validate();return;}
   if(a==='snap'){snapSchedule();return;}
   if(a==='gen'){goTab('generateur');return;}
   if(a==='homefav'){viewFav=+d.i;goTab('generateur');renderResults();return;}
@@ -1125,7 +1141,23 @@ function autoCheck(){
   }).catch(function(){});
 }
 setInterval(autoCheck,5*60*1000);
-document.addEventListener('visibilitychange',function(){if(!document.hidden){autoCheck();resumeRun();}});
+document.addEventListener('visibilitychange',function(){if(!document.hidden){autoCheck();}});
+function validate(){
+  if(valState.sending)return;
+  var codes=valKey().split(' ').filter(Boolean).slice(0,20);if(!codes.length)return;
+  valState.sending=true;valState.err='';document.body.classList.add('sending');render();
+  function fail(m){valState.sending=false;valState.err=m;document.body.classList.remove('sending');render();}
+  fetch(RELAY+'request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({courses:codes})})
+    .then(function(r){return r.json().then(function(j){return {s:r.status,j:j};});})
+    .then(function(x){
+      if(x.s!==200||x.j.status!=='queued'){fail('L’envoi a échoué ('+x.s+'). Tes choix sont gardés, réessaie.');return;}
+      S.sent=codes.join(' ');save();valState.sending=false;valState.err='';document.body.classList.remove('sending');
+      goTab('generateur');render();window.scrollTo(0,0);
+      var old=codes.filter(function(c){var r=DATA[c];return !r||!r.fetched||Date.now()-new Date(r.fetched).getTime()>10*60000;}).length;
+      toast(old?old+' cours demandé'+(old>1?'s':'')+' : mise à jour en cours, les places seront rafraîchies sous peu.':'Tes cours sont à jour (lus il y a moins de 10 min).');
+      var n=0;clearInterval(window.__fc);window.__fc=setInterval(function(){autoCheck();if(++n>=15)clearInterval(window.__fc);},20000);
+    }).catch(function(){fail('Impossible de joindre le serveur. Tes choix sont gardés, réessaie.');});
+}
 function doUpdate(){
   if(upd.busy)return;
   upd.busy=true;upd.msg='Actualisation…';paintStamp();
@@ -1189,9 +1221,9 @@ function homeHTML(){
   h+='<div class="home-cols"><div class="card"><div class="card-h"><h2 class="h3">Mes cours</h2><button type="button" class="btn sm" data-act="opencat">Modifier</button></div>';
   if(!cs.length)h+='<p class="hint">Aucun cours choisi.</p>';
   cs.forEach(function(c){h+='<div class="hrow '+c.cls+'"><code>'+c.code+'</code><span class="ti">'+esc(c.title)+'</span><span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span><span class="of">'+offerText(c)+'</span></div>';});
-  h+='</div><div class="stack"><div class="card"><div class="card-h"><h2 class="h3">Données</h2><button type="button" class="btn sm primary" data-act="upd"'+(upd.busy?' disabled':'')+'>↻ Actualiser</button></div>'
+  h+='</div><div class="stack"><div class="card"><div class="card-h"><h2 class="h3">Données</h2></div>'
     +'<p class="big-line'+(stale?' warn':'')+'">'+(o?'Lues le <b>'+fmtStamp(o)+'</b>'+(stale?' (il y a '+Math.floor(age/24)+' j)':''):'Aucune donnée')+'</p>'
-    +(upd.msg?'<p class="hint">'+esc(upd.msg)+'</p>':'<p class="hint">Relues automatiquement toutes les heures.</p>')+changesHTML()+'</div>'
+    +(upd.msg?'<p class="hint">'+esc(upd.msg)+'</p>':'<p class="hint">Les places de tes cours sont relues automatiquement, selon les places qui restent. Les cours que tu valides dans « Choisir mes cours » sont suivis pendant 7 jours.</p>')+changesHTML()+'</div>'
     +'<div class="card"><h2 class="h3">Mes favoris</h2>';
   if(!S.favs.length)h+='<p class="hint">Aucun favori.</p>';
   else{h+='<div class="favs">';S.favs.forEach(function(f,i){h+='<button type="button" class="btn sm" data-act="homefav" data-i="'+i+'">'+esc(favLabel(f,i))+'</button>';});h+='</div>';}
@@ -1346,7 +1378,7 @@ document.addEventListener('keydown',function(e){
 });
 window.addEventListener('resize',closePop);
 window.addEventListener('scroll',function(e){if(tfPop&&!(e.target&&e.target.classList&&e.target.classList.contains('tf-pop')))closePop();},true);
-function start(){load();render();showTab();resumeRun();}
+function start(){load();render();showTab();}
 fetch('data.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){DATA=d;start();})
  .catch(function(err){document.getElementById('right').innerHTML='<div class="alert bad">Impossible de charger les données des cours ('+esc(String(err&&err.message||err))+'). Recharge la page.</div>';});
 </script>
