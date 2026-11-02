@@ -717,7 +717,22 @@ function allHTML(){
   return h+'</tbody></table></div>';
 }
 var CYC={'1':'1er cycle','2':'2e cycle','3':'3e cycle'};
-function concOf(p){return (p.sections||[]).filter(function(x){return /\((\w{4})\)\s*$/.test(x.heading)&&x.courses.length;}).map(function(x){var m=/\((\w{4})\)\s*$/.exec(x.heading),n=x.heading.replace(/\s*\(\w{4}\)\s*$/,'').toLowerCase();return {code:m[1],name:n.charAt(0).toUpperCase()+n.slice(1),s:x};});}
+var OPT_RE=/^(?:[A-Z0-9IVX]{1,4}\s*[-)]\s*)?(profil|concentration|cheminement)s?\b/i,OPT_NO=/pour toutes|tronc|coop|honor|suivantes?\s*:?\s*$|dans l[’']une|aux (deux|trois)|pour les deux/i;
+function concOf(p){
+  var out=[];
+  (p.sections||[]).forEach(function(x,i){
+    if(!x.courses||!x.courses.length)return;
+    var m=/\((\w{4})\)\s*$/.exec(x.heading);
+    if(m){var n=x.heading.replace(/\s*\(\w{4}\)\s*$/,'').toLowerCase();out.push({code:m[1],name:n.charAt(0).toUpperCase()+n.slice(1),s:x});return;}
+    if(OPT_RE.test(x.heading)&&!OPT_NO.test(x.heading)){
+      var t=x.heading.replace(/^(?:[A-Z0-9IVX]{1,4}\s*[-)]\s*)/,'').replace(/\s*:\s*$/,'').replace(/\s+/g,' ').trim();
+      out.push({code:'h'+i,name:t.charAt(0).toUpperCase()+t.slice(1),s:x,h:true});
+    }
+  });
+  return out;
+}
+function defK(pp){var cc=concOf(pp),m=cc.filter(function(x){return x.code===pp.code;})[0]||(needK(cc)?cc.filter(function(x){return !x.h;})[0]:null);return m?m.code:'';}
+function needK(cc){return cc.filter(function(x){return !x.h;}).length>1;}
 function chip(act,v,label,on){return '<button type="button" class="chip" data-act="'+act+'" data-v="'+esc(v)+'" aria-pressed="'+on+'">'+esc(label)+'</button>';}
 function progFor(sig){
   if(!STRUCT)return S.pick.p||'7111';
@@ -750,13 +765,13 @@ function progHTML(){
     +'<div class="lab">Type de programme</div><div class="chips">'+(types.length?types.map(function(t){return chip('pickt',t,t,P.t===t);}).join(''):'<span class="hint">Choisis un cycle.</span>')+'</div>'
     +'<div class="lab">Programme</div><div class="chips">'+(progs.length?progs.map(function(p){return '<button type="button" class="chip" data-act="pickp" data-p="'+p.code+'" aria-pressed="'+(P.p===p.code)+'">'+esc(p.title)+'</button>';}).join(''):'<span class="hint">Choisis un type.</span>')+'</div>';
   var cc=cur?concOf(cur):[];
-  if(cur&&cc.length)h+='<div class="lab">Concentration</div><div class="chips">'+cc.map(function(x){return chip('pickk',x.code,x.name,P.k===x.code);}).join('')+'</div>';
+  if(cur&&cc.length)h+='<div class="lab">Concentration</div><div class="chips">'+cc.map(function(x){return chip('pickk',x.code,x.name,P.k===x.code);}).join('')+'</div>'+(needK(cc)?'':'<p class="hint">Optionnel : clique de nouveau sur ton choix pour le retirer. Ces options viennent de la fiche UQAM; vérifie-les avec le responsable de programme.</p>');
   h+='</div></section>';
   if(cur){
     var kk=cc.filter(function(x){return x.code===P.k;})[0];
-    h+='<section class="sec cat-wrap"><h2 class="sec-t">Mon choix<small>code '+cur.code+'</small></h2><div class="sec-b"><div class="pb-t"><b>'+esc(cur.title)+'</b> ('+esc(cur.type)+', '+(CYC[cur.cycle]||cur.cycle)+')'+(kk?'<br>Concentration : <b>'+esc(kk.name)+'</b>':(cc.length?'<br><span class="hint">Choisis une concentration ci-dessus.</span>':''))+'</div>'
+    h+='<section class="sec cat-wrap"><h2 class="sec-t">Mon choix<small>code '+cur.code+'</small></h2><div class="sec-b"><div class="pb-t"><b>'+esc(cur.title)+'</b> ('+esc(cur.type)+', '+(CYC[cur.cycle]||cur.cycle)+')'+(kk?'<br>Concentration : <b>'+esc(kk.name)+'</b>':(needK(cc)?'<br><span class="hint">Choisis une concentration ci-dessus.</span>':''))+'</div>'
       +'<p class="hint">Source : <a href="'+esc(cur.url)+'" target="_blank" rel="noopener">fiche officielle UQAM</a>. Information non officielle : confirme ton cheminement avec le responsable de programme.</p>'
-      +'<button type="button" class="btn primary" data-act="pvalid"'+(cc.length&&!kk?' disabled':'')+'>Valider mon programme et voir le cheminement →</button></div></section>';
+      +'<button type="button" class="btn primary" data-act="pvalid"'+(needK(cc)&&!kk?' disabled':'')+'>Valider mon programme et voir le cheminement →</button></div></section>';
   }
   return h;
 }
@@ -764,9 +779,11 @@ function progCoursesHTML(){
   var P=S.pick,cur=STRUCT&&STRUCT.programmes[P.p];if(!cur)return '<p class="hint">Chargement du programme…</p>';
   var cc=concOf(cur),h='';
   {
-    var core=(cur.sections||[]).filter(function(x){return x.courses.length&&!/\((\w{4})\)\s*$/.test(x.heading);});
+    var core=(cur.sections||[]).filter(function(x){return x.courses.length&&!cc.some(function(o){return o.s===x;});});
     var kc=cc.filter(function(x){return x.code===P.k;})[0];
     h+='<p class="hint">Cours du programme (source : <a href="'+esc(cur.url)+'" target="_blank" rel="noopener">fiche UQAM</a>, lue le '+esc(fmtStamp(cur.fetched||STRUCT.fetched))+'). Coche ceux que tu veux suivre.</p>';
+    if(!hasGrid())h+='<p class="hint note">'+(cur.code==='7111'?'La grille par trimestre du site couvre seulement la concentration Finance. Pour cette concentration, les cours sont présentés par bloc.':'Aucune grille par trimestre pour ce programme : les cours sont présentés par bloc, comme sur la fiche UQAM. Valide l’ordre des sessions avec le responsable de programme.')+'</p>';
+    if(cc.length&&!kc&&!needK(cc))h+='<p class="hint note">Choisis un profil ou une concentration dans « Programmes » pour voir ses cours (optionnel).</p>';
     core.forEach(function(x){h+='<h3 class="ph">'+esc(x.heading.replace(/:\s*$/,''))+'</h3>'+x.courses.map(progRow).join('');});
     if(kc)h+='<h3 class="ph">Concentration : '+esc(kc.name)+'</h3>'+kc.s.courses.map(progRow).join('');
     if(!core.length&&!kc)h+='<p class="hint">'+esc(cur.note||'La page du programme ne liste pas de cours.')+'</p>';
@@ -800,11 +817,12 @@ function progBanner(){
     +(S.picked?'':'<div class="hint">Programme par défaut : confirme-le ou change-le.</div>')+'</div>'
     +'<button type="button" class="btn sm" data-act="goprog">Changer</button></div>';
 }
-function catView(){return S.pick.p==='7111'?(S.view==='all'?'all':S.view==='prog'?'prog':'sess'):'prog';}
+function hasGrid(){return S.pick.p==='7111'&&S.pick.k==='7111';}
+function catView(){return hasGrid()?(S.view==='all'?'all':S.view==='prog'?'prog':'sess'):'prog';}
 function catalogHTML(){
   var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0),v=catView();
   var h=progBanner()+'<section class="sec cat cat-wrap"><h2 class="sec-t">Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></h2><div class="sec-b">';
-  if(S.pick.p==='7111')h+='<div class="chips"><button type="button" class="chip" data-act="catview" data-v="prog" aria-pressed="'+(v==='prog')+'">Cours du programme</button><button type="button" class="chip" data-act="catview" data-v="sess" aria-pressed="'+(v==='sess')+'">Par trimestre (grille type)</button><button type="button" class="chip" data-act="catview" data-v="all" aria-pressed="'+(v==='all')+'">Tous les cours</button></div>';
+  if(hasGrid())h+='<div class="chips"><button type="button" class="chip" data-act="catview" data-v="prog" aria-pressed="'+(v==='prog')+'">Cours du programme</button><button type="button" class="chip" data-act="catview" data-v="sess" aria-pressed="'+(v==='sess')+'">Par trimestre (grille type)</button><button type="button" class="chip" data-act="catview" data-v="all" aria-pressed="'+(v==='all')+'">Tous les cours</button></div>';
   h+=(v==='all'?allHTML():v==='sess'?sessionHTML():progCoursesHTML())+'</div></section>'+valBarHTML(cs);
   return h;
 }
@@ -1035,15 +1053,15 @@ document.addEventListener('click',function(e){
     if(k>=0){S.favs.splice(k,1);viewFav=null;}else if(S.favs.length<12)S.favs.push({picks:p});save();renderResults();return;}
   if(a==='rmfav'){S.favs.splice(+d.i,1);viewFav=null;save();renderResults();return;}
   if(a==='catview'){S.view=d.v==='all'?'all':d.v==='prog'?'prog':'sess';save();render();return;}
-  if(a==='pvalid'){S.picked=true;S.view=S.pick.p==='7111'?S.view:'prog';save();goTab('cours');render();return;}
+  if(a==='pvalid'){S.picked=true;S.view=hasGrid()?S.view:'prog';save();goTab('cours');render();return;}
   if(a==='opencat'){S.open.catalog=true;save();goTab('cours');render();window.scrollTo(0,0);return;}
   if(a==='validate'){validate();return;}
   if(a==='goprog'){goTab('programmes');return;}
   if(a==='gocours'){goTab('cours');return;}
   if(a==='pickc'){S.pick={c:d.v,t:'',p:'',k:''};save();renderPages();return;}
   if(a==='pickt'){S.pick={c:S.pick.c,t:d.v,p:'',k:''};save();renderPages();return;}
-  if(a==='pickp'){var pp=STRUCT&&STRUCT.programmes[d.p];if(pp){var cc=concOf(pp);S.pick={c:pp.cycle,t:pp.type,p:pp.code,k:(cc.filter(function(x){return x.code===pp.code;})[0]||cc[0]||{code:''}).code};S.picked=true;if(pp.code==='7111'&&S.view==='prog')S.view='sess';save();renderPages();window.scrollTo(0,0);}return;}
-  if(a==='pickk'){S.pick.k=d.v;S.picked=true;save();renderPages();return;}
+  if(a==='pickp'){var pp=STRUCT&&STRUCT.programmes[d.p];if(pp){var cc=concOf(pp);S.pick={c:pp.cycle,t:pp.type,p:pp.code,k:defK(pp)};S.picked=true;if(hasGrid()&&S.view==='prog')S.view='sess';save();renderPages();window.scrollTo(0,0);}return;}
+  if(a==='pickk'){var cu=STRUCT&&STRUCT.programmes[S.pick.p];S.pick.k=(S.pick.k===d.v&&cu&&!needK(concOf(cu)))?'':d.v;S.picked=true;save();renderPages();return;}
   if(a==='ptog'){var pc=course(d.c);if(!pc)return;
     if(S.sel.indexOf(d.c)<0&&preUnmet(pc)){toast('Préalable à faire d’abord : '+pc.preSig.join(pc.preAny?' ou ':' et ')+'.');return;}
     if(S.sel.indexOf(d.c)<0)S.pOf[d.c]=progFor(d.c);
