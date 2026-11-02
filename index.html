@@ -420,7 +420,7 @@ body.sending::before{content:"";position:fixed;inset:0;z-index:110;background:rg
 .gear:hover,.gear.on{background:var(--accent-soft);color:var(--accent)}
 .hero2{position:relative;overflow:hidden;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:20px;align-items:center;margin:0 0 22px;padding:clamp(28px,5vw,56px) clamp(20px,4vw,48px);border-radius:22px;color:#fff;
   background:linear-gradient(135deg,#06182E 0%,#0B2C55 55%,#10467F 100%);box-shadow:var(--shadow)}
-.hero2-bg{position:absolute;inset:0;z-index:-1}
+.hero2-bg{position:absolute;inset:0;z-index:-1;-webkit-mask-image:linear-gradient(90deg,transparent 0%,transparent 28%,#000 62%);mask-image:linear-gradient(90deg,transparent 0%,transparent 28%,#000 62%)}
 .hero2-bg span{position:absolute;border-radius:10px;filter:blur(2px);opacity:.38}
 .hero2-sky{position:absolute;left:0;right:0;bottom:0;height:120px;z-index:-1;opacity:.55}
 .hero2 .eyebrow{margin:0 0 6px;font:600 clamp(1.1rem,2.6vw,1.6rem) var(--font-head);color:#9CC9F5;letter-spacing:.01em}
