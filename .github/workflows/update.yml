@@ -79,6 +79,7 @@ jobs:
         run: |
           cp index.html site/index.html
           cp structure.json site/structure.json
+          [ -f grilles.json ] && cp grilles.json site/grilles.json || true
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

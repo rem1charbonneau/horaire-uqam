@@ -459,7 +459,7 @@ var GRID=[
  ['FIN5521','FIN5523','FIN5570','FIN5580','Cours de concentration'],
  ['FIN5525','FIN5531','FIN5550','Cours de concentration','Cours de concentration']
 ];
-var TRIM={};GRID.forEach(function(row,i){row.forEach(function(x){(Array.isArray(x)?x:[x]).forEach(function(c){if(/^[A-Z]{3}\d{4}$/.test(c))TRIM[c]=i+1;});});});
+function trimOf(code){var r=gridRows(),n=0;if(!r)return 0;r.forEach(function(row,i){row.items.forEach(function(it){if(it.alts&&it.alts.indexOf(code)>=0&&!n)n=i+1;});});return n;}
 var T=function(s){var p=s.split(':');return +p[0]*60+ +p[1];};
 var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
 var DATA={},CACHE={},STRUCT=null,CAT={};
@@ -671,7 +671,7 @@ function selCls(code){
 function groupSatisfied(codes){return codes.some(isDone);}
 function cellHTML(code,blocked){
   var c=course(code);
-  if(!c)return '<div class="gc off"><b class="cd">'+code+'</b><span class="hint">Données non chargées</span></div>';
+  if(!c)return '<div class="gc off"><b class="cd">'+code+'</b><span class="hint">Hors du catalogue de gestion</span></div>';
   var on=S.sel.indexOf(code)>=0,dn=isDone(code);
   var un=!dn&&preUnmet(c);
   var can=offered(c)&&!dn&&!blocked&&!un;
@@ -683,18 +683,21 @@ function cellHTML(code,blocked){
     +'<div class="pre-line'+(un?' warn':'')+'" title="'+esc(c.pre)+'"><b>Préalable'+(c.preSig.length>1?'s':'')+' :</b> '+esc(preText(c)||'aucun')+'</div></div></div>';
 }
 function sessionHTML(){
-  var h='';
-  GRID.forEach(function(row,i){
-    var codes=[];row.forEach(function(x){(Array.isArray(x)?x:[x]).forEach(function(c){if(/^[A-Z]{3}\d{4}$/.test(c))codes.push(c);});});
+  var g=gridInfo(),h='';
+  if(!g)return '<p class="hint">Aucune grille type pour ce programme.</p>';
+  if(g.need)return '<p class="hint note">Ce programme a une grille par profil ou concentration : choisis-en un dans « Programmes » pour voir la grille correspondante.</p>';
+  if(g.src)h+='<p class="hint">Grille type officielle (<a href="'+esc(g.src.url)+'" target="_blank" rel="noopener">fiche UQAM</a>, lue le '+esc(fmtStamp(g.src.fetched))+')'+(g.title?' : '+esc(g.title):'')+'. C’est un modèle, pas une obligation : confirme ton cheminement avec le responsable de programme.</p>';
+  if(g.variants)h+='<div class="lab">Version de la grille</div><div class="chips">'+g.variants.map(function(o,i){return chip('gvar',String(i),o.title.length>70?o.title.slice(0,68)+'…':o.title,o.title===g.title);}).join('')+'</div>';
+  g.rows.forEach(function(row,i){
+    var codes=[];row.items.forEach(function(x){if(x.alts)x.alts.forEach(function(c){codes.push(c);});});
     var nSel=codes.filter(function(c){return S.sel.indexOf(c)>=0;}).length,nDone=codes.filter(isDone).length;
-    h+='<div class="tri"><div class="tri-h"><b>'+(i===0?'1er':(i+1)+'e')+' trimestre</b><span>'+(nDone?nDone+' fait'+(nDone>1?'s':'')+' · ':'')+nSel+' choisi'+(nSel>1?'s':'')+'</span></div><div class="tri-g">';
-    row.forEach(function(x){
-      if(Array.isArray(x)){
-        var sat=groupSatisfied(x);
-        h+='<div class="gc grp-par"><div class="hint" style="margin-bottom:6px">1 cours parmi :</div>'+x.map(function(c){return cellHTML(c,sat&&!isDone(c));}).join('')+'</div>';
-      }else if(/^[A-Z]{3}\d{4}$/.test(x))h+=cellHTML(x,false);
-      else if(x==='Cours libre')h+='<div class="gc ph"><b>Cours libre</b></div>';
-      else h+='<div class="gc ph"><b>Cours de concentration</b><button type="button" class="btn sm" data-act="catview" data-v="all">Voir la liste</button></div>';
+    h+='<div class="tri"><div class="tri-h"><b>'+esc(row.label)+'</b><span>'+(nDone?nDone+' fait'+(nDone>1?'s':'')+' · ':'')+nSel+' choisi'+(nSel>1?'s':'')+'</span></div><div class="tri-g">';
+    row.items.forEach(function(x){
+      if(x.alts&&x.par){
+        var sat=groupSatisfied(x.alts);
+        h+='<div class="gc grp-par"><div class="hint" style="margin-bottom:6px">1 cours parmi :</div>'+x.alts.map(function(c){return cellHTML(c,sat&&!isDone(c));}).join('')+'</div>';
+      }else if(x.alts)h+=cellHTML(x.alts[0],false);
+      else h+='<div class="gc ph"><b>'+esc(x.text)+'</b>'+(/concentration|option|choix|profil|bloc/i.test(x.text)?'<button type="button" class="btn sm" data-act="catview" data-v="prog">Voir la liste</button>':'')+'</div>';
     });
     h+='</div></div>';
   });
@@ -782,7 +785,7 @@ function progCoursesHTML(){
     var core=(cur.sections||[]).filter(function(x){return x.courses.length&&!cc.some(function(o){return o.s===x;});});
     var kc=cc.filter(function(x){return x.code===P.k;})[0];
     h+='<p class="hint">Cours du programme (source : <a href="'+esc(cur.url)+'" target="_blank" rel="noopener">fiche UQAM</a>, lue le '+esc(fmtStamp(cur.fetched||STRUCT.fetched))+'). Coche ceux que tu veux suivre.</p>';
-    if(!hasGrid())h+='<p class="hint note">'+(cur.code==='7111'?'La grille par trimestre du site couvre seulement la concentration Finance. Pour cette concentration, les cours sont présentés par bloc.':'Aucune grille par trimestre pour ce programme : les cours sont présentés par bloc, comme sur la fiche UQAM. Valide l’ordre des sessions avec le responsable de programme.')+'</p>';
+    if(!hasGrid())h+='<p class="hint note">'+'La fiche UQAM ne publie pas de grille par trimestre pour ce programme : les cours sont présentés par bloc. Valide l’ordre des sessions avec le responsable de programme.'+'</p>';
     if(cc.length&&!kc&&!needK(cc))h+='<p class="hint note">Choisis un profil ou une concentration dans « Programmes » pour voir ses cours (optionnel).</p>';
     core.forEach(function(x){h+='<h3 class="ph">'+esc(x.heading.replace(/:\s*$/,''))+'</h3>'+x.courses.map(progRow).join('');});
     if(kc)h+='<h3 class="ph">Concentration : '+esc(kc.name)+'</h3>'+kc.s.courses.map(progRow).join('');
@@ -817,12 +820,58 @@ function progBanner(){
     +(S.picked?'':'<div class="hint">Programme par défaut : confirme-le ou change-le.</div>')+'</div>'
     +'<button type="button" class="btn sm" data-act="goprog">Changer</button></div>';
 }
-function hasGrid(){return S.pick.p==='7111'&&S.pick.k==='7111';}
-function catView(){return hasGrid()?(S.view==='all'?'all':S.view==='prog'?'prog':'sess'):'prog';}
+var GRIDS=null;
+function normS(x){return (x||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\([^)]*\)/g,' ').replace(/[^a-z0-9]+/g,' ').trim();}
+function optKey(x){return normS(x).replace(/^(concentration|profil|cheminement)( en| de| des| du| d)? /,'');}
+function parseCell(t){
+  t=(t||'').replace(/\*+/g,'').replace(/\s+/g,' ').trim();if(!t)return null;
+  t=t.replace(/^\d+\)\s*(et\s+\d+\)\s*)?/,'').replace(/^\d+\s+(?=[A-Z]{3}\d{4})/,'');
+  var sg=t.match(/[A-Z]{3}\d{4}/g)||[];
+  if(sg.length)return {alts:sg.filter(function(v,i){return sg.indexOf(v)===i;}),par:sg.length>1};
+  return {text:t};
+}
+function legacyRows(){return GRID.map(function(row,i){return {label:(i===0?'1er':(i+1)+'e')+' trimestre',items:row.map(function(x){return Array.isArray(x)?{alts:x,par:true}:/^[A-Z]{3}\d{4}$/.test(x)?{alts:[x]}:{text:x};})};});}
+function expandCell(t){
+  return (t||'').split(/;|\s+et\s+(?=[A-Z]{3}\d{4})/).map(parseCell).filter(Boolean);
+}
+function normRows(rows){
+  if(!rows||!rows.length)return [];
+  var head=rows[0];
+  if(head.length>1&&head.every(function(c){return /^trimestre/i.test(c.t);})&&rows.length>1){
+    var out=[];
+    head.forEach(function(c,j){var items=[];rows.slice(1).forEach(function(r){if(r[j])expandCell(r[j].t).forEach(function(x){items.push(x);});});out.push({label:c.t.replace(/\s+/g,' '),items:items});});
+    return out;
+  }
+  return rows.filter(function(r){var t=r[0]&&r[0].t;return t&&t.length<=30&&!/[A-Z]{3}\d{4}/.test(t)&&!/^trimestre$/i.test(t.trim())&&/^\d|\b[IVX]{1,3}\b|aut|hiv|[ée]t[ée]/i.test(t);}).map(function(r){
+    var items=[];r.slice(1).forEach(function(c){expandCell(c.t).forEach(function(x){items.push(x);});});
+    return {label:r[0].t.replace(/\s+/g,' '),items:items};
+  }).filter(function(r){return r.items.length;});
+}
+function gridInfo(){
+  var cur=STRUCT&&STRUCT.programmes[S.pick.p];
+  if(!GRIDS){return S.pick.p==='7111'&&S.pick.k==='7111'?{rows:legacyRows(),src:null}:null;}
+  var g=GRIDS.programmes[S.pick.p];if(!g||!g.grids||!g.grids.length)return null;
+  var cc=cur?concOf(cur):[],kk=cc.filter(function(x){return x.code===S.pick.k;})[0];
+  var common=g.grids.filter(function(x){return /tronc commun/i.test(x.title);}),opts=g.grids.filter(function(x){return !/tronc commun/i.test(x.title);}),pick=null,variants=null;
+  if(opts.length<=1)pick=opts[0]||null;
+  else{
+    if(kk){var nk=optKey(kk.name);pick=opts.filter(function(o){return optKey(o.title)===nk;})[0]||opts.filter(function(o){var t=optKey(o.title);return t.indexOf(nk)>=0||nk.indexOf(t)>=0;})[0]||null;}
+    if(!pick&&cc.length>1&&needK(cc))return {need:true,src:g};
+    if(!pick){variants=opts;pick=opts.filter(function(o){return o.title===S.gv;})[0]||opts[0];}
+  }
+  var base=pick||common[0];if(!base)return null;
+  var rows=normRows(common.length&&pick?common[0].rows.concat(pick.rows):base.rows);
+  if(common.length&&pick)rows=normRows(common[0].rows).concat(normRows(pick.rows));
+  if(!rows.length)return null;
+  return {rows:rows,src:g,title:pick?pick.title:base.title,variants:variants};
+}
+function gridRows(){var g=gridInfo();return g&&g.rows?g.rows:null;}
+function hasGrid(){return !!gridInfo();}
+function catView(){return hasGrid()?(S.view==='all'&&S.pick.p==='7111'&&S.pick.k==='7111'?'all':S.view==='prog'?'prog':'sess'):'prog';}
 function catalogHTML(){
   var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0),v=catView();
   var h=progBanner()+'<section class="sec cat cat-wrap"><h2 class="sec-t">Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></h2><div class="sec-b">';
-  if(hasGrid())h+='<div class="chips"><button type="button" class="chip" data-act="catview" data-v="prog" aria-pressed="'+(v==='prog')+'">Cours du programme</button><button type="button" class="chip" data-act="catview" data-v="sess" aria-pressed="'+(v==='sess')+'">Par trimestre (grille type)</button><button type="button" class="chip" data-act="catview" data-v="all" aria-pressed="'+(v==='all')+'">Tous les cours</button></div>';
+  if(hasGrid())h+='<div class="chips"><button type="button" class="chip" data-act="catview" data-v="prog" aria-pressed="'+(v==='prog')+'">Cours du programme</button><button type="button" class="chip" data-act="catview" data-v="sess" aria-pressed="'+(v==='sess')+'">Par trimestre (grille type)</button>'+(S.pick.p==='7111'&&S.pick.k==='7111'?'<button type="button" class="chip" data-act="catview" data-v="all" aria-pressed="'+(v==='all')+'">Tous les cours</button>':'')+'</div>';
   h+=(v==='all'?allHTML():v==='sess'?sessionHTML():progCoursesHTML())+'</div></section>'+valBarHTML(cs);
   return h;
 }
@@ -847,7 +896,7 @@ function controlsHTML(){
   var cs=selCourses(),coursesB='';
   cs.forEach(function(c){
     var cand=candidates(c).length,un=preUnmet(c);
-    coursesB+='<div class="crs '+c.cls+'"><div class="crs-h"><code>'+c.code+'</code>'+(TRIM[c.code]?'<span class="cr" title="Trimestre de la grille type">T'+TRIM[c.code]+'</span>':'')+'<span class="ti" style="flex:1">'+esc(c.title)+'</span>'
+    coursesB+='<div class="crs '+c.cls+'"><div class="crs-h"><code>'+c.code+'</code>'+(trimOf(c.code)?'<span class="cr" title="Trimestre de la grille type">T'+trimOf(c.code)+'</span>':'')+'<span class="ti" style="flex:1">'+esc(c.title)+'</span>'
       +'<span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span>'
       +'<span class="n">'+(offered(c)?cand+'/'+c.groups.length:'non offert')+'</span><button type="button" class="btn sm" data-act="removec" data-c="'+c.code+'" aria-label="Retirer '+c.code+'">Retirer</button></div>'
       +'<div class="age'+(ageMin(c)>90?' old':'')+'">'+ageText(c)+'</div>'
@@ -1061,6 +1110,7 @@ document.addEventListener('click',function(e){
   if(a==='pickc'){S.pick={c:d.v,t:'',p:'',k:''};save();renderPages();return;}
   if(a==='pickt'){S.pick={c:S.pick.c,t:d.v,p:'',k:''};save();renderPages();return;}
   if(a==='pickp'){var pp=STRUCT&&STRUCT.programmes[d.p];if(pp){var cc=concOf(pp);S.pick={c:pp.cycle,t:pp.type,p:pp.code,k:defK(pp)};S.picked=true;if(hasGrid()&&S.view==='prog')S.view='sess';save();renderPages();window.scrollTo(0,0);}return;}
+  if(a==='gvar'){var gg=GRIDS&&GRIDS.programmes[S.pick.p];var vs=gg?gg.grids.filter(function(x){return !/tronc commun/i.test(x.title);}):[];if(vs[+d.v]){S.gv=vs[+d.v].title;save();render();}return;}
   if(a==='pickk'){var cu=STRUCT&&STRUCT.programmes[S.pick.p];S.pick.k=(S.pick.k===d.v&&cu&&!needK(concOf(cu)))?'':d.v;S.picked=true;save();renderPages();return;}
   if(a==='ptog'){var pc=course(d.c);if(!pc)return;
     if(S.sel.indexOf(d.c)<0&&preUnmet(pc)){toast('Préalable à faire d’abord : '+pc.preSig.join(pc.preAny?' ou ':' et ')+'.');return;}
@@ -1522,6 +1572,7 @@ document.addEventListener('keydown',function(e){
 window.addEventListener('resize',closePop);
 window.addEventListener('scroll',function(e){if(tfPop&&!(e.target&&e.target.classList&&e.target.classList.contains('tf-pop')))closePop();},true);
 function start(){load();render();showTab();}
+fetch('grilles.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(d&&d.programmes){GRIDS=d;render();}}).catch(function(){});
 fetch('structure.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(d){STRUCT=d;render();}}).catch(function(){});
 fetch('catalogue.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(d){CAT=d;CACHE={};render();}}).catch(function(){});
 fetch('data.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){DATA=d;CACHE={};start();})

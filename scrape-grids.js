@@ -17,7 +17,9 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
       const d=await p.evaluate((raw)=>{
         const ids=[...document.querySelectorAll('[id*="grille" i],[class*="grille" i]')];
         const tables=[...document.querySelectorAll('table')];
-        const pick=tables.filter(t=>/trimestre/i.test(t.innerText)&&/[A-Z]{3}\d{4}/.test(t.innerText));
+        const loose=t=>{const rows=[...t.querySelectorAll('tr')];if(rows.length<4)return false;const sig=new Set(t.innerText.match(/[A-Z]{3}\d{4}/g)||[]);if(sig.size<6)return false;
+          const lab=rows.filter(r=>{const c=r.children[0];if(!c)return false;const x=c.innerText.replace(/\s+/g,' ').trim();return x.length>0&&x.length<=30&&!/[A-Z]{3}\d{4}/.test(x)&&/^\d|aut|hiv|[ée]t[ée]|trimestre/i.test(x);});return lab.length>=3&&lab.length>=rows.length*0.6;};
+        const pick=tables.filter(t=>(/trimestre/i.test(t.innerText)&&/[A-Z]{3}\d{4}/.test(t.innerText))||loose(t));
         const grids=pick.map(t=>{
           const title=(()=>{let n=t;for(let i=0;i<6&&n;i++){let s=n.previousElementSibling;while(s){if(/^H[1-6]$/.test(s.tagName)||s.matches('.titre_bloc,.titre'))return s.innerText.replace(/\s+/g,' ').trim();s=s.previousElementSibling;}n=n.parentElement;}return '';})();
           const rows=[...t.querySelectorAll('tr')].map(tr=>[...tr.children].map(c=>({t:c.innerText.replace(/\s+/g,' ').trim(),s:(c.innerText.match(/[A-Z]{3}\d{4}/g)||[])})));

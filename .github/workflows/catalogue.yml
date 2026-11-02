@@ -35,7 +35,9 @@ jobs:
       - name: Lire les fiches de cours (deux à la fois, avec pause)
         run: node scrape-catalog.js site/catalogue.json structure.json
       - run: cp index.html site/index.html
-      - run: cp structure.json site/structure.json
+      - run: |
+          cp structure.json site/structure.json
+          [ -f grilles.json ] && cp grilles.json site/grilles.json || true
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
