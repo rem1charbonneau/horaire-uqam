@@ -77,6 +77,7 @@ jobs:
           node scrape.js site/data.json 7111 $LIST
       - name: Assembler le site
         run: cp index.html site/index.html
+          cp structure.json site/structure.json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
