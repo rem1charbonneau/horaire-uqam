@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,800&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 /* Disposition : colonne de réglages à gauche (4 sections repliables), résultats à droite avec navigation d'un horaire à l'autre. */
 :root{
@@ -407,25 +407,69 @@ body.sending::before{content:"";position:fixed;inset:0;z-index:110;background:rg
 .pbanner{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:12px;background:var(--surface)}
 .pb-t{font-size:.9375rem;margin-top:2px}
 .age{font-size:.75rem;color:var(--muted);padding:2px 2px 6px}.age.old{color:var(--warn,#d6a100)}
+/* ---- accueil et étapes ---- */
+.nav .brand{display:flex;align-items:center;gap:8px;font:800 1.05rem var(--font-head);color:var(--ink);letter-spacing:-.01em}
+.nav .brand b{color:var(--accent);font-weight:800}
+.b-mark{display:inline-flex;width:30px;height:30px;border-radius:50%;background:#F2B35A;align-items:center;justify-content:center;flex:none}
+.tabs{justify-content:center}
+.tabs a{display:flex;align-items:center;gap:8px}
+.tabs a i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font:700 .75rem var(--font-head)}
+.tabs a.on i{background:rgba(255,255,255,.25);color:var(--accent-ink)}
+.tabs a.done:not(.on) i{background:var(--ok-bg);color:var(--ok)}
+.gear{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;color:var(--muted);text-decoration:none}
+.gear:hover,.gear.on{background:var(--accent-soft);color:var(--accent)}
+.hero2{position:relative;overflow:hidden;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:20px;align-items:center;margin:0 0 22px;padding:clamp(28px,5vw,56px) clamp(20px,4vw,48px);border-radius:22px;color:#fff;
+  background:linear-gradient(135deg,#06182E 0%,#0B2C55 55%,#10467F 100%);box-shadow:var(--shadow)}
+.hero2-bg{position:absolute;inset:0;z-index:-1;opacity:.9;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 84px),repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 42px)}
+.hero2-bg span{position:absolute;border-radius:10px;filter:blur(2px);opacity:.38}
+.hero2-sky{position:absolute;left:0;right:0;bottom:0;height:120px;z-index:-1;opacity:.55}
+.hero2 .eyebrow{margin:0 0 6px;font:600 clamp(1.1rem,2.6vw,1.6rem) var(--font-head);color:#9CC9F5;letter-spacing:.01em}
+.hero2 h1{margin:0;font:italic 800 clamp(3rem,9vw,6.2rem)/.95 var(--font-head);letter-spacing:-.03em;text-shadow:0 6px 24px rgba(0,0,0,.35)}
+.hero2 h1 span{color:#F2B35A}
+.hero2 .lead{margin:14px 0 0;max-width:34em;font-size:clamp(1rem,2vw,1.2rem);line-height:1.45;color:#C9DDF3}
+.hero2 .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.cta{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border:0;border-radius:10px;background:#F2B35A;color:#0B1E36;font:italic 800 1.05rem var(--font-head);text-transform:uppercase;letter-spacing:.01em;cursor:pointer;text-decoration:none;box-shadow:0 8px 22px rgba(242,179,90,.28);transition:transform .15s,box-shadow .15s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(242,179,90,.38)}
+.cta2{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border:1px solid rgba(255,255,255,.35);border-radius:10px;background:transparent;color:#E8F1FB;font:500 1rem var(--font-body);cursor:pointer}
+.cta2:hover{background:rgba(255,255,255,.1)}
+.hero2-art{position:relative;display:flex;justify-content:center}
+.hero2-art svg{width:min(100%,360px);height:auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.4))}
+.art-card{position:absolute;right:2%;bottom:6%;display:grid;grid-template-columns:repeat(3,22px);gap:4px;padding:10px;border-radius:12px;background:rgba(255,255,255,.95);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.art-card i{display:block;height:34px;border-radius:5px}
+.why{margin:0 0 20px}
+.why h2{margin:0 0 6px;font:700 1.4rem var(--font-head);letter-spacing:-.01em}
+.why>p{margin:0 0 16px;max-width:46em;color:var(--muted);line-height:1.5}
+.why-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.why-c{display:flex;flex-direction:column;gap:10px;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:var(--shadow)}
+.why-c .ic{width:72px;height:72px;border-radius:18px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center}
+.why-c .k{font:700 .75rem var(--font-head);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.why-c h3{margin:0;font:700 1.1rem var(--font-head)}
+.why-c p{margin:0;color:var(--muted);font-size:.9375rem;line-height:1.45}
+.fine{margin:14px 0 0;font-size:.8125rem;color:var(--muted)}
+.sh{display:flex;align-items:center;gap:14px;margin:0 0 14px;padding:14px 18px;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:var(--shadow)}
+.sh-ic{flex:none;width:56px;height:56px;border-radius:16px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center}
+.sh-k{font:700 .75rem var(--font-head);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.sh-t{margin:0;font:800 1.35rem var(--font-head);letter-spacing:-.01em}
+.sh .hint{margin-top:2px}
+@media (max-width:760px){.hero2{grid-template-columns:minmax(0,1fr)}.hero2-art{order:-1}.hero2-art svg{width:min(70%,240px)}.nav{flex-wrap:wrap;row-gap:6px}.nav .brand{order:1}.nav-r{order:2;margin-left:auto}.nav .stamp{display:none}.tabs{order:3;flex:1 0 100%;overflow-x:auto;justify-content:flex-start}.tabs{gap:2px}.tabs a{padding:6px 7px;gap:5px;white-space:nowrap;font-size:.8125rem}.tabs a i{width:20px;height:20px}}
 </style>
 </head><body>
 
 <nav class="nav" id="nav">
-  <a class="brand" href="#accueil">Horaire UQAM</a>
+  <a class="brand" href="#accueil" aria-label="Accueil Horaire UQAM"><span class="b-mark" id="bmark"></span><span>Horaire<b>UQAM</b></span></a>
   <div class="tabs" role="tablist">
-    <a href="#accueil" data-tab="accueil">Accueil</a>
-    <a href="#programmes" data-tab="programmes">Programmes</a>
-    <a href="#cours" data-tab="cours">Choisir mes cours</a>
-    <a href="#generateur" data-tab="generateur">Générateur</a>
-    <a href="#parametres" data-tab="parametres">Paramètres</a>
+    <a href="#programmes" data-tab="programmes" data-n="1"><i>1</i>Programme</a>
+    <a href="#cours" data-tab="cours" data-n="2"><i>2</i>Choisir mes cours</a>
+    <a href="#generateur" data-tab="generateur" data-n="3"><i>3</i>Générateur</a>
   </div>
-  <div class="nav-r"><span class="stamp" id="stamp"></span></div>
+  <div class="nav-r"><span class="stamp" id="stamp"></span><a class="gear" href="#parametres" data-tab="parametres" aria-label="Paramètres" title="Paramètres"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></a></div>
 </nav>
 <div class="app">
   <section class="view" id="v-accueil"></section>
   <section class="view" id="v-cours" hidden><div id="catalog"></div></section>
   <section class="view" id="v-programmes" hidden></section>
   <section class="view" id="v-generateur" hidden>
+    <div id="gen-head"></div>
     <div class="cols">
       <aside class="left" id="left"></aside>
       <main class="right" id="right"></main>
@@ -791,7 +835,7 @@ function progHTML(){
   all.forEach(function(p){if(p.cycle===P.c&&types.indexOf(p.type)<0)types.push(p.type);});
   progs=all.filter(function(p){return p.cycle===P.c&&p.type===P.t;}).sort(function(a,b){return a.title<b.title?-1:1;});
   var cur=STRUCT.programmes[P.p],qv=(document.getElementById('progQ')||{}).value||'';
-  var h='<section class="sec cat-wrap"><h2 class="sec-t">Programmes<small>Gestion · '+all.length+' programmes</small></h2><div class="sec-b">'
+  var h=stepHead(1,'Choisis ton programme','Domaine, cycle, type, programme et concentration. Ensuite, valide pour voir ton cheminement.',IC_PROG)+'<section class="sec cat-wrap"><h2 class="sec-t">Programmes<small>Gestion · '+all.length+' programmes</small></h2><div class="sec-b">'
     +'<input type="search" id="progQ" class="pq" value="'+esc(qv)+'" placeholder="Chercher un programme (ex. finance, MBA, marketing)" autocomplete="off"><div id="progRes"></div>'
     +'<div class="lab">Domaine</div><div class="chips"><span class="chip" aria-pressed="true">Gestion (ESG)</span></div>'
     +'<div class="lab">Cycle</div><div class="chips">'+cycles.map(function(c){return chip('pickc',c,CYC[c]||c,P.c===c);}).join('')+'</div>'
@@ -903,7 +947,7 @@ function hasGrid(){return !!gridInfo();}
 function catView(){return hasGrid()?(S.view==='all'&&S.pick.p==='7111'&&S.pick.k==='7111'?'all':S.view==='prog'?'prog':'sess'):'prog';}
 function catalogHTML(){
   var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0),v=catView();
-  var h=progBanner()+'<section class="sec cat cat-wrap"><h2 class="sec-t">Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></h2><div class="sec-b">';
+  var h=stepHead(2,'Choisis tes cours','Coche les cours de l’hiver 2027, puis clique sur Valider : le site lit les groupes et les places.',IC_COURS)+progBanner()+'<section class="sec cat cat-wrap"><h2 class="sec-t">Choisir mes cours<small>'+cs.length+' choisis · '+cr+' crédits'+(S.done.length?' · '+S.done.length+' faits':'')+'</small></h2><div class="sec-b">';
   if(hasGrid())h+='<div class="chips"><button type="button" class="chip" data-act="catview" data-v="prog" aria-pressed="'+(v==='prog')+'">Cours du programme</button><button type="button" class="chip" data-act="catview" data-v="sess" aria-pressed="'+(v==='sess')+'">Par trimestre (grille type)</button>'+(S.pick.p==='7111'&&S.pick.k==='7111'?'<button type="button" class="chip" data-act="catview" data-v="all" aria-pressed="'+(v==='all')+'">Tous les cours</button>':'')+'</div>';
   h+=(v==='all'?allHTML():v==='sess'?sessionHTML():progCoursesHTML())+'</div></section>'+valBarHTML(cs);
   return h;
@@ -1160,6 +1204,8 @@ document.addEventListener('click',function(e){
   if(a==='anim'){P.anim=!P.anim;savePrefs();applyPrefs();renderPages();return;}
   if(a==='tokSave'){var ti=document.getElementById('tokIn');if(ti&&ti.value.trim()){setTok(ti.value.trim());toast('Jeton enregistré sur cet appareil.');}renderPages();return;}
   if(a==='tokDel'){setTok('');toast('Jeton retiré.');renderPages();return;}
+  if(a==='cta'){goTab(nextStep());return;}
+  if(a==='scrollwhy'){var w=document.getElementById('why');if(w)w.scrollIntoView({behavior:P.anim?'smooth':'auto',block:'start'});return;}
   if(a==='wipeGo'){wipeAsk=true;goTab('parametres');renderPages();return;}
   if(a==='wipe'){if(!wipeAsk){wipeAsk=true;renderPages();return;}
     try{[KEY,CKEY,LKEY,TKEY].forEach(function(k){localStorage.removeItem(k);});}catch(x){}
@@ -1243,10 +1289,21 @@ function setTok(v){try{if(v)localStorage.setItem(TKEY,v);else localStorage.remov
 var TABS=['accueil','programmes','cours','generateur','parametres'];
 function curTab(){var h=(location.hash||'').slice(1);return TABS.indexOf(h)>=0?h:'accueil';}
 function goTab(t){if(location.hash!=='#'+t)location.hash='#'+t;else showTab();}
+function paintNav(){
+  var cs=selCourses().filter(function(c){return !isDone(c.code);});
+  var dn={programmes:!!S.picked,cours:cs.length>0&&!!S.picked,generateur:cs.length>0&&valKey()===S.sent};
+  document.querySelectorAll('.tabs a').forEach(function(a){var k=a.getAttribute('data-tab'),i=a.querySelector('i');a.classList.toggle('done',!!dn[k]);if(i)i.textContent=dn[k]?'✓':a.getAttribute('data-n');});
+  var m=document.getElementById('bmark');if(m&&!m.innerHTML)m.innerHTML=SVG_MARK;
+}
+function genHead(){
+  var h=stepHead(3,'Génère ton horaire','Voici les horaires sans conflit avec tes cours validés. Trie-les, fixe un groupe, garde ceux que tu aimes.',IC_GEN)+changesHTML();
+  if(S.favs.length){h+='<div class="card" style="margin-bottom:14px"><h2 class="h3">Mes favoris</h2><div class="favs">'+S.favs.map(function(f,i){return '<button type="button" class="btn sm" data-act="homefav" data-i="'+i+'">'+esc(favLabel(f,i))+'</button>';}).join('')+'</div></div>';}
+  return h;
+}
 function showTab(){
   var t=curTab();
   TABS.forEach(function(k){document.getElementById('v-'+k).hidden=(k!==t);});
-  document.querySelectorAll('.tabs a').forEach(function(a){var on=a.getAttribute('data-tab')===t;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  document.querySelectorAll('.tabs a,.gear').forEach(function(a){var on=a.getAttribute('data-tab')===t;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   closePop();renderPages();window.scrollTo(0,0);
 }
 window.addEventListener('hashchange',showTab);
@@ -1434,33 +1491,36 @@ function changesHTML(){
   if(c.others>0)h+='<p class="hint">'+c.others+' autre'+(c.others>1?'s':'')+' changement'+(c.others>1?'s':'')+' dans les autres cours de la liste.</p>';
   return h+'</div>';
 }
+
+var SVG_MARK='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l4 7H8z" fill="#0B1E36"/><rect x="9" y="9" width="6" height="12" fill="#0B1E36"/><rect x="11" y="13" width="2" height="4" rx="1" fill="#F2B35A"/></svg>';
+var SVG_HERO='<svg viewBox="0 0 400 400" role="img" aria-label="Illustration : le Quartier latin de Montréal, avec un clocher en pierre et un pavillon moderne"><defs><clipPath id="hc"><circle cx="200" cy="200" r="190"/></clipPath><linearGradient id="hsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16407A"/><stop offset=".6" stop-color="#4F8FD0"/><stop offset="1" stop-color="#F7C879"/></linearGradient><linearGradient id="hglass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7DC0F5"/><stop offset="1" stop-color="#2F78BE"/></linearGradient></defs><circle cx="200" cy="200" r="196" fill="#F2B35A"/><g clip-path="url(#hc)"><rect width="400" height="400" fill="url(#hsky)"/><circle cx="302" cy="122" r="34" fill="#FFE2A8" opacity=".95"/><path d="M-10 290 Q90 232 210 276 T410 262 V420 H-10Z" fill="#1B4F86"/><g fill="#0E2C52" opacity=".85"><rect x="18" y="238" width="26" height="90"/><rect x="48" y="214" width="22" height="114"/><rect x="74" y="250" width="30" height="78"/><rect x="318" y="228" width="26" height="100"/><rect x="348" y="244" width="30" height="84"/></g><rect x="196" y="214" width="124" height="118" rx="3" fill="url(#hglass)"/><g stroke="#fff" stroke-opacity=".55" stroke-width="2"><path d="M196 244H320M196 274H320M196 304H320M227 214V332M258 214V332M289 214V332"/></g><rect x="196" y="206" width="124" height="10" fill="#0E2C52"/><polygon points="104,196 132,98 160,196" fill="#B9C3D1"/><polygon points="132,98 160,196 132,196" fill="#9AA7B8"/><rect x="132" y="70" width="2.6" height="30" fill="#0E2C52"/><rect x="123" y="79" width="20" height="2.6" fill="#0E2C52"/><rect x="108" y="196" width="48" height="136" fill="#D7C4A3"/><rect x="108" y="196" width="48" height="8" fill="#B69F78"/><path d="M122 236v-14a10 10 0 0 1 20 0v14z" fill="#33445C"/><circle cx="132" cy="262" r="10" fill="#F4EBD8" stroke="#33445C" stroke-width="2.5"/><path d="M132 255v7l5 3" stroke="#33445C" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M122 332v-30a10 10 0 0 1 20 0v30z" fill="#33445C"/><rect x="0" y="330" width="400" height="80" fill="#0E2C52"/><rect x="0" y="330" width="400" height="6" fill="#1D4A7C"/><g fill="#2E8B6B"><circle cx="84" cy="326" r="13"/><circle cx="352" cy="324" r="15"/></g><g fill="#5A3B26"><rect x="82" y="326" width="4" height="12"/><rect x="350" y="324" width="4" height="14"/></g></g></svg>';
+var SVG_SKY='<svg class="hero2-sky" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true"><path fill="#0A2548" d="M0 120V84h40V58h30v26h26V40h22v44h34V64h28v20h30V30l14-22 14 22v54h36V70h30v14h24V50h40v34h30V66h26v18h42V44h34v40h28V60h30v24h40V36h26v48h34V70h28v14h30V52h38v32h30V62h26v22h44V40h30v44h32V66h30v18h36V46h28v38h30V70h26v14h40V56h34v28h28V48h32v36h30v36z"/></svg>';
+var IC_PROG='<svg width="44" height="44" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M24 8L4 18l20 10 20-10z" fill="#0A6CC2"/><path d="M12 24v9c0 3 5.4 6 12 6s12-3 12-6v-9l-12 6z" fill="#3AA0E8"/><rect x="41" y="19" width="3" height="14" rx="1.5" fill="#F2B35A"/><circle cx="42.5" cy="35" r="3" fill="#F2B35A"/></svg>';
+var IC_COURS='<svg width="44" height="44" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="9" y="6" width="30" height="36" rx="5" fill="#DCEEFC" stroke="#0A6CC2" stroke-width="2.5"/><rect x="14" y="12" width="20" height="4" rx="2" fill="#0A6CC2"/><rect x="14" y="21" width="20" height="4" rx="2" fill="#3AA0E8"/><rect x="14" y="30" width="12" height="4" rx="2" fill="#3AA0E8"/><circle cx="35" cy="36" r="8" fill="#17794A"/><path d="M31 36l3 3 5-6" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var IC_GEN='<svg width="44" height="44" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="5" y="9" width="38" height="33" rx="6" fill="#fff" stroke="#0A6CC2" stroke-width="2.5"/><rect x="5" y="9" width="38" height="9" rx="5" fill="#0A6CC2"/><rect x="11" y="22" width="8" height="12" rx="2" fill="#F2B35A"/><rect x="21" y="26" width="8" height="12" rx="2" fill="#3AA0E8"/><rect x="31" y="22" width="7" height="9" rx="2" fill="#17794A"/></svg>';
+function stepHead(n,t,d,ic){return '<div class="sh"><div class="sh-ic">'+ic+'</div><div><div class="sh-k">Étape '+n+' sur 3</div><h1 class="sh-t">'+t+'</h1><p class="hint">'+d+'</p></div></div>';}
+
+function nextStep(){
+  var cs=selCourses().filter(function(c){return !isDone(c.code);});
+  if(!S.picked)return 'programmes';
+  if(!cs.length||valKey()!==S.sent)return 'cours';
+  return 'generateur';
+}
 function homeHTML(){
-  var cs=selCourses().filter(function(c){return !isDone(c.code);}),cr=cs.reduce(function(a,c){return a+c.credits;},0);
-  var o=oldest(),age=o?(Date.now()-new Date(o).getTime())/6e4:null;
-  var sent=cs.length>0&&valKey()===S.sent;
-  var st=[
-    {n:1,t:'Choisis ton programme',d:'Domaine, cycle, type, programme et concentration : tu vois les cours du programme, leurs crédits et leurs préalables.',done:S.picked||cs.length>0,a:'goprog',b:'Choisir mon programme'},
-    {n:2,t:'Choisis tes cours',d:'Coche les cours que tu veux suivre à l’hiver 2027. Les préalables manquants sont signalés.',done:cs.length>0,a:'gocours',b:'Choisir mes cours'},
-    {n:3,t:'Valide',d:'Un clic sur « Valider » envoie tes cours : le site lit alors les groupes et les places restantes à l’UQAM.',done:sent,a:'gocours',b:'Aller valider'},
-    {n:4,t:'Génère ton horaire',d:'Le site te propose des horaires sans conflit, triés selon tes goûts (moins de jours, moins de trous, plus de places).',done:false,a:'gen',b:'Ouvrir le générateur'}
-  ];
-  var cur=0;for(var k=0;k<3;k++){if(!st[k].done){cur=k;break;}cur=3;}
-  var h='<div class="hero"><div><h1>Construis ton horaire UQAM</h1><p>Hiver 2027 · Faculté de gestion (ESG). Choisis tes cours, le site trouve les horaires sans conflit et te montre les places qui restent.</p></div></div>'
-    +'<div class="steps">'+st.map(function(x,i){
-      var on=i===cur,dn=x.done;
-      return '<div class="step'+(on?' now':'')+(dn?' ok':'')+'"><div class="sn">'+(dn?'✓':x.n)+'</div><div class="sb"><h2 class="h3">'+x.t+'</h2><p class="hint">'+x.d+'</p>'
-        +'<button type="button" class="btn'+(on?' primary':'')+' sm" data-act="'+x.a+'"'+(i===3&&!cs.length?' disabled':'')+'>'+x.b+(on?' →':'')+'</button></div></div>';}).join('')+'</div>';
-  if(cs.length){
-    h+='<div class="home-cols"><div class="card"><div class="card-h"><h2 class="h3">Mes cours</h2><span class="hint">'+cs.length+' cours · '+cr+' crédits</span></div>';
-    cs.forEach(function(c){h+='<div class="hrow '+c.cls+'"><code>'+c.code+'</code><span class="ti">'+esc(c.title)+'</span><span class="gold">'+c.credits+' crédit'+(c.credits>1?'s':'')+'</span><span class="of">'+offerText(c)+'</span></div>';});
-    h+='<p class="hint" style="margin-top:8px">'+(o?'Places lues '+(age<1?'à l’instant':age<60?'il y a '+Math.round(age)+' min':age<1440?'il y a '+Math.round(age/60)+' h':'le '+fmtStamp(o))+' (la plus ancienne de tes cours). Elles se mettent à jour toutes seules.':'Les places seront lues quand tu auras validé.')+'</p></div>'
-      +'<div class="stack">'+changesHTML();
-  }else h+='<div class="home-cols"><div class="card"><p class="hint">Aucun cours choisi pour l’instant. Commence par l’étape 1.</p></div><div class="stack">';
-  h+='<div class="card"><h2 class="h3">Mes favoris</h2>';
-  if(!S.favs.length)h+='<p class="hint">Aucun horaire gardé. Dans le générateur, « Garder cet horaire » le range ici.</p>';
-  else{h+='<div class="favs">';S.favs.forEach(function(f,i){h+='<button type="button" class="btn sm" data-act="homefav" data-i="'+i+'">'+esc(favLabel(f,i))+'</button>';});h+='</div>';}
-  h+='</div></div></div>';
-  h+='<p class="hint" style="text-align:center;margin-top:18px">Envie de repartir de zéro ? <button type="button" class="btn sm" data-act="wipeGo">Tout réinitialiser</button></p>';
+  var fresh=!S.picked&&!S.sel.length;
+  var blk=[['6%','14%','74px','34px','#4FD1BF'],['14%','52%','86px','40px','#7BA3FF'],['30%','20%','70px','36px','#F2B35A'],['52%','8%','96px','38px','#B79BFF'],['62%','62%','78px','40px','#FF8FA9'],['10%','82%','70px','34px','#4FD1BF'],['44%','88%','84px','38px','#F2B35A'],['72%','36%','90px','36px','#7BA3FF']];
+  var h='<section class="hero2"><div class="hero2-bg" aria-hidden="true">'+blk.map(function(b){return '<span style="top:'+b[0]+';left:'+b[1]+';width:'+b[2]+';height:'+b[3]+';background:'+b[4]+'"></span>';}).join('')+'</div>'+SVG_SKY
+    +'<div class="hero2-txt"><p class="eyebrow">Bienvenue sur</p><h1>Horaire<br><span>UQAM</span></h1>'
+    +'<p class="lead">Le générateur d’horaires pour les étudiantes et étudiants de l’ESG UQAM. Choisis ton programme et tes cours de l’hiver 2027 : le site trouve les horaires sans conflit et te montre les places qui restent.</p>'
+    +'<div class="ctas"><button type="button" class="cta" data-act="cta">'+(fresh?'Commence maintenant !':'Continue où tu en es')+' <span aria-hidden="true">→</span></button><button type="button" class="cta2" data-act="scrollwhy">Comment ça marche</button></div></div>'
+    +'<div class="hero2-art">'+SVG_HERO+'<div class="art-card" aria-hidden="true"><i style="background:#0A6CC2"></i><i style="background:#F2B35A"></i><i style="background:#17794A"></i></div></div></section>'
+    +'<section class="why" id="why"><h2>À quoi sert ce site ?</h2><p>À préparer ta session sans te perdre dans les pages de l’UQAM : tu vois ton cheminement, tu choisis tes cours, et le site assemble tous les horaires possibles sans conflit, en tenant compte de tes heures de travail et de tes préférences.</p>'
+    +'<div class="why-g">'
+    +'<div class="why-c"><div class="ic">'+IC_PROG+'</div><div class="k">Étape 1</div><h3>Choisis ton programme</h3><p>Domaine, cycle, programme et concentration : tu vois les cours à suivre, leurs crédits, leurs préalables et la grille de cheminement de l’UQAM.</p></div>'
+    +'<div class="why-c"><div class="ic">'+IC_COURS+'</div><div class="k">Étape 2</div><h3>Choisis tes cours</h3><p>Coche les cours de l’hiver 2027. Les préalables manquants sont signalés, puis tu valides et le site lit les groupes et les places.</p></div>'
+    +'<div class="why-c"><div class="ic">'+IC_GEN+'</div><div class="k">Étape 3</div><h3>Génère ton horaire</h3><p>Des horaires sans conflit, triés selon tes goûts : moins de jours sur le campus, moins de trous, plus de places libres.</p></div>'
+    +'</div><p class="fine">Outil non officiel : les données viennent des pages publiques de l’UQAM et peuvent changer. L’inscription se fait toujours dans Mon Portail, et le choix de cours se confirme avec le responsable de programme.</p></section>';
+  if(!fresh)h+='<p class="hint" style="text-align:center;margin-top:8px">Envie de repartir de zéro ? <button type="button" class="btn sm" data-act="wipeGo">Tout réinitialiser</button></p>';
   return h;
 }
 function chipsHTML(act,cur,list){return '<div class="chips">'+list.map(function(x){return '<button type="button" class="chip" data-act="'+act+'" data-v="'+x[0]+'" aria-pressed="'+(String(cur)===String(x[0]))+'">'+x[1]+'</button>';}).join('')+'</div>';}
@@ -1481,6 +1541,8 @@ function renderPages(){
   if(a&&!a.hidden||a&&a.innerHTML==='')a.innerHTML=homeHTML();
   if(p&&!p.hidden||p&&p.innerHTML==='')p.innerHTML=settingsHTML();
   var pg=document.getElementById('v-programmes');if(pg&&!pg.hidden)pg.innerHTML=progHTML();
+  var gh=document.getElementById('gen-head'),gv=document.getElementById('v-generateur');if(gh&&gv&&!gv.hidden)gh.innerHTML=genHead();
+  paintNav();
   var el=document.getElementById('stamp'),b=document.getElementById('updbtn');
   stampText(el);
   if(b){b.disabled=upd.busy;b.innerHTML=upd.busy?'↻ <span class="t">Actualisation…</span>':'↻ <span class="t">Actualiser</span>';}
