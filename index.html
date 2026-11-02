@@ -1140,7 +1140,7 @@ function doUpdate(){
       if(x.j.status==='busy'){
         runInfo().then(function(r){
           if(r&&r.status!=='completed')waitFresh(before,new Date(r.run_started_at||r.created_at).getTime());
-          else plain('Une lecture a eu lieu il y a moins de 15 min.');
+          else plain('Une lecture vient d’avoir lieu (il y a moins de 3 min).');
         }).catch(function(){plain('Une lecture est déjà en cours ou très récente.');});
         return;
       }
