@@ -772,7 +772,7 @@ function progHTML(){
   h+='</div></section>';
   if(cur){
     var kk=cc.filter(function(x){return x.code===P.k;})[0];
-    h+='<section class="sec cat-wrap"><h2 class="sec-t">Mon choix<small>code '+cur.code+'</small></h2><div class="sec-b"><div class="pb-t"><b>'+esc(cur.title)+'</b> ('+esc(cur.type)+', '+(CYC[cur.cycle]||cur.cycle)+')'+(kk?'<br>Concentration : <b>'+esc(kk.name)+'</b>':(needK(cc)?'<br><span class="hint">Choisis une concentration ci-dessus.</span>':''))+'</div>'
+    h+='<section class="sec cat-wrap"><h2 class="sec-t">Mon choix<small>programme '+cur.code+(kk&&!kk.h&&kk.code!==cur.code?' · concentration '+kk.code:'')+'</small></h2><div class="sec-b"><div class="pb-t"><b>'+esc(cur.title)+'</b> ('+esc(cur.type)+', '+(CYC[cur.cycle]||cur.cycle)+')'+(kk?'<br>Concentration : <b>'+esc(kk.name)+'</b>':(needK(cc)?'<br><span class="hint">Choisis une concentration ci-dessus.</span>':''))+'</div>'
       +'<p class="hint">Source : <a href="'+esc(cur.url)+'" target="_blank" rel="noopener">fiche officielle UQAM</a>. Information non officielle : confirme ton cheminement avec le responsable de programme.</p>'
       +'<button type="button" class="btn primary" data-act="pvalid"'+(needK(cc)&&!kk?' disabled':'')+'>Valider mon programme et voir le cheminement →</button></div></section>';
   }
