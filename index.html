@@ -379,6 +379,8 @@ body{padding-top:0}
 .chg{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
 .chg-l{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
 .chg-l code{font-family:var(--font-mono);font-size:.78rem;margin-right:4px}
+.mode-buf::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--work-bg);opacity:.55}
+.ferr{color:var(--bad);background:var(--bad-bg);border-radius:10px;padding:8px 12px;font-size:.8rem;line-height:1.35;margin-bottom:8px}
 </style>
 </head><body>
 
@@ -460,11 +462,14 @@ function conflict(g1,g2){for(var i=0;i<g1.slots.length;i++){for(var j=0;j<g2.slo
 function getGroup(c,id){for(var i=0;i<c.groups.length;i++){if(c.groups[i].id===id)return c.groups[i];}return null;}
 var WORK_DEFAULT=[];
 function defaults(){
-  var dl={};DAYS.slice(0,6).forEach(function(d){dl[d]={on:true,s:'00:00',e:'23:59'};});
+  var dl={};DAYS.slice(0,6).forEach(function(d){dl[d]={on:true,s:'08:00',e:'22:00'};});
   return {sel:['ORH1700','SCO1045','MAT2082','ECO1301'],done:[],view:'sess',excl:{},pin:{},modes:['pres','hyb','dist'],noCampus:[],hideFull:true,minPl:0,en:false,
     workOn:true,work:JSON.parse(JSON.stringify(WORK_DEFAULT)),bufP:120,bufD:60,before:'',after:'',dayLim:dl,
     sort:'campus',favs:[],open:{catalog:false,courses:true,time:true,mode:false,work:false},reqAll:false};
 }
+var ferr={time:'',work:''},ferT=null;
+function showErr(k,m){ferr[k]=m;render();clearTimeout(ferT);ferT=setTimeout(function(){ferr.time=ferr.work='';var l=document.querySelectorAll('.ferr');for(var i=0;i<l.length;i++)l[i].remove();},9000);}
+function hmm(v){return /^\d\d:\d\d$/.test(v)?v:'';}
 var S=defaults(),rows=[],total=0,capped=false,idx=0,viewFav=null,diag='',showReq=false;
 var LOADERR='';
 function selCourses(){var out=[];S.sel.forEach(function(code,i){var c=course(code);if(c){c.cls=PAL[out.length%PAL.length];out.push(c);}});return out;}
@@ -706,14 +711,14 @@ function controlsHTML(){
 
   var hrs=['','08:00','09:00','10:00','11:00','12:00','13:00'],hrsA=['','15:00','16:00','17:00','18:00','19:00','20:00','21:00'];
   function opt(list,v){return list.map(function(h){return '<option value="'+h+'"'+(h===v?' selected':'')+'>'+(h?h.replace(':00','h'):'Aucune limite')+'</option>';}).join('');}
-  var timeB='<div class="row"><label>Pas de cours avant '+tf('id="before"',S.before,true)+'</label>'
-    +'<label>Pas de cours après '+tf('id="after"',S.after,true)+'</label></div>'
+  var timeB=(ferr.time?'<div class="ferr" role="alert">'+esc(ferr.time)+'</div>':'')+'<div class="row"><label>Pas de cours avant '+tf('id="before" data-rng="c"',S.before,true)+'</label>'
+    +'<label>Pas de cours après '+tf('id="after" data-rng="c"',S.after,true)+'</label></div>'
     +'<div class="chips"><button type="button" class="chip" data-act="preset" data-v="day">Jour seulement</button><button type="button" class="chip" data-act="preset" data-v="eve">Soir seulement</button><button type="button" class="chip" data-act="preset" data-v="none">Effacer</button></div>'
     +'<div class="lab">Réglage par jour</div><div class="days">';
   DAYS.slice(0,6).forEach(function(d){var l=S.dayLim[d];
     timeB+='<label class="dn"><input type="checkbox" data-act="dayon" data-d="'+d+'"'+(l.on?' checked':'')+'>'+d+'</label>'
-      +tf('data-act="dayt" data-d="'+d+'" data-f="s" aria-label="'+d+' début"',l.s)
-      +'<span>à</span>'+tf('data-act="dayt" data-d="'+d+'" data-f="e" aria-label="'+d+' fin"',l.e);});
+      +tf('data-act="dayt" data-rng="c" data-d="'+d+'" data-f="s" aria-label="'+d+' début"',l.s)
+      +'<span>à</span>'+tf('data-act="dayt" data-rng="c" data-d="'+d+'" data-f="e" aria-label="'+d+' fin"',l.e);});
   timeB+='</div>';
   var tsub=(S.before||S.after)?((S.before?'dès '+S.before.replace(':00','h'):'')+(S.before&&S.after?' · ':'')+(S.after?'avant '+S.after.replace(':00','h'):'')):'aucune limite';
   var offd=DAYS.slice(0,6).filter(function(d){return !S.dayLim[d].on;});
@@ -728,7 +733,7 @@ function controlsHTML(){
     +'<label>Places min. <input type="number" id="fMin" min="0" max="200" value="'+S.minPl+'"></label></div>';
   var msub=S.modes.length===3&&!S.noCampus.length?'tout':S.modes.map(function(m){return MODES[m];}).join(', ');
 
-  var workB=S.work.map(function(w,i){
+  var workB=(ferr.work?'<div class="ferr" role="alert">'+esc(ferr.work)+'</div>':'')+S.work.map(function(w,i){
     return '<div class="shift">'+dayDD('data-act="shift" data-i="'+i+'" data-f="d" aria-label="Jour"',w.d)
       +tf('data-act="shift" data-i="'+i+'" data-f="s" aria-label="Début"',w.s)+'<span>à</span>'+tf('data-act="shift" data-i="'+i+'" data-f="e" aria-label="Fin"',w.e)
       +'<button type="button" class="x" data-act="rmshift" data-i="'+i+'" aria-label="Retirer">×</button></div>';}).join('')
@@ -792,7 +797,7 @@ function resultsHTML(){
     +'<button type="button" class="btn'+(isFav?' primary':'')+'" data-act="fav">'+(isFav?'★ Dans mes favoris':'☆ Garder cet horaire')+'</button><button type="button" class="btn" data-act="snap">Enregistrer l\u2019image</button></div>';
   h+='<div class="stats"><span class="stat"><b>'+st.days+'</b> jours</span><span class="stat"><b>'+st.campusDays+'</b> jours sur campus</span><span class="stat"><b>'+st.campuses+'</b> lieu'+(st.campuses>1?'x':'')+' connu'+(st.campuses>1?'s':'')+'</span><span class="stat">groupe le plus serré : <b>'+(st.minp===null?'?':st.minp)+'</b> pl.</span></div>';
   h+='<div class="wkwrap">'+gridHTML(sel)+'</div>'
-    +'<div class="legend">'+modeBadge('pres')+modeBadge('hyb')+modeBadge('dist')+'<span class="mode mode-work">Indisponible</span></div></div>';
+    +'<div class="legend">'+modeBadge('pres')+modeBadge('hyb')+modeBadge('dist')+'<span class="mode mode-work">Indisponible</span>'+(S.work.length&&S.bufP>0?'<span class="mode mode-buf" title="Temps de trajet avant et après une indisponibilité">Marge de trajet</span>':'')+'</div></div>';
   h+='<div class="card"><h2 class="h3">Groupes de cet horaire</h2><div class="tblwrap"><table><thead><tr><th>Cours</th><th>Gr.</th><th>Horaire</th><th>Modalité</th><th>Lieu</th><th>Places</th></tr></thead><tbody>';
   sel.forEach(function(x){var g=x.g,notes=g.notes.slice();if(g.prof)notes.unshift(g.prof);
     h+='<tr class="'+x.c.cls+'"><td class="cd">'+x.c.code+'</td><td class="m">'+g.id+'</td><td class="m">'+esc(whenText(g))+'</td><td>'+modeBadge(g.mode)+'</td><td>'+esc(placeText(g))+(notes.length?'<div class="hint">'+esc(notes.join(' · '))+'</div>':'')+'</td><td>'+seatsPill(g.places)+'</td></tr>';});
@@ -867,6 +872,10 @@ function load(){
     if(['campus','campusDays','jours','places'].indexOf(d.sort)>=0)b.sort=d.sort;
     if(Array.isArray(d.favs))b.favs=d.favs.filter(function(f){return f&&f.picks;}).slice(0,12);
     if(d.open&&typeof d.open==='object')b.open=d.open;
+    b.work.forEach(function(w){if(T(w.e)<=T(w.s)){var ne=Math.min(T(w.s)+60,1439);w.e=String(Math.floor(ne/60)).padStart(2,'0')+':'+String(ne%60).padStart(2,'0');}});
+    DAYS.slice(0,6).forEach(function(x){var l=b.dayLim[x];if(l.s<'08:00')l.s='08:00';if(l.e>'22:00'||l.e<='08:00')l.e='22:00';if(l.s>='22:00'||T(l.e)<=T(l.s)){l.s='08:00';l.e='22:00';}});
+    if(b.before&&(b.before<'08:00'||b.before>='22:00'))b.before='';if(b.after&&(b.after>'22:00'||b.after<='08:00'))b.after='';
+    if(b.before&&b.after&&b.before>=b.after){b.before='';b.after='';}
     S=b;
   }catch(e){}
 }
@@ -903,7 +912,7 @@ document.addEventListener('click',function(e){
   else if(a==='campus')toggle(S.noCampus,d.v);
   else if(a==='pin'){if(S.pin[d.c]===d.g)delete S.pin[d.c];else S.pin[d.c]=d.g;}
   else if(a==='removec'){toggle(S.sel,d.c);}
-  else if(a==='preset'){if(d.v==='day')setAll('','18:00');else if(d.v==='eve')setAll('17:30','');else{setAll('','');DAYS.slice(0,6).forEach(function(x){S.dayLim[x]={on:true,s:'00:00',e:'23:59'};});}}
+  else if(a==='preset'){if(d.v==='day')setAll('','18:00');else if(d.v==='eve')setAll('17:30','');else{setAll('','');DAYS.slice(0,6).forEach(function(x){S.dayLim[x]={on:true,s:'08:00',e:'22:00'};});}}
   else if(a==='addshift')S.work.push({d:'Sam',s:'09:00',e:'17:00'});
   else if(a==='rmshift')S.work.splice(+d.i,1);
   else return;
@@ -917,15 +926,29 @@ document.addEventListener('change',function(e){
   else if(id==='fMin')S.minPl=Math.max(0,Number(t.value)||0);
   else if(id==='bufP')S.bufP=Math.max(0,Number(t.value)||0);
   else if(id==='bufD')S.bufD=Math.max(0,Number(t.value)||0);
-  else if(id==='before')S.before=t.value;
-  else if(id==='after')S.after=t.value;
+  else if(id==='before'||id==='after'){
+    var v0=t.value,bf=id==='before'?v0:S.before,af=id==='after'?v0:S.after,msg='';
+    if(v0&&(v0<'08:00'||v0>'22:00'))msg='Les cours se donnent entre 8 h et 22 h : choisis une heure dans cet intervalle.';
+    else if(bf&&af&&bf>=af)msg='« Pas de cours avant » doit être plus tôt que « Pas de cours après ».';
+    if(msg){showErr('time',msg);return;}
+    ferr.time='';S[id]=v0;}
   else if(id==='sort'){S.sort=t.value;idx=0;save();compute();renderResults();return;}
   else if(a==='togglec'){var cc=course(d.c);if(S.sel.indexOf(d.c)>=0||(!isDone(d.c)&&cc&&!preUnmet(cc)))toggle(S.sel,d.c);}
   else if(a==='donec'){var dc=course(d.c);if(isDone(d.c)||(dc&&!preUnmet(dc))){toggle(S.done,d.c);if(isDone(d.c)){var k=S.sel.indexOf(d.c);if(k>=0)S.sel.splice(k,1);}}}
   else if(a==='incl'){var L=S.excl[d.c]=S.excl[d.c]||[],i=L.indexOf(d.g);if(t.checked&&i>=0)L.splice(i,1);else if(!t.checked&&i<0)L.push(d.g);}
   else if(a==='dayon')S.dayLim[d.d].on=t.checked;
-  else if(a==='dayt'){if(t.value)S.dayLim[d.d][d.f]=t.value;}
-  else if(a==='shift'){var w=S.work[+d.i];if(w&&t.value)w[d.f]=t.value;}
+  else if(a==='dayt'){
+    var L2=S.dayLim[d.d],nv=t.value,ns=d.f==='s'?nv:L2.s,ne2=d.f==='e'?nv:L2.e,m2='';
+    if(nv&&(nv<'08:00'||nv>'22:00'))m2='Les cours se donnent entre 8 h et 22 h : choisis une heure dans cet intervalle.';
+    else if(ns>=ne2)m2=d.d+' : l’heure de fin doit être après l’heure de début.';
+    if(m2){showErr('time',m2);return;}
+    ferr.time='';if(nv)L2[d.f]=nv;}
+  else if(a==='shift'){
+    var w=S.work[+d.i];
+    if(w&&t.value){
+      var ns2=d.f==='s'?t.value:w.s,ne3=d.f==='e'?t.value:w.e;
+      if(d.f!=='d'&&T(ne3)<=T(ns2)){showErr('work','L’heure de fin doit être après l’heure de début (début '+ns2+', fin '+ne3+'). Le changement n’a pas été appliqué.');return;}
+      ferr.work='';w[d.f]=t.value;}}
   else return;
   reset();save();render();
 });
@@ -1258,7 +1281,8 @@ function openPop(inp){
   if(inp.dataset.list==='days'){DAYS.forEach(function(d){h+='<button type="button" class="tf-o'+(d===inp.value?' on':'')+'" data-v="'+d+'">'+(DAYS_LONG[DAYS.indexOf(d)].charAt(0).toUpperCase()+DAYS_LONG[DAYS.indexOf(d)].slice(1))+'</button>';});}
   else{
   if(inp.dataset.empty)h+='<button type="button" class="tf-o tf-none'+(inp.value===''?' on':'')+'" data-v="">Aucune limite</button>';
-  for(var m=0;m<1440;m+=15){var v=String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');h+='<button type="button" class="tf-o'+(v===inp.value?' on':'')+'" data-v="'+v+'">'+v+'</button>';}
+  var lo=inp.dataset.rng==='c'?480:300,hi=inp.dataset.rng==='c'?1320:1425;
+  for(var m=lo;m<=hi;m+=15){var v=String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');h+='<button type="button" class="tf-o'+(v===inp.value?' on':'')+'" data-v="'+v+'">'+v+'</button>';}
   }
   tfPop=document.createElement('div');tfPop.className='tf-pop';tfPop.innerHTML=h;tfPop._inp=inp;
   var w=Math.max(r.width,120);tfPop.style.width=w+'px';
