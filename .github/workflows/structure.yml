@@ -1,0 +1,40 @@
+name: Lire la structure des programmes (blocs, profils, sous-listes)
+
+on:
+  workflow_dispatch:
+    inputs:
+      codes:
+        description: "Codes de programmes (vide = tous)"
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  lire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: |
+          npm install
+          npx playwright install --with-deps chromium
+      - name: Lire la structure
+        run: |
+          cp structure.json structure-new.json
+          node scrape-structure.js programmes.json structure-new.json Gestion ${{ inputs.codes }}
+      - name: Déposer le résultat sur la branche structure-out
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          cp structure-new.json /tmp/structure.json
+          git checkout --orphan structure-out
+          git rm -rf . >/dev/null 2>&1 || true
+          cp /tmp/structure.json structure.json
+          git add -f structure.json
+          git commit -m "structure.json" 
+          git push -f origin structure-out

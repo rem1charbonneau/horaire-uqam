@@ -18,16 +18,24 @@ let prev={};try{prev=JSON.parse(fs.readFileSync(out)).programmes||{};}catch(e){}
         if(!root)return null;
         const conc=[...root.querySelectorAll('select option')].map(o=>o.textContent.replace(/\s+/g,' ').trim()).filter(Boolean);
         const sections=[];let cur=null;
-        root.querySelectorAll('h3.titre_bloc, div.bloc_cours').forEach(n=>{
-          if(n.matches('h3')){cur={heading:n.innerText.replace(/\s+/g,' ').trim(),courses:[]};sections.push(cur);}
+        let grp='',sub='';
+        const LEG=/^(trimestres|préalables|prealables|enseignement en ligne)$/i;
+        root.querySelectorAll('h3.titre_bloc, h4, div.bloc_cours').forEach(n=>{
+          if(n.matches('h4')){
+            const t=n.innerText.replace(/\s+/g,' ').trim();
+            if(!cur||!t||LEG.test(t)||/^ou$/i.test(t))return;
+            if(/^(profil|concentration|cheminement)/i.test(t)){grp=t.replace(/\s*:\s*$/,'');sub='';}else sub=t.replace(/\s*:\s*$/,'');
+            return;
+          }
+          if(n.matches('h3')){grp='';sub='';cur={heading:n.innerText.replace(/\s+/g,' ').trim(),courses:[]};sections.push(cur);}
           else{
             if(!cur){cur={heading:'',courses:[]};sections.push(cur);}
             const l=n.querySelector('.ligne_cours');if(!l)return;
             const sig=l.getAttribute('data-sigle')||l.id.replace(/_\d+$/,'');
             const txt=(l.querySelector('.texte')||l).textContent.replace(/\s+/g,' ').trim();
             const tri={};l.querySelectorAll('.trimestres span').forEach(s=>{tri[s.textContent.trim()]=s.classList.contains('actif');});
-            cur.courses.push({sigle:sig,title:txt.replace(/^[A-Z]{3}\d{3}[0-9A-Z]\s*-\s*/,''),
-              pre:!!l.querySelector('.prealables'),online:!!l.querySelector('.enLigne'),offered:tri});
+            cur.courses.push(Object.assign({sigle:sig,title:txt.replace(/^[A-Z]{3}\d{3}[0-9A-Z]\s*-\s*/,''),
+              pre:!!l.querySelector('.prealables'),online:!!l.querySelector('.enLigne'),offered:tri},grp?{grp}:{},sub?{sub}:{}));
           }
         });
         const intro=(document.querySelector('#bloc_presentation')||{innerText:''}).innerText.replace(/\s+/g,' ').trim().slice(0,600);
