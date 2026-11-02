@@ -1064,7 +1064,7 @@ function runInfo(){
 }
 function waitFresh(before,since,mins){
   clearInterval(upd.timer);
-  var t0=since||Date.now(),est=t0+(mins||7)*60*1000;
+  var t0=since||Date.now(),est=t0+(mins===1?70:(mins||7)*60)*1000;
   try{localStorage.setItem(RKEY,JSON.stringify({t0:t0,before:before,mins:mins}));}catch(e){}
   upd.busy=true;
   function say(st){upd.msg=(st==='queued'?'Lecture en attente':'Lecture de l’UQAM en cours')+' · fin prévue vers '+hm(Math.max(est,Date.now()+30000));paintStamp();}
@@ -1082,7 +1082,7 @@ function waitFresh(before,since,mins){
       }).catch(function(){});
     }).catch(function(){});
   }
-  upd.timer=setInterval(tick,20000);
+  upd.timer=setInterval(tick,(mins&&mins<=2)?8000:20000);
 }
 function forget(){try{localStorage.removeItem(RKEY);}catch(e){}}
 // Reprendre le décompte après un rechargement de la page
@@ -1128,7 +1128,7 @@ function doUpdate(){
         }).catch(function(){plain('Une lecture est déjà en cours ou très récente.');});
         return;
       }
-      waitFresh(before,undefined,S.sel.length?3:7);
+      waitFresh(before,undefined,S.sel.length?1:7);
     }).catch(function(){stopPoll();toast('Impossible de joindre le relais.');});
     return;
   }
@@ -1186,7 +1186,7 @@ function settingsHTML(){
    +'<div class="lab">Thème</div>'+chipsHTML('theme',P.theme,[['auto','Automatique'],['light','Clair'],['dark','Sombre']])
    +'<div class="lab">Taille du texte</div>'+chipsHTML('tsize',P.ts,[[0.9,'Petit'],[1,'Normal'],[1.12,'Grand'],[1.25,'Très grand']])
    +'<div class="lab">Animations</div><div class="chips"><button type="button" class="chip" data-act="anim" aria-pressed="'+P.anim+'">'+(P.anim?'Activées':'Désactivées')+'</button></div></div>'
-   +'<div class="card"><h2 class="h3">Actualisation</h2><p class="hint">Le bouton « Actualiser » relit seulement les places de tes cours choisis (environ 3 min), sur tous tes appareils. Tous les cours de la liste sont relus automatiquement toutes les heures.</p>'
+   +'<div class="card"><h2 class="h3">Actualisation</h2><p class="hint">Le bouton « Actualiser » relit seulement les places de tes cours choisis (environ 1 min), sur tous tes appareils. Tous les cours de la liste sont relus automatiquement toutes les heures.</p>'
    +'</div><div class="card"><h2 class="h3">Mes données</h2><p class="hint">Cours choisis, cours faits, limites d’heures, indisponibilités et favoris sont gardés dans ce navigateur.</p>'
    +(wipeAsk?'<div class="row"><span>Tout réinitialiser ?</span><button type="button" class="btn danger" data-act="wipe">Oui, réinitialiser</button><button type="button" class="btn" data-act="wipeNo">Annuler</button></div>'
             :'<div class="row"><button type="button" class="btn" data-act="wipe">Réinitialiser mes choix</button></div>')

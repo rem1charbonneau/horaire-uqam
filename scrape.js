@@ -10,7 +10,11 @@ function hm(s){return s.replace('h',':');}
 let errors=0;
 (async()=>{
   const b=await chromium.launch();
-  for(const sig of sigles){
+  // Petite liste (actualisation rapide) : 4 cours à la fois. Liste complète : un à la fois, avec pause.
+  const par=sigles.length<=12?4:1,pause=par>1?300:1500,queue=sigles.slice();
+  async function worker(){
+  while(queue.length){
+    const sig=queue.shift();
     const p=await b.newPage();
     try{
       await p.goto('https://etudier.uqam.ca/cours?sigle='+sig,{waitUntil:'networkidle',timeout:45000});
@@ -77,8 +81,10 @@ let errors=0;
       console.log(sig,rec.title,'| gr:',rec.groups.length,'| préalables:',rec.prereqSigles.join(',')||'-');
     }catch(e){errors++;console.log(sig,'ERREUR',e.message.slice(0,120));}
     await p.close();
-    await new Promise(r=>setTimeout(r,1500));
+    await new Promise(r=>setTimeout(r,pause));
   }
+  }
+  await Promise.all(Array.from({length:par},worker));
   await b.close();
   fs.writeFileSync(out,JSON.stringify(data));
   if(errors>sigles.length/2){console.log('Trop d\'erreurs, abandon');process.exit(1);}
