@@ -77,6 +77,7 @@ let errors=0;
           rec.groups.push({id:g.id,teacher:/Non disponible/i.test(g.teacher)?'':g.teacher,mode:mode,places:places,slots:slots,exams:exams,notes:notes,en:isEn});
         }
       }
+      if(process.env.ASKED==='1')rec.asked=Date.now();else if(data[sig]&&data[sig].asked)rec.asked=data[sig].asked;
       data[sig]=rec;
       console.log(sig,rec.title,'| gr:',rec.groups.length,'| préalables:',rec.prereqSigles.join(',')||'-');
     }catch(e){errors++;console.log(sig,'ERREUR',e.message.slice(0,120));}
