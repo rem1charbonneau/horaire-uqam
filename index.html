@@ -379,7 +379,9 @@ body{padding-top:0}
 .pre-line.warn b{color:inherit}
 .cat td.pre{font-size:.78rem;min-width:150px;white-space:normal}
 .chg{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
-.card.exam{margin-top:14px}.exam-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-bottom:4px}.exam-ok{margin:8px 0 0;color:var(--ok);font-weight:600}.exam-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:10px;margin-top:10px}
+.card.exam{margin-top:14px}.exam-g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:0 24px;align-items:start}.ex-col{min-width:0}.ex-col+.ex-col{border-left:1px solid var(--line);padding-left:24px}
+@media (max-width:900px){.exam-g{grid-template-columns:minmax(0,1fr)}.ex-col+.ex-col{border-left:0;padding-left:0;border-top:1px solid var(--line);margin-top:16px;padding-top:16px}}
+.dts{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}.dt{display:grid;grid-template-columns:7.6rem minmax(0,1fr);gap:4px 10px;padding:8px 10px;border-radius:10px;background:var(--surface-2);border:1px solid transparent}.dt-d{display:flex;flex-direction:column;gap:2px}.dt-d b{font-size:.8125rem}.dt-d span{font-size:.75rem;color:var(--muted)}.dt-t{min-width:0;font-weight:500}.dt-t small{display:block;margin-top:2px;font-weight:400;color:var(--muted);font-size:.78rem}.dt.past{opacity:.5}.dts-more{margin-top:8px}.dts-more summary{cursor:pointer;color:var(--accent);font-weight:600;padding:4px 0}.dt.next{border-color:var(--accent);background:var(--accent-soft)}.dt.next .dt-d span{color:var(--accent);font-weight:700}.exam-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-bottom:4px}.exam-ok{margin:8px 0 0;color:var(--ok);font-weight:600}.exam-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:10px;margin-top:10px}
 .exam-c{display:flex;flex-direction:column;gap:8px;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
 .exam-ct{display:flex;flex-direction:column;gap:2px;min-width:0}.exam-ct code{font-family:var(--font-mono);font-weight:700}.exam-ct small{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .exam-t{display:flex;flex-wrap:wrap;gap:6px}
@@ -1567,13 +1569,43 @@ function gaugeRow(g){
     +'<span class="gz-bar" role="img" aria-label="'+a+' place'+(a>1?'s':'')+', avant '+g.b+'"><i class="'+cl+'" style="width:'+w.toFixed(1)+'%"></i><u style="left:'+tb.toFixed(1)+'%"></u></span>'
     +'<span class="gz-v"><b>'+a+'</b> pl. <em class="'+(dl>0?'up':'dn')+'">'+(dl>0?'▲ +':'▼ −')+Math.abs(dl)+'</em></span></div>';
 }
+var DATES_SRC={ver:'3 nov. 2026',page:'https://esg.uqam.ca/etudiants/calendrier-de-lesg-hiver/',pdf:'https://registrariat.uqam.ca/Pdf/calendrier/calendrier2627.pdf'};
+var DATES=[
+ {a:'2027-01-05',t:'Test MAT1002',n:'18 h à 21 h, local à venir, photo exigée'},
+ {a:'2027-01-11',t:'Début du trimestre d’hiver'},
+ {a:'2027-01-22',t:'Dernier jour pour t’inscrire, changer de cours ou annuler sans facturation',n:'Inscription des nouveaux étudiants ouverte depuis le 13 octobre'},
+ {a:'2027-01-23',b:'2027-03-16',t:'Abandon sans mention d’échec, avec facturation',n:'Cours intensifs : 60 % de la durée du cours'},
+ {a:'2027-01-29',t:'Frais de scolarité : 1er versement (temps complet)'},
+ {a:'2027-02-19',t:'Frais de scolarité : 2e et dernier versement'},
+ {a:'2027-03-01',b:'2027-03-07',t:'Semaine de lecture ou de relâche',n:'Selon les facultés et écoles'},
+ {a:'2027-03-26',t:'Congé'},
+ {a:'2027-03-29',t:'Congé'},
+ {a:'2027-04-23',t:'Fin du trimestre',n:'Le 23 ou le 30 avril, ou le 2 mai selon ta faculté ou ton école'}
+];
+function dParse(x){var p=x.split('-');return new Date(+p[0],+p[1]-1,+p[2]);}
+function dFmt(x){var d=dParse(x);return d.getDate()+(d.getDate()===1?'er':'')+' '+MONTHS[d.getMonth()];}
+function datesHTML(){
+  var now=new Date();now.setHours(0,0,0,0);var nextDone=false;
+  var items=DATES.map(function(e){
+    var end=dParse(e.b||e.a),st=dParse(e.a),past=end<now,on=st<=now&&now<=end,next=false;
+    if(!past&&!nextDone){next=true;nextDone=true;}
+    var left=Math.round((st-now)/864e5),when=on?'En cours':past?'Passé':left===0?'Aujourd’hui':left===1?'Demain':'Dans '+left+' jours';
+    var lab=e.b?'Du '+dFmt(e.a)+' au '+dFmt(e.b):dFmt(e.a);
+    return {past:past,h:'<li class="dt'+(past?' past':'')+(next||on?' next':'')+'"><div class="dt-d"><b>'+esc(lab)+'</b><span>'+esc(when)+'</span></div><div class="dt-t">'+esc(e.t)+(e.n?'<small>'+esc(e.n)+'</small>':'')+'</div></li>'};
+  });
+  var up=items.filter(function(x){return !x.past;}),shown=up.slice(0,4),more=items.filter(function(x){return shown.indexOf(x)<0;});
+  return '<div class="ex-col"><h2 class="h3">Dates importantes</h2><p class="hint">Hiver 2027 · les 4 prochaines</p><ol class="dts">'+shown.map(function(x){return x.h;}).join('')+'</ol>'
+    +(more.length?'<details class="dts-more"><summary>Voir toutes les dates ('+more.length+' de plus)</summary><ol class="dts">'+more.map(function(x){return x.h;}).join('')+'</ol></details>':'')
+    +'<p class="hint" style="margin-top:10px">Source : <a href="'+DATES_SRC.page+'" target="_blank" rel="noopener">calendrier de l’ESG</a>, consulté le '+DATES_SRC.ver+'. En cas de différence, le <a href="'+DATES_SRC.pdf+'" target="_blank" rel="noopener">calendrier officiel (PDF)</a> prévaut. Confirme dans Mon Portail.</p></div>';
+}
 function changesHTML(){
-  var c=loadChanges();if(!c)return '';
+  var c=loadChanges()||{t:0,mine:[],others:0,none:true};
   var n=c.mine.length,by={},ord=[];
   c.mine.forEach(function(i){if(!by[i.code]){by[i.code]=[];ord.push(i.code);}by[i.code].push(i);});
-  var h='<section class="card exam"><div class="exam-h"><h2 class="h3" style="margin:0">Sous examen</h2><span class="hint">En date du '+esc(fmtStamp(c.t))+'</span></div>'
-    +'<p class="hint">Places restantes par groupe de tes cours. Le trait blanc marque la lecture précédente ; la barre pleine = 40 places ou plus.</p>';
-  if(!n)h+='<p class="exam-ok">Aucun changement dans tes cours.</p>';
+  var h='<section class="card exam"><div class="exam-g"><div class="ex-col"><div class="exam-h"><h2 class="h3" style="margin:0">Suivi des places</h2>'+(c.none?'':'<span class="hint">En date du '+esc(fmtStamp(c.t))+'</span>')+'</div>'
+    +'<p class="hint">Changements de places dans tes cours depuis la lecture précédente. Le trait blanc marque la lecture précédente ; la barre pleine = 40 places ou plus.</p>';
+  if(c.none)h+='<p class="hint">Pas encore de lecture à comparer. Les changements apparaîtront ici à la prochaine mise à jour.</p>';
+  else if(!n)h+='<p class="exam-ok">Aucun changement dans tes cours.</p>';
   else{h+='<div class="exam-l">';ord.forEach(function(code){
     var gz=by[code].filter(function(i){return i.g;}).map(function(i){return i.g;}).sort(function(x,y){return x.a-y.a;}),
         ot=by[code].filter(function(i){return !i.g;}),cr=DATA[code];
@@ -1581,7 +1613,7 @@ function changesHTML(){
       +(ot.length?'<div class="exam-t">'+ot.map(function(i){return '<span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span>';}).join('')+'</div>':'')+'</div>';});
     h+='</div>';}
   if(c.others>0)h+='<p class="hint">'+c.others+' autre'+(c.others>1?'s':'')+' changement'+(c.others>1?'s':'')+' dans les autres cours de la liste.</p>';
-  return h+'</section>';
+  return h+'</div>'+datesHTML()+'</div></section>';
 }
 
 var SVG_MARK='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l4 7H8z" fill="#0B1E36"/><rect x="9" y="9" width="6" height="12" fill="#0B1E36"/><rect x="11" y="13" width="2" height="4" rx="1" fill="#F2B35A"/></svg>';
@@ -1623,7 +1655,7 @@ function aboutHTML(){
   +'<div class="card warn"><h2>À retenir</h2><ul><li>Le site <b>ne t’inscrit à rien</b> : l’inscription se fait toujours dans Mon Portail.</li><li>Il ne garantit <b>ni qu’un cours soit offert, ni qu’il reste de la place</b>.</li><li>Préalables, équivalences, exemptions et cheminement : à confirmer auprès du Registrariat ou du responsable de ton programme.</li></ul></div>'
   +'<div class="card"><h2>D’où viennent les données et à quel rythme</h2><table><tbody>'
   +'<tr><td>Groupes et places</td><td>Lus sur les pages publiques de l’UQAM quand tu valides tes cours, puis rafraîchis en arrière-plan environ aux 5 minutes, avec une limite par heure. L’heure de la dernière lecture s’affiche en haut de la page. Il peut y avoir du retard : vérifie toujours dans Mon Portail avant de t’inscrire.</td></tr>'
-  +'<tr><td>Liste des cours</td><td>Mise à jour une fois par semaine.</td></tr>'
+  +'<tr><td>Dates importantes</td><td>Saisies à la main à partir du calendrier de l’ESG pour l’hiver 2027. Le calendrier officiel de l’UQAM (PDF) prévaut en cas de différence.</td></tr><tr><td>Liste des cours</td><td>Mise à jour une fois par semaine.</td></tr>'
   +'<tr><td>Programmes et grilles</td><td>Mis à jour périodiquement, pas en direct. Ils peuvent différer de la fiche officielle de l’UQAM.</td></tr>'
   +'</tbody></table></div>'
   +'<div class="card"><h2>Limites connues</h2><ul><li>Seuls les programmes de gestion (ESG) sont couverts.</li><li>Certaines grilles de cheminement n’ont pas pu être lues : le site affiche alors les blocs de cours sans la grille.</li><li>Les locaux ne sont plus publics depuis l’été 2025 : le local est souvent absent.</li><li>Un cours dont l’horaire n’est pas encore publié est signalé « à lire » et ne peut pas être placé dans un horaire.</li><li>Tes choix restent dans ton navigateur seulement, sur cet appareil. Tu peux tout effacer dans les Paramètres.</li></ul></div>'
