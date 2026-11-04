@@ -1455,7 +1455,7 @@ function applyData(d,why){
   var mine=items.filter(function(i){return S.sel.indexOf(i.code)>=0;});
   var rt=newestOf(d),rms=rt?new Date(rt).getTime():Date.now();
   try{localStorage.setItem(CKEY,JSON.stringify({t:rms,mine:mine.slice(0,60),others:items.length-mine.length,oth:items.filter(function(i){return S.sel.indexOf(i.code)<0;}).slice(0,80)}));}catch(e){}
-  render();paintStamp();
+  render();paintStamp();loadSH();
   var msg='Données en date du '+fmtStamp(rms)+' : '+(mine.length?mine.length+' changement'+(mine.length>1?'s':'')+' dans tes cours.':'aucun changement dans tes cours.');
   if(why!=='Nouvelles données chargées.'||S.sent)toast(msg);
 }
@@ -1624,11 +1624,15 @@ function recordHist(){
     while(h.length&&h[0].t<lim)h.shift();if(h.length>400)h.splice(0,h.length-400);});
   if(ch){try{localStorage.setItem(HKEY,JSON.stringify(HIST));}catch(e){}}
 }
+var SH=null;
+function loadSH(){return fetch('history.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(j){if(j&&j.c){SH=j;if(document.getElementById('right'))renderResults();}}).catch(function(){});}
+function seriesOf(code){var a=SH&&SH.c&&SH.c[code];return a&&a.length?a:(HIST[code]||[]);}
 function refSnap(code,ms){
-  var h=HIST[code]||[];if(h.length<2)return null;
-  var T=h[h.length-1].t,lim=T-ms,r=null;
-  for(var i=h.length-2;i>=0;i--){if(h[i].t<=lim){r=h[i];break;}}
-  return r||h[0];
+  var h=seriesOf(code),c=DATA[code];if(!h.length||!c||!c.fetched)return null;
+  var T=new Date(c.fetched).getTime(),X=T-ms,r=null;
+  for(var i=h.length-1;i>=0;i--){if(h[i].t<=X){r=h[i];break;}}
+  if(r)return {t:X,p:r.p,T:T};
+  return {t:h[0].t,p:h[0].p,T:T};
 }
 function fmtDur(ms){var m=Math.max(0,Math.round(ms/6e4));if(m<60)return m+' min';var h=Math.floor(m/60),r=m%60;if(h>=48)return Math.round(h/24)+' j';return h+' h'+(r?String(r).padStart(2,'0'):'');}
 function courseCards(list){
@@ -1647,19 +1651,19 @@ function seatCards(){
   var chg=loadChanges(),tags={};((chg&&chg.mine)||[]).forEach(function(i){if(!i.g){(tags[i.code]=tags[i.code]||[]).push(i);}});
   var cov=[],h='<div class="exam-l">';
   cs.forEach(function(c){
-    var cur=DATA[c.code],snap=refSnap(c.code,WIN*36e5),hs=HIST[c.code]||[],T=hs.length?hs[hs.length-1].t:0,dur=snap&&T?T-snap.t:0,rows=[],sa=0,sb=0;
+    var cur=DATA[c.code],snap=refSnap(c.code,WIN*36e5),dur=snap?Math.max(0,snap.T-snap.t):0,rows=[],sa=0,sb=0,ex=S.excl[c.code]||[],pn=S.pin[c.code];
     if(dur)cov.push(dur);
-    (cur&&cur.groups||[]).forEach(function(g){if(typeof g.places!=='number')return;var b=snap&&typeof snap.p[g.id]==='number'?snap.p[g.id]:g.places;rows.push({id:g.id,b:b,a:g.places});sa+=g.places;sb+=b;});
+    (cur&&cur.groups||[]).forEach(function(g){if(typeof g.places!=='number')return;if(pn?g.id!==pn:ex.indexOf(g.id)>=0)return;var b=snap&&typeof snap.p[g.id]==='number'?snap.p[g.id]:g.places;rows.push({id:g.id,b:b,a:g.places});sa+=g.places;sb+=b;});
     rows.forEach(function(r){var e=eta(r.a,r.b-r.a,dur);r.k=e.h===null?(r.a<=0?-1:1e6+r.a):e.h;});
     rows.sort(function(x,y){return x.k-y.k||x.a-y.a;});
     var top=rows.slice(0,6),rest=rows.slice(6);
-    h+='<div class="exam-c"><div class="exam-ct"><span class="exam-cc"><code>'+esc(c.code)+'</code>'+urgTag(sa,sb-sa,dur)+'</span><small>'+esc(c.title||'')+' · '+sa+' places au total'+(dur?(sb>sa?', '+(sb-sa)+' prise'+(sb-sa>1?'s':'')+' en '+fmtDur(dur):', aucune prise en '+fmtDur(dur)):'')+'</small></div>'
-      +top.map(function(r){return gaugeRow(r,dur);}).join('')
+    h+='<div class="exam-c"><div class="exam-ct"><span class="exam-cc"><code>'+esc(c.code)+'</code>'+urgTag(sa,sb-sa,dur)+'</span><small>'+esc(c.title||'')+' · '+sa+' place'+(sa>1?'s':'')+' dans '+rows.length+' groupe'+(rows.length>1?'s':'')+' choisi'+(rows.length>1?'s':'')+(dur?(sb>sa?', '+(sb-sa)+' prise'+(sb-sa>1?'s':'')+' en '+fmtDur(dur):', aucune prise en '+fmtDur(dur)):'')+'</small></div>'
+      +(rows.length?'':'<p class="hint">Aucun groupe choisi pour ce cours.</p>')+top.map(function(r){return gaugeRow(r,dur);}).join('')
       +(rest.length?'<details class="dts-more"><summary>Voir les '+rest.length+' autres groupes</summary>'+rest.map(function(r){return gaugeRow(r,dur);}).join('')+'</details>':'')
       +(tags[c.code]?'<div class="exam-t">'+tags[c.code].map(function(i){return '<span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span>';}).join('')+'</div>':'')+'</div>';});
   h+='</div>';
   var mn=cov.length?Math.min.apply(null,cov):0;
-  var note=cov.length?(mn<WIN*36e5-6e4?'Historique disponible : '+fmtDur(mn)+' seulement. Il se remplit à chaque lecture.':'Comparaison avec la lecture d’il y a '+fmtDur(WIN*36e5)+'.'):'Pas encore d’historique : le rythme des places apparaîtra après la prochaine lecture.';
+  var note=cov.length?(mn<WIN*36e5-6e4?'Historique disponible : '+fmtDur(mn)+' seulement, donc la période de '+fmtDur(WIN*36e5)+' n’est pas encore couverte. Il s’allonge à chaque lecture.':'Rythme calculé sur les '+fmtDur(WIN*36e5)+' dernières.'):'Pas encore d’historique : le rythme des places apparaîtra après quelques lectures.';
   return '<p class="hint" style="margin-top:6px">'+esc(note)+'</p>'+h;
 }
 function changesHTML(){
@@ -1871,7 +1875,7 @@ function start(){load();render();showTab();}
 fetch('grilles.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(d&&d.programmes){GRIDS=d;render();}}).catch(function(){});
 fetch('structure.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(d){STRUCT=d;render();}}).catch(function(){});
 fetch('catalogue.json').then(function(r){return r.ok?r.json():null;}).then(function(d){if(d){CAT=d;CACHE={};render();}}).catch(function(){});
-fetch('data.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){DATA=d;CACHE={};start();})
+fetch('data.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}).then(function(d){DATA=d;CACHE={};start();loadSH();})
  .catch(function(err){document.getElementById('right').innerHTML='<div class="alert bad">Impossible de charger les données des cours ('+esc(String(err&&err.message||err))+'). Recharge la page.</div>';});
 </script>
 </body></html>
