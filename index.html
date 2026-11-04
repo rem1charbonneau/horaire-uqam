@@ -379,6 +379,7 @@ body{padding-top:0}
 .pre-line.warn b{color:inherit}
 .cat td.pre{font-size:.78rem;min-width:150px;white-space:normal}
 .chg{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
+.chg.exam summary{cursor:pointer;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;padding:2px 0}.chg.exam[open] summary{margin-bottom:6px}
 .chg-l{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
 .chg-l code{font-family:var(--font-mono);font-size:.78rem;margin-right:4px}
 .mode-buf::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--work-bg);opacity:.55}
@@ -1386,12 +1387,12 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 function newest(){var o=null;Object.keys(DATA).forEach(function(k){var f=DATA[k]&&DATA[k].fetched;if(f&&(!o||f>o))o=f;});return o;}
 function stampHTML(){
   if(upd.msg)return esc(upd.msg);
-  var o=oldest();return o?'Lu le '+fmtStamp(o):'';
+  var o=oldest();return o?'En date du '+fmtStamp(o):'';
 }
 function stampText(el){
   if(!el)return;var last=oldest()?fmtStamp(oldest()):'';
   if(upd.msg)el.innerHTML='<span>'+esc(upd.msg)+'</span>'+(last?'<small>Dernière lecture : '+esc(last)+'</small>':'');
-  else el.textContent=last?'Lu le '+last:'';
+  else el.textContent=last?'En date du '+last:'';
 }
 function paintStamp(){
   var el=document.getElementById('stamp'),b=document.getElementById('updbtn');
@@ -1432,9 +1433,10 @@ function applyData(d,why){
   var items=diffData(DATA,d);
   DATA=d;CACHE={};
   var mine=items.filter(function(i){return S.sel.indexOf(i.code)>=0;});
-  try{localStorage.setItem(CKEY,JSON.stringify({t:Date.now(),mine:mine.slice(0,60),others:items.length-mine.length}));}catch(e){}
+  var rt=newestOf(d),rms=rt?new Date(rt).getTime():Date.now();
+  try{localStorage.setItem(CKEY,JSON.stringify({t:rms,mine:mine.slice(0,60),others:items.length-mine.length}));}catch(e){}
   render();paintStamp();
-  var msg='Cours relus à '+hm(Date.now())+' : '+(mine.length?mine.length+' changement'+(mine.length>1?'s':'')+' dans tes cours.':'aucun changement dans tes cours.');
+  var msg='Données en date du '+fmtStamp(rms)+' : '+(mine.length?mine.length+' changement'+(mine.length>1?'s':'')+' dans tes cours.':'aucun changement dans tes cours.');
   if(why!=='Nouvelles données chargées.'||S.sent)toast(msg);
 }
 var RKEY='uqam-h27-run';
@@ -1548,12 +1550,12 @@ function favLabel(f,i){
 }
 function changesHTML(){
   var c=loadChanges();if(!c)return '';
-  var h='<div class="chg"><div class="lab">Cours relus à '+hm(c.t)+'</div>';
-  if(!c.mine.length)h+='<p class="hint">Aucun changement dans tes cours.</p>';
-  else{h+='<ul class="chg-l">';c.mine.slice(0,14).forEach(function(i){h+='<li><code>'+esc(i.code)+'</code> <span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span></li>';});
-    if(c.mine.length>14)h+='<li class="hint">+ '+(c.mine.length-14)+' autres</li>';h+='</ul>';}
+  var n=c.mine.length,h='<details class="chg exam"><summary><span class="lab" style="margin:0">Sous examen</span> <span class="hint">'+(n?n+' changement'+(n>1?'s':'')+' dans tes cours':'aucun changement dans tes cours')+' · en date du '+esc(fmtStamp(c.t))+'</span></summary>';
+  if(!n)h+='<p class="hint">Aucun changement de places ni d’horaire dans tes cours depuis la lecture précédente.</p>';
+  else{h+='<ul class="chg-l">';c.mine.slice(0,40).forEach(function(i){h+='<li><code>'+esc(i.code)+'</code> <span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span></li>';});
+    if(n>40)h+='<li class="hint">+ '+(n-40)+' autres</li>';h+='</ul>';}
   if(c.others>0)h+='<p class="hint">'+c.others+' autre'+(c.others>1?'s':'')+' changement'+(c.others>1?'s':'')+' dans les autres cours de la liste.</p>';
-  return h+'</div>';
+  return h+'</details>';
 }
 
 var SVG_MARK='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l4 7H8z" fill="#0B1E36"/><rect x="9" y="9" width="6" height="12" fill="#0B1E36"/><rect x="11" y="13" width="2" height="4" rx="1" fill="#F2B35A"/></svg>';
