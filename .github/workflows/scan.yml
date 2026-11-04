@@ -36,8 +36,9 @@ jobs:
             git archive origin/history-out | tar -x -C /tmp/hist
           fi
           curl -fsS "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/catalogue.json" -o /tmp/catalogue.json
+          curl -fsS "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/data.json" -o /tmp/data.json || true
       - name: Relever les places
-        run: node scan.js /tmp/hist /tmp/catalogue.json "${{ inputs.decouvertes || '120' }}"
+        run: node scan.js /tmp/hist /tmp/catalogue.json "${{ inputs.decouvertes || '120' }}" /tmp/data.json
       - name: Publier l'historique (branche history-out)
         run: |
           git config user.name "github-actions"

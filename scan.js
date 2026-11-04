@@ -2,13 +2,14 @@
 // Usage : node scan.js <dossier_historique> <catalogue.json> [nb_découvertes]
 // Dossier : idx.json {off:[sigles offerts], checked:{sigle:ms}} + h/<SIGLE>.json {t:[ms...], g:{groupe:[places...]}}
 const fs=require('fs'),cp=require('child_process'),path=require('path');
-const [,,dir,catF,nd]=process.argv;
+const [,,dir,catF,nd,seedF]=process.argv;
 const NEW=+nd||120,KEEP=50*36e5,RECHECK=7*864e5;
 fs.mkdirSync(path.join(dir,'h'),{recursive:true});
 let idx={off:[],checked:{}};try{idx=JSON.parse(fs.readFileSync(path.join(dir,'idx.json'),'utf8'));}catch(e){}
 idx.off=idx.off||[];idx.checked=idx.checked||{};
 const cat=Object.keys(JSON.parse(fs.readFileSync(catF,'utf8')));
 const now=Date.now(),off=new Set(idx.off);
+try{const sd=JSON.parse(fs.readFileSync(seedF,'utf8'));for(const [k,v] of Object.entries(sd))if(v&&Array.isArray(v.groups)&&v.groups.length)off.add(k);}catch(e){}
 const unknown=cat.filter(s=>!off.has(s)&&!(idx.checked[s]>now-RECHECK)).sort((a,b)=>(idx.checked[a]||0)-(idx.checked[b]||0)).slice(0,NEW);
 const list=[...off,...unknown];
 console.log('À lire : '+off.size+' offerts + '+unknown.length+' à découvrir');
