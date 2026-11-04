@@ -1145,6 +1145,13 @@ function resultsHTML(){
   h+='<div class="stats"><span class="stat"><b>'+st.days+'</b> jour'+(st.days>1?'s':'')+'</span><span class="stat"><b>'+st.campusDays+'</b> jour'+(st.campusDays>1?'s':'')+' sur campus</span><span class="stat"><b>'+st.campuses+'</b> lieu'+(st.campuses>1?'x':'')+' connu'+(st.campuses>1?'s':'')+'</span><span class="stat">groupe le plus serré : <b>'+(st.minp===null?'?':st.minp)+'</b> pl.</span><span class="stat"><b>'+fmtH(st.gap)+'</b> de trous</span><span class="stat">début <b>'+fmtT(st.first)+'</b> · fin <b>'+fmtT(st.last)+'</b></span></div>';
   h+='<div class="wkwrap">'+gridHTML(sel)+'</div>'
     +'<div class="legend">'+modeBadge('pres')+modeBadge('hyb')+modeBadge('dist')+'</div></div>';
+  if(S.favs.length){
+    h+='<div class="card"><h2 class="h3">Mes favoris</h2><div class="favs">';
+    S.favs.forEach(function(f,i){
+      var gs2=[];Object.keys(f.picks).forEach(function(code){var c=course(code);if(c){var g=getGroup(c,f.picks[code]);if(g)gs2.push(g);}});var s2=stats(gs2);
+      h+='<span class="fav" aria-pressed="'+(viewFav===i)+'"><button type="button" class="btn sm" data-act="viewfav" data-i="'+i+'">Favori '+(i+1)+' · '+Object.keys(f.picks).length+' cours · '+s2.days+' jours</button><button type="button" class="btn sm" data-act="rmfav" data-i="'+i+'" aria-label="Retirer le favori '+(i+1)+'">×</button></span>';});
+    h+='</div></div>';
+  }
   h+='<div class="card"><h2 class="h3">Groupes de cet horaire</h2><div class="tblwrap"><table><thead><tr><th>Cours</th><th>Gr.</th><th>Horaire</th><th>Modalité</th><th>Lieu</th><th>Places</th></tr></thead><tbody>';
   sel.forEach(function(x){var g=x.g,notes=g.notes.slice();if(g.prof)notes.unshift(g.prof);
     h+='<tr class="'+x.c.cls+'"><td class="cd">'+x.c.code+'</td><td class="m">'+g.id+'</td><td class="m">'+esc(whenText(g))+'</td><td>'+modeBadge(g.mode)+'</td><td>'+esc(placeText(g))+(notes.length?'<div class="hint">'+esc(notes.join(' · '))+'</div>':'')+'</td><td>'+seatsPill(g.places)+'</td></tr>';});
@@ -1167,13 +1174,6 @@ function resultsHTML(){
   var miss=sel.filter(function(x){return !(x.g.exams||[]).length;}).map(function(x){return x.c.code;});
   if(miss.length&&ex.length)h+='<p class="hint" style="margin-top:8px">'+miss.join(', ')+' : dates d\u2019examen non affichées par l\u2019UQAM.</p>';
   h+='</div>';
-  if(S.favs.length){
-    h+='<div class="card"><h2 class="h3">Mes favoris</h2><div class="favs">';
-    S.favs.forEach(function(f,i){
-      var gs2=[];Object.keys(f.picks).forEach(function(code){var c=course(code);if(c){var g=getGroup(c,f.picks[code]);if(g)gs2.push(g);}});var s2=stats(gs2);
-      h+='<span class="fav" aria-pressed="'+(viewFav===i)+'"><button type="button" class="btn sm" data-act="viewfav" data-i="'+i+'">Favori '+(i+1)+' · '+Object.keys(f.picks).length+' cours · '+s2.days+' jours</button><button type="button" class="btn sm" data-act="rmfav" data-i="'+i+'" aria-label="Retirer le favori '+(i+1)+'">×</button></span>';});
-    h+='</div></div>';
-  }
   return h;
 }
 var lastPruned=[],lastPrunedDone=[];
