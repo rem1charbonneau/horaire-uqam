@@ -12,7 +12,7 @@ let errors=0;
 (async()=>{
   const b=await chromium.launch();
   // Petite liste (actualisation rapide) : 4 cours à la fois. Liste complète : un à la fois, avec pause.
-  const par=sigles.length<=12?4:1,pause=par>1?300:1500,queue=sigles.slice();
+  let par=sigles.length<=12?4:1,pause=par>1?300:1500;if(+process.env.PAR>0)par=+process.env.PAR;if(process.env.PAUSE)pause=+process.env.PAUSE;const queue=sigles.slice();
   async function worker(){
   while(queue.length){
     const sig=queue.shift();

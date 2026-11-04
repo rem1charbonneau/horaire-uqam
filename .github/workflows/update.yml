@@ -75,10 +75,6 @@ jobs:
           if [ -z "$LIST" ]; then echo "Aucun cours demandé récemment : pas de lecture."; exit 0; fi
           echo "Cours lus : $LIST"
           node scrape.js site/data.json 7111 $LIST
-      - name: Historique des places (pour mesurer le rythme des inscriptions)
-        run: |
-          curl -fsS -H "Cache-Control: no-cache" "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/history.json?t=$(date +%s)" -o site/history.json || echo '{}' > site/history.json
-          node hist.js site/data.json site/history.json
       - name: Assembler le site
         run: |
           cp index.html site/index.html

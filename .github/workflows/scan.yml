@@ -1,0 +1,50 @@
+name: Relevé horaire des places (tous les cours)
+
+on:
+  schedule:
+    - cron: '41 * * * *'
+  workflow_dispatch:
+    inputs:
+      decouvertes:
+        description: "Nombre de cours du catalogue à vérifier (découverte des cours offerts)"
+        required: false
+        default: '120'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: |
+          npm install
+          npx playwright install --with-deps chromium
+      - name: Reprendre l'historique et le catalogue
+        run: |
+          mkdir -p /tmp/hist
+          if git fetch origin history-out:refs/remotes/origin/history-out 2>/dev/null; then
+            git archive origin/history-out | tar -x -C /tmp/hist
+          fi
+          curl -fsS "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/catalogue.json" -o /tmp/catalogue.json
+      - name: Relever les places
+        run: node scan.js /tmp/hist /tmp/catalogue.json "${{ inputs.decouvertes || '120' }}"
+      - name: Publier l'historique (branche history-out)
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout --orphan history-out
+          git rm -rf . >/dev/null 2>&1 || true
+          cp -r /tmp/hist/. .
+          git add -f idx.json h
+          git commit -m "Historique des places"
+          git push -f origin history-out
