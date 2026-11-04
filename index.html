@@ -379,7 +379,18 @@ body{padding-top:0}
 .pre-line.warn b{color:inherit}
 .cat td.pre{font-size:.78rem;min-width:150px;white-space:normal}
 .chg{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
-.card.exam{margin-top:14px}.exam-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-bottom:4px}.exam-ok{margin:8px 0 0;color:var(--ok);font-weight:600}.exam-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin-top:10px}.exam-c{display:flex;flex-direction:column;gap:6px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}.exam-c code{font-family:var(--font-mono);font-weight:700}.exam-t{display:flex;flex-wrap:wrap;gap:6px}
+.card.exam{margin-top:14px}.exam-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-bottom:4px}.exam-ok{margin:8px 0 0;color:var(--ok);font-weight:600}.exam-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:10px;margin-top:10px}
+.exam-c{display:flex;flex-direction:column;gap:8px;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
+.exam-ct{display:flex;flex-direction:column;gap:2px;min-width:0}.exam-ct code{font-family:var(--font-mono);font-weight:700}.exam-ct small{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.exam-t{display:flex;flex-wrap:wrap;gap:6px}
+.gz{display:grid;grid-template-columns:5.2rem minmax(60px,1fr) auto;align-items:center;gap:8px}
+.gz-n{color:var(--muted);font-size:.8125rem;white-space:nowrap}
+.gz-bar{position:relative;height:10px;border-radius:6px;background:var(--line);min-width:0}
+.gz-bar i{display:block;height:100%;border-radius:6px;transition:width .4s}
+.gz-bar i.ok{background:var(--ok)}.gz-bar i.warn{background:#f2b35a}.gz-bar i.bad{background:#ef5b5b}
+.gz-bar u{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--ink);border-radius:1px;opacity:.85}
+.gz-v{font-size:.8125rem;white-space:nowrap;text-align:right}.gz-v b{font-size:.95rem}
+.gz-v em{font-style:normal;font-weight:700;margin-left:4px}.gz-v em.up{color:var(--ok)}.gz-v em.dn{color:#f2b35a}
 .chg-l{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
 .chg-l code{font-family:var(--font-mono);font-size:.78rem;margin-right:4px}
 .mode-buf::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--work-bg);opacity:.55}
@@ -1419,6 +1430,7 @@ function diffData(a,b){
         if(y.places===0)out.push({code:k,t:'Groupe '+id+' maintenant complet (avant : '+x.places+')',k:'bad'});
         else if(x.places===0)out.push({code:k,t:'Groupe '+id+' : une place s’est libérée ('+y.places+')',k:'ok'});
         else out.push({code:k,t:'Groupe '+id+' : '+x.places+' → '+y.places+' places',k:y.places<x.places?'warn':'ok'});
+        if(typeof x.places==='number'&&typeof y.places==='number')out[out.length-1].g={id:id,b:x.places,a:y.places};
       }
       if(JSON.stringify(x.slots)!==JSON.stringify(y.slots))out.push({code:k,t:'Groupe '+id+' : horaire ou lieu modifié',k:'warn'});
       else if(JSON.stringify(x.exams)!==JSON.stringify(y.exams))out.push({code:k,t:'Groupe '+id+' : dates d’examen modifiées',k:'warn'});
@@ -1548,15 +1560,25 @@ function favLabel(f,i){
   var gs=[];Object.keys(f.picks).forEach(function(code){var c=course(code);if(c){var g=getGroup(c,f.picks[code]);if(g)gs.push(g);}});
   var st=stats(gs);return 'Favori '+(i+1)+' · '+Object.keys(f.picks).length+' cours · '+st.days+' jours';
 }
+function gaugeRow(g){
+  var MAXP=40,a=Math.max(0,g.a),w=Math.min(100,a/MAXP*100),tb=Math.min(100,Math.max(0,g.b)/MAXP*100),
+      cl=a===0?'bad':a<5?'bad':a<10?'warn':'ok',dl=g.a-g.b;
+  return '<div class="gz"><span class="gz-n">Groupe '+esc(g.id)+'</span>'
+    +'<span class="gz-bar" role="img" aria-label="'+a+' place'+(a>1?'s':'')+', avant '+g.b+'"><i class="'+cl+'" style="width:'+w.toFixed(1)+'%"></i><u style="left:'+tb.toFixed(1)+'%"></u></span>'
+    +'<span class="gz-v"><b>'+a+'</b> pl. <em class="'+(dl>0?'up':'dn')+'">'+(dl>0?'▲ +':'▼ −')+Math.abs(dl)+'</em></span></div>';
+}
 function changesHTML(){
   var c=loadChanges();if(!c)return '';
   var n=c.mine.length,by={},ord=[];
   c.mine.forEach(function(i){if(!by[i.code]){by[i.code]=[];ord.push(i.code);}by[i.code].push(i);});
   var h='<section class="card exam"><div class="exam-h"><h2 class="h3" style="margin:0">Sous examen</h2><span class="hint">En date du '+esc(fmtStamp(c.t))+'</span></div>'
-    +'<p class="hint">Changements de places et d’horaire dans tes cours depuis la lecture précédente.</p>';
+    +'<p class="hint">Places restantes par groupe de tes cours. Le trait blanc marque la lecture précédente ; la barre pleine = 40 places ou plus.</p>';
   if(!n)h+='<p class="exam-ok">Aucun changement dans tes cours.</p>';
   else{h+='<div class="exam-l">';ord.forEach(function(code){
-    h+='<div class="exam-c"><code>'+esc(code)+'</code><div class="exam-t">'+by[code].map(function(i){return '<span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span>';}).join('')+'</div></div>';});
+    var gz=by[code].filter(function(i){return i.g;}).map(function(i){return i.g;}).sort(function(x,y){return x.a-y.a;}),
+        ot=by[code].filter(function(i){return !i.g;}),cr=DATA[code];
+    h+='<div class="exam-c"><div class="exam-ct"><code>'+esc(code)+'</code>'+(cr&&cr.title?'<small>'+esc(cr.title)+'</small>':'')+'</div>'+gz.map(gaugeRow).join('')
+      +(ot.length?'<div class="exam-t">'+ot.map(function(i){return '<span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span>';}).join('')+'</div>':'')+'</div>';});
     h+='</div>';}
   if(c.others>0)h+='<p class="hint">'+c.others+' autre'+(c.others>1?'s':'')+' changement'+(c.others>1?'s':'')+' dans les autres cours de la liste.</p>';
   return h+'</section>';
