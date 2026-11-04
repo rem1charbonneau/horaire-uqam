@@ -379,7 +379,7 @@ body{padding-top:0}
 .pre-line.warn b{color:inherit}
 .cat td.pre{font-size:.78rem;min-width:150px;white-space:normal}
 .chg{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
-.chg.exam summary{cursor:pointer;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;padding:2px 0}.chg.exam[open] summary{margin-bottom:6px}
+.card.exam{margin-top:14px}.exam-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-bottom:4px}.exam-ok{margin:8px 0 0;color:var(--ok);font-weight:600}.exam-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin-top:10px}.exam-c{display:flex;flex-direction:column;gap:6px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}.exam-c code{font-family:var(--font-mono);font-weight:700}.exam-t{display:flex;flex-wrap:wrap;gap:6px}
 .chg-l{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
 .chg-l code{font-family:var(--font-mono);font-size:.78rem;margin-right:4px}
 .mode-buf::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--work-bg);opacity:.55}
@@ -1184,7 +1184,7 @@ function render(){
   renderResults();renderPages();
   if(Math.abs(window.scrollY-wy)>1)window.scrollTo(wx,wy);
 }
-function renderResults(){document.getElementById('right').innerHTML=resultsHTML();}
+function renderResults(){document.getElementById('right').innerHTML=resultsHTML()+changesHTML();}
 
 //--- persistance
 var KEY='uqam-h27-v3';
@@ -1357,7 +1357,7 @@ function paintNav(){
   var m=document.getElementById('bmark');if(m&&!m.innerHTML)m.innerHTML=SVG_MARK;
 }
 function genHead(){
-  var h=stepHead(3,'Génère ton horaire','Voici les horaires sans conflit avec tes cours validés. Trie-les, fixe un groupe, garde ceux que tu aimes.',IC_GEN)+changesHTML();
+  var h=stepHead(3,'Génère ton horaire','Voici les horaires sans conflit avec tes cours validés. Trie-les, fixe un groupe, garde ceux que tu aimes.',IC_GEN)+'';
   if(S.favs.length){h+='<div class="card" style="margin-bottom:14px"><h2 class="h3">Mes favoris</h2><div class="favs">'+S.favs.map(function(f,i){return '<button type="button" class="btn sm" data-act="homefav" data-i="'+i+'">'+esc(favLabel(f,i))+'</button>';}).join('')+'</div></div>';}
   return h;
 }
@@ -1550,12 +1550,16 @@ function favLabel(f,i){
 }
 function changesHTML(){
   var c=loadChanges();if(!c)return '';
-  var n=c.mine.length,h='<details class="chg exam"><summary><span class="lab" style="margin:0">Sous examen</span> <span class="hint">'+(n?n+' changement'+(n>1?'s':'')+' dans tes cours':'aucun changement dans tes cours')+' · en date du '+esc(fmtStamp(c.t))+'</span></summary>';
-  if(!n)h+='<p class="hint">Aucun changement de places ni d’horaire dans tes cours depuis la lecture précédente.</p>';
-  else{h+='<ul class="chg-l">';c.mine.slice(0,40).forEach(function(i){h+='<li><code>'+esc(i.code)+'</code> <span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span></li>';});
-    if(n>40)h+='<li class="hint">+ '+(n-40)+' autres</li>';h+='</ul>';}
+  var n=c.mine.length,by={},ord=[];
+  c.mine.forEach(function(i){if(!by[i.code]){by[i.code]=[];ord.push(i.code);}by[i.code].push(i);});
+  var h='<section class="card exam"><div class="exam-h"><h2 class="h3" style="margin:0">Sous examen</h2><span class="hint">En date du '+esc(fmtStamp(c.t))+'</span></div>'
+    +'<p class="hint">Changements de places et d’horaire dans tes cours depuis la lecture précédente.</p>';
+  if(!n)h+='<p class="exam-ok">Aucun changement dans tes cours.</p>';
+  else{h+='<div class="exam-l">';ord.forEach(function(code){
+    h+='<div class="exam-c"><code>'+esc(code)+'</code><div class="exam-t">'+by[code].map(function(i){return '<span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span>';}).join('')+'</div></div>';});
+    h+='</div>';}
   if(c.others>0)h+='<p class="hint">'+c.others+' autre'+(c.others>1?'s':'')+' changement'+(c.others>1?'s':'')+' dans les autres cours de la liste.</p>';
-  return h+'</details>';
+  return h+'</section>';
 }
 
 var SVG_MARK='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l4 7H8z" fill="#0B1E36"/><rect x="9" y="9" width="6" height="12" fill="#0B1E36"/><rect x="11" y="13" width="2" height="4" rx="1" fill="#F2B35A"/></svg>';
