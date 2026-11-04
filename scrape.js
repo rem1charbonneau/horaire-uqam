@@ -75,7 +75,7 @@ let errors=0;
           const notes=g.rem.filter(x=>!/^Examens?\s*:/i.test(x));
           const isEn=/anglais|english/i.test(g.rem.join(' '));
           if(!slots.length&&!notes.length)continue;
-          rec.groups.push({id:g.id,teacher:/Non disponible/i.test(g.teacher)?'':g.teacher,mode:mode,places:places,slots:slots,exams:exams,notes:notes,en:isEn});
+          rec.groups.push({id:g.id,plt:g.pl.slice(0,120),teacher:/Non disponible/i.test(g.teacher)?'':g.teacher,mode:mode,places:places,slots:slots,exams:exams,notes:notes,en:isEn});
         }
       }
       if(process.env.ASKED==='1')rec.asked=Date.now();else if(data[sig]&&data[sig].asked)rec.asked=data[sig].asked;
