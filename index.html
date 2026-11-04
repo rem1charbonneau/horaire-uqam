@@ -385,14 +385,19 @@ body{padding-top:0}
 .exam-c{display:flex;flex-direction:column;gap:8px;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
 .exam-ct{display:flex;flex-direction:column;gap:2px;min-width:0}.exam-ct code{font-family:var(--font-mono);font-weight:700}.exam-ct small{color:var(--muted)}
 .exam-t{display:flex;flex-wrap:wrap;gap:6px}
-.gz{display:grid;grid-template-columns:5.2rem minmax(60px,1fr) auto;align-items:center;gap:8px}
+.gz{display:grid;grid-template-columns:5.2rem minmax(60px,1fr) auto;align-items:center;gap:2px 8px}
 .gz-n{color:var(--muted);font-size:.8125rem;white-space:nowrap}
-.gz-bar{position:relative;height:10px;border-radius:6px;background:var(--line);min-width:0}
-.gz-bar i{display:block;height:100%;border-radius:6px;transition:width .4s}
+.gz-bar{position:relative;height:10px;border-radius:6px;background:var(--line);min-width:0;overflow:hidden}
+.gz-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:6px}
 .gz-bar i.ok{background:var(--ok)}.gz-bar i.warn{background:#f2b35a}.gz-bar i.bad{background:#ef5b5b}
-.gz-bar u{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--ink);border-radius:1px;opacity:.85}
+.gz-bar u{position:absolute;top:0;bottom:0;border-radius:3px}
+.gz-bar u.tk,.lg.tk{background:repeating-linear-gradient(135deg,rgba(255,255,255,.75) 0 2px,transparent 2px 5px);outline:1px solid rgba(255,255,255,.6);outline-offset:-1px}
+.gz-bar u.fr{background:rgba(95,211,149,.45)}
+.lg.tk{display:inline-block;width:18px;height:9px;border-radius:3px;vertical-align:-1px;margin:0 2px;background-color:#ef5b5b}
 .gz-v{font-size:.8125rem;white-space:nowrap;text-align:right}.gz-v b{font-size:.95rem}
-.gz-v em{font-style:normal;font-weight:700;margin-left:4px}.gz-v em.eq{color:var(--muted)}.gz-v em.up{color:var(--ok)}.gz-v em.dn{color:#f2b35a}
+.gz-v em{font-style:normal;font-weight:700;margin-left:4px}.gz-v em.up{color:var(--ok)}.gz-v em.dn{color:#f2b35a}
+.gz-e{grid-column:2/4;font-size:.75rem;margin:-2px 0 4px}.gz-e.bad{color:var(--bad);font-weight:700}.gz-e.warn{color:var(--warn);font-weight:600}.gz-e.ok{color:var(--muted)}
+.exam-cc{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .chg-l{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
 .chg-l code{font-family:var(--font-mono);font-size:.78rem;margin-right:4px}
 .mode-buf::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--work-bg);opacity:.55}
@@ -1563,12 +1568,22 @@ function favLabel(f,i){
   var gs=[];Object.keys(f.picks).forEach(function(code){var c=course(code);if(c){var g=getGroup(c,f.picks[code]);if(g)gs.push(g);}});
   var st=stats(gs);return 'Favori '+(i+1)+' · '+Object.keys(f.picks).length+' cours · '+st.days+' jours';
 }
-function gaugeRow(g){
-  var MAXP=40,a=Math.max(0,g.a),w=Math.min(100,a/MAXP*100),tb=Math.min(100,Math.max(0,g.b)/MAXP*100),
-      cl=a===0?'bad':a<5?'bad':a<10?'warn':'ok',dl=g.a-g.b;
+function eta(a,taken,dur){
+  if(a<=0)return {txt:'Complet',lv:'bad',h:0};
+  if(!dur||dur<6e5)return {txt:'',lv:'',h:null};
+  if(taken<=0)return {txt:taken<0?'des places se libèrent':'stable',lv:'ok',h:null};
+  var h=a/(taken/(dur/36e5));
+  var t=h<1?'complet dans ~'+Math.max(5,Math.round(h*60/5)*5)+' min':h<24?'complet dans ~'+(h<10?Math.round(h*2)/2:Math.round(h))+' h':'complet dans ~'+Math.round(h/24)+' j';
+  return {txt:t,lv:h<24||a<5?'bad':h<72?'warn':'ok',h:h};
+}
+function gaugeRow(g,dur){
+  var MAXP=40,a=Math.max(0,g.a),b=Math.max(0,g.b),w=Math.min(100,a/MAXP*100),tk=b-a,e=eta(a,tk,dur),
+      seg=tk!==0?'<u class="'+(tk>0?'tk':'fr')+'" style="left:'+Math.min(100,Math.min(a,b)/MAXP*100).toFixed(1)+'%;width:'+Math.max(1.5,Math.min(100,Math.abs(tk)/MAXP*100)).toFixed(1)+'%"></u>':'';
+  var cl=a===0||a<5?'bad':a<10?'warn':'ok';
   return '<div class="gz"><span class="gz-n">Groupe '+esc(g.id)+'</span>'
-    +'<span class="gz-bar" role="img" aria-label="'+a+' place'+(a>1?'s':'')+', avant '+g.b+'"><i class="'+cl+'" style="width:'+w.toFixed(1)+'%"></i>'+(dl===0?'':'<u style="left:'+tb.toFixed(1)+'%"></u>')+'</span>'
-    +'<span class="gz-v"><b>'+a+'</b> pl. '+(dl===0?'<em class="eq">=</em>':'<em class="'+(dl>0?'up':'dn')+'">'+(dl>0?'▲ +':'▼ −')+Math.abs(dl)+'</em>')+'</span></div>';
+    +'<span class="gz-bar" role="img" aria-label="'+a+' place'+(a>1?'s':'')+' restante'+(a>1?'s':'')+(tk>0?', '+tk+' prise'+(tk>1?'s':''):'')+'"><i class="'+cl+'" style="width:'+w.toFixed(1)+'%"></i>'+seg+'</span>'
+    +'<span class="gz-v"><b>'+a+'</b> pl.'+(tk>0?' <em class="dn">−'+tk+'</em>':tk<0?' <em class="up">+'+(-tk)+'</em>':'')+'</span>'
+    +(e.txt?'<span class="gz-e '+e.lv+'">'+esc(e.txt)+'</span>':'')+'</div>';
 }
 var DATES_SRC={ver:'3 nov. 2026',page:'https://esg.uqam.ca/etudiants/calendrier-de-lesg-hiver/',pdf:'https://registrariat.uqam.ca/Pdf/calendrier/calendrier2627.pdf'};
 var DATES=[
@@ -1599,7 +1614,7 @@ function datesHTML(){
     +'<p class="hint" style="margin-top:10px">Source : <a href="'+DATES_SRC.page+'" target="_blank" rel="noopener">calendrier de l’ESG</a>, consulté le '+DATES_SRC.ver+'. En cas de différence, le <a href="'+DATES_SRC.pdf+'" target="_blank" rel="noopener">calendrier officiel (PDF)</a> prévaut. Confirme dans Mon Portail.</p></div>';
 }
 var HKEY='uqam-h27-hist',WIN=(function(){try{var v=+localStorage.getItem('uqam-h27-win');return v>0?v:2;}catch(e){return 2;}})(),HIST=(function(){try{return JSON.parse(localStorage.getItem(HKEY)||'{}')||{};}catch(e){return {};}})();
-var WINS=[[1,'1 h'],[2,'2 h'],[6,'6 h'],[24,'24 h'],[168,'7 j']];
+var WINS=[[0.5,'30 min'],[1,'1 h'],[2,'2 h'],[6,'6 h'],[24,'24 h']];
 function recordHist(){
   var ch=false,lim=Date.now()-8*864e5;
   S.sel.forEach(function(code){var c=DATA[code];if(!c||!c.fetched||!c.groups)return;var ms=new Date(c.fetched).getTime();if(isNaN(ms))return;
@@ -1625,33 +1640,33 @@ function courseCards(list){
     return '<div class="exam-c"><div class="exam-ct"><code>'+esc(code)+'</code>'+(cr&&cr.title?'<small>'+esc(cr.title)+'</small>':'')+'</div>'+gz.map(gaugeRow).join('')
       +(ot.length?'<div class="exam-t">'+ot.map(function(i){return '<span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span>';}).join('')+'</div>':'')+'</div>';}).join('')+'</div>';
 }
+function urgTag(a,tk,dur){var e=eta(a,tk,dur);if(!e.lv)return '';var lab=a<=0?'Complet':e.lv==='bad'?'Presse-toi':e.lv==='warn'?'À surveiller':'Pas de presse';return '<span class="tag '+e.lv+'">'+lab+'</span>';}
 function seatCards(){
   var cs=selCourses().filter(function(c){return !isDone(c.code);});
   if(!cs.length)return '<p class="hint">Choisis des cours et valide-les pour suivre leurs places.</p>';
   var chg=loadChanges(),tags={};((chg&&chg.mine)||[]).forEach(function(i){if(!i.g){(tags[i.code]=tags[i.code]||[]).push(i);}});
   var cov=[],h='<div class="exam-l">';
   cs.forEach(function(c){
-    var cur=DATA[c.code],snap=refSnap(c.code,WIN*36e5),hs=HIST[c.code]||[],T=hs.length?hs[hs.length-1].t:0,rows=[];
-    if(snap&&T)cov.push(T-snap.t);
-    (cur&&cur.groups||[]).forEach(function(g){if(typeof g.places!=='number')return;var b=snap&&typeof snap.p[g.id]==='number'?snap.p[g.id]:g.places;rows.push({id:g.id,b:b,a:g.places});});
-    rows.sort(function(x,y){return (y.a!==y.b)-(x.a!==x.b)||x.a-y.a;});
-    var chd=rows.filter(function(r){return r.a!==r.b;}).length,top=rows.slice(0,6),rest=rows.slice(6);
-    h+='<div class="exam-c"><div class="exam-ct"><code>'+esc(c.code)+'</code><small>'+esc(c.title||'')+(chd?' · '+chd+' groupe'+(chd>1?'s':'')+' modifié'+(chd>1?'s':''):' · aucun changement')+'</small></div>'
-      +top.map(gaugeRow).join('')
-      +(rest.length?'<details class="dts-more"><summary>Voir les '+rest.length+' autres groupes</summary>'+rest.map(gaugeRow).join('')+'</details>':'')
+    var cur=DATA[c.code],snap=refSnap(c.code,WIN*36e5),hs=HIST[c.code]||[],T=hs.length?hs[hs.length-1].t:0,dur=snap&&T?T-snap.t:0,rows=[],sa=0,sb=0;
+    if(dur)cov.push(dur);
+    (cur&&cur.groups||[]).forEach(function(g){if(typeof g.places!=='number')return;var b=snap&&typeof snap.p[g.id]==='number'?snap.p[g.id]:g.places;rows.push({id:g.id,b:b,a:g.places});sa+=g.places;sb+=b;});
+    rows.forEach(function(r){var e=eta(r.a,r.b-r.a,dur);r.k=e.h===null?(r.a<=0?-1:1e6+r.a):e.h;});
+    rows.sort(function(x,y){return x.k-y.k||x.a-y.a;});
+    var top=rows.slice(0,6),rest=rows.slice(6);
+    h+='<div class="exam-c"><div class="exam-ct"><span class="exam-cc"><code>'+esc(c.code)+'</code>'+urgTag(sa,sb-sa,dur)+'</span><small>'+esc(c.title||'')+' · '+sa+' places au total'+(dur?(sb>sa?', '+(sb-sa)+' prise'+(sb-sa>1?'s':'')+' en '+fmtDur(dur):', aucune prise en '+fmtDur(dur)):'')+'</small></div>'
+      +top.map(function(r){return gaugeRow(r,dur);}).join('')
+      +(rest.length?'<details class="dts-more"><summary>Voir les '+rest.length+' autres groupes</summary>'+rest.map(function(r){return gaugeRow(r,dur);}).join('')+'</details>':'')
       +(tags[c.code]?'<div class="exam-t">'+tags[c.code].map(function(i){return '<span class="tag '+(i.k||'')+'">'+esc(i.t)+'</span>';}).join('')+'</div>':'')+'</div>';});
   h+='</div>';
-  var note=cov.length?(Math.min.apply(null,cov)<WIN*36e5-6e4?'Historique disponible : '+fmtDur(Math.min.apply(null,cov))+' (le suivi s’enrichit à chaque lecture).':'Comparaison avec la lecture d’il y a '+WIN+' h.'):'Pas encore d’historique : les variations apparaîtront après la prochaine lecture.';
+  var mn=cov.length?Math.min.apply(null,cov):0;
+  var note=cov.length?(mn<WIN*36e5-6e4?'Historique disponible : '+fmtDur(mn)+' seulement. Il se remplit à chaque lecture.':'Comparaison avec la lecture d’il y a '+fmtDur(WIN*36e5)+'.'):'Pas encore d’historique : le rythme des places apparaîtra après la prochaine lecture.';
   return '<p class="hint" style="margin-top:6px">'+esc(note)+'</p>'+h;
 }
 function changesHTML(){
-  var c=loadChanges()||{others:0},oth=c.oth||[];
-  var h='<div class="exam-pair"><section class="card exam"><div class="ex-col"><div class="exam-h"><h2 class="h3" style="margin:0">Suivi des places</h2><span class="hint">Variation sur</span></div>'
+  var h='<div class="exam-pair"><section class="card exam"><div class="ex-col"><div class="exam-h"><h2 class="h3" style="margin:0">Suivi des places</h2><span class="hint">Rythme sur</span></div>'
     +'<div class="chips" role="group" aria-label="Période de comparaison" style="margin:6px 0 2px">'+WINS.map(function(w){return '<button type="button" class="chip" data-act="win" data-v="'+w[0]+'" aria-pressed="'+(w[0]===WIN)+'">'+w[1]+'</button>';}).join('')+'</div>'
-    +'<p class="hint">La barre montre les places restantes (pleine = 40 ou plus). Le trait blanc marque où elles en étaient au début de la période.</p>'
+    +'<p class="hint">Barre = places restantes (pleine à 40 ou plus). <span class="lg tk"></span> Zone hachurée = places prises pendant la période. L’estimation « complet dans… » suppose que le rythme se maintient.</p>'
     +seatCards();
-  if(c.others>0){
-    if(oth.length)h+='<details class="dts-more"><summary>'+c.others+' changement'+(c.others>1?'s':'')+' dans les autres cours de la liste</summary>'+courseCards(oth)+(c.others>oth.length?'<p class="hint">+ '+(c.others-oth.length)+' autres non affichés</p>':'')+'</details>';}
   return h+'</div></section><section class="card exam">'+datesHTML()+'</section></div>';
 }
 
