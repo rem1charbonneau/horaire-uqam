@@ -379,8 +379,8 @@ body{padding-top:0}
 .pre-line.warn b{color:inherit}
 .cat td.pre{font-size:.78rem;min-width:150px;white-space:normal}
 .chg{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
-.card.exam{margin-top:14px}.exam-g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:0 24px;align-items:start}.ex-col{min-width:0}.ex-col+.ex-col{border-left:1px solid var(--line);padding-left:24px}
-@media (max-width:900px){.exam-g{grid-template-columns:minmax(0,1fr)}.ex-col+.ex-col{border-left:0;padding-left:0;border-top:1px solid var(--line);margin-top:16px;padding-top:16px}}
+.exam-pair{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:14px;align-items:start;margin-top:14px}.card.exam{margin:0;min-width:0}.ex-col{min-width:0}
+@media (max-width:1100px){.exam-pair{grid-template-columns:minmax(0,1fr)}}
 .dts{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}.dt{display:grid;grid-template-columns:7.6rem minmax(0,1fr);gap:4px 10px;padding:8px 10px;border-radius:10px;background:var(--surface-2);border:1px solid transparent}.dt-d{display:flex;flex-direction:column;gap:2px}.dt-d b{font-size:.8125rem}.dt-d span{font-size:.75rem;color:var(--muted)}.dt-t{min-width:0;font-weight:500}.dt-t small{display:block;margin-top:2px;font-weight:400;color:var(--muted);font-size:.78rem}.dt.past{opacity:.5}.dts-more{margin-top:8px}.dts-more summary{cursor:pointer;color:var(--accent);font-weight:600;padding:4px 0}.dt.next{border-color:var(--accent);background:var(--accent-soft)}.dt.next .dt-d span{color:var(--accent);font-weight:700}.exam-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-bottom:4px}.exam-ok{margin:8px 0 0;color:var(--ok);font-weight:600}.exam-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:10px;margin-top:10px}
 .exam-c{display:flex;flex-direction:column;gap:8px;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
 .exam-ct{display:flex;flex-direction:column;gap:2px;min-width:0}.exam-ct code{font-family:var(--font-mono);font-weight:700}.exam-ct small{color:var(--muted)}
@@ -1646,13 +1646,13 @@ function seatCards(){
 }
 function changesHTML(){
   var c=loadChanges()||{others:0},oth=c.oth||[];
-  var h='<section class="card exam"><div class="exam-g"><div class="ex-col"><div class="exam-h"><h2 class="h3" style="margin:0">Suivi des places</h2><span class="hint">Variation sur</span></div>'
+  var h='<div class="exam-pair"><section class="card exam"><div class="ex-col"><div class="exam-h"><h2 class="h3" style="margin:0">Suivi des places</h2><span class="hint">Variation sur</span></div>'
     +'<div class="chips" role="group" aria-label="Période de comparaison" style="margin:6px 0 2px">'+WINS.map(function(w){return '<button type="button" class="chip" data-act="win" data-v="'+w[0]+'" aria-pressed="'+(w[0]===WIN)+'">'+w[1]+'</button>';}).join('')+'</div>'
     +'<p class="hint">La barre montre les places restantes (pleine = 40 ou plus). Le trait blanc marque où elles en étaient au début de la période.</p>'
     +seatCards();
   if(c.others>0){
     if(oth.length)h+='<details class="dts-more"><summary>'+c.others+' changement'+(c.others>1?'s':'')+' dans les autres cours de la liste</summary>'+courseCards(oth)+(c.others>oth.length?'<p class="hint">+ '+(c.others-oth.length)+' autres non affichés</p>':'')+'</details>';}
-  return h+'</div>'+datesHTML()+'</div></section>';
+  return h+'</div></section><section class="card exam">'+datesHTML()+'</section></div>';
 }
 
 var SVG_MARK='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l4 7H8z" fill="#0B1E36"/><rect x="9" y="9" width="6" height="12" fill="#0B1E36"/><rect x="11" y="13" width="2" height="4" rx="1" fill="#F2B35A"/></svg>';
