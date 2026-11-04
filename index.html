@@ -1568,13 +1568,13 @@ function favLabel(f,i){
   var gs=[];Object.keys(f.picks).forEach(function(code){var c=course(code);if(c){var g=getGroup(c,f.picks[code]);if(g)gs.push(g);}});
   var st=stats(gs);return 'Favori '+(i+1)+' · '+Object.keys(f.picks).length+' cours · '+st.days+' jours';
 }
-function gaugeRow(g,dur){
-  var MAXP=40,a=Math.max(0,g.a),b=Math.max(0,g.b),w=Math.min(100,a/MAXP*100),tk=b-a,
+function gaugeRow(g,dur,peak){
+  var MAXP=peak||40,a=Math.max(0,g.a),b=Math.max(0,g.b),w=Math.min(100,a/MAXP*100),tk=b-a,
       seg=tk!==0?'<u class="'+(tk>0?'tk':'fr')+'" style="left:'+Math.min(100,Math.min(a,b)/MAXP*100).toFixed(1)+'%;width:'+Math.max(1.5,Math.min(100,Math.abs(tk)/MAXP*100)).toFixed(1)+'%"></u>':'';
   var cl=a===0||a<5?'bad':a<10?'warn':'ok';
   return '<div class="gz"><span class="gz-n">Groupe '+esc(g.id)+'</span>'
     +'<span class="gz-bar" role="img" aria-label="'+a+' place'+(a>1?'s':'')+' restante'+(a>1?'s':'')+(tk>0?', '+tk+' prise'+(tk>1?'s':''):'')+'"><i class="'+cl+'" style="width:'+w.toFixed(1)+'%"></i>'+seg+'</span>'
-    +'<span class="gz-v"><b>'+a+'</b> pl.'+(tk>0?' <em class="dn">−'+tk+'</em>':tk<0?' <em class="up">+'+(-tk)+'</em>':'')+'</span>'
+    +'<span class="gz-v"><b>'+a+'</b>'+(peak?' / '+peak:' pl.')+(tk>0?' <em class="dn">−'+tk+'</em>':tk<0?' <em class="up">+'+(-tk)+'</em>':'')+'</span>'
     +'</div>';
 }
 var DATES_SRC={ver:'3 nov. 2026',page:'https://esg.uqam.ca/etudiants/calendrier-de-lesg-hiver/',pdf:'https://registrariat.uqam.ca/Pdf/calendrier/calendrier2627.pdf'};
@@ -1644,10 +1644,11 @@ function seatCards(){
     var c=x.c,g=x.g;if(typeof g.places!=='number')return;
     var snap=refSnap(c.code,WIN*36e5),dur=snap?Math.max(0,snap.T-snap.t):0,b=snap&&typeof snap.p[g.id]==='number'?snap.p[g.id]:g.places,tk=b-g.places;
     if(dur)cov.push(dur);
+    var ser=seriesOf(c.code),peak=g.places,t0=ser.length?ser[0].t:0;ser.forEach(function(e){if(e.p&&typeof e.p[g.id]==='number'&&e.p[g.id]>peak)peak=e.p[g.id];});peak=Math.max(peak,b,1);
     var cap=!dur?'':tk>0?tk+' place'+(tk>1?'s':'')+' prise'+(tk>1?'s':'')+' en '+fmtDur(dur):tk<0?(-tk)+' place'+(tk<-1?'s':'')+' libérée'+(tk<-1?'s':'')+' en '+fmtDur(dur):'Aucun changement en '+fmtDur(dur);
     h+='<div class="exam-c"><div class="exam-ct"><span class="exam-cc"><code>'+esc(c.code)+'</code>'+(g.places<=0?'<span class="tag bad">Complet</span>':'')+'</span><small>'+esc(c.title||'')+'</small></div>'
-      +gaugeRow({id:g.id,b:b,a:g.places},0)
-      +(cap?'<p class="gz-cap">'+esc(cap)+'</p>':'')+'</div>';});
+      +gaugeRow({id:g.id,b:b,a:g.places},0,peak)
+      +(cap?'<p class="gz-cap">'+esc(cap)+'</p>':'')+'<p class="gz-cap">Plus haut observé : '+peak+' place'+(peak>1?'s':'')+(t0?' (depuis le '+esc(fmtStamp(t0))+')':'')+'</p></div>';});
   h+='</div>';
   var mn=cov.length?Math.min.apply(null,cov):0;
   var note=cov.length?(mn<WIN*36e5-6e4?'Historique disponible : '+fmtDur(mn)+' seulement, donc la période de '+fmtDur(WIN*36e5)+' n’est pas encore couverte. Il s’allonge à chaque lecture.':'Variation sur les '+fmtDur(WIN*36e5)+' dernières.'):'Pas encore d’historique : les variations apparaîtront après quelques lectures.';
@@ -1656,7 +1657,7 @@ function seatCards(){
 function changesHTML(){
   var h='<div class="exam-pair"><section class="card exam"><div class="ex-col"><div class="exam-h"><h2 class="h3" style="margin:0">Suivi des places</h2><span class="hint">Variation sur</span></div>'
     +'<div class="chips" role="group" aria-label="Période de comparaison" style="margin:6px 0 2px">'+WINS.map(function(w){return '<button type="button" class="chip" data-act="win" data-v="'+w[0]+'" aria-pressed="'+(w[0]===WIN)+'">'+w[1]+'</button>';}).join('')+'</div>'
-    +'<p class="hint">Groupes de l’horaire présenté. Barre = places restantes (pleine à 40 ou plus). <span class="lg tk"></span> Zone hachurée = places prises pendant la période.</p>'
+    +'<p class="hint">Groupes de l’horaire présenté. L’UQAM publie seulement les places restantes, pas le total : la barre compare donc les places restantes au plus haut niveau observé par le site. <span class="lg tk"></span> Zone hachurée = places prises pendant la période.</p>'
     +seatCards();
   return h+'</div></section><section class="card exam">'+datesHTML()+'</section></div>';
 }
