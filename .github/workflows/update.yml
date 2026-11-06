@@ -40,16 +40,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('package.json') }}
+          key: playwright-v2-${{ runner.os }}-${{ hashFiles('package.json') }}
       - name: Installer Playwright
         if: github.event_name != 'push'
         run: |
           npm install
-          if [ "${{ steps.pw-cache.outputs.cache-hit }}" = "true" ]; then
-            npx playwright install-deps chromium
-          else
-            npx playwright install --with-deps chromium
-          fi
+          # Toujours installer le navigateur : si le cache date d'une ancienne version de Playwright,
+          # la commande télécharge la bonne version (et ne fait rien si elle est déjà là).
+          npx playwright install --with-deps chromium
       - name: Reprendre les dernières données publiées (repli si une lecture échoue)
         run: |
           mkdir -p site
