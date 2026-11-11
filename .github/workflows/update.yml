@@ -47,7 +47,8 @@ jobs:
           npm install
           # Toujours installer le navigateur : si le cache date d'une ancienne version de Playwright,
           # la commande télécharge la bonne version (et ne fait rien si elle est déjà là).
-          npx playwright install --with-deps chromium
+          # Réessaie en cas de panne réseau passagère (apt qui ne trouve pas les serveurs Ubuntu)
+          for i in 1 2 3; do npx playwright install --with-deps chromium && break; [ $i = 3 ] && exit 1; echo "Échec, nouvel essai dans 30 s"; sleep 30; done
       - name: Reprendre les dernières données publiées (repli si une lecture échoue)
         run: |
           mkdir -p site

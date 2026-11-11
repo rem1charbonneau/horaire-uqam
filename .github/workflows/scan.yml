@@ -28,7 +28,8 @@ jobs:
           node-version: 22
       - run: |
           npm install
-          npx playwright install --with-deps chromium
+          # Réessaie en cas de panne réseau passagère (apt qui ne trouve pas les serveurs Ubuntu)
+          for i in 1 2 3; do npx playwright install --with-deps chromium && break; [ $i = 3 ] && exit 1; echo "Échec, nouvel essai dans 30 s"; sleep 30; done
       - name: Reprendre l'historique et le catalogue
         run: |
           mkdir -p /tmp/hist
